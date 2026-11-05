@@ -97,7 +97,7 @@ footer .in{display:flex;justify-content:center;gap:48px;padding-block:28px 36px}
   font-family:"Cabin Sketch","Comic Sans MS",cursive;font-weight:700;font-size:28px;line-height:1;
   text-shadow:0 0 6px #fff,0 0 2px #fff;
   opacity:0;transform:translateY(8px) rotate(-3deg) scale(.9);pointer-events:none;transition:opacity .3s .25s,transform .3s .25s}
-.bubble svg{width:62px;height:34px;flex:none;overflow:visible;filter:drop-shadow(0 0 3px #fff)}
+.bubble svg{width:42px;height:23px;flex:none;overflow:visible;filter:drop-shadow(0 0 3px #fff)}
 .bubble.show{opacity:1;transform:rotate(-3deg);pointer-events:auto}
 .bubble.show svg{animation:nudge 1.4s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
