@@ -176,7 +176,7 @@ body{margin:0}
 </head>
 <body>
 <div id="dcroot" x-data="dcApp" style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #fffdfb; font-family: 'Merriweather', serif; color: #4a4547">
-  <template x-if="v.anncOpen"><div style="display: contents"><div role="region" aria-label="最新公告" style="position: absolute; left: 0; right: 0; top: 0; height: 40px; box-sizing: border-box; z-index: 60; display: flex; align-items: center; gap: 10px; padding: 0 12px 0 16px; background: #fdf3f5; border-bottom: 1.5px dashed #e7a8bf; color: #4a4547; font: 500 14px/1.4 'M PLUS Rounded 1c', sans-serif"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true" style="flex: none"><g fill="none" stroke="#4a4547" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M5 13.5c0-1 .8-1.8 1.8-1.8H11l10-6v20.6l-10-6H6.8c-1 0-1.8-.8-1.8-1.8z" fill="#f6c9d4"></path><path d="M11 20.5l2.2 6.2c.3.8 1.3 1 1.9.5l.6-.5c.5-.4.6-1.1.3-1.7L14 20.5"></path><path d="M25 12.5c1.4 1 2.2 2.4 2.2 3.8s-.8 2.8-2.2 3.8M24.2 8.6c2.6 1.7 4.2 4.5 4.2 7.6s-1.6 5.9-4.2 7.6" stroke="#c27ba0"></path></g></svg><span style="flex: none; font-weight: 800; font-size: 11px; letter-spacing: .15em; padding: 2px 8px; border-radius: 999px; background: #f6c9d4">公告</span><a href="/news.html" style="flex: 1; min-width: 0; color: #4a4547; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Sceneey's Studio 新網站上線<span style="color: #c27ba0; margin-left: 8px; font-weight: 800">看更多 →</span></a><button type="button" aria-label="關閉公告" @click="v.closeAnnc($event)" style="flex: none; width: 30px; height: 30px; border: 0; background: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path d="M4.5 4.8c3.6 3.4 7 7 11 10.6M15.4 4.4c-3.8 3.6-7.4 7.4-10.8 11" stroke="#4a4547" stroke-width="2.2" stroke-linecap="round" fill="none"></path></svg></button></div></div></template>
+  <template x-if="v.anncOpen"><div style="display: contents"><div role="region" aria-label="最新公告" style="position: absolute; left: 0; right: 0; top: 0; height: 40px; box-sizing: border-box; z-index: 60; display: flex; align-items: center; gap: 10px; padding: 0 12px 0 16px; background: #fdf3f5; border-bottom: 1.5px dashed #e7a8bf; color: #4a4547; font: 500 14px/1.4 'M PLUS Rounded 1c', sans-serif"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true" style="flex: none"><g fill="none" stroke="#4a4547" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M5 13.5c0-1 .8-1.8 1.8-1.8H11l10-6v20.6l-10-6H6.8c-1 0-1.8-.8-1.8-1.8z" fill="#f6c9d4"></path><path d="M11 20.5l2.2 6.2c.3.8 1.3 1 1.9.5l.6-.5c.5-.4.6-1.1.3-1.7L14 20.5"></path><path d="M25 12.5c1.4 1 2.2 2.4 2.2 3.8s-.8 2.8-2.2 3.8M24.2 8.6c2.6 1.7 4.2 4.5 4.2 7.6s-1.6 5.9-4.2 7.6" stroke="#c27ba0"></path></g></svg><span style="flex: none; font-weight: 800; font-size: 11px; letter-spacing: .15em; padding: 2px 8px; border-radius: 999px; background: #f6c9d4"><span x-text="v.site.annc.tag"></span></span><a :href="v.site.annc.href" style="flex: 1; min-width: 0; color: #4a4547; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><span x-text="v.site.annc.text"></span><template x-if="v.site.annc.hasLink"><div style="display: contents"><span style="color: #c27ba0; margin-left: 8px; font-weight: 800"><span x-text="v.site.annc.linkText"></span> →</span></div></template></a><button type="button" aria-label="關閉公告" @click="v.closeAnnc($event)" style="flex: none; width: 30px; height: 30px; border: 0; background: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path d="M4.5 4.8c3.6 3.4 7 7 11 10.6M15.4 4.4c-3.8 3.6-7.4 7.4-10.8 11" stroke="#4a4547" stroke-width="2.2" stroke-linecap="round" fill="none"></path></svg></button></div></div></template>
   <svg width="0" height="0" style="position: absolute" aria-hidden="true"><defs><filter id="crayonPill" x="-10%" y="-30%" width="120%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="5" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" result="d"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="2" result="g"></feTurbulence><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.8" result="m"></feColorMatrix><feComposite in="d" in2="m" operator="in"></feComposite></filter><filter id="crayonEdge" x="-2%" y="-60%" width="104%" height="220%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" result="d"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="1" seed="11" result="g"></feTurbulence><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.75" result="m"></feColorMatrix><feComposite in="d" in2="m" operator="in"></feComposite></filter></defs></svg>
   <div @scroll="v.onScroll($event)" :style="'position: absolute; left: 0; right: 0; bottom: 0; top: ' + (v.scTop) + '; overflow-y: auto'">
     <header style="position: sticky; top: 0; z-index: 10; background: rgba(255,253,251,.96); border-bottom: 1px solid #f3dde4">
@@ -276,9 +276,19 @@ class DCLogic { constructor(props) { this.props = props || {}; this.state = {}; 
   setState(o) { if (typeof o === 'function') o = o(this.state); Object.assign(this.state, o); }
   forceUpdate() {} }
 
+var NEWS_URL = "/news.html", NEED = ["annc"], SITE_DEF = { annc: {"on": true, "tag": "公告", "text": "Sceneey's Studio 新網站上線", "link": "news", "linkText": "看更多"} };
+function siteCached(k) { try { var c = localStorage.getItem('site_' + k); return c ? JSON.parse(c) : null; } catch (e) { return null; } }
+var SITE = { annc: siteCached('annc') || SITE_DEF.annc, news: NEED.indexOf('news') >= 0 ? siteCached('news') : null, gallery: NEED.indexOf('gallery') >= 0 ? siteCached('gallery') : null };
+document.addEventListener('alpine:init', function () { SITE = Alpine.reactive(SITE);
+  NEED.forEach(function (k) { fetch('/api/site?k=' + k, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+    if (d && d.data != null) { SITE[k] = d.data; try { localStorage.setItem('site_' + k, JSON.stringify(d.data)); } catch (e) {} } }).catch(function () {}); }); });
+function siteVals(r) { var a = SITE.annc || SITE_DEF.annc, l = a.link || 'news';
+  r.site = { annc: { tag: a.tag || '公告', text: a.text || '', hasLink: l !== 'none', linkText: a.linkText || '看更多', href: l === 'none' ? null : (l === 'news' ? NEWS_URL : l) } };
+  if (!a.on) { r.anncOpen = false; r.scTop = '0px'; } return r; }
+
 
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { annc: true, lb: null, name: '', text: '', pw: '', priv: false, hp: '', sent: false, err: '', busy: false, msgs: [], loading: true, loadErr: '', unlocked: {}, pwIn: {}, pwBad: null, cf: null, replyId: null, replyText: '', key: '', loginPw: '', loginErr: '', admErr: '' }; }
+  constructor(props) { super(props); this.state = { annc: true, lb: null, name: '', text: '', pw: '', priv: false, hp: '', sent: false, err: '', busy: false, msgs: [], loading: true, loadErr: '', unlocked: {}, pwIn: {}, pwBad: null, cf: null, replyId: null, replyText: '', key: '', loginPw: '', loginErr: '', admErr: '', tab: 'msgs', dA: null, dN: [], dG: [], dirtyA: false, dirtyG: false, nwF: null, glStatus: '', cmNote: '' }; }
 
   componentDidMount() {
     if (MODE === 'admin') { let k = ''; try { k = sessionStorage.getItem('gbk') || ''; } catch (_) {} if (k) { this.setState({ key: k }); this.load(k); } else this.setState({ loading: false }); }
@@ -297,6 +307,7 @@ class Component extends DCLogic {
     try {
       const d = await this.api(MODE === 'admin' ? { action: 'admin_list' } : null, MODE === 'admin' ? k : '');
       this.setState({ msgs: d.messages || [], loading: false });
+      if (MODE === 'admin' && !this._siteLoaded) { this._siteLoaded = true; this.loadSite(); }
       if (MODE === 'admin' && fresh) { try { sessionStorage.setItem('gbk', k); } catch (_) {} }
     } catch (e) {
       if (MODE === 'admin' && (e.status === 401 || e.status === 503)) { try { sessionStorage.removeItem('gbk'); } catch (_) {} this.setState({ key: '', loginErr: e.message, loading: false }); }
@@ -318,11 +329,56 @@ class Component extends DCLogic {
     try { await this.api(body, this.state.key); if (extra) this.setState(extra); await this.load(); }
     catch (e) { if (e.status === 401) { this.setState({ key: '', loginErr: e.message }); } else this.setState({ admErr: e.message }); }
   }
+
+  async call(url, body) {
+    const h = { 'content-type': 'application/json' }; if (this.state.key) h['x-admin-key'] = this.state.key;
+    const r = await fetch(url, body ? { method: 'POST', headers: h, body: JSON.stringify(body) } : { headers: h, cache: 'no-store' });
+    let d = {}; try { d = await r.json(); } catch (_) {}
+    if (!r.ok) { const e = new Error(d.error || '網路好像怪怪的，請稍後再試'); e.status = r.status; throw e; }
+    return d;
+  }
+  async loadSite() {
+    try {
+      const [a, n, g] = await Promise.all(['annc', 'news', 'gallery'].map((k) => this.call('/api/site?k=' + k)));
+      this.setState({ dA: a.data, dN: n.data, dG: g.data, dirtyA: false, dirtyG: false });
+    } catch (e) { this.setState({ admErr: '網站內容載入失敗：' + e.message }); }
+  }
+  async saveSite(k, data, extra) {
+    this.setState({ admErr: '', cmNote: '儲存中…' });
+    try {
+      const d = await this.call('/api/site', { action: 'save', k: k, data: data });
+      const map = { annc: 'dA', news: 'dN', gallery: 'dG' };
+      this.setState(Object.assign({ [map[k]]: d.data, cmNote: '已儲存，網站已更新 ✓' }, extra || {}));
+    } catch (e) { this.setState({ cmNote: '' }); if (e.status === 401) this.setState({ key: '', loginErr: e.message }); else this.setState({ admErr: e.message }); }
+  }
+  async shrink(file) {
+    const bmp = await createImageBitmap(file);
+    const s = Math.min(1, 1800 / Math.max(bmp.width, bmp.height));
+    const c = document.createElement('canvas'); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    let blob = await new Promise((r) => c.toBlob(r, 'image/webp', 0.86));
+    if (!blob || blob.type !== 'image/webp') blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', 0.88));
+    const data = await new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(String(fr.result).split(',')[1]); fr.readAsDataURL(blob); });
+    return { type: blob.type, data: data };
+  }
+  async uploadFiles(input) {
+    const files = Array.from(input.files || []).filter((f) => /^image\//.test(f.type)); if (!files.length) return;
+    this.setState({ admErr: '', cmNote: '' });
+    let done = 0;
+    for (const f of files) {
+      this.setState({ glStatus: '上傳中 ' + (done + 1) + ' / ' + files.length + '…' });
+      try { const img = await this.shrink(f); const d = await this.call('/api/site', { action: 'upload', type: img.type, data: img.data });
+        this.setState({ dG: (this.state.dG || []).concat([{ src: d.src, alt: f.name.replace(/\.[^.]+$/, '').slice(0, 60) }]), dirtyG: true }); done++; }
+      catch (e) { this.setState({ admErr: '「' + f.name + '」上傳失敗：' + e.message }); }
+    }
+    input.value = '';
+    this.setState({ glStatus: done ? '上傳了 ' + done + ' 張，記得按「儲存圖庫」' : '' });
+  }
   renderVals() {
 
     const S = this.state, ADMIN = MODE === 'admin';
     const ask = (c) => this.setState({ cf: c });
-    const listOn = !ADMIN || !!S.key;
+    const listOn = !ADMIN || (!!S.key && S.tab === 'msgs');
     const gb = {
       name: S.name, text: S.text, count: S.text.length + ' / 300', sent: S.sent, err: S.err, busy: S.busy,
       privStr: S.priv ? 'true' : 'false', privOn: S.priv, pw: S.pw,
@@ -362,12 +418,53 @@ class Component extends DCLogic {
       loginPw: S.loginPw, loginErr: S.loginErr, loginErrOn: !!S.loginErr,
       onLoginPw: (e) => this.setState({ loginPw: e.target.value, loginErr: '' }),
       login: (e) => { e.preventDefault(); const k = S.loginPw; if (!k) return; this.setState({ key: k, loginPw: '' }); this.load(k, true); },
-      logout: () => { try { sessionStorage.removeItem('gbk'); } catch (_) {} this.setState({ key: '', msgs: [] }); },
+      logout: () => { try { sessionStorage.removeItem('gbk'); } catch (_) {} this._siteLoaded = false; this.setState({ key: '', msgs: [], tab: 'msgs', nwF: null }); },
       cfOpen: !!S.cf, cfTitle: S.cf ? S.cf.title : '', cfBody: S.cf ? S.cf.body : '', cfOk: S.cf ? S.cf.ok : '', cfOkClass: S.cf && S.cf.danger ? 'gb-btn cf-danger' : 'gb-btn',
       cfNo: () => this.setState({ cf: null }),
       cfYes: () => { const r = this.state.cf && this.state.cf.run; this.setState({ cf: null }); if (r) r(); }
     };
     
+
+    if (ADMIN) {
+      const authed = !!S.key, COL = { '公告': '#c27ba0', '維修': '#8a9bb0', '圖片': '#9b8ac9', '花絮': '#d9a76a' };
+      const TABS = [['msgs', '留言'], ['annc', '公告列'], ['news', 'NEWS'], ['gal', 'GALLERY']];
+      gb.tabs = TABS.map((t) => ({ label: t[1], sel: S.tab === t[0] ? 'true' : 'false', pick: () => this.setState({ tab: t[0], cmNote: '', admErr: '' }) }));
+      gb.tabAnnc = authed && S.tab === 'annc'; gb.tabNews = authed && S.tab === 'news'; gb.tabGal = authed && S.tab === 'gal';
+      gb.cmNote = S.cmNote; gb.cmNoteOn = !!S.cmNote;
+      const a = S.dA || {}; const mode = a.link === 'none' ? 'none' : (!a.link || a.link === 'news' ? 'news' : 'custom');
+      const edA = (p) => this.setState({ dA: Object.assign({}, this.state.dA, p), dirtyA: true, cmNote: '' });
+      gb.an = { on: !!a.on, off: !a.on, tag: a.tag || '', text: a.text || '', mode: mode, custom: mode === 'custom', url: mode === 'custom' ? a.link : '', hasLink: mode !== 'none', linkText: a.linkText || '',
+        dirtyMsg: S.dirtyA ? '有未儲存的變更' : '',
+        toggleOn: () => edA({ on: !a.on }), onTag: (e) => edA({ tag: e.target.value }), onText: (e) => edA({ text: e.target.value }),
+        onMode: (e) => { const v = e.target.value; edA({ link: v === 'custom' ? (mode === 'custom' ? a.link : 'https://') : v }); },
+        onUrl: (e) => edA({ link: e.target.value }), onLinkText: (e) => edA({ linkText: e.target.value }),
+        save: () => ask({ title: '儲存公告列？', body: a.on ? '儲存後，全站最上方的公告列會馬上更新。' : '儲存後，全站的公告列會隱藏起來。', ok: '儲存', run: () => this.saveSite('annc', this.state.dA, { dirtyA: false }) }) };
+      const dN = S.dN || [], F = S.nwF;
+      const edN = (p) => this.setState({ nwF: Object.assign({}, this.state.nwF, p) });
+      const sorted = dN.slice().sort((x, y) => (y.pin ? 1 : 0) - (x.pin ? 1 : 0) || (x.date < y.date ? 1 : x.date > y.date ? -1 : 0));
+      gb.nw = { count: dN.length, editing: !!F, f: F ? Object.assign({}, F, { dateIso: F.date.replace(/\./g, '-') }) : { title: '', dateIso: '', cat: '公告', pin: false, body: '' },
+        saveLabel: F && F.isNew ? '發布公告' : '儲存修改',
+        add: () => { const d = new Date(); const p = (x) => String(x).padStart(2, '0'); this.setState({ nwF: { isNew: true, id: '', title: '', date: d.getFullYear() + '.' + p(d.getMonth() + 1) + '.' + p(d.getDate()), cat: '公告', pin: false, body: '' }, cmNote: '', admErr: '' }); },
+        onTitle: (e) => edN({ title: e.target.value }), onDate: (e) => { if (e.target.value) edN({ date: e.target.value.replace(/-/g, '.') }); },
+        onCat: (e) => edN({ cat: e.target.value }), togglePin: () => edN({ pin: !this.state.nwF.pin }), onBody: (e) => edN({ body: e.target.value }),
+        cancel: () => this.setState({ nwF: null }),
+        save: () => { const f = this.state.nwF; if (!f.title.trim()) { this.setState({ admErr: '標題要填喔' }); return; }
+          ask({ title: f.isNew ? '發布這則公告？' : '儲存修改？', body: f.isNew ? '發布後會馬上出現在 NEWS 頁。' : '修改會馬上更新到 NEWS 頁。', ok: f.isNew ? '發布' : '儲存',
+            run: () => { const it = { id: f.id || ('n' + Date.now().toString(36)), date: f.date, cat: f.cat, pin: !!f.pin, title: f.title.trim(), body: f.body.trim() };
+              const list = (this.state.dN || []).filter((x) => x.id !== it.id); list.push(it); this.saveSite('news', list, { nwF: null }); } }); },
+        items: sorted.map((n) => ({ id: n.id, date: n.date, cat: n.cat, pin: !!n.pin, title: n.title, col: COL[n.cat] || '#3d3639',
+          edit: () => this.setState({ nwF: Object.assign({}, n, { isNew: false }), cmNote: '', admErr: '' }),
+          del: () => ask({ title: '刪除這則公告？', body: '「' + n.title + '」會從 NEWS 頁移除，刪除後無法復原。', ok: '刪除', danger: true, run: () => this.saveSite('news', (this.state.dN || []).filter((x) => x.id !== n.id)) }) })) };
+      const dG = S.dG || [];
+      const edG = (i, p) => { const l = this.state.dG.slice(); l[i] = Object.assign({}, l[i], p); this.setState({ dG: l, dirtyG: true, cmNote: '' }); };
+      const mvG = (i, d) => { const l = this.state.dG.slice(), j = i + d; if (j < 0 || j >= l.length) return; const t = l[i]; l[i] = l[j]; l[j] = t; this.setState({ dG: l, dirtyG: true, cmNote: '' }); };
+      gb.gl = { status: S.glStatus, dirtyMsg: S.dirtyG ? '有未儲存的變更（記得按儲存）' : '共 ' + dG.length + ' 張',
+        items: dG.map((g, i) => ({ src: g.src, alt: g.alt, onAlt: (e) => edG(i, { alt: e.target.value }), up: () => mvG(i, -1), down: () => mvG(i, 1),
+          del: () => ask({ title: '刪除這張圖？', body: '按「儲存圖庫」之後才會從 GALLERY 移除，移除後無法復原。', ok: '刪除', danger: true, run: () => this.setState({ dG: this.state.dG.filter((_, j) => j !== i), dirtyG: true, cmNote: '' }) }) })),
+        onFiles: (e) => this.uploadFiles(e.target),
+        save: () => ask({ title: '儲存圖庫？', body: 'GALLERY 頁會馬上更新成目前的內容與順序（共 ' + dG.length + ' 張）。', ok: '儲存', run: () => this.saveSite('gallery', this.state.dG, { dirtyG: false, glStatus: '' }) }) };
+    }
+
     return { ...gb, onScroll: (e) => { const el = e.currentTarget; const k = el.querySelector('.mini-kick'); if (!k) return; const d = el.scrollTop - (this._lastY || 0); this._lastY = el.scrollTop; const a = Math.max(-14, Math.min(14, -d * 0.6)); k.style.transform = 'rotate(' + a + 'deg)'; clearTimeout(this._kt); this._kt = setTimeout(() => { k.style.transform = 'rotate(0deg)'; }, 120); }, anncOpen: this.state.annc, closeAnnc: () => this.setState({ annc: false }), scTop: this.state.annc ? '40px' : '0px' };
   }
 }
@@ -377,7 +474,7 @@ document.addEventListener('alpine:init', function () {
   Alpine.data('dcApp', function () {
     var c = new Component({});
     c.state = Alpine.reactive(c.state);
-    return { init: function () { if (c.componentDidMount) c.componentDidMount(); }, get v() { return c.renderVals(); } };
+    return { init: function () { if (c.componentDidMount) c.componentDidMount(); }, get v() { return siteVals(c.renderVals()); } };
   });
 });
 

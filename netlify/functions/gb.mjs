@@ -1,5 +1,5 @@
 import { getStore } from "@netlify/blobs";
-import { handle } from "./gb-core.mjs";
+import { handle } from "../lib/gb-core.mjs";
 
 export default async (req, context) => {
   try {

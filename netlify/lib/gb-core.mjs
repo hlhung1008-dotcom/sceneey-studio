@@ -1,5 +1,6 @@
 // Sceneey's Studio guestbook — core logic (store is injected so it can be tested).
 import crypto from "node:crypto";
+import { isAdmin, adminSecret } from "./auth.mjs";
 
 const J = (o, s = 200) =>
   new Response(JSON.stringify(o), {
@@ -20,12 +21,6 @@ function checkPw(pw, stored) {
   const got = crypto.scryptSync(pw, Buffer.from(s, "hex"), 32);
   const want = Buffer.from(h, "hex");
   return got.length === want.length && crypto.timingSafeEqual(got, want);
-}
-function isAdmin(req) {
-  const want = process.env.admin_sceneey || process.env.ADMIN_SCENEEY || process.env.ADMIN_PASSWORD || "";
-  const got = req.headers.get("x-admin-key") || "";
-  if (!want || !got) return false;
-  return crypto.timingSafeEqual(sha(got), sha(want));
 }
 const today = () =>
   new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit" })
@@ -91,7 +86,7 @@ export async function handle(req, context, store) {
 
   // ---- admin ----
   if (!["admin_list", "approve", "reply", "delete"].includes(act)) return J({ error: "未知的動作" }, 400);
-  if (!(process.env.admin_sceneey || process.env.ADMIN_SCENEEY || process.env.ADMIN_PASSWORD)) return J({ error: "管理密碼還沒設定（admin_sceneey）" }, 503);
+  if (!adminSecret()) return J({ error: "管理密碼還沒設定（admin_sceneey）" }, 503);
   if (!isAdmin(req)) { await sleep(800); return J({ error: "密碼不對喔" }, 401); }
   if (act === "admin_list") return J({ messages: (await all(store)).map(adm) });
   const key = "m/" + String(b.id || "");
