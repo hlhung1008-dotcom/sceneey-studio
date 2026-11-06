@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sceneey Q&amp;A 手機版</title>
+
+<script>if(window.innerWidth>=1024&&!/[?&]stay/.test(location.search))location.replace('/qa.html'+location.hash);</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&amp;family=Dela+Gothic+One&amp;family=M+PLUS+Rounded+1c:wght@500;800&amp;family=Cabin+Sketch:wght@700&amp;family=Corinthia:wght@700&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Noto+Serif+TC:wght@500;600&amp;display=swap">
+<style>
+body{margin:0}
+a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3px}
+.mini-swing{animation:miniswing 3.6s ease-in-out infinite}
+@keyframes miniswing{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.pg-head{padding:34px 18px 18px;text-align:center}
+.pg-eyebrow{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:14px;color:#8a7d82;letter-spacing:.06em}
+.pg-title{margin:2px 0 0;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:44px;line-height:1;letter-spacing:.14em;color:#3d3639}
+.pg-banner{position:relative;margin:0 16px;height:190px;border-radius:6px;overflow:hidden}
+.pg-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.62) sepia(.22) hue-rotate(-14deg) contrast(.93) brightness(1.06)}
+.pg-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,#f6c9d4,#e6dcf5 55%,#cfe6f1);mix-blend-mode:soft-light;opacity:.85}
+.pg-cap{position:absolute;left:12px;bottom:10px;z-index:1;font:500 11px/1 "Noto Serif TC",serif;letter-spacing:.25em;color:#3d3639;background:rgba(255,253,251,.88);padding:6px 10px}
+.pg-soon{display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 22px 48px;text-align:center}
+.pg-soon em{font:italic 500 24px/1 "Cormorant Garamond",Georgia,serif;color:#c27ba0}
+.pg-soon p{margin:0;font-family:"Noto Serif TC",serif;font-size:13px;letter-spacing:.12em;color:#6b5e63;line-height:1.9}
+.pg-soon a{font-family:"Noto Serif TC",serif;font-size:13px;letter-spacing:.12em;color:#3d3639;text-decoration:none;border-bottom:1px solid #c27ba0;padding-bottom:3px;margin-top:4px}
+.gal-grid{columns:2;column-gap:10px;padding:4px 16px 30px}
+.gal-grid button{display:block;width:100%;margin:0 0 10px;padding:0;border:0;background:#f7eef1;border-radius:5px;overflow:hidden;break-inside:avoid}
+.gal-grid img{display:block;width:100%;height:auto}
+.nw-filter{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0 16px 14px}
+.nw-filter button{display:inline-flex;align-items:center;gap:6px;font:500 12px/1 "Noto Serif TC",serif;letter-spacing:.1em;color:#3d3639;background:none;border:1px solid #ecdfe3;border-radius:999px;padding:7px 12px}
+.nw-filter button i{width:6px;height:6px;border-radius:50%}
+.nw-list{list-style:none;margin:0 16px;padding:0;border-top:1px solid #ecdfe3}
+.nw-item{border-bottom:1px solid #ecdfe3}
+.nw-sum{width:100%;text-align:left;background:none;border:0;padding:16px 2px;display:flex;flex-direction:column;gap:6px;font:inherit;color:inherit}
+.nw-top{display:flex;align-items:center;gap:8px}
+.nw-date{font-family:"Cormorant Garamond",Georgia,serif;font-size:15px;color:#8a7d82;font-variant-numeric:tabular-nums}
+.nw-cat{font:500 10px/1 "Noto Serif TC",serif;letter-spacing:.15em;padding:3px 8px;border-radius:999px;border:1px solid currentColor}
+.nw-t{font-family:"Noto Serif TC",serif;font-weight:600;font-size:15px;line-height:1.5;color:#3d3639}
+.nw-pin{font:italic 500 13px "Cormorant Garamond",serif;color:#c27ba0;margin-left:6px}
+.nw-body{padding:0 2px 18px;font-family:"Noto Serif TC",serif;font-size:13px;line-height:1.9;color:#4f4649}
+.nw-empty{text-align:center;font-family:"Noto Serif TC",serif;font-size:13px;color:#8a7d82;margin:24px 0}
+@media (prefers-reduced-motion:reduce){.mini-swing{animation:none}.mini-kick{transition:none!important}}
+
+.mpill{transition:background .2s,transform .2s}
+.mpill:not([aria-current]):hover{background:#fbdbe4 !important;transform:translateX(-3px) rotate(-2deg)}
+@keyframes logobeat{0%,100%{transform:scale(1)}25%{transform:scale(1.28) rotate(-8deg)}50%{transform:scale(.92)}75%{transform:scale(1.15) rotate(6deg)}}
+
+.gb{max-width:none;margin:0 auto;padding:0 16px 10px;font-family:"Noto Serif TC",serif;color:#3d3639}
+.gb-intro{text-align:center;margin:0 0 24px}
+.gb-intro em{display:block;font:italic 500 24px/1 "Cormorant Garamond",Georgia,serif;color:#c27ba0;letter-spacing:.06em;margin-bottom:10px}
+.gb-intro p{margin:0;font-size:14px;letter-spacing:.12em;line-height:1.9;color:#6b5e63}
+.gb-form{border:1px solid #ecdfe3;border-radius:8px;background:#fff;padding:16px;display:flex;flex-direction:column;gap:12px}
+.gb-form label{font-size:12px;letter-spacing:.2em;color:#8a7d82}
+.gb-form input,.gb-form textarea,.gb-reply textarea{width:100%;box-sizing:border-box;font:inherit;font-size:14px;color:#3d3639;background:#fffdfb;border:1px solid #ecdfe3;border-radius:6px;padding:10px 12px;outline:none;transition:border-color .2s}
+.gb-form input:focus,.gb-form textarea:focus,.gb-reply textarea:focus{border-color:#c27ba0}
+.gb-form textarea{min-height:96px;resize:vertical;line-height:1.8}
+.gb-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.gb-count{font:500 13px "Cormorant Garamond",serif;color:#8a7d82;font-variant-numeric:tabular-nums}
+.gb-btn{font:500 13px/1 "Noto Serif TC",serif;letter-spacing:.2em;color:#fff;background:#3d3639;border:0;border-radius:999px;padding:11px 24px;cursor:pointer;transition:background .2s,transform .2s}
+.gb-btn:hover{background:#c27ba0;transform:translateY(-1px)}
+.gb-ghost{font:500 12px/1 "Noto Serif TC",serif;letter-spacing:.12em;color:#3d3639;background:none;border:1px solid #ecdfe3;border-radius:999px;padding:7px 14px;cursor:pointer}
+.gb-ghost:hover{border-color:#c27ba0;color:#c27ba0}
+.gb-danger:hover{border-color:#b5475e;color:#b5475e}
+.gb-note{margin:0;font-size:13px;letter-spacing:.08em;line-height:1.8}
+.gb-ok{color:#c27ba0}.gb-err{color:#b5475e}
+.gb-hint{font-size:12px;color:#8a7d82;letter-spacing:.08em}
+.gb-list{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid #ecdfe3}
+.gb-item{padding:18px 2px;border-bottom:1px solid #ecdfe3}
+.gb-meta{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.gb-name{font-weight:600;font-size:15px}
+.gb-date{font:500 14px "Cormorant Garamond",serif;color:#8a7d82;font-variant-numeric:tabular-nums}
+.gb-tag{font-size:11px;letter-spacing:.15em;color:#b5475e;border:1px solid currentColor;border-radius:999px;padding:2px 8px}
+.gb-text{margin:8px 0 0;font-size:14px;line-height:1.9;white-space:pre-wrap;word-break:break-word;color:#4f4649}
+.gb-ans{margin:12px 0 0 0;padding:10px 14px;border-left:2px solid #f6c9d4;background:#fdf5f7;border-radius:0 6px 6px 0}
+.gb-ans b{display:block;font:700 22px/1 "Corinthia",cursive;color:#c27ba0;margin-bottom:4px}
+.gb-ans p{margin:0;font-size:13px;line-height:1.85;white-space:pre-wrap;color:#4f4649}
+.gb-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.gb-reply{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.gb-reply textarea{min-height:72px;resize:vertical;line-height:1.8}
+.gb-empty{text-align:center;font-size:13px;color:#8a7d82;padding:28px 0}
+.gb-admin{margin-top:24px;border:1px dashed #d9c4cb;border-radius:8px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.gb-admin span{font-size:12px;color:#8a7d82;letter-spacing:.08em;line-height:1.7}
+.gb-lockbtn{display:inline-flex;align-items:center;gap:6px;font:500 12px/1 "Noto Serif TC",serif;letter-spacing:.12em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:8px 14px;cursor:pointer;transition:all .2s;align-self:flex-start}
+.gb-lockbtn[aria-pressed="true"]{background:#3d3639;border-color:#3d3639;color:#fff}
+.gb-lockbtn:hover{border-color:#c27ba0}
+.gb-pwrow{display:flex;gap:8px;align-items:center}
+.gb-pwrow input{flex:1;min-width:0}
+.gb-sealed{margin-top:10px;padding:14px 16px;border:1px dashed #d9c4cb;border-radius:8px;background:#fdf8fa;display:flex;flex-direction:column;gap:10px}
+.gb-sealed p{margin:0;display:flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:#8a7d82}
+.gb-sealed .gb-pwrow input{font:inherit;font-size:14px;background:#fff;border:1px solid #ecdfe3;border-radius:6px;padding:8px 10px;outline:none;color:#3d3639}
+.gb-sealed .gb-pwrow input:focus{border-color:#c27ba0}
+.gb-lk{display:inline-flex;align-items:center;gap:4px;font-size:11px;letter-spacing:.12em;color:#8a5a73;background:#f7e6ee;border-radius:999px;padding:3px 9px}
+.gb-check{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.06em;color:#4f4649;cursor:pointer}
+.gb-check input{width:16px;height:16px;accent-color:#c27ba0;margin:0}
+.gb-warn{font-size:12px;color:#b5475e;letter-spacing:.06em}
+.gb button:focus-visible{outline:2px solid #c27ba0;outline-offset:3px}
+
+.cf-bg{position:absolute;inset:0;z-index:90;background:rgba(61,54,57,.38);display:flex;align-items:center;justify-content:center;padding:20px;animation:cfin .18s ease-out}
+.cf-box{width:100%;max-width:320px;background:#fffdfb;border-radius:12px;padding:26px 24px 20px;box-shadow:0 18px 50px rgba(61,54,57,.25);font-family:"Noto Serif TC",serif;color:#3d3639;text-align:center;animation:cfpop .22s cubic-bezier(.34,1.5,.5,1)}
+.cf-box h2{margin:0 0 8px;font-size:17px;font-weight:600;letter-spacing:.08em}
+.cf-box p{margin:0 0 20px;font-size:13px;line-height:1.85;color:#6b5e63;letter-spacing:.04em}
+.cf-btns{display:flex;justify-content:center;gap:10px}
+.cf-btns button{min-height:44px;min-width:104px}
+.gb-btn.cf-danger{background:#b5475e}.gb-btn.cf-danger:hover{background:#963a4e}
+@keyframes cfin{from{opacity:0}}@keyframes cfpop{from{opacity:0;transform:scale(.92) translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.cf-bg,.cf-box{animation:none}}
+
+.logo-link{position:relative}
+.logo-link .lg-h{position:relative;z-index:2;flex:none;transform-origin:50% 60%}
+.lg-w{display:inline-block;margin-left:-4px}
+.lg-t{display:inline-block;font-family:"La Belle Aurore",cursive;font-weight:400;color:#4f494c;letter-spacing:.02em;white-space:nowrap;filter:url(#pencilTex)}
+.logo-link:hover{color:inherit !important}
+.logo-link:hover .lg-h{animation:logobeat .7s ease-in-out}
+@media (prefers-reduced-motion:reduce){.logo-link:hover .lg-h{animation:none}}
+</style>
+<style>html,body{margin:0;background:#fffdfb;overflow:hidden}#dcroot{margin:0 auto}template{display:none}</style>
+</head>
+<body>
+<div id="dcroot" x-data="dcApp" style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #fffdfb; font-family: 'M PLUS Rounded 1c', sans-serif; color: #4a4547">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true"><defs><filter id="mPill" x="-10%" y="-30%" width="120%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="5" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" result="d"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="2" result="g"></feTurbulence><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.8" result="m"></feColorMatrix><feComposite in="d" in2="m" operator="in"></feComposite></filter><filter id="mEdge" x="-2%" y="-60%" width="104%" height="220%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="3" result="d"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="1" seed="11" result="g"></feTurbulence><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.75" result="m"></feColorMatrix><feComposite in="d" in2="m" operator="in"></feComposite></filter></defs></svg>
+  <template x-if="v.anncOpen"><div style="display: contents"><div role="region" aria-label="最新公告" style="position: absolute; left: 0; right: 0; top: 0; height: 36px; box-sizing: border-box; z-index: 60; display: flex; align-items: center; gap: 10px; padding: 0 12px 0 16px; background: #fdf3f5; border-bottom: 1.5px dashed #e7a8bf; color: #4a4547; font: 500 12px/1.4 'M PLUS Rounded 1c', sans-serif"><svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="flex: none"><g fill="none" stroke="#4a4547" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M5 13.5c0-1 .8-1.8 1.8-1.8H11l10-6v20.6l-10-6H6.8c-1 0-1.8-.8-1.8-1.8z" fill="#f6c9d4"></path><path d="M11 20.5l2.2 6.2c.3.8 1.3 1 1.9.5l.6-.5c.5-.4.6-1.1.3-1.7L14 20.5"></path><path d="M25 12.5c1.4 1 2.2 2.4 2.2 3.8s-.8 2.8-2.2 3.8M24.2 8.6c2.6 1.7 4.2 4.5 4.2 7.6s-1.6 5.9-4.2 7.6" stroke="#c27ba0"></path></g></svg><span style="flex: none; font-weight: 800; font-size: 9px; letter-spacing: .15em; padding: 2px 8px; border-radius: 999px; background: #f6c9d4">公告</span><a href="/m/news.html" style="flex: 1; min-width: 0; color: #4a4547; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Sceneey's Studio 新網站上線<span style="color: #c27ba0; margin-left: 8px; font-weight: 800">看更多 →</span></a><button type="button" aria-label="關閉公告" @click="v.closeAnnc($event)" style="flex: none; width: 30px; height: 30px; border: 0; background: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path d="M4.5 4.8c3.6 3.4 7 7 11 10.6M15.4 4.4c-3.8 3.6-7.4 7.4-10.8 11" stroke="#4a4547" stroke-width="2.2" stroke-linecap="round" fill="none"></path></svg></button></div></div></template>
+  <div @scroll="v.onScroll($event)" :style="'position: absolute; left: 0; right: 0; bottom: 0; top: ' + (v.scTop) + '; overflow-x: hidden; overflow-y: auto'">
+    <header style="position: sticky; top: 0; z-index: 30; background: rgba(253,247,249,.96); border-bottom: 1px solid #f3dde4">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px"><a class="logo-link" href="/m/" aria-label="Sceneey's Studio 首頁" style="display: flex; align-items: center; gap: 6px; text-decoration: none; color: #4f494c"><svg width="0" height="0" style="position: absolute" aria-hidden="true"><defs><filter id="pencilTex" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="7" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.2" xChannelSelector="R" yChannelSelector="G" result="d"></feDisplacementMap><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.55" result="g"></feColorMatrix><feComposite in="d" in2="g" operator="in"></feComposite></filter></defs></svg><svg class="lg-h" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><g filter="url(#pencilTex)"><path d="M20 34C9 26 4 20 4 13.5 4 8.5 8 5 12.5 5c3.3 0 5.8 2 7.5 4.6C21.7 7 24.2 5 27.5 5 32 5 36 8.5 36 13.5 36 20 31 26 20 34z" fill="#f6c9d4"></path><g fill="none" stroke="#f0aebf" stroke-width="1.1" stroke-linecap="round" opacity=".9"><path d="M9 12 L15 7"></path><path d="M8 17 L19 8"></path><path d="M10 21 L24 9"></path><path d="M13 25 L29 9"></path><path d="M16 29 L32 12"></path><path d="M21 31 L33 18"></path></g><path d="M20 33.2C9.6 25.6 4.6 19.8 4.8 13.4 5 8.8 8.4 5.6 12.6 5.7c3.2.1 5.6 2.1 7.3 4.5 1.8-2.7 4.3-4.6 7.6-4.6 4.4.1 7.8 3.4 7.7 8 0 6.4-5.1 12.3-15.2 19.6" fill="none" stroke="#4f494c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.4 33.6C10.2 26.4 4.2 20.6 4.3 13.8" fill="none" stroke="#4f494c" stroke-width=".8" stroke-linecap="round" opacity=".55"></path><path d="M21 9.4c1.6-2.2 3.9-3.8 6.9-3.9" fill="none" stroke="#4f494c" stroke-width=".8" stroke-linecap="round" opacity=".5"></path></g></svg><span class="lg-w"><span class="lg-t" style="font-size: 21px; line-height: 1.1">Sceneey's Studio</span></span></a><button type="button" aria-label="選單" :aria-expanded="v.menuOpen" @click="v.toggleMenu($event)" style="background: #fff; border: 2px solid #4a4547; border-radius: 12px; padding: 5px 7px; line-height: 0; cursor: pointer"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6c6-1 12 1 18-.4M3 12.2c6-.8 12 .8 18-.2M3 18c6 .6 12-1 18 .2" stroke="#4a4547" stroke-width="2.4" fill="none" stroke-linecap="round"></path></svg></button></div>
+      <div aria-hidden="true" style="position: absolute; right: 64px; top: 100%; width: 72px; pointer-events: none"><div class="mini-kick" style="transform-origin: 50% 0; transition: transform .6s cubic-bezier(.34,1.6,.5,1)"><div class="mini-swing" style="transform-origin: 50% 0"><svg width="72" height="40" viewBox="0 0 72 40" style="display: block; overflow: visible"><g fill="none" stroke="#4a4547" stroke-width="1.6" stroke-linecap="round"><path d="M25,0 C26,12 24,26 25.5,40"></path><path d="M48,0 C47,14 49,27 47.5,40"></path></g></svg><img src="/img/c/a7709ceaf351e2589ecf63f52b0e8df1.webp" alt="" style="display: block; width: 72px; margin-top: -4px"></div></div></div>
+      <template x-if="v.menuOpen"><div style="display: contents"><nav aria-label="網站導覽" style="position: absolute; right: 16px; top: 52px; z-index: 2; display: flex; flex-direction: column; gap: 4px; background: #fff; border: 2px solid #4a4547; border-radius: 16px; padding: 10px; box-shadow: 4px 4px 0 #f6c9d4"><a href="/m/" aria-label="首頁" class="mpill" style="display: flex; align-items: center; padding: 6px 14px; border-radius: 999px; color: #4a4547; background: transparent"><svg viewBox="0 0 40 40" width="24" height="24" aria-hidden="true" style="display: block; overflow: visible"><defs><filter id="houseCrayonMQA" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="7" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"></feDisplacementMap></filter></defs><g filter="url(#houseCrayonMQA)" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M7 19.5 L20 7.5 L33.2 19.8" fill="none"></path><path d="M10.5 17.2 L10.8 32.6 L29.6 32.8 L29.4 17.4" fill="#f6c9d4" fill-opacity=".55"></path><path d="M17.4 32.6 L17.6 24.4 C19.4 23.6 21 23.6 22.6 24.4 L22.8 32.6" fill="#fff"></path><path d="M25.6 12 L25.8 7.6 L29.2 7.8 L29.2 15" fill="none"></path><path d="M20 17.6c-1.4-1.6-3.8-.4-2.6 1.4L20 21.4l2.6-2.4c1.2-1.8-1.2-3-2.6-1.4z" fill="#c27ba0" stroke-width="1.2"></path></g></svg></a><a href="/m/news.html" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">NEWS</a><a href="/m/world.html" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">WORLD</a><a href="/m/characters.html" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">CHARACTERS</a><a href="/m/story.html" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">STORY</a><a href="/m/gallery.html" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">GALLERY</a><a href="/m/qa.html" aria-current="page" class="mpill" style="text-decoration: none; color: #fff; background: #4a4547; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">Q&amp;A</a></nav></div></template>
+    </header>
+    <main style="padding-bottom: 30px">
+      <div class="pg-head"><p class="pg-eyebrow">Sceneey's Studio</p><h1 class="pg-title">Q&amp;A</h1></div>
+      <section class="gb" aria-label="留言板">
+        <div class="gb-intro"><em>leave a note</em><p>想問的問題、想說的話都可以留在這裡。<br>留言會在 Sceneey 看過後公開 ♡</p></div>
+        <form class="gb-form" @submit="v.submit($event)" style="position: relative">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" value="" @input="v.onHp($event)" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0">
+          <label for="gb-n">暱稱</label>
+          <input id="gb-n" type="text" maxlength="20" placeholder="最多 20 字" :value="v.name" @input="v.onName($event)">
+          <label for="gb-t">留言</label>
+          <textarea id="gb-t" maxlength="300" placeholder="最多 300 字" :value="v.text" @input="v.onText($event)"></textarea>
+          <button type="button" class="gb-lockbtn" :aria-pressed="v.privStr" @click="v.togglePriv($event)"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>悄悄話（只有 Sceneey 看得到）</button>
+          <template x-if="v.privOn"><div style="display: contents"><div style="display: flex; flex-direction: column; gap: 12px">
+          <label for="gb-p">查看密碼</label>
+          <input id="gb-p" type="password" maxlength="12" placeholder="4–12 字，之後用來打開悄悄話和 Sceneey 的回覆" :value="v.pw" @input="v.onPw($event)">
+          <span class="gb-hint">請記住這組密碼，也不要用其他網站的密碼喔。</span>
+          </div></div></template>
+          <div class="gb-row"><span class="gb-count"><span x-text="v.count"></span></span><button type="submit" class="gb-btn">送出留言</button></div>
+          <template x-if="v.sent"><div style="display: contents"><p class="gb-note gb-ok" role="status">已送出！審核通過後就會出現在下面 ♡</p></div></template>
+          <template x-if="v.err"><div style="display: contents"><p class="gb-note gb-err" role="alert"><span x-text="v.err"></span></p></div></template>
+          <span class="gb-hint">不需要註冊，也請不要留下 email、電話等個人資料。</span>
+        </form>
+        <template x-if="v.listOn"><div style="display: contents"><ol class="gb-list">
+          <template x-for="(m, $index) in v.msgs"><div style="display: contents"><li class="gb-item">
+            <div class="gb-meta"><span class="gb-name"><span x-text="m.name"></span></span><span class="gb-date"><span x-text="m.date"></span></span><template x-if="m.priv"><div style="display: contents"><span class="gb-lk"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>悄悄話</span></div></template><template x-if="m.pending"><div style="display: contents"><span class="gb-tag">待審核</span></div></template></div>
+            <template x-if="m.showText"><div style="display: contents"><p class="gb-text"><span x-text="m.text"></span></p></div></template>
+            <template x-if="m.showReply"><div style="display: contents"><div class="gb-ans"><b>Sceneey</b><template x-if="m.rpriv"><div style="display: contents"><span class="gb-lk" style="margin-bottom: 6px"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>上鎖回覆</span></div></template><p><span x-text="m.reply"></span></p></div></div></template>
+            <template x-if="m.needPw"><div style="display: contents"><div class="gb-sealed">
+              <p><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span x-text="m.sealMsg"></span></p>
+              <div class="gb-pwrow"><input type="password" maxlength="12" aria-label="輸入查看密碼" placeholder="輸入留言時設定的密碼" :value="m.pwIn" @input="m.onPwIn($event)"><button type="button" class="gb-ghost" @click="m.unlock($event)">打開</button></div>
+              <template x-if="m.pwBad"><div style="display: contents"><span class="gb-warn" role="alert">密碼不對喔</span></div></template>
+            </div></div></template>
+            <template x-if="m.admin"><div style="display: contents"><div class="gb-tools">
+              <template x-if="m.pending"><div style="display: contents"><button type="button" class="gb-ghost" @click="m.approve($event)">通過審核</button></div></template>
+              <button type="button" class="gb-ghost" @click="m.startReply($event)"><span x-text="m.replyLabel"></span></button>
+              <button type="button" class="gb-ghost gb-danger" @click="m.del($event)">刪除</button>
+            </div></div></template>
+            <template x-if="m.editing"><div style="display: contents"><div class="gb-reply">
+              <textarea aria-label="回覆內容" maxlength="500" :value="m.replyText" @input="m.onReply($event)"></textarea>
+              <span class="gb-hint"><span x-text="m.replyHint"></span></span>
+              <div class="gb-tools" style="margin-top: 0"><button type="button" class="gb-btn" @click="m.saveReply($event)">儲存回覆</button><button type="button" class="gb-ghost" @click="m.cancelReply($event)">取消</button></div>
+            </div></div></template>
+          </li></div></template>
+        </ol></div></template>
+        <template x-if="v.empty"><div style="display: contents"><p class="gb-empty"><span x-text="v.emptyMsg"></span></p></div></template>
+        <template x-if="v.admErrOn"><div style="display: contents"><p class="gb-note gb-err" role="alert" style="text-align: center; margin-top: 14px"><span x-text="v.admErr"></span></p></div></template>
+      </section>
+    </main>
+    <footer style="position: relative; z-index: 5; background: #fff; padding: 34px 16px 30px; display: flex; flex-direction: column; align-items: center; gap: 18px">
+      <svg aria-hidden="true" width="390" height="36" viewBox="0 0 390 36" style="position: absolute; left: 0; top: -18px; overflow: visible; pointer-events: none"><path d="M0,11.6 L10,12.5 L20,13.8 L30,12.6 L40,11.0 L50,10.7 L60,12.3 L70,14.2 L80,17.7 L90,20.0 L100,23.1 L110,22.7 L120,20.8 L130,18.1 L140,16.3 L150,17.2 L160,17.3 L170,17.9 L180,17.7 L190,14.7 L200,12.2 L210,10.1 L220,8.8 L230,9.5 L240,12.1 L250,13.7 L260,18.1 L270,19.9 L280,19.6 L290,17.8 L300,17.8 L310,17.1 L320,20.5 L330,22.0 L340,22.0 L350,20.5 L360,19.1 L370,14.5 L380,11.9 L390,10.0 L390,36 L0,36 Z" fill="#ffffff"></path><path d="M0,11.6 L10,12.5 L20,13.8 L30,12.6 L40,11.0 L50,10.7 L60,12.3 L70,14.2 L80,17.7 L90,20.0 L100,23.1 L110,22.7 L120,20.8 L130,18.1 L140,16.3 L150,17.2 L160,17.3 L170,17.9 L180,17.7 L190,14.7 L200,12.2 L210,10.1 L220,8.8 L230,9.5 L240,12.1 L250,13.7 L260,18.1 L270,19.9 L280,19.6 L290,17.8 L300,17.8 L310,17.1 L320,20.5 L330,22.0 L340,22.0 L350,20.5 L360,19.1 L370,14.5 L380,11.9 L390,10.0" fill="none" stroke="#4a4547" stroke-width="4" stroke-linecap="round" filter="url(#mEdge)"></path></svg>
+      <span style="font-family: 'Corinthia', 'Snell Roundhand', cursive; font-weight: 700; font-size: 26px; line-height: 1; color: #c27ba0">link</span>
+      <nav aria-label="社群連結" style="display: flex; gap: 26px">
+      <a href="https://caveduck.io/user/_sceneey_" target="_blank" rel="noopener" style="display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; color: #4a4547"><span style="position: relative; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" viewBox="0 0 100 100" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible"><path d="M50,3 C76,2 98,22 97,50 C97,77 76,98 49,97 C23,97 2.6,76 3.4,49 C4,24 25,4 50,3 Z" fill="#fde7a8"></path><g filter="url(#mPill)" fill="none" stroke="#4a4547"><path d="M50,3 C76,2 98,22 97,50 C97,77 76,98 49,97 C23,97 2.6,76 3.4,49 C4,24 25,4 50,3 Z" stroke-width="3.2"></path></g></svg><svg aria-hidden="true" viewBox="0 0 72 72" width="28" height="28" style="position: relative"><path d="M14 40c0-12 9-20 20-20 9 0 16 6 18 14h8c2 0 3 2 2 3-2 4-6 6-10 6 0 11-9 19-20 19-10 0-18-8-18-18v-4z" fill="#fde7a8" stroke="#4a4547" stroke-width="3" stroke-linejoin="round"></path><circle cx="38" cy="32" r="2.6" fill="#4a4547"></circle><path d="M22 46c4 4 12 4 16 0" fill="none" stroke="#4a4547" stroke-width="2.6" stroke-linecap="round"></path></svg></span><span style="font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 13px; line-height: 1">Caveduck</span><span style="font-weight: 700; font-size: 9.5px; color: #8a7680">@_sceneey_</span></a>
+      <a href="https://www.threads.com/@sceneey._.char" target="_blank" rel="noopener" style="display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; color: #4a4547"><span style="position: relative; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" viewBox="0 0 100 100" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible"><path d="M50,3 C76,2 98,22 97,50 C97,77 76,98 49,97 C23,97 2.6,76 3.4,49 C4,24 25,4 50,3 Z" fill="#f6c9d4"></path><g filter="url(#mPill)" fill="none" stroke="#4a4547"><path d="M50,3 C76,2 98,22 97,50 C97,77 76,98 49,97 C23,97 2.6,76 3.4,49 C4,24 25,4 50,3 Z" stroke-width="3.2"></path></g></svg><svg aria-hidden="true" viewBox="0 0 72 72" width="28" height="28" style="position: relative"><path d="M44 30c-2-6-7-9-13-9-9 0-14 7-14 17s5 18 15 18c8 0 14-5 14-12 0-6-5-10-12-10-6 0-10 3-10 7s3 6 7 6c6 0 9-5 9-12" fill="none" stroke="#4a4547" stroke-width="3.4" stroke-linecap="round"></path></svg></span><span style="font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 13px; line-height: 1">Threads</span><span style="font-weight: 700; font-size: 9.5px; color: #8a7680">@sceneey._.char</span></a>
+      <a href="https://x.com/risucookie" target="_blank" rel="noopener" style="display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; color: #4a4547"><span style="position: relative; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" viewBox="0 0 100 100" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible"><path d="M50,3 C76,2 98,22 97,50 C97,77 76,98 49,97 C23,97 2.6,76 3.4,49 C4,24 25,4 50,3 Z" fill="#cfe6f1"></path><g filter="url(#mPill)" fill="none" stroke="#4a4547"><path d="M50,3 C76,2 98,22 97,50 C97,77 76,98 49,97 C23,97 2.6,76 3.4,49 C4,24 25,4 50,3 Z" stroke-width="3.2"></path></g></svg><svg aria-hidden="true" viewBox="0 0 72 72" width="28" height="28" style="position: relative"><path d="M16 16l32 40M48 16L16 56" stroke="#4a4547" stroke-width="4" stroke-linecap="round"></path></svg></span><span style="font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 13px; line-height: 1">X</span><span style="font-weight: 700; font-size: 9.5px; color: #8a7680">@risucookie</span></a>
+      </nav>
+      <small style="font-size: 10px; letter-spacing: .2em; color: #8a7680">2026 | Sceneey</small>
+    </footer>
+  </div>
+
+  <template x-if="v.cfOpen"><div style="display: contents">
+    <div class="cf-bg">
+      <div class="cf-box" role="dialog" aria-modal="true" aria-labelledby="cf-t">
+        <h2 id="cf-t"><span x-text="v.cfTitle"></span></h2>
+        <p><span x-text="v.cfBody"></span></p>
+        <div class="cf-btns"><button type="button" class="gb-ghost" @click="v.cfNo($event)">取消</button><button type="button" :class="v.cfOkClass" @click="v.cfYes($event)"><span x-text="v.cfOk"></span></button></div>
+      </div>
+    </div>
+  </div></template>
+</div>
+<script>(function(){var r=document.getElementById('dcroot');function fit(){var W=document.documentElement.clientWidth||window.innerWidth,H=window.innerHeight;var z=W/390;r.style.width='390px';r.style.zoom=z;r.style.height=(H/z)+'px';}fit();window.addEventListener('resize',fit);})();</script>
+<script>
+var MODE = "public";
+
+class DCLogic { constructor(props) { this.props = props || {}; this.state = {}; }
+  setState(o) { if (typeof o === 'function') o = o(this.state); Object.assign(this.state, o); }
+  forceUpdate() {} }
+
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { annc: true, menu: false, name: '', text: '', pw: '', priv: false, hp: '', sent: false, err: '', busy: false, msgs: [], loading: true, loadErr: '', unlocked: {}, pwIn: {}, pwBad: null, cf: null, replyId: null, replyText: '', key: '', loginPw: '', loginErr: '', admErr: '' }; }
+
+  componentDidMount() {
+    if (MODE === 'admin') { let k = ''; try { k = sessionStorage.getItem('gbk') || ''; } catch (_) {} if (k) { this.setState({ key: k }); this.load(k); } else this.setState({ loading: false }); }
+    else this.load();
+  }
+  async api(body, key) {
+    const h = { 'content-type': 'application/json' }; if (key) h['x-admin-key'] = key;
+    const r = await fetch('/api/gb', body ? { method: 'POST', headers: h, body: JSON.stringify(body) } : { headers: h, cache: 'no-store' });
+    let d = {}; try { d = await r.json(); } catch (_) {}
+    if (!r.ok) { const e = new Error(d.error || '網路好像怪怪的，請稍後再試'); e.status = r.status; throw e; }
+    return d;
+  }
+  async load(k, fresh) {
+    if (k === undefined) k = this.state.key;
+    this.setState({ loading: true, loadErr: '' });
+    try {
+      const d = await this.api(MODE === 'admin' ? { action: 'admin_list' } : null, MODE === 'admin' ? k : '');
+      this.setState({ msgs: d.messages || [], loading: false });
+      if (MODE === 'admin' && fresh) { try { sessionStorage.setItem('gbk', k); } catch (_) {} }
+    } catch (e) {
+      if (MODE === 'admin' && (e.status === 401 || e.status === 503)) { try { sessionStorage.removeItem('gbk'); } catch (_) {} this.setState({ key: '', loginErr: e.message, loading: false }); }
+      else this.setState({ loading: false, loadErr: e.message });
+    }
+  }
+  async post(n, t, pv, p) {
+    this.setState({ busy: true, err: '' });
+    try { await this.api({ action: 'post', name: n, text: t, priv: pv, pw: pv ? p : '', website: this.state.hp }); this.setState({ name: '', text: '', pw: '', priv: false, sent: true, busy: false }); }
+    catch (e) { this.setState({ err: e.message, busy: false, sent: false }); }
+  }
+  async unlock(id) {
+    const pw = (this.state.pwIn[id] || '').trim(); if (!pw) { this.setState({ pwBad: id }); return; }
+    try { const d = await this.api({ action: 'unlock', id: id, pw: pw }); this.setState({ unlocked: Object.assign({}, this.state.unlocked, { [id]: { text: d.text, reply: d.reply } }), pwBad: null }); }
+    catch (e) { this.setState({ pwBad: id }); }
+  }
+  async adm(body, extra) {
+    this.setState({ admErr: '' });
+    try { await this.api(body, this.state.key); if (extra) this.setState(extra); await this.load(); }
+    catch (e) { if (e.status === 401) { this.setState({ key: '', loginErr: e.message }); } else this.setState({ admErr: e.message }); }
+  }
+  renderVals() {
+
+    const S = this.state, ADMIN = MODE === 'admin';
+    const ask = (c) => this.setState({ cf: c });
+    const listOn = !ADMIN || !!S.key;
+    const gb = {
+      name: S.name, text: S.text, count: S.text.length + ' / 300', sent: S.sent, err: S.err, busy: S.busy,
+      privStr: S.priv ? 'true' : 'false', privOn: S.priv, pw: S.pw,
+      onName: (e) => this.setState({ name: e.target.value, sent: false, err: '' }),
+      onText: (e) => this.setState({ text: e.target.value, sent: false, err: '' }),
+      onPw: (e) => this.setState({ pw: e.target.value, err: '' }),
+      onHp: (e) => this.setState({ hp: e.target.value }),
+      togglePriv: () => this.setState({ priv: !S.priv, pw: '', err: '' }),
+      submit: (e) => { e.preventDefault(); if (S.busy) return; const n = S.name.trim(), t = S.text.trim(), p = S.pw.trim(), pv = S.priv;
+        if (!n || !t) { this.setState({ err: '暱稱和留言都要填喔', sent: false }); return; }
+        if (pv && p.length < 4) { this.setState({ err: '悄悄話需要設定 4–12 字的查看密碼喔', sent: false }); return; }
+        ask({ title: pv ? '確定送出悄悄話？' : '確定送出留言？', body: pv ? '送出後就不能修改了。悄悄話只有 Sceneey 看得到，之後用你設的密碼打開。' : '送出後就不能修改了，Sceneey 看過後會公開在這裡。', ok: '送出', run: () => this.post(n, t, pv, p) }); },
+      listOn: listOn,
+      msgs: (listOn ? S.msgs : []).map((m) => {
+        const u = S.unlocked[m.id]; const see = ADMIN || !!u; const locked = !!m.priv && !see;
+        const text = u ? u.text : m.text; const reply = u ? u.reply : m.reply;
+        return { id: m.id, name: m.name, date: m.date, priv: !!m.priv, rpriv: !!m.priv && !!reply, pending: !m.ok,
+          showText: !locked, text: text || '', showReply: !locked && !!reply, reply: reply || '', needPw: locked,
+          sealMsg: m.hasReply ? '這是一則悄悄話（Sceneey 已回覆），輸入密碼才能看' : '這是一則悄悄話，輸入密碼才能看',
+          pwIn: S.pwIn[m.id] || '', pwBad: S.pwBad === m.id,
+          onPwIn: (e) => this.setState({ pwIn: Object.assign({}, this.state.pwIn, { [m.id]: e.target.value }), pwBad: null }),
+          unlock: () => this.unlock(m.id),
+          admin: ADMIN, editing: ADMIN && S.replyId === m.id, replyLabel: m.reply ? '修改回覆' : '回覆', replyText: S.replyText,
+          replyHint: m.priv ? '悄悄話的回覆會自動上鎖，只有留言者輸入密碼才看得到。' : '公開留言的回覆會公開顯示（只有悄悄話可以上鎖回覆）。',
+          approve: () => ask({ title: '通過這則留言？', body: m.priv ? '通過後會出現在列表上，內容仍然上鎖。' : '通過後所有人都看得到這則留言。', ok: '通過', run: () => this.adm({ action: 'approve', id: m.id }) }),
+          del: () => ask({ title: '確定要刪除嗎？', body: '「' + m.name + '」的這則留言' + (m.reply ? '和你的回覆' : '') + '會一起刪除，刪除後無法復原。', ok: '刪除', danger: true, run: () => this.adm({ action: 'delete', id: m.id }) }),
+          startReply: () => this.setState({ replyId: m.id, replyText: m.reply || '' }),
+          onReply: (e) => this.setState({ replyText: e.target.value }),
+          saveReply: () => { const rt = this.state.replyText.trim(); if (!rt) return;
+            ask({ title: m.priv ? '送出上鎖回覆？' : '送出回覆？', body: (m.priv ? '只有留言者輸入密碼才看得到這則回覆。' : '回覆會公開顯示在這則留言下面。') + (m.ok ? '' : '這則留言也會一起通過審核。'), ok: '送出回覆', run: () => this.adm({ action: 'reply', id: m.id, reply: rt }, { replyId: null }) }); },
+          cancelReply: () => this.setState({ replyId: null }) };
+      }),
+      empty: listOn && (S.loading || S.msgs.length === 0),
+      emptyMsg: S.loading ? '載入中…' : (S.loadErr || (ADMIN ? '目前沒有任何留言。' : '還沒有留言，來當第一個吧 ♡')),
+      admErr: S.admErr, admErrOn: !!S.admErr,
+      needLogin: ADMIN && !S.key, authed: ADMIN && !!S.key,
+      loginPw: S.loginPw, loginErr: S.loginErr, loginErrOn: !!S.loginErr,
+      onLoginPw: (e) => this.setState({ loginPw: e.target.value, loginErr: '' }),
+      login: (e) => { e.preventDefault(); const k = S.loginPw; if (!k) return; this.setState({ key: k, loginPw: '' }); this.load(k, true); },
+      logout: () => { try { sessionStorage.removeItem('gbk'); } catch (_) {} this.setState({ key: '', msgs: [] }); },
+      cfOpen: !!S.cf, cfTitle: S.cf ? S.cf.title : '', cfBody: S.cf ? S.cf.body : '', cfOk: S.cf ? S.cf.ok : '', cfOkClass: S.cf && S.cf.danger ? 'gb-btn cf-danger' : 'gb-btn',
+      cfNo: () => this.setState({ cf: null }),
+      cfYes: () => { const r = this.state.cf && this.state.cf.run; this.setState({ cf: null }); if (r) r(); }
+    };
+    
+    return { ...gb, onScroll: (e) => { const el = e.currentTarget; const k = el.querySelector('.mini-kick'); if (!k) return; const d = el.scrollTop - (this._lastY || 0); this._lastY = el.scrollTop; const a = Math.max(-14, Math.min(14, -d * 0.6)); k.style.transform = 'rotate(' + a + 'deg)'; clearTimeout(this._kt); this._kt = setTimeout(() => { k.style.transform = 'rotate(0deg)'; }, 120); }, anncOpen: this.state.annc, closeAnnc: () => this.setState({ annc: false }), scTop: this.state.annc ? '36px' : '0px', menuOpen: this.state.menu, toggleMenu: () => this.setState({ menu: !this.state.menu }) };
+  }
+}
+
+
+document.addEventListener('alpine:init', function () {
+  Alpine.data('dcApp', function () {
+    var c = new Component({});
+    c.state = Alpine.reactive(c.state);
+    return { init: function () { if (c.componentDidMount) c.componentDidMount(); }, get v() { return c.renderVals(); } };
+  });
+});
+
+</script>
+<script src="/js/alpine.min.js"></script>
+</body>
+</html>
