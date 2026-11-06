@@ -22,7 +22,7 @@ function checkPw(pw, stored) {
   return got.length === want.length && crypto.timingSafeEqual(got, want);
 }
 function isAdmin(req) {
-  const want = process.env.ADMIN_PASSWORD || "";
+  const want = process.env.admin_sceneey || process.env.ADMIN_SCENEEY || process.env.ADMIN_PASSWORD || "";
   const got = req.headers.get("x-admin-key") || "";
   if (!want || !got) return false;
   return crypto.timingSafeEqual(sha(got), sha(want));
@@ -91,7 +91,7 @@ export async function handle(req, context, store) {
 
   // ---- admin ----
   if (!["admin_list", "approve", "reply", "delete"].includes(act)) return J({ error: "未知的動作" }, 400);
-  if (!process.env.ADMIN_PASSWORD) return J({ error: "管理密碼還沒設定（ADMIN_PASSWORD）" }, 503);
+  if (!(process.env.admin_sceneey || process.env.ADMIN_SCENEEY || process.env.ADMIN_PASSWORD)) return J({ error: "管理密碼還沒設定（admin_sceneey）" }, 503);
   if (!isAdmin(req)) { await sleep(800); return J({ error: "密碼不對喔" }, 401); }
   if (act === "admin_list") return J({ messages: (await all(store)).map(adm) });
   const key = "m/" + String(b.id || "");
