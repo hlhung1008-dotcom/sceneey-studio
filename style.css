@@ -115,3 +115,6 @@ footer .in{display:flex;justify-content:center;gap:48px;padding-block:28px 36px}
   padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));cursor:zoom-out}
 .lightbox img{max-height:88vh;width:auto;max-width:100%;box-shadow:0 10px 40px rgba(194,123,160,.3)}
 .lightbox .x{position:absolute;top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));background:none;border:0;font-size:30px;color:var(--mauve);cursor:pointer}
+
+nav a.home{display:inline-flex;align-items:center;padding:3px 10px;color:#4a4547}
+nav a.home:hover{color:#c27ba0}

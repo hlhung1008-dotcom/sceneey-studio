@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>News · Sceneey's Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allison&family=Cabin+Sketch:wght@700&family=Annie+Use+Your+Telescope&family=Merriweather:ital,wght@0,400;1,400&family=PT+Sans:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+TC:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<header><div class="bar gut">
+<a class="logo" href="index.html"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34C9 26 4 20 4 13.5 4 8.5 8 5 12.5 5c3.3 0 5.8 2 7.5 4.6C21.7 7 24.2 5 27.5 5 32 5 36 8.5 36 13.5 36 20 31 26 20 34z" fill="#f6c9d4"/><path d="M9 12c3 5 9 11 15 15M13 8c3 6 9 12 15 16M8 17c4 4 8 8 12 11" stroke="#fff" stroke-width="1.2" fill="none" opacity=".8"/></svg><span>𝒮𝒸𝑒𝓃𝑒𝑒𝓎'𝓈 𝓈𝓉𝓊𝒹𝒾𝑜</span></a>
+<button class="menu" aria-expanded="false" aria-label="選單"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2"/></svg></button>
+<nav aria-label="網站導覽"><a href="index.html" class="home" aria-label="首頁"><svg viewBox="0 0 40 40" width="26" height="26" aria-hidden="true" style="display:block;overflow:visible"><defs><filter id="houseCrayon" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/></filter></defs><g filter="url(#houseCrayon)" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M7 19.5 L20 7.5 L33.2 19.8" fill="none"/><path d="M10.5 17.2 L10.8 32.6 L29.6 32.8 L29.4 17.4" fill="#f6c9d4" fill-opacity=".55"/><path d="M17.4 32.6 L17.6 24.4 C19.4 23.6 21 23.6 22.6 24.4 L22.8 32.6" fill="#fff"/><path d="M25.6 12 L25.8 7.6 L29.2 7.8 L29.2 15" fill="none"/><path d="M20 17.6c-1.4-1.6-3.8-.4-2.6 1.4L20 21.4l2.6-2.4c1.2-1.8-1.2-3-2.6-1.4z" fill="#c27ba0" stroke-width="1.2"/></g></svg></a><a href="world.html">𝒲𝑜𝓇𝓁𝒹</a><a href="characters.html">𝒞𝒽𝒶𝓇𝒶𝒸𝓉𝑒𝓇𝓈</a><a href="story.html">𝒮𝓉𝑜𝓇𝓎</a><a href="gallery.html">𝒢𝒶𝓁𝓁𝑒𝓇𝓎</a><a href="news.html" aria-current="page">𝒩𝑒𝓌𝓈</a><a href="qa.html">𝒬&𝒜</a></nav>
+</div></header>
+<main class="news">
+<div class="nw-head gut">
+  <p class="nw-eyebrow">Sceneey's Studio</p>
+  <h1 class="nw-title">News</h1>
+  <p class="nw-sub">公告、維修、圖片與創作花絮</p>
+</div>
+<div class="nw-filter gut" role="group" aria-label="分類">
+  <button type="button" data-cat="全部" aria-pressed="true">全部</button>
+  <button type="button" data-cat="公告" aria-pressed="false"><i style="background:#c27ba0"></i>公告</button>
+  <button type="button" data-cat="維修" aria-pressed="false"><i style="background:#8a9bb0"></i>維修</button>
+  <button type="button" data-cat="圖片" aria-pressed="false"><i style="background:#9b8ac9"></i>圖片</button>
+  <button type="button" data-cat="花絮" aria-pressed="false"><i style="background:#d9a76a"></i>花絮</button>
+</div>
+<ol class="nw-list gut" id="nwList" aria-live="polite"></ol>
+<p class="nw-empty gut" id="nwEmpty" hidden>這個分類目前還沒有消息。</p>
+</main>
+<style>
+.news{--ink:#3d3639;--soft:#8a7d82;--rule:#ecdfe3;--paper:#fffdfb}
+.news{background:var(--paper);padding-bottom:80px}
+.nw-head{max-width:760px;margin:0 auto;padding-block:64px 28px;text-align:center}
+.nw-eyebrow{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:17px;color:var(--soft);letter-spacing:.06em}
+.nw-title{margin:4px 0 10px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:64px;line-height:1;letter-spacing:.18em;color:var(--ink)}
+.nw-sub{margin:0;font-family:"Noto Serif TC",serif;font-size:14px;letter-spacing:.2em;color:var(--soft)}
+.nw-filter{max-width:760px;margin:0 auto 18px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.nw-filter button{display:inline-flex;align-items:center;gap:7px;font:500 14px/1 "Noto Serif TC",serif;letter-spacing:.12em;color:var(--ink);background:none;border:1px solid var(--rule);border-radius:999px;padding:9px 18px;cursor:pointer;transition:background .2s,border-color .2s}
+.nw-filter button i{width:7px;height:7px;border-radius:50%}
+.nw-filter button:hover{border-color:#d8c4cb}
+.nw-filter button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.nw-filter button:focus-visible,.nw-item summary:focus-visible{outline:2px solid #c27ba0;outline-offset:3px}
+.nw-list{list-style:none;max-width:760px;margin:0 auto;padding-top:0;padding-bottom:0;border-top:1px solid var(--rule)}
+.nw-item{border-bottom:1px solid var(--rule)}
+.nw-item summary{list-style:none;display:grid;grid-template-columns:110px minmax(0,1fr) auto;align-items:baseline;gap:18px;padding:22px 4px;cursor:pointer}
+.nw-item summary::-webkit-details-marker{display:none}
+.nw-date{font-family:"Cormorant Garamond",Georgia,serif;font-size:18px;color:var(--soft);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.nw-main{display:flex;flex-direction:column;gap:6px;min-width:0}
+.nw-cat{align-self:flex-start;font:500 11px/1 "Noto Serif TC",serif;letter-spacing:.2em;padding:4px 10px;border-radius:999px;border:1px solid currentColor}
+.nw-t{font-family:"Noto Serif TC",serif;font-weight:600;font-size:18px;line-height:1.5;color:var(--ink)}
+.nw-pin{font:italic 500 14px "Cormorant Garamond",serif;color:#c27ba0;margin-left:8px}
+.nw-arrow{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--soft);transition:transform .3s}
+.nw-item[open] .nw-arrow{transform:rotate(90deg)}
+.nw-body{padding:0 4px 26px 132px;font-family:"Noto Serif TC",serif;font-size:15px;line-height:2;color:#4f4649;white-space:pre-line}
+.nw-body img{display:block;max-width:100%;border-radius:4px;margin-top:14px}
+.nw-body a{color:#c27ba0}
+.nw-empty{max-width:760px;margin:30px auto 0;text-align:center;font-family:"Noto Serif TC",serif;color:var(--soft);letter-spacing:.1em}
+@media (max-width:640px){.nw-title{font-size:46px}.nw-item summary{grid-template-columns:minmax(0,1fr) auto;gap:6px 12px}.nw-date{grid-column:1/-1}.nw-body{padding-left:4px}}
+</style>
+<script>
+(function(){
+  var COL={'公告':'#c27ba0','維修':'#8a9bb0','圖片':'#9b8ac9','花絮':'#d9a76a'};
+  var list=document.getElementById('nwList'),empty=document.getElementById('nwEmpty'),btns=document.querySelectorAll('.nw-filter button'),data=[];
+  function render(cat){
+    list.textContent='';
+    var items=data.filter(function(n){return cat==='全部'||n.cat===cat;});
+    empty.hidden=items.length>0;
+    items.forEach(function(n){
+      var li=document.createElement('li');li.className='nw-item';li.id=n.id;
+      var d=document.createElement('details');if(location.hash==='#'+n.id)d.open=true;
+      var sm=document.createElement('summary');
+      var dt=document.createElement('span');dt.className='nw-date';dt.textContent=n.date.replace(/-/g,'.');
+      var mn=document.createElement('span');mn.className='nw-main';
+      var ct=document.createElement('span');ct.className='nw-cat';ct.textContent=n.cat;ct.style.color=COL[n.cat]||'#8a7d82';
+      var tt=document.createElement('span');tt.className='nw-t';tt.textContent=n.title;
+      if(n.pin){var p=document.createElement('span');p.className='nw-pin';p.textContent='pinned';tt.appendChild(p);}
+      mn.append(ct,tt);
+      var ar=document.createElement('span');ar.className='nw-arrow';ar.setAttribute('aria-hidden','true');ar.textContent='›';
+      sm.append(dt,mn,ar);
+      var bd=document.createElement('div');bd.className='nw-body';bd.textContent=n.body||'';
+      if(n.image){var im=document.createElement('img');im.src=n.image;im.alt=n.title;im.loading='lazy';bd.appendChild(im);}
+      if(n.link){var a=document.createElement('a');a.href=n.link;a.target='_blank';a.rel='noopener';a.textContent='查看原文 →';a.style.display='inline-block';a.style.marginTop='10px';bd.appendChild(a);}
+      d.append(sm,bd);li.appendChild(d);list.appendChild(li);
+    });
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){btns.forEach(function(x){x.setAttribute('aria-pressed',x===b);});render(b.dataset.cat);});});
+  fetch('news.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(j){
+    data=j.slice().sort(function(a,b){if(!!b.pin!==!!a.pin)return b.pin?1:-1;return a.date<b.date?1:-1;});render('全部');
+    if(location.hash){var t=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)t.scrollIntoView({block:'center'});}
+  }).catch(function(){empty.hidden=false;empty.textContent='公告暫時無法載入，請稍後再試。';});
+})();
+</script>
+<div class="copy">2026 | Sceneey</div>
+<footer><div class="in gut">
+<a class="soc" href="https://www.threads.com/@sceneey._.char" target="_blank" rel="noopener"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#666" stroke-width="1.6"/><path d="M13 19.5h-1a3.5 3.5 0 0 1 0-7h3m4 0h3a3.5 3.5 0 0 1 0 7h-3m-6-3.5h8" fill="none" stroke="#666" stroke-width="1.6" stroke-linecap="round"/></svg><span>threads</span></a>
+<a class="soc" href="https://x.com/risucookie" target="_blank" rel="noopener"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#666" stroke-width="1.6"/><path d="M11.5 11h3.2l8 12h-3.2zM22.5 11l-4.6 5.3M11.5 23l4.7-5.4" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg><span>x</span></a>
+</div></footer>
+<script src="announce.js"></script>
+<script src="nav.js"></script>
+<script src="peek.js"></script>
+</body></html>
