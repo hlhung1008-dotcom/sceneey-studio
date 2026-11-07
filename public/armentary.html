@@ -134,6 +134,9 @@ body{margin:0}
 .indie-note a{color:#3d3639;text-decoration:none;border-bottom:1px solid #c27ba0;padding-bottom:3px;white-space:nowrap}
 /* world page */
 .wh{position:relative;height:360px;overflow:hidden;display:flex;align-items:flex-end}
+.wh.fade{height:500px}
+.wh.fade .wh-in{padding-bottom:165px;z-index:2;text-shadow:0 2px 14px rgba(30,20,12,.45)}
+.wh.fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;z-index:1;pointer-events:none;background:linear-gradient(rgba(255,253,251,0),rgba(255,253,251,.35) 30%,rgba(255,253,251,.85) 70%,#fffdfb)}
 .wh-in{position:relative;max-width:1180px;width:100%;margin:0 auto;padding:0 56px 40px;display:flex;flex-direction:column;gap:10px}
 .wh-crumb{font:500 12px "Noto Serif TC",serif;letter-spacing:.25em;opacity:.8}
 .wh-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
@@ -177,6 +180,17 @@ body{margin:0}
 .cc-soon .cc-ph span{color:#e7d8b6;font-size:72px}
 .cc-soon .cc-ph small{color:#e7d8b6}
 .cc-soon .cc-sil{position:absolute;left:50%;bottom:0;width:62%;height:78%;transform:translateX(-50%);background:radial-gradient(circle at 50% 22%,#1a1612 0 17%,transparent 17.5%),radial-gradient(ellipse at 50% 100%,#1a1612 0 60%,transparent 60.5%);opacity:.95}
+.cg-round{display:flex;flex-wrap:wrap;gap:30px 44px}
+.cg-round .cc{width:156px;align-items:center;text-align:center}
+.cg-round .cc-img{width:156px;height:156px;aspect-ratio:auto;border-radius:50%;box-shadow:0 0 0 4px #fff,0 0 0 5px #ecdfe3}
+.cg-round .cc-badge,.cg-round .cc-award{display:none}
+.cg-round .cc-ph span{font-size:46px}
+.cg-round .cc-ph small{font-size:9px;letter-spacing:.2em}
+.cg-round .cc-soon .cc-ph span{font-size:50px}
+.cg-round .cc-soon .cc-ph small{display:none}
+.cg-round .cc-soon .cc-sil{width:74%;height:80%}
+.cg-round .cc-one{font-size:12px}
+.cc-weapon{font:italic 500 13px "Cormorant Garamond","Noto Serif TC",serif !important;letter-spacing:.2em;color:#a8854c !important}
 .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 34px}
 .filters button{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 "Noto Serif TC",serif;letter-spacing:.14em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:10px 16px;cursor:pointer;transition:all .2s}
 .filters button i{width:8px;height:8px;border-radius:50%}
@@ -208,6 +222,59 @@ body{margin:0}
 .ss4 img:nth-child(1){animation-delay:0s}.ss4 img:nth-child(2){animation-delay:6s}.ss4 img:nth-child(3){animation-delay:12s}.ss4 img:nth-child(4){animation-delay:18s}
 @keyframes ssfade4{0%{opacity:0;transform:scale(1.02)}5%{opacity:1}25%{opacity:1}30%{opacity:0;transform:scale(1.12)}100%{opacity:0;transform:scale(1.12)}}
 @media (prefers-reduced-motion:reduce){.ss img{animation:none}.ss img:first-child{opacity:1}}
+
+.lead{margin:0 0 22px;max-width:860px;font:400 15px/2.05 "Noto Serif TC",serif;letter-spacing:.05em;color:#4f4649}
+.forms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.form{position:relative;padding:24px 22px 22px;border-radius:10px;background:#fbf6ec;border:1px solid #eadfc8;font-family:"Noto Serif TC",serif}
+.form i{position:absolute;right:18px;top:10px;font:italic 600 34px "Cormorant Garamond",serif;color:#c9a35a;opacity:.55}
+.form b{display:block;font-size:16px;letter-spacing:.15em;color:#3d3639}
+.form small{display:block;font:italic 500 13px "Cormorant Garamond",serif;color:#a8854c;letter-spacing:.06em;margin:3px 0 10px}
+.form p{margin:0;font-size:13.5px;line-height:1.9;color:#5c5054}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 44px;font-family:"Noto Serif TC",serif}
+.rule{display:grid;grid-template-columns:92px 1fr;gap:14px;padding:15px 0;border-bottom:1px dashed #e3d4b8}
+.rule b{font-size:14px;font-weight:600;letter-spacing:.24em;color:#a8854c}
+.rule b small{display:block;margin-top:3px;font:italic 500 12px "Cormorant Garamond",serif;letter-spacing:.06em;color:#b9a27a}
+.rule p{margin:0;font-size:13.5px;line-height:1.9;color:#4f4649}
+.lands{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.land{padding:18px 18px 16px;border-radius:10px;background:#fbf6ec;border:1px solid #eadfc8;font-family:"Noto Serif TC",serif}
+.land b{display:block;font-size:15px;letter-spacing:.12em;color:#3d3639}
+.land small{display:block;font:italic 500 13px "Cormorant Garamond",serif;color:#8a7d82;margin:2px 0 8px}
+.land em{display:inline-block;margin-bottom:8px;font-style:normal;font-size:11px;letter-spacing:.14em;color:#a8854c;border:1px solid #e1cfa9;border-radius:999px;padding:2px 9px}
+.land p{margin:0;font-size:13px;line-height:1.8;color:#5c5054}
+.land.lost{background:#2b2620;border-color:#2b2620}.land.lost b{color:#f3dc9e}.land.lost p{color:#d9ccb3}.land.lost small{color:#b9a27a}.land.lost em{color:#e7d8b6;border-color:#5a4c38}
+.land.sea{background:#eef3f5;border-color:#d7e3e8}
+.spots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.spot.img{background-size:cover;background-position:center right;padding:40px 40px 36px;min-height:260px}
+.spot.img p{max-width:560px}
+.spot{padding:24px 24px 22px;border-radius:10px;background:#fff;border:1px solid #eadfc8;font-family:"Noto Serif TC",serif}
+.spot.wide{grid-column:1/-1;background:#fbf6ec}
+.spot.dark{background:#2b2620;border-color:#2b2620}
+.spot em{display:inline-block;margin-bottom:10px;font-style:normal;font-size:11px;letter-spacing:.14em;color:#a8854c;border:1px solid #e1cfa9;border-radius:999px;padding:2px 10px}
+.spot b{display:block;font-size:18px;letter-spacing:.14em;color:#3d3639}
+.spot small{display:block;font:italic 500 14px "Cormorant Garamond",serif;color:#8a7d82;margin:2px 0 10px}
+.spot p{margin:0 0 8px;font-size:13.5px;line-height:1.95;color:#4f4649}
+.spot.dark b{color:#f3dc9e}.spot.dark p{color:#d9ccb3}.spot.dark small{color:#b9a27a}.spot.dark em{color:#e7d8b6;border-color:#5a4c38}
+.menu{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.menu div{background:#fff;border:1px solid #efe3cb;border-radius:8px;padding:12px 14px}
+.menu b{font:italic 600 15px "Cormorant Garamond",serif;letter-spacing:.1em;color:#a8854c}
+.menu p{margin:6px 0 0;font-size:12.5px;line-height:1.85;color:#5c5054}
+.note{font-size:12.5px !important;color:#8a7d82 !important}
+.feat{display:grid;grid-template-columns:460px 1fr;gap:0;align-items:stretch}
+.feat.rev{grid-template-columns:1fr 380px}
+.feat.rev .feat-img{order:2}
+.feat-img{position:relative;background:center 20%/cover no-repeat;min-height:460px;-webkit-mask-image:linear-gradient(90deg,#000 40%,transparent 96%);mask-image:linear-gradient(90deg,#000 40%,transparent 96%)}
+.feat-body{margin-left:-24px;padding-left:0;position:relative;z-index:1}
+.feat-cap{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);white-space:nowrap;font:italic 500 14px "Cormorant Garamond","Noto Serif TC",serif;letter-spacing:.24em;color:#fff;text-shadow:0 1px 10px rgba(40,24,12,.7)}
+.feat.rev .feat-body{align-self:center}
+.feat.rev .feat-img{min-height:340px}
+.rules.one{grid-template-columns:1fr}
+.mascot{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:center;padding:26px;border-radius:12px;background:#fdf6f8;border:1px solid #f1dfe6;font-family:"Noto Serif TC",serif}
+.mascot-ic{width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 50% 42%,#fff 0 38%,#fbeef3 39% 100%);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 0 6px #fff,0 0 0 7px #f1dfe6}
+.mascot-ic::before{content:"";width:86px;height:76px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(194,123,160,.25);}
+.mascot-ic::after{content:"";position:absolute;width:22px;height:9px;top:72px;left:68px;background:radial-gradient(circle at 4px 4px,#4a3642 0 3.5px,transparent 4px),radial-gradient(circle at 18px 4px,#4a3642 0 3.5px,transparent 4px)}
+.mascot b{display:block;font-size:20px;letter-spacing:.2em;color:#3d3639}
+.mascot small{display:block;font:italic 500 14px "Cormorant Garamond",serif;color:#c27ba0;margin:2px 0 10px}
+.mascot ul{margin:0;padding-left:18px}.mascot li{font-size:13.5px;line-height:1.9;color:#4f4649}
 </style>
 <style>html,body{margin:0;background:#fffdfb;overflow:hidden}#dcroot{margin:0 auto}template{display:none}
 #pl{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--pl-bg,#fffdfb);transition:opacity .5s ease,visibility .5s}
@@ -254,11 +321,29 @@ body{margin:0}
       </div>
     </header>
     <main style="background: #fffdfb; padding-bottom: 40px">
-      <section class="wh" style="color: #fff"><div class="ss" aria-hidden="true"><img src="/img/c/ec89c6a42f2660c870ecbf9521f23bb9.webp" alt=""><img src="/img/c/f27364f8851ff4b808091908a1bdd7cf.webp" alt=""><img src="/img/c/e94c0208923594d88d5589580f28c12a.webp" alt=""><img src="/img/c/74624ef0469b1e1aa774a8d980b992ac.webp" alt=""><img src="/img/c/e8f7f724734c4941cd4378446aedf4be.webp" alt=""></div><div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(59,44,22,.86) 0%, rgba(59,44,22,.55) 50%, rgba(59,44,22,.15) 100%)"></div><div class="wh-in"><span class="wh-crumb"><a href="/world">WORLD</a>　/　ARMENTARY</span><span class="wh-en" style="font-family: Corinthia, cursive; font-weight: 700; letter-spacing: .02em; font-size: 130px">Armentary</span><span class="wh-zh">神器與契約</span><p class="wh-tag" style="margin: 0">奧瑪曆 1523 年。人類與擁有三種型態的「神器」締結契約，與精靈、獸人、龍族、魔族並存的大陸。</p></div></section>
+      <section class="wh fade" style="color: #fff"><div class="ss" aria-hidden="true"><img src="/img/c/ec89c6a42f2660c870ecbf9521f23bb9.webp" alt=""><img src="/img/c/f27364f8851ff4b808091908a1bdd7cf.webp" alt=""><img src="/img/c/e94c0208923594d88d5589580f28c12a.webp" alt=""><img src="/img/c/74624ef0469b1e1aa774a8d980b992ac.webp" alt=""><img src="/img/c/e8f7f724734c4941cd4378446aedf4be.webp" alt=""></div><div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(59,44,22,.86) 0%, rgba(59,44,22,.55) 50%, rgba(59,44,22,.15) 100%)"></div><div class="wh-in"><span class="wh-crumb"><a href="/world">WORLD</a>　/　ARMENTARY</span><span class="wh-en" style="font-family: Corinthia, cursive; font-weight: 700; letter-spacing: .02em; font-size: 130px">Armentary</span><span class="wh-zh">神器與契約</span><p class="wh-tag" style="margin: 0">人類與擁有三種型態的「神器」締結契約，與精靈、獸人、龍族、魔族並存的大陸。</p></div></section>
       <div class="cw">
-      <section class="sec"><div class="sec-h"><h2>世界概要</h2><em>Overview</em></div><div class="facts"><div class="fact"><b style="color: #a8823f">Calendar</b><p>奧瑪曆 1523 年</p></div><div class="fact"><b style="color: #a8823f">Artifacts</b><p>神器擁有人類、武器、手持武器的人形三種型態</p></div><div class="fact"><b style="color: #a8823f">Contract</b><p>神器需與主人締結契約，才能維持壽命與鋒利</p></div><div class="fact"><b style="color: #a8823f">Rank</b><p>公會評級由強至弱：SS・S・A・B・C・D</p></div></div></section>
-      <section class="sec"><div class="sec-h"><h2>大陸與地點</h2><em>Continents & Places</em></div><div class="places"><div class="place" style="background: #f4ecdc"><b>法奧斯大陸</b><small>Faerth</small><p>人類統治，世界權力樞紐，貴族與大公會掌控神器。</p></div><div class="place" style="background: #f4ecdc"><b>埃雷諾亞大陸</b><small>Eleanor</small><p>精靈的森之國，排斥工業與濫用神器。</p></div><div class="place" style="background: #f4ecdc"><b>瓦爾卡大陸</b><small>Valka</small><p>獸人的極北冰原與草原，崇尚力量與薩滿信仰。</p></div><div class="place" style="background: #f4ecdc"><b>德拉古諾斯</b><small>Dragonus</small><p>活火山與浮空島遍布的龍眠之地。</p></div><div class="place" style="background: #f4ecdc"><b>塔達羅斯</b><small>Tartarus</small><p>終年不見陽光的焦土，魔族與地下城魔物的源頭。</p></div><div class="place" style="background: #f4ecdc"><b>阿比斯淵</b><small>The Abyssal Tides</small><p>覆蓋近半星球的深海國度，擁有獨立的神器體系。</p></div><div class="place" style="background: #f4ecdc"><b>斯利亞</b><small>Slyria</small><p>法奧斯的繁華都市，公會評級與契約冒險者學院所在。</p></div><div class="place" style="background: #f4ecdc"><b>荊莓鎮</b><small>Thornberry</small><p>四季產莓的邊陲小鎮，有一間雙莓甜點鋪。</p></div></div></section>
-      <section class="sec"><div class="sec-h"><h2>登場角色</h2><em>Characters</em></div><div class="cg"><a class="cc" href="#"><div class="cc-img"><div class="cc-ph" style="background:#f4ecdc;color:#a8823f"><span>澤</span><small>立繪待補</small></div><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">澤德</p><p class="cc-one">師傅……想把這些都塞進去。</p><span class="cc-era">西方奇幻</span></a><a class="cc" href="#"><div class="cc-img"><div class="cc-ph" style="background:#f4ecdc;color:#a8823f"><span>克</span><small>立繪待補</small></div><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">克萊莫</p><p class="cc-one">爸爸，需要女兒幫忙磨刃嗎？</p><span class="cc-era">西方奇幻</span></a><div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-sil"></div><div class="cc-ph"><span>？</span><small>COMING SOON</small></div><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">？？？</p><p class="cc-one">神秘的新角色，即將登場。</p></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>世界概要</h2><em>Overview</em></div><p class="lead">人類依靠與神器締結契約，對抗精靈、獸人、龍與魔族等多種族的世界。神器是擁有三種型態的特殊存在——能以人的模樣生活，也能化為武器；他們透過與主人的契約維持壽命與鋒利，無主的神器，終將在歲月中衰弱。</p><div class="facts"><div class="fact"><b style="color: #a8823f">Calendar</b><p>奧瑪曆</p></div><div class="fact"><b style="color: #a8823f">Artifacts</b><p>人類、手持武器的人形、完全武器三種型態</p></div><div class="fact"><b style="color: #a8823f">Lifespan</b><p>無主神器約於四十歲後逐漸衰弱</p></div><div class="fact"><b style="color: #a8823f">Rank</b><p>公會評級由強至弱：SS・S・A・B・C・D</p></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>神器的三種型態</h2><em>Three Forms</em></div><div class="forms"><div class="form"><i>I</i><b>人類型態</b><small>Human Form</small><p>與常人無異的外表，能在人群中生活、工作與交談。多數時候，神器以這個模樣待在主人身邊。</p></div><div class="form"><i>II</i><b>人形・手持武器</b><small>Armed Form</small><p>保有人形，手中握著自己幻化出的武器作戰。能自行移動與判斷，力量次於締結契約後的完全武器型態。</p></div><div class="form"><i>III</i><b>完全武器型態</b><small>Weapon Form</small><p>神器完全失去人形，只剩下武器的外觀。無法自行移動，僅能由契約主使用的完全工具型態——卻也是力量最強的型態。</p></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>契約</h2><em>The Contract</em></div><div class="rules"><div class="rule"><b>締結<small>Bond</small></b><p>契約可延長神器壽命，並解鎖最強的完全武器型態。</p></div><div class="rule"><b>感知<small>Link</small></b><p>締結後，主人能感知神器的位置，並與之進行心靈對話；神器必須服從契約主。</p></div><div class="rule"><b>同命<small>Fate</small></b><p>主人死亡時，神器亦隨之消亡。唯有在主人死去的瞬間及時易主、重新締結，才能免於消亡。</p></div><div class="rule"><b>開鋒<small>First Edge</small></b><p>契約必須在雙方自願、同意之下締結；只有形式而沒有真心，契約便不會成立。</p></div><div class="rule"><b>磨刃<small>Honing</small></b><p>締結契約後的神器需要定期「磨刃」，才能維持自身的鋒利。</p></div><div class="rule"><b>壽命<small>Lifespan</small></b><p>無主神器約在四十歲後逐漸衰弱，最終死亡。</p></div><div class="rule"><b>評級<small>Rank</small></b><p>無主神器由公會統一評級（SS、S、A、B、C、D）並媒合潛在契約主；SS 與 S 級通常由貴族或王室掌控。</p></div><div class="rule"><b>拒約<small>Refusal</small></b><p>也有部分神器拒絕締結契約，寧願接受壽命的限制，直到消亡。</p></div><div class="rule"><b>禁忌<small>Taboo</small></b><p>神器無法懷孕，也常淪為貴族壟斷的工具。</p></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>七大陸與深海</h2><em>Continents & the Deep</em></div><div class="lands"><div class="land"><b>法奧斯大陸</b><small>Faerth</small><em>人類</em><p>世界的權力樞紐，貴族與大公會掌控神器的集中地。</p></div><div class="land"><b>埃雷諾亞大陸</b><small>Eleanor</small><em>精靈</em><p>森之國，排斥外界的工業，也厭惡過度濫用神器。</p></div><div class="land"><b>瓦爾卡大陸</b><small>Valka</small><em>獸人</em><p>極北的冰原與草原，崇尚肉體力量與薩滿信仰。</p></div><div class="land"><b>德拉古諾斯</b><small>Dragonus</small><em>龍族</em><p>佈滿活火山與浮空島的龍眠之地，鮮少涉足世事。</p></div><div class="land"><b>塔達羅斯</b><small>Tartarus</small><em>魔族</em><p>終年不見陽光的焦土，多數地下城魔物與惡魔的發源地。</p></div><div class="land sea"><b>阿比斯淵</b><small>The Abyssal Tides</small><em>鮫人・海怪</em><p>覆蓋近半顆星球的深海國度，擁有獨立的深海神器體系。</p></div><div class="land lost"><b>阿斯忒里亞大陸</b><small>Asteria</small><em>無人統治・深淵生物</em><p>被遠古魔法撕裂的失落之地，大地下城奧羅姆薩爾的所在。</p></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>重要地點</h2><em>Places</em></div><div class="spots">
+<div class="spot"><em>法奧斯大陸</em><b>斯利亞</b><small>Slyria</small><p>法奧斯的繁華都市，契約制度嚴苛。貴族與大公會在此掌控神器評級，公會也設有專門訓練「契約冒險者」的學院。</p></div>
+<div class="spot"><em>法奧斯大陸・西南邊陲</em><b>荊莓鎮</b><small>Thornberry</small><p>被茂密混交林環抱的偏僻小鎮，四季皆產各式野莓——夏有藍莓與覆盆子，秋有黑刺李與接骨木果，冬雪融後仍能採得耐寒的冰莓。</p><p>莓果的香氣招來大批候鳥與小型精靈獸，使森林邊緣的生態豐富而獨特。居民純樸，多透過教會日報與巡迴傳教士了解外界的消息。</p></div>
+<div class="spot"><em>法奧斯大陸</em><b>萊亞</b><small>Laia</small><p>遠離大城市的偏僻小鎮，居民純樸，對神器幾乎一無所知。</p><p>鎮上的人通常藉由教會禮拜或教會日報，才能得知來自大城市的新知與神器相關的消息——也因此，這裡是想遠離城市紛擾的人最好的藏身之處。</p></div>
+<div class="spot dark wide img" style="background-image:linear-gradient(90deg,rgba(26,20,16,.94) 0%,rgba(26,20,16,.82) 45%,rgba(26,20,16,.25) 100%),url(/img/c/ae8a71d1612cc8794b8f83286d4161d3.webp)"><em>阿斯忒里亞大陸</em><b>奧羅姆薩爾</b><small>Oromthal — 「聖者的故鄉」</small><p>阿斯忒里亞最深處的傳說級大地下城，已知深度超過百層。它擁有龐大的自我意識，會以心靈與血肉魔法即時改變地貌，映照並吞噬入侵者的慾望與恐懼。</p><p>傳說它最深處的熔爐能吞噬強大的靈魂，孕育出凌駕 SS 級的頂階神器。教會稱這裡為神聖的「聖者的故鄉」——至於為什麼，教會從未多做解釋。</p></div>
+</div></section>
+      <section class="sec"><div class="sec-h"><h2>魔法體系</h2><em>Magic</em></div><div class="facts"><div class="fact"><b style="color: #a8823f">Elemental・元素</b><p>火、水、風、土。最普及的魔法，多數冒險者的基礎。</p></div><div class="fact"><b style="color: #a8823f">Mind・心靈</b><p>幻覺與魅惑。高階魔物常用，能摧毀對手的意志。</p></div><div class="fact"><b style="color: #a8823f">Flesh・血肉</b><p>治癒與詛咒。教會掌握其中部分禁術分支。</p></div><div class="fact"><b style="color: #a8823f">Forge・鍛造</b><p>與神器高度契合，能強化武器型態的輸出。</p></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>雙生神信仰</h2><em>The Twin Gods</em></div><div class="feat"><div class="feat-img" style="background-image:url(/img/c/f27364f8851ff4b808091908a1bdd7cf.webp)"></div><div class="feat-body"><p class="lead" style="margin-bottom:6px">由教宗領導、遍布世界各地的雙生神教會，是這個世界最龐大的信仰。它與皇室貴族共同掌控著法奧斯大陸，也是多數人認識「神器」的唯一窗口。</p>
+<div class="rules one">
+<div class="rule"><b>教義<small>Doctrine</small></b><p>信奉雙生神創造了神器，讓他們與人類締結契約，以消滅世上的惡魔。</p></div>
+<div class="rule"><b>矛盾<small>Paradox</small></b><p>然而神器卻常常誕生於地下城之中——這個矛盾，教會從不正面解釋。</p></div>
+<div class="rule"><b>教會<small>The Church</small></b><p>在世界各地建立教堂、傳播神器知識。偏遠小鎮的居民，多仰賴教會禮拜、教會日報與巡迴傳教士了解外界。</p></div>
+<div class="rule"><b>政教<small>Crown &amp; Altar</small></b><p>表面上與皇室共治、提倡神聖的契約，暗地裡卻與皇權角力，勢力日漸坐大。</p></div>
+<div class="rule"><b>禁術<small>Rumor</small></b><p>傳聞教會掌握血肉魔法的禁術分支，甚至暗中研究以魔法打造的「人造神器」……</p></div>
+</div></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>瓦勒利亞皇室</h2><em>The Valerian Crown</em></div><p class="lead" style="margin:0">統治法奧斯大陸的人類帝國。瓦勒利亞皇室與雙生神教會共同掌控著這片大陸，SS 與 S 級的頂尖神器，多半收歸於王室與貴族之手。</p></section>
+      <section class="sec"><div class="sec-h"><h2>登場角色</h2><em>Characters</em></div><div class="cg cg-round"><a class="cc" href="#"><div class="cc-img"><img src="/img/c/7b8d518e20b8b7d4764847ba415398e5.webp" alt="澤德"><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">澤德</p><p class="cc-one cc-weapon" style="color: #a8823f !important">神器・長棍</p></a><a class="cc" href="#"><div class="cc-img"><img src="/img/c/1e9a3f7348ce75d7fbd69f79b4cfc3da.webp" alt="克萊莫"><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">克萊莫</p><p class="cc-one cc-weapon" style="color: #a8823f !important">神器・巨劍</p></a><div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-sil"></div><div class="cc-ph"><span>？</span><small>COMING SOON</small></div><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">？？？</p><p class="cc-one cc-weapon">？？？</p></div></div></section>
       <section class="sec"><div class="sec-h"><h2>其他世界</h2><em>Explore</em></div><div style="display: flex; gap: 10px; flex-wrap: wrap"><a class="chip" href="/maroplis" style="color: #3f8f9c">MAROPLIS・烏托邦 →</a><a class="chip" href="/wujie" style="color: #7d64a6">WUJIE・五界 →</a><a class="chip" href="/characters" style="color: #c27ba0">全部角色 →</a></div></section>
       </div>
     </main>

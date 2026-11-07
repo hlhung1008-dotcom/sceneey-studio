@@ -134,6 +134,9 @@ body{margin:0}
 .indie-note a{color:#3d3639;text-decoration:none;border-bottom:1px solid #c27ba0;padding-bottom:3px;white-space:nowrap}
 /* world page */
 .wh{position:relative;height:360px;overflow:hidden;display:flex;align-items:flex-end}
+.wh.fade{height:500px}
+.wh.fade .wh-in{padding-bottom:165px;z-index:2;text-shadow:0 2px 14px rgba(30,20,12,.45)}
+.wh.fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;z-index:1;pointer-events:none;background:linear-gradient(rgba(255,253,251,0),rgba(255,253,251,.35) 30%,rgba(255,253,251,.85) 70%,#fffdfb)}
 .wh-in{position:relative;max-width:1180px;width:100%;margin:0 auto;padding:0 56px 40px;display:flex;flex-direction:column;gap:10px}
 .wh-crumb{font:500 12px "Noto Serif TC",serif;letter-spacing:.25em;opacity:.8}
 .wh-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
@@ -177,6 +180,17 @@ body{margin:0}
 .cc-soon .cc-ph span{color:#e7d8b6;font-size:72px}
 .cc-soon .cc-ph small{color:#e7d8b6}
 .cc-soon .cc-sil{position:absolute;left:50%;bottom:0;width:62%;height:78%;transform:translateX(-50%);background:radial-gradient(circle at 50% 22%,#1a1612 0 17%,transparent 17.5%),radial-gradient(ellipse at 50% 100%,#1a1612 0 60%,transparent 60.5%);opacity:.95}
+.cg-round{display:flex;flex-wrap:wrap;gap:30px 44px}
+.cg-round .cc{width:156px;align-items:center;text-align:center}
+.cg-round .cc-img{width:156px;height:156px;aspect-ratio:auto;border-radius:50%;box-shadow:0 0 0 4px #fff,0 0 0 5px #ecdfe3}
+.cg-round .cc-badge,.cg-round .cc-award{display:none}
+.cg-round .cc-ph span{font-size:46px}
+.cg-round .cc-ph small{font-size:9px;letter-spacing:.2em}
+.cg-round .cc-soon .cc-ph span{font-size:50px}
+.cg-round .cc-soon .cc-ph small{display:none}
+.cg-round .cc-soon .cc-sil{width:74%;height:80%}
+.cg-round .cc-one{font-size:12px}
+.cc-weapon{font:italic 500 13px "Cormorant Garamond","Noto Serif TC",serif !important;letter-spacing:.2em;color:#a8854c !important}
 .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 34px}
 .filters button{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 "Noto Serif TC",serif;letter-spacing:.14em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:10px 16px;cursor:pointer;transition:all .2s}
 .filters button i{width:8px;height:8px;border-radius:50%}
@@ -254,11 +268,11 @@ body{margin:0}
       </div>
     </header>
     <main style="background: #fffdfb; padding-bottom: 40px">
-      <section class="wh" style="color: #fff"><div class="ss ss4" aria-hidden="true"><img src="/img/c/debccb3aac499c642cc49b86fb826408.webp" alt=""><img src="/img/c/d2f639c4062c6fce318f84188abad702.webp" alt=""><img src="/img/c/160a7a5e4c7c927d0c30143f8a077838.webp" alt=""><img src="/img/c/e73720191b5ce48f034a42a77801f8ec.webp" alt=""></div><div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(42,33,56,.86) 0%, rgba(42,33,56,.55) 50%, rgba(42,33,56,.15) 100%)"></div><div class="wh-in"><span class="wh-crumb"><a href="/world">WORLD</a>　/　WUJIE</span><span class="wh-en" style="font-family: Corinthia, cursive; font-weight: 700; letter-spacing: .02em; font-size: 130px">Wujie</span><span class="wh-zh">五界</span><p class="wh-tag" style="margin: 0">天地初開，清者上浮，濁者下沉。九天、仙界、大荒、人間、九幽——上古神話與現代台灣交會。</p></div></section>
+      <section class="wh fade" style="color: #fff"><div class="ss ss4" aria-hidden="true"><img src="/img/c/debccb3aac499c642cc49b86fb826408.webp" alt=""><img src="/img/c/d2f639c4062c6fce318f84188abad702.webp" alt=""><img src="/img/c/160a7a5e4c7c927d0c30143f8a077838.webp" alt=""><img src="/img/c/e73720191b5ce48f034a42a77801f8ec.webp" alt=""></div><div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(42,33,56,.86) 0%, rgba(42,33,56,.55) 50%, rgba(42,33,56,.15) 100%)"></div><div class="wh-in"><span class="wh-crumb"><a href="/world">WORLD</a>　/　WUJIE</span><span class="wh-en" style="font-family: Corinthia, cursive; font-weight: 700; letter-spacing: .02em; font-size: 130px">Wujie</span><span class="wh-zh">五界</span><p class="wh-tag" style="margin: 0">天地初開，清者上浮，濁者下沉。九天、仙界、大荒、人間、九幽——上古神話與現代台灣交會。</p></div></section>
       <div class="cw">
       <section class="sec"><div class="sec-h"><h2>五界</h2><em>Five Realms</em></div><div class="places" style="grid-template-columns: repeat(5, minmax(0, 1fr))"><div class="place" style="background: #efeaf6"><div style="margin: -16px -16px 12px; aspect-ratio: 16/10; overflow: hidden; border-radius: 8px 8px 0 0"><img src="/img/c/debccb3aac499c642cc49b86fb826408.webp" alt="九天" style="width: 100%; height: 100%; object-fit: cover"></div><b>九天</b><small>Jiutian</small><p>神界之巔，天生神尊的居所。北極雪境有凌霜神殿與青梅林。</p></div><div class="place" style="background: #efeaf6"><div style="margin: -16px -16px 12px; aspect-ratio: 16/10; overflow: hidden; border-radius: 8px 8px 0 0"><img src="/img/c/d2f639c4062c6fce318f84188abad702.webp" alt="仙界" style="width: 100%; height: 100%; object-fit: cover"></div><b>仙界</b><small>The Immortal Court</small><p>修煉飛升的仙人所組成的仙庭，立天規、巡三界。</p></div><div class="place" style="background: #efeaf6"><b>大荒</b><small>The Wilds</small><p>焦土與雷澤，凶獸橫行，太古四凶的故鄉。</p></div><div class="place" style="background: #efeaf6"><div style="margin: -16px -16px 12px; aspect-ratio: 16/10; overflow: hidden; border-radius: 8px 8px 0 0"><img src="/img/c/e73720191b5ce48f034a42a77801f8ec.webp" alt="人間" style="width: 100%; height: 100%; object-fit: cover"></div><b>人間</b><small>Mortal Realm</small><p>靈氣稀薄的凡人之界，仙神與凶獸皆不得擅入。</p></div><div class="place" style="background: #efeaf6"><div style="margin: -16px -16px 12px; aspect-ratio: 16/10; overflow: hidden; border-radius: 8px 8px 0 0"><img src="/img/c/160a7a5e4c7c927d0c30143f8a077838.webp" alt="九幽" style="width: 100%; height: 100%; object-fit: cover"></div><b>九幽</b><small>The Abyss</small><p>三界之下的魔障深淵，兩千年前「天漏」的源頭。</p></div></div></section>
       <section class="sec"><div class="sec-h"><h2>天漏之卷</h2><em>Chronicle</em></div><div class="facts" style="grid-template-columns: repeat(3, minmax(0, 1fr))"><div class="fact"><b style="color: #7d64a6">Vol. II</b><p style="font-size: 15px; font-weight: 600; letter-spacing: .2em; margin-bottom: 6px">天漏</p><p style="color: #5c5054; font-size: 13px">九幽魔障破出，撕裂天穹，天河倒灌，仙庭諸尊也補不上那道裂口。</p></div><div class="fact"><b style="color: #7d64a6">Vol. III</b><p style="font-size: 15px; font-weight: 600; letter-spacing: .2em; margin-bottom: 6px">補天</p><p style="color: #5c5054; font-size: 13px">凌霜神殿之主以身補天。天穹合上了，那位神尊再也沒有回來。</p></div><div class="fact"><b style="color: #7d64a6">Vol. IV</b><p style="font-size: 15px; font-weight: 600; letter-spacing: .2em; margin-bottom: 6px">封殿</p><p style="color: #5c5054; font-size: 13px">神殿從此封閉，殿後的青梅林依然年年結果，無人採摘。</p></div></div></section>
-      <section class="sec"><div class="sec-h"><h2>登場角色</h2><em>Characters</em></div><div class="cg"><a class="cc" href="#"><div class="cc-img"><div class="cc-ph" style="background:#efeaf6;color:#7d64a6"><span>濤</span><small>立繪待補</small></div><span class="cc-badge" style="background:#7d64a6">WUJIE</span></div><p class="cc-name">濤列</p><p class="cc-one">把主人視為美食的上古兇獸。</p><span class="cc-era">上古 × 現代</span></a></div></section>
+      <section class="sec"><div class="sec-h"><h2>登場角色</h2><em>Characters</em></div><div class="cg cg-round"><a class="cc" href="#"><div class="cc-img"><div class="cc-ph" style="background:#efeaf6;color:#7d64a6"><span>濤</span><small>立繪待補</small></div><span class="cc-badge" style="background:#7d64a6">WUJIE</span></div><p class="cc-name">濤列</p><p class="cc-one">把主人視為美食的上古兇獸。</p><span class="cc-era">上古 × 現代</span></a></div></section>
       <section class="sec"><div class="sec-h"><h2>其他世界</h2><em>Explore</em></div><div style="display: flex; gap: 10px; flex-wrap: wrap"><a class="chip" href="/armentary" style="color: #a8823f">ARMENTARY・神器與契約 →</a><a class="chip" href="/maroplis" style="color: #3f8f9c">MAROPLIS・烏托邦 →</a><a class="chip" href="/characters" style="color: #c27ba0">全部角色 →</a></div></section>
       </div>
     </main>

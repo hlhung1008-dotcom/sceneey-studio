@@ -134,6 +134,9 @@ body{margin:0}
 .indie-note a{color:#3d3639;text-decoration:none;border-bottom:1px solid #c27ba0;padding-bottom:3px;white-space:nowrap}
 /* world page */
 .wh{position:relative;height:360px;overflow:hidden;display:flex;align-items:flex-end}
+.wh.fade{height:500px}
+.wh.fade .wh-in{padding-bottom:165px;z-index:2;text-shadow:0 2px 14px rgba(30,20,12,.45)}
+.wh.fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;z-index:1;pointer-events:none;background:linear-gradient(rgba(255,253,251,0),rgba(255,253,251,.35) 30%,rgba(255,253,251,.85) 70%,#fffdfb)}
 .wh-in{position:relative;max-width:1180px;width:100%;margin:0 auto;padding:0 56px 40px;display:flex;flex-direction:column;gap:10px}
 .wh-crumb{font:500 12px "Noto Serif TC",serif;letter-spacing:.25em;opacity:.8}
 .wh-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
@@ -177,6 +180,17 @@ body{margin:0}
 .cc-soon .cc-ph span{color:#e7d8b6;font-size:72px}
 .cc-soon .cc-ph small{color:#e7d8b6}
 .cc-soon .cc-sil{position:absolute;left:50%;bottom:0;width:62%;height:78%;transform:translateX(-50%);background:radial-gradient(circle at 50% 22%,#1a1612 0 17%,transparent 17.5%),radial-gradient(ellipse at 50% 100%,#1a1612 0 60%,transparent 60.5%);opacity:.95}
+.cg-round{display:flex;flex-wrap:wrap;gap:30px 44px}
+.cg-round .cc{width:156px;align-items:center;text-align:center}
+.cg-round .cc-img{width:156px;height:156px;aspect-ratio:auto;border-radius:50%;box-shadow:0 0 0 4px #fff,0 0 0 5px #ecdfe3}
+.cg-round .cc-badge,.cg-round .cc-award{display:none}
+.cg-round .cc-ph span{font-size:46px}
+.cg-round .cc-ph small{font-size:9px;letter-spacing:.2em}
+.cg-round .cc-soon .cc-ph span{font-size:50px}
+.cg-round .cc-soon .cc-ph small{display:none}
+.cg-round .cc-soon .cc-sil{width:74%;height:80%}
+.cg-round .cc-one{font-size:12px}
+.cc-weapon{font:italic 500 13px "Cormorant Garamond","Noto Serif TC",serif !important;letter-spacing:.2em;color:#a8854c !important}
 .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 34px}
 .filters button{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 "Noto Serif TC",serif;letter-spacing:.14em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:10px 16px;cursor:pointer;transition:all .2s}
 .filters button i{width:8px;height:8px;border-radius:50%}
@@ -262,7 +276,7 @@ body{margin:0}
             <span class="cp-note">角色介紹、開場與小工具，都在 Caveduck 的角色頁。</span>
           </div>
         </div>
-        <section class="sec"><div class="sec-h"><h2>同一個世界的角色</h2><em>Also in MAROPLIS</em></div><div class="cg"><a class="cc" href="#"><div class="cc-img"><div class="cc-ph" style="background:#e3f1f2;color:#3f8f9c"><span>林</span><small>立繪待補</small></div><span class="cc-badge" style="background:#3f8f9c">MAROPLIS</span></div><p class="cc-name">林恩</p><p class="cc-one">成為了黑市首腦的人質。</p><span class="cc-era">Echo</span></a><a class="cc" href="#"><div class="cc-img"><div class="cc-ph" style="background:#e3f1f2;color:#3f8f9c"><span>井</span><small>立繪待補</small></div><span class="cc-badge" style="background:#3f8f9c">MAROPLIS</span></div><p class="cc-name">井</p><p class="cc-one">操，閉嘴。</p><span class="cc-era">Echo</span></a></div></section>
+        <section class="sec"><div class="sec-h"><h2>同一個世界的角色</h2><em>Also in MAROPLIS</em></div><div class="cg"><a class="cc" href="#"><div class="cc-img"><img src="/img/c/4c2c3f6e2b225f9fefbd48c418e90f3e.webp" alt="林恩" style="object-position: 50% 20%"><span class="cc-badge" style="background:#3f8f9c">MAROPLIS</span></div><p class="cc-name">林恩</p><p class="cc-one">成為了黑市首腦的人質。</p><span class="cc-era">Echo</span></a><a class="cc" href="#"><div class="cc-img"><img src="/img/c/6dd4c0a7c6eb28a028e64b6a168d83bf.webp" alt="井" style="object-position: 40% 25%"><span class="cc-badge" style="background:#3f8f9c">MAROPLIS</span></div><p class="cc-name">井</p><p class="cc-one">操，閉嘴。</p><span class="cc-era">Echo</span></a></div></section>
       </div>
     </main>
     <footer style="position: relative; z-index: 1; margin-top: 40px; height: 270px; background: #ffffff">
