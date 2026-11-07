@@ -421,8 +421,12 @@ class Component extends DCLogic {
     const s = Math.min(1, 1800 / Math.max(bmp.width, bmp.height));
     const c = document.createElement('canvas'); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
     c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
-    let blob = await new Promise((r) => c.toBlob(r, 'image/webp', 0.86));
-    if (!blob || blob.type !== 'image/webp') blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', 0.88));
+    let blob = null;
+    for (const q of [0.86, 0.75, 0.62, 0.5]) {
+      blob = await new Promise((r) => c.toBlob(r, 'image/webp', q));
+      if (!blob || blob.type !== 'image/webp') blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', q + 0.02));
+      if (blob.size < 1700000) break;
+    }
     const data = await new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(String(fr.result).split(',')[1]); fr.readAsDataURL(blob); });
     return { type: blob.type, data: data };
   }

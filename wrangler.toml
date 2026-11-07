@@ -1,0 +1,8 @@
+name = "sceneey-studio"
+pages_build_output_dir = "public"
+compatibility_date = "2026-06-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "sceneey-studio"
+database_id = "81c95a81-e96e-4b21-8017-a4d3e5fc953a"
