@@ -111,7 +111,225 @@ body{margin:0}
 .lg-t > span:nth-child(15){animation-delay:840ms}.logo-link:hover .lg-t > span:nth-child(15){animation-name:lgc14}
 .lg-t > span:nth-child(16){animation-delay:900ms}.logo-link:hover .lg-t > span:nth-child(16){animation-name:lgc15}
 @media (prefers-reduced-motion:reduce){.logo-link:hover .lg-h{animation:none}.lg-t > span,.logo-link:hover .lg-t > span{animation:none !important}}
-</style>
+
+.cw{max-width:1180px;margin:0 auto;padding:0 56px}
+.cw-lead{max-width:640px;margin:-6px auto 44px;text-align:center;font-family:"Noto Serif TC",serif;font-size:15px;line-height:2;letter-spacing:.08em;color:#6b5e63}
+.wl{display:flex;flex-direction:column;gap:28px}
+.wc{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid #ecdfe3;background:#fff;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.wc:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(61,54,57,.35)}
+.wc-art{position:relative;min-height:300px;overflow:hidden}
+.wc-art .wc-num{position:absolute;left:28px;top:22px;font:italic 500 15px "Cormorant Garamond",serif;letter-spacing:.1em;opacity:.8}
+.wc-art .wc-big{position:absolute;left:24px;bottom:12px;font:600 76px/1 "Cormorant Garamond",serif;letter-spacing:.12em;opacity:.95}
+.wc-body{padding:34px 36px 30px;display:flex;flex-direction:column;gap:14px;font-family:"Noto Serif TC",serif}
+.wc-zh{font-size:24px;font-weight:600;letter-spacing:.2em;color:#3d3639;display:flex;align-items:baseline;gap:12px}
+.wc-zh small{font:italic 500 14px "Cormorant Garamond",serif;letter-spacing:.08em;color:#8a7d82}
+.wc-tag{font-size:14px;line-height:1.95;letter-spacing:.06em;color:#5c5054}
+.wc-row{display:flex;align-items:center;gap:8px;margin-top:auto}
+.av{width:46px;height:46px;border-radius:50%;overflow:hidden;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px #ecdfe3;margin-left:-10px;display:flex;align-items:center;justify-content:center;font:600 16px "Noto Serif TC",serif;color:#fff}
+.av:first-child{margin-left:0}
+.av img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.wc-cnt{margin-left:12px;font-size:13px;letter-spacing:.12em;color:#8a7d82}
+.wc-go{margin-left:auto;font:500 13px "Noto Serif TC",serif;letter-spacing:.2em;padding-bottom:3px;border-bottom:1px solid currentColor}
+.indie-note{margin:46px auto 10px;max-width:760px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 28px;border:1px dashed #e4cdd6;border-radius:10px;font-family:"Noto Serif TC",serif;color:#5c5054;font-size:14px;letter-spacing:.06em}
+.indie-note a{color:#3d3639;text-decoration:none;border-bottom:1px solid #c27ba0;padding-bottom:3px;white-space:nowrap}
+/* world page */
+.wh{position:relative;height:360px;overflow:hidden;display:flex;align-items:flex-end}
+.wh-in{position:relative;max-width:1180px;width:100%;margin:0 auto;padding:0 56px 40px;display:flex;flex-direction:column;gap:10px}
+.wh-crumb{font:500 12px "Noto Serif TC",serif;letter-spacing:.25em;opacity:.8}
+.wh-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+.wh-en{font:600 96px/1 "Cormorant Garamond",serif;letter-spacing:.14em}
+.wh-zh{font:600 22px "Noto Serif TC",serif;letter-spacing:.35em}
+.wh-tag{max-width:620px;font:400 15px/2 "Noto Serif TC",serif;letter-spacing:.06em;opacity:.92}
+.sec{padding:54px 0 0}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin:0 0 22px}
+.sec-h h2{margin:0;font:600 20px "Noto Serif TC",serif;letter-spacing:.3em;color:#3d3639}
+.sec-h em{font:italic 500 16px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.08em}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.fact{border:1px solid #ecdfe3;border-radius:8px;background:#fff;padding:18px 18px 16px;font-family:"Noto Serif TC",serif}
+.fact b{display:block;font:italic 500 13px "Cormorant Garamond",serif;letter-spacing:.12em;margin-bottom:8px}
+.fact p{margin:0;font-size:14px;line-height:1.8;color:#3d3639;letter-spacing:.04em}
+.places{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.place{padding:16px 16px 14px;border-radius:8px;font-family:"Noto Serif TC",serif}
+.place b{display:block;font-size:15px;letter-spacing:.12em;color:#3d3639}
+.place small{display:block;font:italic 500 13px "Cormorant Garamond",serif;color:#8a7d82;margin:2px 0 8px}
+.place p{margin:0;font-size:13px;line-height:1.75;color:#5c5054}
+.factions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.fac{border:1px solid #ecdfe3;border-radius:10px;background:#fff;padding:22px 24px;font-family:"Noto Serif TC",serif}
+.fac h3{margin:0 0 4px;font:600 26px "Cormorant Garamond",serif;letter-spacing:.14em}
+.fac p{margin:6px 0 14px;font-size:14px;line-height:1.85;color:#5c5054}
+.fac .fac-who{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 12px "Noto Serif TC",serif;letter-spacing:.12em;padding:6px 12px;border-radius:999px;border:1px solid currentColor;text-decoration:none}
+/* character cards */
+.cg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.cc{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;font-family:"Noto Serif TC",serif}
+.cc-img{position:relative;aspect-ratio:3/4;border-radius:8px;overflow:hidden;background:#f6eef1}
+.cc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.cc:hover .cc-img img{transform:scale(1.04)}
+.cc-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.cc-ph span{font:600 64px/1 "Noto Serif TC",serif;opacity:.9}
+.cc-ph small{font:500 11px "Noto Serif TC",serif;letter-spacing:.3em;opacity:.75}
+.cc-badge{position:absolute;left:10px;top:10px;font:600 10px/1 "Cormorant Garamond",serif;letter-spacing:.2em;color:#fff;padding:5px 9px;border-radius:999px}
+.cc-award{position:absolute;right:10px;bottom:10px;font:500 10px/1.2 "Noto Serif TC",serif;letter-spacing:.08em;color:#3d3639;background:rgba(255,253,251,.92);padding:5px 8px;border-radius:4px}
+.cc-name{margin:12px 0 0;font-size:16px;font-weight:600;letter-spacing:.12em;color:#3d3639}
+.cc-one{margin:5px 0 0;font-size:13px;line-height:1.7;color:#6b5e63}
+.cc-era{margin-top:6px;font:italic 500 13px "Cormorant Garamond",serif;letter-spacing:.06em;color:#8a7d82}
+.cc-soon .cc-img{background:#2b2620}
+.cc-soon .cc-ph span{color:#e7d8b6;font-size:72px}
+.cc-soon .cc-ph small{color:#e7d8b6}
+.cc-soon .cc-sil{position:absolute;left:50%;bottom:0;width:62%;height:78%;transform:translateX(-50%);background:radial-gradient(circle at 50% 22%,#1a1612 0 17%,transparent 17.5%),radial-gradient(ellipse at 50% 100%,#1a1612 0 60%,transparent 60.5%);opacity:.95}
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 34px}
+.filters button{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 "Noto Serif TC",serif;letter-spacing:.14em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:10px 16px;cursor:pointer;transition:all .2s}
+.filters button i{width:8px;height:8px;border-radius:50%}
+.filters button:hover{border-color:#c27ba0}
+.filters button[aria-pressed="true"]{background:#3d3639;border-color:#3d3639;color:#fff}
+.cnt-line{text-align:center;margin:-18px 0 26px;font:italic 500 15px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.08em}
+/* character page */
+.cp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start;padding-top:44px}
+.cp-art{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:3/4;background:#f6eef1}
+.cp-art img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.cp-info{font-family:"Noto Serif TC",serif;display:flex;flex-direction:column;gap:16px;padding-top:8px}
+.cp-crumb{font:500 12px "Noto Serif TC",serif;letter-spacing:.25em;color:#8a7d82}
+.cp-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+.cp-name{margin:0;font-size:40px;font-weight:600;letter-spacing:.12em;color:#3d3639;line-height:1.25}
+.cp-one{font-size:17px;line-height:1.9;color:#5c5054;letter-spacing:.06em;margin:0}
+.cp-meta{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px 18px;margin:8px 0 0;padding:20px 0;border-top:1px solid #ecdfe3;border-bottom:1px solid #ecdfe3;font-size:14px}
+.cp-meta dt{font:italic 500 15px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.08em}
+.cp-meta dd{margin:0;color:#3d3639;letter-spacing:.06em}
+.cp-meta a{color:inherit}
+.cp-cta{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;margin-top:6px;font:500 14px "Noto Serif TC",serif;letter-spacing:.2em;color:#fff;background:#3d3639;border-radius:999px;padding:14px 26px;text-decoration:none;transition:background .2s}
+.cp-cta:hover{background:#c27ba0}
+.cp-note{font-size:12px;color:#8a7d82;letter-spacing:.06em}
+
+.ss{position:absolute;inset:0;overflow:hidden}
+.ss img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:ssfade 30s linear infinite}
+.ss img:nth-child(1){animation-delay:0s}.ss img:nth-child(2){animation-delay:6s}.ss img:nth-child(3){animation-delay:12s}.ss img:nth-child(4){animation-delay:18s}.ss img:nth-child(5){animation-delay:24s}
+@keyframes ssfade{0%{opacity:0;transform:scale(1.02)}4%{opacity:1}20%{opacity:1}24%{opacity:0;transform:scale(1.12)}100%{opacity:0;transform:scale(1.12)}}
+.ss4 img{animation-name:ssfade4;animation-duration:24s}
+.ss4 img:nth-child(1){animation-delay:0s}.ss4 img:nth-child(2){animation-delay:6s}.ss4 img:nth-child(3){animation-delay:12s}.ss4 img:nth-child(4){animation-delay:18s}
+@keyframes ssfade4{0%{opacity:0;transform:scale(1.02)}5%{opacity:1}25%{opacity:1}30%{opacity:0;transform:scale(1.12)}100%{opacity:0;transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.ss img{animation:none}.ss img:first-child{opacity:1}}
+
+.wv-stack{timeline-scope:--wv2,--wv3}
+.wv{position:relative;background:#fffdfb}
+.wv-stack{position:relative;width:100%;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.wv.is-open .wv-stack{width:58%}
+.wv-band{position:sticky;top:82px;display:block;width:100%;height:778px;border:0;padding:0;margin:0;cursor:pointer;background:none;overflow:hidden;transition:filter .5s}
+.wv-stack::after{content:"";display:block;height:230px}
+.wv-in{position:absolute;inset:0 0 -150px 0;will-change:transform}
+@keyframes wvlift{to{transform:translateY(-150px);filter:brightness(.78)}}
+.wv-band .wv-bg{position:absolute;inset:0;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.wv-axis{position:absolute;left:0;right:0;bottom:30px;z-index:55;display:flex;justify-content:center;pointer-events:none;transition:right .7s cubic-bezier(.2,.8,.2,1)}
+.wv-axis.is-open{right:42%}
+.wv-axis{transition:right .7s cubic-bezier(.2,.8,.2,1),opacity .5s,transform .5s}
+.wv-axis.is-gone{opacity:0;transform:translateY(16px)}
+.wv-axis.is-gone .wa-track{pointer-events:none}
+.wa-track{position:relative;display:flex;justify-content:space-between;width:600px;pointer-events:auto;counter-reset:wa}
+.wa-line{position:absolute;left:-60px;right:-60px;top:11px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7) 12%,rgba(255,255,255,.7) 88%,transparent);filter:drop-shadow(0 0 3px rgba(255,214,226,.9))}
+.wa-line i{display:block;height:1.5px;margin:-0.25px 0 0 82px;background:linear-gradient(90deg,#f3dfc6,#e9b9c6,#f6e6ea,#e9b9c6,#f3dfc6);background-size:200% 100%;opacity:.6;box-shadow:0 0 5px rgba(255,214,226,.45);animation:washine 3s linear infinite;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+@keyframes washine{to{background-position:-200% 0}}
+.wa-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;width:110px;margin:0 -33px;border:0;padding:0;background:none;cursor:pointer;font:inherit}
+.wa-node::before{counter-increment:wa;content:counter(wa,upper-roman);position:absolute;top:-19px;font:italic 500 11px "Cormorant Garamond",serif;letter-spacing:.15em;color:rgba(255,255,255,.7);text-shadow:0 0 6px rgba(74,54,66,.6)}
+.wa-dot{position:relative;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0;transition:filter .5s}
+.wa-dot::before{content:"";width:9px;height:9px;box-sizing:border-box;transform:rotate(45deg);border:1.5px solid rgba(255,255,255,.9);background:rgba(255,255,255,.08);transition:all .5s cubic-bezier(.2,.8,.2,1)}
+.wa-dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(255,228,236,.0);transition:all .5s}
+.wa-lb{font:700 26px/1 "Corinthia","Allison",cursive;color:rgba(255,255,255,.82);white-space:nowrap;text-shadow:0 0 10px rgba(74,54,66,.75),0 1px 3px rgba(74,54,66,.6);transition:color .5s,text-shadow .5s}
+.wa-node:hover .wa-dot::before{transform:rotate(45deg) scale(1.3);background:rgba(255,255,255,.5)}
+.wa-node:hover .wa-lb{color:#fff}
+.wa-node.is-on .wa-dot::before{background:#fff;box-shadow:0 0 8px 2px rgba(255,214,226,.9)}
+.wa-node.is-lit .wa-dot{filter:drop-shadow(0 0 5px rgba(255,214,226,1)) drop-shadow(0 0 12px rgba(255,240,205,.9))}
+.wa-node.is-lit .wa-dot::before{width:24px;height:24px;border:0;transform:none;background:linear-gradient(160deg,#fff 30%,#ffd6e2);clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);animation:watwinkle 2.6s ease-in-out infinite}
+.wa-node.is-lit .wa-dot::after{border-color:rgba(255,228,236,.85);animation:wapulse 2.6s ease-out infinite}
+@keyframes watwinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.82) rotate(45deg)}}
+@keyframes wapulse{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.wa-node.is-lit .wa-lb{color:#fff;text-shadow:0 0 10px rgba(255,190,210,.95),0 0 3px rgba(74,54,66,.6)}
+.wa-q{cursor:default}
+.wa-q .wa-dot::before{border-style:dashed;border-color:rgba(255,255,255,.6);background:none}
+.wa-q .wa-lb{font:italic 500 14px/26px "Cormorant Garamond",serif;letter-spacing:.3em;color:rgba(255,255,255,.6)}
+.wa-q::before{content:"?"}
+@media (prefers-reduced-motion:reduce){.wa-line i,.wa-node .wa-dot::before,.wa-node .wa-dot::after{animation:none !important}}
+.wv-desc{position:absolute;left:8%;top:474px;font:400 15px/2.1 "Noto Serif TC",serif;letter-spacing:.32em;color:rgba(255,255,255,.88);text-shadow:0 1px 8px rgba(30,20,28,.55);white-space:nowrap;text-align:left;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s;opacity:.85}
+.wv-band:hover .wv-desc{opacity:1;transform:translateX(14px)}
+.wv-band.r .wv-desc{left:auto;right:9%;text-align:right}
+.wv-band.r:hover .wv-desc{transform:translateX(-14px)}
+.wv.is-open .wv-band.r .wv-desc{right:7%}
+.wv-band .wv-scroll{z-index:4}
+.wv-band:hover .wv-bg{transform:scale(1.02)}
+.wv-band .ss img{animation-name:wvfade}
+.wv-band .ss4 img{animation-name:wvfade4}
+@keyframes wvfade{0%{opacity:0;transform:scale(1)}4%{opacity:1}20%{opacity:1}24%{opacity:0;transform:scale(1.05)}100%{opacity:0;transform:scale(1.05)}}
+@keyframes wvfade4{0%{opacity:0;transform:scale(1)}5%{opacity:1}25%{opacity:1}30%{opacity:0;transform:scale(1.05)}100%{opacity:0;transform:scale(1.05)}}
+.wv-veil::after{content:"";position:absolute;inset:0;background:rgba(28,20,26,.38);transition:opacity .6s ease}
+.wv-band:hover .wv-veil::after,.wv-band:focus-visible .wv-veil::after,.wv-band.is-sel .wv-veil::after{opacity:0}
+.wv-band .wv-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(74,54,66,.42) 0%,rgba(74,54,66,.12) 45%,rgba(255,246,249,.12) 100%)}
+.wv.is-open .wv-band{filter:saturate(.55) brightness(.92)}
+.wv.is-open .wv-band.is-sel{filter:none}
+.wv-name{position:absolute;left:8%;top:404px;transform:translateY(-38%) rotate(-4deg);font-family:"Corinthia","Allison",cursive;font-weight:700;font-size:96px;line-height:1;color:#fff;white-space:nowrap;text-shadow:0 0 14px rgba(246,201,212,.6),0 2px 10px rgba(74,54,66,.45);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.wv-band:hover .wv-name{transform:translateY(-38%) rotate(-4deg) translateX(14px)}
+.wv-band.r .wv-name{left:auto;right:9%}
+.wv-band.r:hover .wv-name{transform:translateY(-38%) rotate(-4deg) translateX(-14px)}
+.wv.is-open .wv-band.r .wv-name{right:7%}
+.wv-scroll{position:absolute;left:50%;bottom:118px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font:italic 500 14px "Cormorant Garamond",serif;letter-spacing:.2em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35);pointer-events:none}
+.wv-scroll i{width:1px;height:34px;background:linear-gradient(#fff,transparent);animation:wvdrop 1.6s ease-in-out infinite}
+@keyframes wvdrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.wv-ph{position:absolute;right:28px;bottom:22px;font:500 11px "Noto Serif TC",serif;letter-spacing:.3em;color:rgba(255,255,255,.85)}
+.wv-drawer{position:absolute;top:122px;right:0;bottom:0;z-index:60;width:42%;background:#fffdfb;transform:translateX(calc(100% + 34px));transition:transform .7s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;overflow:visible;font-family:"Noto Serif TC",serif;border-left:1px solid #f0e2e7}
+.wv-dr-in{overflow-y:auto;max-height:100%}
+.wv-drawer.is-open{transform:none;box-shadow:-18px 0 40px -24px rgba(74,54,66,.45)}
+.wv-dr-in{padding:40px 46px 34px;display:flex;flex-direction:column;gap:14px}
+.wv-close{position:absolute;top:14px;right:16px;width:44px;height:44px;border:0;background:none;font:400 30px/1 "Cormorant Garamond",serif;color:#8a7d82;cursor:pointer}
+.wv-close:hover{color:#3d3639}
+.wv-en{font:700 56px/1 "Corinthia","Allison",cursive}
+.wv-zh{font-size:18px;font-weight:600;letter-spacing:.35em;color:#3d3639}
+.wv-tag{margin:0;font-size:14px;line-height:1.95;letter-spacing:.05em;color:#5c5054}
+.wv-facts{display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px 14px;margin:6px 0 2px;padding:14px 0;border-top:1px solid #ecdfe3;border-bottom:1px solid #ecdfe3;font-size:13px}
+.wv-facts dt{font-weight:600;letter-spacing:.2em}
+.wv-facts dd{margin:0;color:#5c5054;letter-spacing:.04em;line-height:1.7}
+.wv-ch-h{font:italic 500 16px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.08em;margin-top:4px}
+.wv-chs{display:flex;flex-wrap:wrap;gap:18px 20px}
+.wv-ch{display:flex;flex-direction:column;align-items:center;gap:7px;width:72px;text-decoration:none;color:#3d3639}
+.wv-ch:hover .wv-ch-img{transform:translateY(-3px);box-shadow:0 0 0 2px #fff,0 0 0 3.5px currentColor}
+.wv-ch-img{position:relative;width:60px;height:60px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;font:600 22px "Noto Serif TC",serif;box-shadow:0 0 0 2px #fff,0 0 0 3px #ecdfe3;transition:transform .25s,box-shadow .25s}
+.wv-ch-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.wv-ch b{font-size:12px;font-weight:600;letter-spacing:.06em;text-align:center;line-height:1.3}
+.wv-ch small{display:none}
+.wv-ch-soon .wv-ch-img{background:#2b2620;color:#e7d8b6}
+.wv-go{align-self:flex-start;margin-top:8px;font:500 13px "Noto Serif TC",serif;letter-spacing:.2em;color:#fff;background:#3d3639;border-radius:999px;padding:12px 22px;text-decoration:none;transition:background .2s}
+.wv-go:hover{background:#c27ba0}
+.wv-hint{position:absolute;right:26px;top:22px;z-index:2;font:italic 500 14px "Cormorant Garamond",serif;color:#fff;letter-spacing:.1em;text-shadow:0 1px 6px rgba(0,0,0,.35);pointer-events:none;transition:opacity .4s}
+.wv.is-open .wv-hint{opacity:0}
+.wv-tab{position:absolute;top:50%;left:0;width:30px;height:64px;transform:translate(-100%,-50%);border:0;border-radius:12px 0 0 12px;background:#fffdfb;color:#4a4547;font:400 22px/1 "Cormorant Garamond",serif;cursor:pointer;box-shadow:-3px 0 10px -4px rgba(74,54,66,.35);display:flex;align-items:center;justify-content:center;transition:color .2s}
+.wv-tab:hover{color:#c27ba0}
+.wv-back{position:absolute;left:18px;top:16px;z-index:5;display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 16px 0 12px;border:0;border-radius:999px;background:rgba(255,253,251,.88);color:#4a4547;font:500 13px "Noto Serif TC",serif;letter-spacing:.15em;cursor:pointer;box-shadow:0 0 0 1.5px #4a4547,3px 3px 0 1px #f6c9d4;transition:transform .2s}
+.wv-back:hover{transform:translateX(-2px)}
+.wv-fx{position:absolute;inset:0;pointer-events:none}
+.fx-armentary .wv-bg{filter:sepia(.35) saturate(1.1) brightness(1.03)}
+.fx-armentary .wv-tint{position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,214,140,.35),rgba(168,133,76,.15));mix-blend-mode:soft-light}
+.fx-armentary .wv-fx{background-image:radial-gradient(2px 2px at 20% 80%,rgba(255,236,190,.95) 50%,transparent 51%),radial-gradient(1.5px 1.5px at 60% 70%,rgba(255,236,190,.85) 50%,transparent 51%),radial-gradient(2.5px 2.5px at 85% 90%,rgba(255,236,190,.8) 50%,transparent 51%),radial-gradient(1.5px 1.5px at 40% 95%,rgba(255,236,190,.9) 50%,transparent 51%);background-size:240px 220px;animation:fxrise 14s linear infinite;opacity:.9}
+@keyframes fxrise{from{background-position:0 0}to{background-position:40px -220px}}
+.fx-maroplis .wv-bg{filter:saturate(.8) contrast(1.12) hue-rotate(-12deg) brightness(.96)}
+.fx-maroplis .wv-tint{position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,220,255,.22),rgba(255,0,140,.16));mix-blend-mode:soft-light}
+.wv-gl{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:0}
+.wv-gl.g1{filter:sepia(1) saturate(6) hue-rotate(-50deg) brightness(.62);animation:gl1 4.2s steps(1) infinite}
+.wv-gl.g2{filter:sepia(1) saturate(6) hue-rotate(150deg) brightness(.62);animation:gl2 5.3s steps(1) infinite}
+@keyframes gl1{0%,100%{opacity:0}62%{opacity:.75;clip-path:inset(18% 0 70% 0);transform:translateX(-26px)}63.5%{opacity:.7;clip-path:inset(52% 0 36% 0);transform:translateX(34px)}65%{opacity:.6;clip-path:inset(8% 0 0 0);transform:translateX(-7px)}66.5%{opacity:0}91%{opacity:.7;clip-path:inset(74% 0 14% 0);transform:translateX(22px)}92.5%{opacity:0}}
+@keyframes gl2{0%,100%{opacity:0}63%{opacity:.6;clip-path:inset(30% 0 55% 0);transform:translateX(30px)}64.5%{opacity:.55;clip-path:inset(0 0 4% 0);transform:translateX(6px)}66%{opacity:0}34%{opacity:.65;clip-path:inset(84% 0 6% 0);transform:translateX(-30px)}35.5%{opacity:0}}
+.fx-maroplis .wv-fx{background:repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 1px,transparent 1px 3px)}
+.fx-maroplis .wv-fx::after{content:"";position:absolute;left:0;right:0;height:90px;top:-90px;background:linear-gradient(transparent,rgba(180,250,255,.10) 70%,rgba(255,255,255,.22) 72%,transparent 74%);animation:glscan 6s linear infinite}
+@keyframes glscan{from{transform:translateY(0)}to{transform:translateY(1100px)}}
+.fx-maroplis .wv-name{animation:glname 4.2s steps(1) infinite}
+@keyframes glname{0%,100%{text-shadow:0 0 14px rgba(120,230,255,.45),0 2px 10px rgba(20,30,40,.5)}62%{text-shadow:-4px 0 rgba(255,0,110,.85),4px 0 rgba(0,240,255,.85);transform:translateY(-38%) rotate(-4deg) translateX(-6px)}63.5%{text-shadow:5px 0 rgba(255,0,110,.85),-5px 0 rgba(0,240,255,.85);transform:translateY(-38%) rotate(-4deg) translateX(8px)}65%{text-shadow:-2px 0 rgba(255,0,110,.7),2px 0 rgba(0,240,255,.7)}66.5%{text-shadow:0 0 14px rgba(120,230,255,.45),0 2px 10px rgba(20,30,40,.5);transform:translateY(-38%) rotate(-4deg)}}
+.fx-wujie .wv-bg{filter:saturate(.95) brightness(1.04)}
+.fx-wujie .wv-tint{position:absolute;inset:0;background:linear-gradient(100deg,rgba(246,201,212,.35),rgba(195,177,224,.3));mix-blend-mode:soft-light}
+.fx-wujie .wv-fx{background-image:radial-gradient(4px 2.6px at 15% 10%,rgba(255,214,226,.95) 50%,transparent 52%),radial-gradient(3px 2px at 55% 30%,rgba(255,228,236,.9) 50%,transparent 52%),radial-gradient(4.5px 3px at 80% 5%,rgba(250,200,215,.9) 50%,transparent 52%),radial-gradient(3px 2px at 35% 60%,rgba(255,236,242,.85) 50%,transparent 52%);background-size:260px 240px;animation:fxpetal 16s linear infinite}
+@keyframes fxpetal{from{background-position:0 0}to{background-position:-120px 240px}}
+@media (prefers-reduced-motion:reduce){.wv-fx,.wv-fx::after,.wv-gl,.fx-maroplis .wv-name{animation:none !important}.wv-gl{opacity:0}}
+.mini-kick{transition:opacity .4s}
+*:has(.wv.is-open) .mini-kick{opacity:0}
+.wv-band:nth-of-type(1){z-index:1}
+.wv-band:nth-of-type(2){margin-top:340px;-webkit-mask-image:linear-gradient(175.24deg, transparent 25px, #000 235px);mask-image:linear-gradient(175.24deg, transparent 25px, #000 235px);z-index:2;view-timeline:--wv2 block}
+.wv-band:nth-of-type(1) .wv-in{animation:wvlift linear both;animation-timeline:--wv2;animation-range:entry 0% entry 100%}
+.wv-band:nth-of-type(3){margin-top:340px;-webkit-mask-image:linear-gradient(175.24deg, transparent 25px, #000 235px);mask-image:linear-gradient(175.24deg, transparent 25px, #000 235px);z-index:3;view-timeline:--wv3 block}
+.wv-band:nth-of-type(2) .wv-in{animation:wvlift linear both;animation-timeline:--wv3;animation-range:entry 0% entry 100%}</style>
 <style>html,body{margin:0;background:#fffdfb;overflow:hidden}#dcroot{margin:0 auto}template{display:none}
 #pl{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--pl-bg,#fffdfb);transition:opacity .5s ease,visibility .5s}
 #pl.done{opacity:0;visibility:hidden}
@@ -156,12 +374,12 @@ body{margin:0}
         </div>
       </div>
     </header>
-    <main style="background: #fffdfb; padding-bottom: 40px">
-      <div class="pg-head"><p class="pg-eyebrow">Sceneey's Studio</p><h1 class="pg-title">World</h1></div>
-      <div class="pg-wrap"><div class="pg-banner"><img src="/img/c/2b7eeaeba7ac50e299303ceb9632f639.webp" alt="世界觀 主視覺" style="object-position: 50% 45%"><span class="pg-cap">世界觀</span></div></div>
-      <div class="pg-wrap"><div class="pg-soon"><em>coming soon</em><p>世界觀整理中，敬請期待。</p></div></div>
+    <main style="background: #fffdfb; overflow: clip">
+      <h1 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">World</h1>
+      <section :class="v.wvCls"><div class="wv-stack"><button type="button" :class="v.cls_armentary" aria-label="ARMENTARY 神器與契約：查看介紹" @click="v.open_armentary($event)"><div class="wv-in"><div class="wv-bg"><div class="ss"><img src="/img/c/ec89c6a42f2660c870ecbf9521f23bb9.webp" alt=""><img src="/img/c/f27364f8851ff4b808091908a1bdd7cf.webp" alt=""><img src="/img/c/e94c0208923594d88d5589580f28c12a.webp" alt=""><img src="/img/c/74624ef0469b1e1aa774a8d980b992ac.webp" alt=""><img src="/img/c/e8f7f724734c4941cd4378446aedf4be.webp" alt=""></div></div><div class="wv-tint"></div><div class="wv-fx"></div><div class="wv-veil"></div><span class="wv-name">Armentary</span><span class="wv-desc">以契約為名，我們稱之為「神器」。</span></div><span class="wv-scroll">scroll<i></i></span></button><button type="button" :class="v.cls_maroplis" aria-label="MAROPLIS 烏托邦：查看介紹" @click="v.open_maroplis($event)"><div class="wv-in"><div class="wv-bg"><div class="ss"><img src="/img/c/054883da6422c2b1c7bded96c51fa5f8.webp" alt=""><img src="/img/c/901733ec4cfd910b5e546796cf7872b8.webp" alt=""><img src="/img/c/52d845d4507a0a465a086f4f2338ad61.webp" alt=""><img src="/img/c/86107957c4a5b6cb83786ac2b79e8a61.webp" alt=""><img src="/img/c/0d224bb10a713141b1361b15c5a0166d.webp" alt=""></div></div><div class="wv-gl g1"><div class="ss"><img src="/img/c/054883da6422c2b1c7bded96c51fa5f8.webp" alt=""><img src="/img/c/901733ec4cfd910b5e546796cf7872b8.webp" alt=""><img src="/img/c/52d845d4507a0a465a086f4f2338ad61.webp" alt=""><img src="/img/c/86107957c4a5b6cb83786ac2b79e8a61.webp" alt=""><img src="/img/c/0d224bb10a713141b1361b15c5a0166d.webp" alt=""></div></div><div class="wv-gl g2"><div class="ss"><img src="/img/c/054883da6422c2b1c7bded96c51fa5f8.webp" alt=""><img src="/img/c/901733ec4cfd910b5e546796cf7872b8.webp" alt=""><img src="/img/c/52d845d4507a0a465a086f4f2338ad61.webp" alt=""><img src="/img/c/86107957c4a5b6cb83786ac2b79e8a61.webp" alt=""><img src="/img/c/0d224bb10a713141b1361b15c5a0166d.webp" alt=""></div></div><div class="wv-tint"></div><div class="wv-fx"></div><div class="wv-veil"></div><span class="wv-name">Maroplis</span><span class="wv-desc">沒有苦痛的烏托邦星球。</span></div><span class="wv-scroll">scroll<i></i></span></button><button type="button" :class="v.cls_wujie" aria-label="WUJIE 五界：查看介紹" @click="v.open_wujie($event)"><div class="wv-in"><div class="wv-bg"><div class="ss ss4"><img src="/img/c/debccb3aac499c642cc49b86fb826408.webp" alt=""><img src="/img/c/d2f639c4062c6fce318f84188abad702.webp" alt=""><img src="/img/c/160a7a5e4c7c927d0c30143f8a077838.webp" alt=""><img src="/img/c/e73720191b5ce48f034a42a77801f8ec.webp" alt=""></div></div><div class="wv-tint"></div><div class="wv-fx"></div><div class="wv-veil"></div><span class="wv-name">Wujie</span><span class="wv-desc">九天之上，九幽之下。</span></div></button></div>
+      </section>
     </main>
-    <footer style="position: relative; z-index: 1; margin-top: 40px; height: 270px; background: #ffffff">
+    <footer style="position: relative; z-index: 1; margin-top: 0px; height: 270px; background: #ffffff">
   <svg aria-hidden="true" width="1440" height="40" viewBox="0 0 1440 40" style="position: absolute; left: 0; top: -22px; overflow: visible; pointer-events: none"><path d="M0,22.8 L24,26.8 L48,29.1 L72,25.1 L96,21.2 L120,15.9 L144,12.7 L168,11.2 L192,12.6 L216,15.3 L240,17.6 L264,15.9 L288,13.1 L312,11.8 L336,13.1 L360,14.7 L384,18.5 L408,25.7 L432,27.8 L456,26.1 L480,23.2 L504,19.3 L528,18.7 L552,14.4 L576,16.3 L600,18.4 L624,15.7 L648,15.5 L672,13.2 L696,12.0 L720,8.8 L744,10.9 L768,15.2 L792,19.7 L816,25.7 L840,27.7 L864,25.2 L888,21.0 L912,20.4 L936,19.0 L960,19.0 L984,18.9 L1008,20.6 L1032,18.4 L1056,15.0 L1080,11.1 L1104,7.8 L1128,8.9 L1152,13.2 L1176,17.8 L1200,21.3 L1224,25.4 L1248,25.5 L1272,21.2 L1296,19.6 L1320,18.9 L1344,18.9 L1368,22.7 L1392,22.9 L1416,21.3 L1440,19.2 L1440,40 L0,40 Z" fill="#ffffff"></path><g filter="url(#crayonEdge)" fill="none" stroke="#4a4547" stroke-linecap="round" stroke-linejoin="round"><path d="M0,22.8 L24,26.8 L48,29.1 L72,25.1 L96,21.2 L120,15.9 L144,12.7 L168,11.2 L192,12.6 L216,15.3 L240,17.6 L264,15.9 L288,13.1 L312,11.8 L336,13.1 L360,14.7 L384,18.5 L408,25.7 L432,27.8 L456,26.1 L480,23.2 L504,19.3 L528,18.7 L552,14.4 L576,16.3 L600,18.4 L624,15.7 L648,15.5 L672,13.2 L696,12.0 L720,8.8 L744,10.9 L768,15.2 L792,19.7 L816,25.7 L840,27.7 L864,25.2 L888,21.0 L912,20.4 L936,19.0 L960,19.0 L984,18.9 L1008,20.6 L1032,18.4 L1056,15.0 L1080,11.1 L1104,7.8 L1128,8.9 L1152,13.2 L1176,17.8 L1200,21.3 L1224,25.4 L1248,25.5 L1272,21.2 L1296,19.6 L1320,18.9 L1344,18.9 L1368,22.7 L1392,22.9 L1416,21.3 L1440,19.2" stroke-width="5"></path><path d="M0,24.2 L24,27.7 L48,29.7 L72,26.4 L96,24.0 L120,18.0 L144,13.2 L168,12.8 L192,13.0 L216,17.5 L240,18.3 L264,16.7 L288,15.3 L312,14.6 L336,15.3 L360,15.9 L384,20.7 L408,26.8 L432,28.1 L456,27.2 L480,25.6 L504,21.5 L528,19.6 L552,17.2 L576,19.1 L600,19.5 L624,18.9 L648,16.6 L672,13.7 L696,13.8 L720,11.7 L744,13.0 L768,17.1 L792,21.5 L816,26.9 L840,28.9 L864,26.7 L888,22.9 L912,23.5 L936,19.5 L960,20.1 L984,22.0 L1008,22.9 L1032,18.9 L1056,16.6 L1080,13.4 L1104,10.8 L1128,9.5 L1152,16.2 L1176,20.4 L1200,22.4 L1224,27.3 L1248,28.3 L1272,22.2 L1296,22.0 L1320,20.9 L1344,19.4 L1368,23.8 L1392,24.4 L1416,22.0 L1440,22.3" stroke-width="2.4" opacity=".65"></path></g></svg>
   <div style="position: absolute; left: 0; right: 0; top: 40px; display: flex; flex-direction: column; align-items: center; gap: 20px">
     <span style="font-family: 'Corinthia', 'Snell Roundhand', cursive; font-weight: 700; font-size: 30px; line-height: 1; color: #c27ba0">link</span>
@@ -171,6 +389,23 @@ body{margin:0}
 </footer>
   </div>
 
+<aside :class="v.drCls" aria-label="世界觀介紹" :aria-hidden="v.drHidden" :style="'top: ' + (v.drTop)">
+          <button type="button" class="wv-tab" aria-label="收起介紹" @click="v.close($event)">›</button>
+          <button type="button" class="wv-close" aria-label="關閉介紹" @click="v.close($event)">×</button>
+          <div class="wv-dr-in">
+            <span class="wv-en" :style="'color: ' + (v.d.tone)"><span x-text="v.d.name"></span></span>
+            <span class="wv-zh"><span x-text="v.d.zh"></span></span>
+            <p class="wv-tag"><span x-text="v.d.tagline"></span></p>
+            <dl class="wv-facts"><template x-for="(f, $index) in v.d.facts"><div style="display: contents"><dt :style="'color: ' + (v.d.tone)"><span x-text="f.k"></span></dt><dd><span x-text="f.v"></span></dd></div></template></dl>
+            <span class="wv-ch-h">Characters in this world</span>
+            <div class="wv-chs"><template x-for="(c, $index) in v.d.chars"><div style="display: contents">
+              <template x-if="c.soon"><div style="display: contents"><div class="wv-ch wv-ch-soon"><div class="wv-ch-img">？</div><b>？？？</b><small>Coming soon</small></div></div></template>
+              <template x-if="c.shown"><div style="display: contents"><a class="wv-ch" :href="c.href"><div class="wv-ch-img" :style="'background: ' + (c.soft) + '; color: ' + (c.tone)"><span x-text="c.initial"></span><template x-if="c.hasImg"><div style="display: contents"><img :src="c.img" :alt="c.name"></div></template></div><b><span x-text="c.name"></span></b><small><span x-text="c.one"></span></small></a></div></template>
+            </div></template></div>
+            <a class="wv-go" :href="v.d.page">進入世界觀 →</a>
+          </div>
+        </aside>
+        <nav :class="v.axCls" aria-label="世界觀快速導覽"><div class="wa-track"><div class="wa-line"><i :style="'width: ' + (v.axFill)"></i></div><button type="button" :class="v.ax_armentary" aria-label="前往 Armentary" @click="v.go_armentary($event)"><span class="wa-dot"></span><span class="wa-lb">Armentary</span></button><button type="button" :class="v.ax_maroplis" aria-label="前往 Maroplis" @click="v.go_maroplis($event)"><span class="wa-dot"></span><span class="wa-lb">Maroplis</span></button><button type="button" :class="v.ax_wujie" aria-label="前往 Wujie" @click="v.go_wujie($event)"><span class="wa-dot"></span><span class="wa-lb">Wujie</span></button><span class="wa-node wa-q" aria-label="尚未公開"><span class="wa-dot">?</span><span class="wa-lb">? ? ?</span></span></div></nav>
 </div>
 <script>(function(){var r=document.getElementById('dcroot');function fit(){var W=document.documentElement.clientWidth||window.innerWidth,H=window.innerHeight;var z=W<1440?W/1440:1;r.style.width=z<1?'1440px':'100%';r.style.zoom=z;r.style.height=(H/z)+'px';}fit();window.addEventListener('resize',fit);})();</script>
 <script>
@@ -191,12 +426,20 @@ function siteVals(r) { var a = SITE.annc || SITE_DEF.annc, l = a.link || 'news';
   if (!a.on) { r.anncOpen = false; r.scTop = '0px'; } return r; }
 
 
+
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { annc: true, lb: null }; }
+  constructor(props) { super(props); this.state = { annc: true, lb: null, wsel: '', wcur: 0 }; }
   renderVals() {
-    return { onScroll: (e) => { const el = e.currentTarget; const k = el.querySelector('.mini-kick'); if (!k) return; const d = el.scrollTop - (this._lastY || 0); this._lastY = el.scrollTop; const a = Math.max(-14, Math.min(14, -d * 0.6)); k.style.transform = 'rotate(' + a + 'deg)'; clearTimeout(this._kt); this._kt = setTimeout(() => { k.style.transform = 'rotate(0deg)'; }, 120); }, anncOpen: this.state.annc, closeAnnc: () => this.setState({ annc: false }), scTop: this.state.annc ? '40px' : '0px' };
+    const WD = {"armentary": {"name": "Armentary", "zh": "神器與契約", "tone": "#a8823f", "tagline": "奧瑪曆 1523 年。人類與擁有三種型態的「神器」締結契約，與精靈、獸人、龍族、魔族並存的大陸。", "page": "/armentary", "facts": [{"k": "曆法", "v": "奧瑪曆 1523 年"}, {"k": "神器", "v": "人類、武器、手持武器的人形三種型態"}, {"k": "舞台", "v": "法奧斯大陸等七大陸與深海國度"}], "chars": [{"name": "澤德", "one": "師傅……想把這些都塞進去。", "img": "", "initial": "澤", "tone": "#a8823f", "soft": "#f4ecdc", "href": "#", "soon": false, "shown": true, "hasImg": false}, {"name": "克萊莫", "one": "爸爸，需要女兒幫忙磨刃嗎？", "img": "", "initial": "克", "tone": "#a8823f", "soft": "#f4ecdc", "href": "#", "soon": false, "shown": true, "hasImg": false}, {"name": "？？？", "one": "", "img": "", "initial": "？", "tone": "#a8823f", "soft": "#f4ecdc", "href": "#", "soon": true, "shown": false, "hasImg": false}]}, "maroplis": {"name": "Maroplis", "zh": "烏托邦", "tone": "#3f8f9c", "tagline": "科技登峰造極，環境卻已崩壞的星球。城市由雲層區一路沉到基核層，階級絕對、沒有神明。", "page": "/maroplis", "facts": [{"k": "階層", "v": "雲層區・灰脈層・邊緣層・基核層"}, {"k": "勢力", "v": "地下黑市 Echo、雲層研究機構 Nīlus"}, {"k": "貨幣", "v": "LN（羅恩）"}], "chars": [{"name": "林恩", "one": "成為了黑市首腦的人質。", "img": "", "initial": "林", "tone": "#3f8f9c", "soft": "#e3f1f2", "href": "#", "soon": false, "shown": true, "hasImg": false}, {"name": "井", "one": "操，閉嘴。", "img": "", "initial": "井", "tone": "#3f8f9c", "soft": "#e3f1f2", "href": "#", "soon": false, "shown": true, "hasImg": false}, {"name": "偽善者-ZL7893", "one": "永遠保有母愛的男性仿生人。", "img": "/img/c/4f3daa01c9a4d6e214da3d45ffefee0c.webp", "initial": "偽", "tone": "#3f8f9c", "soft": "#e3f1f2", "href": "/zl7893", "soon": false, "shown": true, "hasImg": true}]}, "wujie": {"name": "Wujie", "zh": "五界", "tone": "#7d64a6", "tagline": "天地初開，清者上浮，濁者下沉。九天、仙界、大荒、人間、九幽——上古神話與現代台灣交會。", "page": "/wujie", "facts": [{"k": "五界", "v": "九天・仙界・大荒・人間・九幽"}, {"k": "大劫", "v": "兩千年前的「天漏」與神尊補天"}, {"k": "現代", "v": "凶獸撕裂空間，來到現代台灣"}], "chars": [{"name": "濤列", "one": "把主人視為美食的上古兇獸。", "img": "", "initial": "濤", "tone": "#7d64a6", "soft": "#efeaf6", "href": "#", "soon": false, "shown": true, "hasImg": false}]}};
+    const sel = this.state.wsel;
+    const HDR = 82, STEP = 1118, ORDER = ["armentary", "maroplis", "wujie"];
+    const ix = sel ? ORDER.indexOf(sel) : (this.state.wcur || 0);
+    const wv = { axCls: 'wv-axis' + (sel ? ' is-open' : '') + (this.state.wend ? ' is-gone' : ''), axFill: (ix < 0 ? 0 : ix * 556 / 3).toFixed(1) + 'px', track: (el) => { try { const st = el.querySelector('.wv-stack'); if (!st) return; const scale = el.getBoundingClientRect().height / el.clientHeight || 1; const v = (st.getBoundingClientRect().top - el.getBoundingClientRect().top) / scale; const i = Math.max(0, Math.min(ORDER.length - 1, Math.floor((HDR - v) / STEP + 0.35))); const end = (st.getBoundingClientRect().bottom - el.getBoundingClientRect().top) / scale < el.clientHeight - 40; if (i !== (this.state.wcur || 0) || end !== !!this.state.wend) this.setState({ wcur: i, wend: end }); } catch (e) {} }, drTop: ((this.state.annc ? 40 : 0) + HDR) + 'px', wvCls: sel ? 'wv is-open' : 'wv', drCls: sel ? 'wv-drawer is-open' : 'wv-drawer', drHidden: sel ? 'false' : 'true', d: WD[sel || 'maroplis'], close: () => this.setState({ wsel: '' }), goBack: () => { try { if (window.history.length > 1) window.history.back(); } catch (e) {} } };
+    Object.keys(WD).forEach((k) => { wv['cls_' + k] = 'wv-band fx-' + k + (k === 'maroplis' ? '' : ' r') + (sel === k ? ' is-sel' : ''); wv['open_' + k] = () => this.setState({ wsel: sel === k ? '' : k }); const i = ORDER.indexOf(k); wv['ax_' + k] = 'wa-node' + (i === ix ? ' is-lit' : (i < ix ? ' is-on' : '')); wv['go_' + k] = () => { try { const st = document.querySelector('.wv-stack'); let sc = st && st.parentElement; while (sc && !/(auto|scroll)/.test(getComputedStyle(sc).overflowY)) sc = sc.parentElement; if (sc) { const scale = sc.getBoundingClientRect().height / sc.clientHeight || 1; const top = sc.scrollTop + (st.getBoundingClientRect().top - sc.getBoundingClientRect().top) / scale; sc.scrollTo({ top: Math.max(0, top + i * STEP - HDR + 2), behavior: 'smooth' }); } } catch (e) {} this.setState({ wsel: k }); }; });
+    return { ...wv, onScroll: (e) => { const el = e.currentTarget; wv.track(el); const k = el.querySelector('.mini-kick'); if (!k) return; const d = el.scrollTop - (this._lastY || 0); this._lastY = el.scrollTop; const a = Math.max(-14, Math.min(14, -d * 0.6)); k.style.transform = 'rotate(' + a + 'deg)'; clearTimeout(this._kt); this._kt = setTimeout(() => { k.style.transform = 'rotate(0deg)'; }, 120); }, anncOpen: this.state.annc, closeAnnc: () => this.setState({ annc: false }), scTop: this.state.annc ? '40px' : '0px' };
   }
 }
+
 
 
 document.addEventListener('alpine:init', function () {

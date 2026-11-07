@@ -60,7 +60,7 @@ export const DEFAULTS = {
     },
     {
       "src": "/img/c/871bd3ca59a83e5b5c6404da8b96e307.webp",
-      "alt": "第七小隊交換計畫"
+      "alt": "第七小隊訓練計畫"
     },
     {
       "src": "/img/c/818deb743f48c20b9a1d0520bb7a2b68.webp",
