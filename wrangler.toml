@@ -1,8 +1,15 @@
 name = "sceneey-studio"
-pages_build_output_dir = "public"
+main = "worker/index.js"
 compatibility_date = "2026-06-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "sceneey-studio"
 database_id = "81c95a81-e96e-4b21-8017-a4d3e5fc953a"
+
+[observability]
+enabled = true
