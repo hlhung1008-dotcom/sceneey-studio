@@ -219,6 +219,10 @@ body{margin:0}
 .cp-cta:hover{background:#c27ba0}
 .cp-note{font-size:12px;color:#8a7d82;letter-spacing:.06em}
 
+.fgs{display:flex;flex-direction:column;gap:10px;max-width:900px;margin:0 auto 34px}
+.fg{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.fg-n{font:italic 500 14px "Cormorant Garamond","Noto Serif TC",serif;letter-spacing:.12em;color:#8a7d82;text-align:right}
+.fgs .filters{margin:0 !important;justify-content:flex-start !important}
 .tg-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
 .tg{display:inline-flex;align-items:center;font:600 10px/1 "Noto Serif TC",serif;letter-spacing:.12em;padding:4px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
 .cc .tg-row{margin-top:10px}
@@ -356,7 +360,7 @@ body{margin:0}
     <main style="background: #fffdfb; padding-bottom: 40px">
       <div class="pg-head"><p class="pg-eyebrow">Sceneey's Studio</p><h1 class="pg-title">Characters</h1></div>
       <div class="cw">
-        <div class="filters" role="group" aria-label="篩選角色"><template x-for="(f, $index) in v.filters"><div style="display: contents"><button type="button" :aria-pressed="f.pressed" @click="f.pick($event)"><i :style="'background: ' + (f.col)"></i><span x-text="f.label"></span></button></div></template></div>
+        <div class="fgs"><template x-for="(g, $index) in v.fgroups"><div style="display: contents"><div class="fg"><span class="fg-n"><span x-text="g.name"></span></span><div class="filters" role="group" :aria-label="g.name"><template x-for="(f, $index) in g.items"><div style="display: contents"><button type="button" :aria-pressed="f.pressed" @click="f.pick($event)"><i :style="'background: ' + (f.col)"></i><span x-text="f.label"></span></button></div></template></div></div></div></template></div>
         <p class="cnt-line"><span x-text="v.countLine"></span></p>
         <div class="cg"><template x-for="(c, $index) in v.cards"><div style="display: contents">
           <template x-if="c.soon"><div style="display: contents"><div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-ph"><span>？</span><small>COMING SOON</small></div></div><div class="tg-row"><template x-for="(t, $index) in c.tags"><div style="display: contents"><span class="tg" :style="'color: ' + (t.col) + '; background: ' + (t.soft)"><span x-text="t.label"></span></span></div></template></div><p class="cc-name">？？？</p><p class="cc-one">神秘的新角色，即將登場。</p></div></div></template>
@@ -414,7 +418,9 @@ const ctagIds = (c) => { const a = (c.tags || []).slice(); if (c.collab && a.ind
 const ctags = (c) => ctagIds(c).map(tagById).filter((t) => t && t.kind !== 'world' && tagOn(t, 'chars'));
 const tagsOf = (c) => { const w = worldOf(c.world); const t = [{ label: c.world ? w.en : '獨立角色', col: w.tone, soft: w.soft }];
   ctags(c).forEach((x) => t.push({ label: x.label, col: x.color, soft: x.color + '1f' })); return t; };
-const filterList = (indieLabel, where) => [['all', '全部', '#3d3639']].concat(allTags().filter((t) => t.kind === 'world').map((t) => [t.id, t.label, t.color])).concat([['indie', indieLabel, WL[''].tone]]).concat(allTags().filter((t) => t.kind !== 'world' && tagOn(t, where)).map((t) => [t.id, t.label, t.color]));
+const filterList = (indieLabel, where) => [['all', '全部', '#3d3639', '世界觀']].concat(allTags().filter((t) => t.kind === 'world').map((t) => [t.id, t.label, t.color, '世界觀'])).concat([['indie', indieLabel, WL[''].tone, '世界觀']]).concat(allTags().filter((t) => t.kind !== 'world' && tagOn(t, where)).map((t) => [t.id, t.label, t.color, t.group || '標籤']));
+const filterGroups = (FL, f, pick) => { const names = []; FL.forEach((x) => { if (names.indexOf(x[3]) < 0) names.push(x[3]); });
+  return names.map((n) => ({ name: n, items: FL.filter((x) => x[3] === n).map((x) => ({ label: x[1], col: x[2], pressed: f === x[0] ? 'true' : 'false', pick: () => pick(x[0]) })) })); };
 const charHas = (c, f) => f === 'all' || (f === 'indie' ? !c.world : (c.world === f || ctagIds(c).indexOf(f) >= 0));
 
 if (typeof NEED !== 'undefined') { NEED.push('chars', 'tags'); SITE.chars = siteCached('chars'); SITE.tags = siteCached('tags'); }
@@ -427,7 +433,7 @@ class Component extends DCLogic {
     const f = FL.some((x) => x[0] === this.state.f) ? this.state.f : 'all';
     const list = allChars().filter((c) => charHas(c, f));
     const R = {
-      filters: FL.map((x) => ({ label: x[1], col: x[2], pressed: f === x[0] ? 'true' : 'false', pick: () => this.setState({ f: x[0] }) })),
+      fgroups: filterGroups(FL, f, (v) => this.setState({ f: v })),
       countLine: list.length + ' characters',
       cards: list.map((c) => { const w = worldOf(c.world); return { name: c.name, one: c.one, era: c.era, award: c.award, hasAward: !!c.award, img: c.img, pos: c.pos || '50% 20%', hasImg: !!c.img, noImg: !c.img,
         initial: c.name.charAt(0), tone: w.tone, soft: w.soft, soon: !!c.soon, shown: !c.soon, href: charHref(c), tags: tagsOf(c) }; }),

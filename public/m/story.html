@@ -161,6 +161,10 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .cp-cta:hover{background:#c27ba0}
 .cp-note{font-size:12px;color:#8a7d82;letter-spacing:.06em}
 
+.fgs{display:flex;flex-direction:column;gap:10px;max-width:900px;margin:0 auto 34px}
+.fg{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.fg-n{font:italic 500 14px "Cormorant Garamond","Noto Serif TC",serif;letter-spacing:.12em;color:#8a7d82;text-align:right}
+.fgs .filters{margin:0 !important;justify-content:flex-start !important}
 .tg-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
 .tg{display:inline-flex;align-items:center;font:600 10px/1 "Noto Serif TC",serif;letter-spacing:.12em;padding:4px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
 .cc .tg-row{margin-top:10px}
@@ -264,7 +268,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .al-f button{border:0;background:none;padding:4px 2px;font:500 13px "Noto Serif TC",serif;letter-spacing:.16em;color:#8a7d82;cursor:pointer;border-bottom:1px solid transparent}
 .al-f button:hover{color:#c27ba0}
 .al-f button[aria-pressed="true"]{color:#3d3639;border-bottom-color:#c27ba0}
-.al .filters{margin:0 0 30px}
+.al .fgs{margin:0 0 30px}
 .al-snip{font-size:12.5px;line-height:1.8;color:#8a7d82}
 .al-h{margin:44px 0 14px;font:600 15px "Noto Serif TC",serif;letter-spacing:.2em;color:#3d3639;display:flex;align-items:baseline;gap:12px}
 .al-h em{font:italic 500 14px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.06em}
@@ -367,7 +371,8 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .al-row time{font-size:13px !important}
 .al-who{white-space:normal !important}
 .al-f{gap:2px 14px !important;margin-bottom:20px !important}
-.al .filters{gap:6px !important;margin-bottom:20px !important}
+.al .filters{gap:6px !important}
+.fg{grid-template-columns:1fr !important;gap:6px !important}.fg-n{text-align:left !important;font-size:12px !important}.fgs{gap:12px !important}
 .al .filters button{padding:7px 11px !important;font-size:12px !important}
 .sl{grid-template-columns:1fr !important;gap:16px !important}
 .sp-wrap{padding-top:18px !important}
@@ -404,7 +409,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
       <div class="pg-head"><p class="pg-eyebrow">Sceneey's Studio</p><h1 class="pg-title">Story</h1></div>
       <div class="cw"><div class="al">
         <div class="al-s"><input class="al-q" type="search" placeholder="全站搜尋文章：標題、內文、角色、世界觀……" aria-label="全站搜尋文章" :value="v.q" @input="v.onQ($event)"><span class="al-n"><span x-text="v.storyLine"></span></span></div>
-        <div class="filters" role="group" aria-label="篩選故事"><template x-for="(f, $index) in v.filters"><div style="display: contents"><button type="button" :aria-pressed="f.pressed" @click="f.pick($event)"><i :style="'background: ' + (f.col)"></i><span x-text="f.label"></span></button></div></template></div>
+        <div class="fgs"><template x-for="(g, $index) in v.fgroups"><div style="display: contents"><div class="fg"><span class="fg-n"><span x-text="g.name"></span></span><div class="filters" role="group" :aria-label="g.name"><template x-for="(f, $index) in g.items"><div style="display: contents"><button type="button" :aria-pressed="f.pressed" @click="f.pick($event)"><i :style="'background: ' + (f.col)"></i><span x-text="f.label"></span></button></div></template></div></div></div></template></div>
         <template x-if="v.noStories"><div style="display: contents"><p class="st-empty"><span x-text="v.emptyMsg"></span></p></div></template>
         <ol class="al-list"><template x-for="(t, $index) in v.items"><div style="display: contents"><li><a class="al-row" :href="t.href"><template x-if="t.hasCover"><div style="display: contents"><span class="al-pv" aria-hidden="true"><img :src="t.cover" alt="" loading="lazy"></span></div></template><time><span x-text="t.date"></span></time><span class="al-main"><b><span x-text="t.title"></span></b><template x-if="t.hasSummary"><div style="display: contents"><span class="al-sum"><span x-text="t.summary"></span></span></div></template><template x-if="t.hasSnip"><div style="display: contents"><span class="al-snip">內文：<span x-text="t.snip"></span></span></div></template></span><span class="al-who"><span x-text="t.who"></span></span></a></li></div></template></ol>
         <template x-if="v.hasBlogHits"><div style="display: contents"><h2 class="al-h">角色秘密設定 &amp; 幕後花絮 <em><span x-text="v.blogHitLine"></span></em></h2>
@@ -459,7 +464,9 @@ const ctagIds = (c) => { const a = (c.tags || []).slice(); if (c.collab && a.ind
 const ctags = (c) => ctagIds(c).map(tagById).filter((t) => t && t.kind !== 'world' && tagOn(t, 'chars'));
 const tagsOf = (c) => { const w = worldOf(c.world); const t = [{ label: c.world ? w.en : '獨立角色', col: w.tone, soft: w.soft }];
   ctags(c).forEach((x) => t.push({ label: x.label, col: x.color, soft: x.color + '1f' })); return t; };
-const filterList = (indieLabel, where) => [['all', '全部', '#3d3639']].concat(allTags().filter((t) => t.kind === 'world').map((t) => [t.id, t.label, t.color])).concat([['indie', indieLabel, WL[''].tone]]).concat(allTags().filter((t) => t.kind !== 'world' && tagOn(t, where)).map((t) => [t.id, t.label, t.color]));
+const filterList = (indieLabel, where) => [['all', '全部', '#3d3639', '世界觀']].concat(allTags().filter((t) => t.kind === 'world').map((t) => [t.id, t.label, t.color, '世界觀'])).concat([['indie', indieLabel, WL[''].tone, '世界觀']]).concat(allTags().filter((t) => t.kind !== 'world' && tagOn(t, where)).map((t) => [t.id, t.label, t.color, t.group || '標籤']));
+const filterGroups = (FL, f, pick) => { const names = []; FL.forEach((x) => { if (names.indexOf(x[3]) < 0) names.push(x[3]); });
+  return names.map((n) => ({ name: n, items: FL.filter((x) => x[3] === n).map((x) => ({ label: x[1], col: x[2], pressed: f === x[0] ? 'true' : 'false', pick: () => pick(x[0]) })) })); };
 const charHas = (c, f) => f === 'all' || (f === 'indie' ? !c.world : (c.world === f || ctagIds(c).indexOf(f) >= 0));
 
 const storiesAll = () => (siteGet('stories') || []).filter((t) => !t.hidden);
@@ -488,7 +495,7 @@ class Component extends DCLogic {
     const bh = ft.filter((h) => h.type === 'blog').map((h) => ({ h: h, c: chs.find((c) => c.id === h.id && !c.soon) })).filter((x) => x.c && pass([x.c]));
     const R = {
       q: this.state.q || '', onQ: (e) => { const v = e.target.value; this.setState({ q: v }); },
-      filters: FL.map((x) => ({ label: x[1], col: x[2], pressed: f === x[0] ? 'true' : 'false', pick: () => this.setState({ f: x[0] }) })),
+      fgroups: filterGroups(FL, f, (v) => this.setState({ f: v })),
       noStories: !list.length && !bh.length, emptyMsg: all.length ? '找不到符合的文章' : '故事整理中，敬請期待。', storyLine: (q || f !== 'all') ? '找到 ' + (list.length + bh.length) + ' 篇' : (all.length ? all.length + ' stories' : ''),
       items: list.map((t) => { const cs = charsOf(t); const sn = q && !meta(t) ? snipOf[t.id] : ''; return { href: storyHref(t), title: t.title, summary: t.summary || '', hasSummary: !!t.summary && !sn, snip: sn || '', hasSnip: !!sn, date: t.date || '', who: cs.length ? cs.map((c) => c.name).join('・') : '獨立短篇', cover: t.cover || '', hasCover: !!t.cover }; }),
       hasBlogHits: bh.length > 0, blogHitLine: bh.length + ' 篇', blogHits: bh.map((x) => { const w = worldOf(x.c.world); return { href: charHref(x.c), title: x.c.name + '｜秘密 & 幕後花絮', snip: x.h.snip, who: x.c.world ? w.en : '獨立角色' }; }),

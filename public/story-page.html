@@ -219,6 +219,10 @@ body{margin:0}
 .cp-cta:hover{background:#c27ba0}
 .cp-note{font-size:12px;color:#8a7d82;letter-spacing:.06em}
 
+.fgs{display:flex;flex-direction:column;gap:10px;max-width:900px;margin:0 auto 34px}
+.fg{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.fg-n{font:italic 500 14px "Cormorant Garamond","Noto Serif TC",serif;letter-spacing:.12em;color:#8a7d82;text-align:right}
+.fgs .filters{margin:0 !important;justify-content:flex-start !important}
 .tg-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
 .tg{display:inline-flex;align-items:center;font:600 10px/1 "Noto Serif TC",serif;letter-spacing:.12em;padding:4px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
 .cc .tg-row{margin-top:10px}
@@ -322,7 +326,7 @@ body{margin:0}
 .al-f button{border:0;background:none;padding:4px 2px;font:500 13px "Noto Serif TC",serif;letter-spacing:.16em;color:#8a7d82;cursor:pointer;border-bottom:1px solid transparent}
 .al-f button:hover{color:#c27ba0}
 .al-f button[aria-pressed="true"]{color:#3d3639;border-bottom-color:#c27ba0}
-.al .filters{margin:0 0 30px}
+.al .fgs{margin:0 0 30px}
 .al-snip{font-size:12.5px;line-height:1.8;color:#8a7d82}
 .al-h{margin:44px 0 14px;font:600 15px "Noto Serif TC",serif;letter-spacing:.2em;color:#3d3639;display:flex;align-items:baseline;gap:12px}
 .al-h em{font:italic 500 14px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.06em}
@@ -462,7 +466,9 @@ const ctagIds = (c) => { const a = (c.tags || []).slice(); if (c.collab && a.ind
 const ctags = (c) => ctagIds(c).map(tagById).filter((t) => t && t.kind !== 'world' && tagOn(t, 'chars'));
 const tagsOf = (c) => { const w = worldOf(c.world); const t = [{ label: c.world ? w.en : '獨立角色', col: w.tone, soft: w.soft }];
   ctags(c).forEach((x) => t.push({ label: x.label, col: x.color, soft: x.color + '1f' })); return t; };
-const filterList = (indieLabel, where) => [['all', '全部', '#3d3639']].concat(allTags().filter((t) => t.kind === 'world').map((t) => [t.id, t.label, t.color])).concat([['indie', indieLabel, WL[''].tone]]).concat(allTags().filter((t) => t.kind !== 'world' && tagOn(t, where)).map((t) => [t.id, t.label, t.color]));
+const filterList = (indieLabel, where) => [['all', '全部', '#3d3639', '世界觀']].concat(allTags().filter((t) => t.kind === 'world').map((t) => [t.id, t.label, t.color, '世界觀'])).concat([['indie', indieLabel, WL[''].tone, '世界觀']]).concat(allTags().filter((t) => t.kind !== 'world' && tagOn(t, where)).map((t) => [t.id, t.label, t.color, t.group || '標籤']));
+const filterGroups = (FL, f, pick) => { const names = []; FL.forEach((x) => { if (names.indexOf(x[3]) < 0) names.push(x[3]); });
+  return names.map((n) => ({ name: n, items: FL.filter((x) => x[3] === n).map((x) => ({ label: x[1], col: x[2], pressed: f === x[0] ? 'true' : 'false', pick: () => pick(x[0]) })) })); };
 const charHas = (c, f) => f === 'all' || (f === 'indie' ? !c.world : (c.world === f || ctagIds(c).indexOf(f) >= 0));
 
 const storiesAll = () => (siteGet('stories') || []).filter((t) => !t.hidden);

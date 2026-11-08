@@ -108,6 +108,7 @@ a{color:var(--pink)}
 .modal>div{width:min(420px,92vw);background:#fff;border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px}
 .modal b{font-size:16px;letter-spacing:.1em}
 .modal .row{display:flex;justify-content:flex-end;gap:8px}
+.tgg{display:grid;grid-template-columns:70px minmax(0,1fr);gap:10px;align-items:start;margin-top:8px}.tgg-n{font-size:12px;letter-spacing:.12em;color:var(--sub);padding-top:7px}
 .chars{display:flex;flex-wrap:wrap;gap:8px}.chars label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer;background:#fff}.chars input{accent-color:var(--pink)}.chars label:has(input:checked){border-color:var(--pink);background:var(--soft);color:var(--pink)}
 .empty{padding:60px 20px;text-align:center;color:var(--sub)}
 @media (max-width:860px){.wrap{grid-template-columns:1fr;padding:14px}.side{position:static;max-height:260px}.g2,.imgs{grid-template-columns:1fr}.tb{top:56px}.top{padding:12px 14px;flex-wrap:wrap}.anav{order:3;width:100%}}
@@ -158,7 +159,9 @@ function worlds() { return TAGS.filter(function (t) { return t.kind === 'world';
 function plainTags(where) { return TAGS.filter(function (t) { return t.kind !== 'world' && (!where || !Array.isArray(t.on) || t.on.indexOf(where) >= 0); }); }
 function tagLabel(id) { var t = TAGS.find(function (x) { return x.id === id; }); return t ? t.label : (id ? id : '獨立角色'); }
 function ctagIds(c) { var a = (c.tags || []).slice(); if (c.collab && a.indexOf('collab') < 0) a.push('collab'); if (c.award && a.indexOf('award') < 0) a.push('award'); return a; }
-function chips(name, sel, where) { return '<div class="chars">' + plainTags(where).map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div>'; }
+function tagGroups(list) { var g = []; list.forEach(function (t) { var n = t.group || '標籤'; var x = g.find(function (y) { return y.n === n; }); if (!x) { x = { n: n, l: [] }; g.push(x); } x.l.push(t); }); return g; }
+function chips(name, sel, where) { var gs = tagGroups(plainTags(where)); if (!gs.length) return '<span class="hint">還沒有可用的標籤，可以到「標籤」分頁新增</span>';
+  return gs.map(function (g) { return '<div class="tgg"><span class="tgg-n">' + esc(g.n) + '</span><div class="chars">' + g.l.map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div></div>'; }).join(''); }
 function worldSelect(v, attr) { return '<select class="in" ' + attr + '><option value="">獨立角色（不屬於任何世界觀）</option>' + worlds().map(function (t) { return '<option value="' + esc(t.id) + '"' + (v === t.id ? ' selected' : '') + '>' + esc(t.label) + '</option>'; }).join('') + '</select>'; }
 function form(title, html) { return new Promise(function (res) { var md = $('fmodal'); $('fmt').textContent = title; $('fmb').innerHTML = html; md.classList.add('on'); var f1 = md.querySelector('input'); if (f1) f1.focus();
   var done = function (v) { md.classList.remove('on'); $('fmok').onclick = $('fmno').onclick = null; res(v); }; $('fmok').onclick = function () { var o = {}; md.querySelectorAll('[name]').forEach(function (x) { o[x.name] = x.value.trim(); }); done(o); }; $('fmno').onclick = function () { done(null); }; }); }
