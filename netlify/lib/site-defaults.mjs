@@ -124,7 +124,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "claymore",
@@ -146,7 +147,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "severus",
@@ -168,7 +170,8 @@ export const DEFAULTS = {
       "soon": true,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "lyn",
@@ -190,7 +193,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "jing",
@@ -212,7 +216,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "zl",
@@ -234,7 +239,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "taolie",
@@ -256,7 +262,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "xuhuan",
@@ -278,7 +285,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "mnzj",
@@ -300,7 +308,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "seventh",
@@ -322,7 +331,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "suxue",
@@ -344,7 +354,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "soulswap",
@@ -366,7 +377,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "cangling",
@@ -388,7 +400,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "jiyun",
@@ -410,7 +423,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "emmett",
@@ -432,7 +446,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "grey",
@@ -454,7 +469,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     },
     {
       "id": "mute",
@@ -476,7 +492,8 @@ export const DEFAULTS = {
       "soon": false,
       "hidden": false,
       "tags": [],
-      "gender": "m"
+      "gender": "",
+      "ctype": "char"
     }
   ],
   "stories": [],

@@ -38,7 +38,7 @@ export function sanitize(html) {
   }
   return out + escT(h.slice(last));
 }
-const CATS = ["公告", "維修", "圖片", "花絮"];
+const CATS = ["公告", "維修", "圖片", "花絮", "活動"];
 const SRC_RE = /^\/(img\/c\/[0-9a-f]{32}\.webp|api\/media\/[a-z0-9]{6,40})$/;
 const str = (s, max) => { const v = clean(s); if (len(v) > max) throw new Error("內容太長了（最多 " + max + " 字）"); return v; };
 
@@ -63,7 +63,7 @@ function validate(k, d) {
     if (!Array.isArray(d) || d.length > 300) throw new Error("資料格式錯誤");
     return d.map((g) => { const src = String(g.src || ""); if (!SRC_RE.test(src)) throw new Error("圖片網址不對");
       const chars = Array.isArray(g.chars) ? [...new Set(g.chars.map(String).filter((x) => ID_RE.test(x)))].slice(0, 20) : [];
-      return { src, alt: str(g.alt, 60), kw: str(g.kw, 200), chars, tags: TAGIDS(g.tags), gender: ["m", "f"].includes(g.gender) ? g.gender : "" }; });
+      return { src, alt: str(g.alt, 60), kw: str(g.kw, 200), chars, tags: TAGIDS(g.tags), gender: ["m", "f", "n"].includes(g.gender) ? g.gender : "" }; });
   }
   if (k === "tags") {
     if (!Array.isArray(d) || d.length > 100) throw new Error("資料格式錯誤");
@@ -87,7 +87,7 @@ function validate(k, d) {
       const pos = /^\d{1,3}% \d{1,3}%$/.test(String(c.pos || "")) ? c.pos : "50% 20%";
       const stories = (Array.isArray(c.stories) ? c.stories : []).slice(0, 30).map((t) => { const title = str(t.title, 60); if (!title) throw new Error(name + "：故事標題要填喔"); return { title, url: url(t.url, "故事"), desc: str(t.desc, 200) }; });
       return { id, name, one: str(c.one, 120), era: str(c.era, 30), world, collab: !!c.collab, partner: str(c.partner, 40), award: str(c.award, 40), role: str(c.role, 40),
-        img: img(c.img), av: img(c.av), banner: img(c.banner), pos, play: url(c.play, "遊玩連結"), opening: str(c.opening, 60), released: str(c.released, 20), stories, tags: TAGIDS(c.tags), gender: ["m", "f"].includes(c.gender) ? c.gender : "", soon: !!c.soon, hidden: !!c.hidden };
+        img: img(c.img), av: img(c.av), banner: img(c.banner), pos, play: url(c.play, "遊玩連結"), opening: str(c.opening, 60), released: str(c.released, 20), stories, tags: TAGIDS(c.tags), gender: ["m", "f", "n"].includes(c.gender) ? c.gender : "", ctype: c.ctype === "sim" ? "sim" : "char", soon: !!c.soon, hidden: !!c.hidden };
     });
   }
   if (k === "stories") {

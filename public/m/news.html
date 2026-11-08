@@ -31,6 +31,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .nw-filter{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0 16px 14px}
 .nw-filter button{display:inline-flex;align-items:center;gap:6px;font:500 12px/1 "Noto Serif TC",serif;letter-spacing:.1em;color:#3d3639;background:none;border:1px solid #ecdfe3;border-radius:999px;padding:7px 12px}
 .nw-filter button i{width:6px;height:6px;border-radius:50%}
+.nw-filter{padding-top:16px}.nw-filter button{position:relative;overflow:visible}.nw-filter button[aria-pressed="true"]::before,.nw-filter button[aria-pressed="true"]::after{content:"";position:absolute;bottom:calc(100% - 3px);width:9px;height:17px;border:1.5px solid var(--ec,#c27ba0);border-bottom:0;border-radius:50% 50% 30% 30%/70% 70% 30% 30%;background:linear-gradient(#fff,#fff) padding-box,#fff;box-shadow:inset 0 -5px 0 -2px #fbe3ec;transform-origin:50% 100%;animation:nwEar .45s cubic-bezier(.3,1.6,.5,1) both;z-index:1}.nw-filter button[aria-pressed="true"]::before{left:26%;--r:-14deg}.nw-filter button[aria-pressed="true"]::after{right:26%;--r:14deg;animation-delay:.06s}@keyframes nwEar{0%{transform:translateY(8px) rotate(var(--r)) scaleY(.2);opacity:0}100%{transform:translateY(0) rotate(var(--r)) scaleY(1);opacity:1}}@media (prefers-reduced-motion:reduce){.nw-filter button[aria-pressed="true"]::before,.nw-filter button[aria-pressed="true"]::after{animation:none}}
 .nw-list{list-style:none;margin:0 16px;padding:0;border-top:1px solid #ecdfe3}
 .nw-item{border-bottom:1px solid #ecdfe3}
 .nw-sum{width:100%;text-align:left;background:none;border:0;padding:16px 2px;display:flex;flex-direction:column;gap:6px;font:inherit;color:inherit}
@@ -123,15 +124,15 @@ function siteVals(r) { var a = SITE.annc || SITE_DEF.annc, l = a.link || 'news';
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { annc: true, menu: false, cat: '全部', open: null }; }
   renderVals() {
-    const COL = { '全部': '#3d3639', '公告': '#c27ba0', '維修': '#8a9bb0', '圖片': '#9b8ac9', '花絮': '#d9a76a' };
+    const COL = { '全部': '#3d3639', '公告': '#c27ba0', '維修': '#8a9bb0', '圖片': '#9b8ac9', '花絮': '#d9a76a', '活動': '#5fa08a' };
     const data = (SITE.news || [
       { id: '2026-11-site-launch', date: '2026.11.07', cat: '公告', pin: true, title: "Sceneey's Studio 新網站上線", body: '全新的 Sceneey\'s Studio 正式上線了！這裡會整理角色設定集、世界觀與作品紀錄，之後的更新與消息也會在這裡公告。' }
     ]).slice().sort((a, b) => (b.pin ? 1 : 0) - (a.pin ? 1 : 0) || (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
     const cur = this.state.cat;
-    const cats = ['全部', '公告', '維修', '圖片', '花絮'].map((name) => {
+    const cats = ['全部', '公告', '維修', '圖片', '花絮', '活動'].map((name) => {
       const on = name === cur;
       return { name, col: name === '全部' ? 'transparent' : COL[name], pressed: on ? 'true' : 'false',
-        style: on ? 'background: #3d3639; border-color: #3d3639; color: #ffffff' : '',
+        style: on ? '--ec: ' + (COL[name] || '#3d3639') + '; background: #ffffff; border-color: ' + (COL[name] || '#3d3639') + '; box-shadow: inset 0 0 0 1px ' + (COL[name] || '#3d3639') + '; color: ' + (COL[name] || '#3d3639') + '; font-weight: 600' : '',
         pick: () => this.setState({ cat: name }) };
     });
     const items = data.filter((n) => cur === '全部' || n.cat === cur).map((n) => ({

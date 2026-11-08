@@ -446,7 +446,7 @@ class Component extends DCLogic {
     
 
     if (ADMIN) {
-      const authed = !!S.key, COL = { '公告': '#c27ba0', '維修': '#8a9bb0', '圖片': '#9b8ac9', '花絮': '#d9a76a' };
+      const authed = !!S.key, COL = { '公告': '#c27ba0', '維修': '#8a9bb0', '圖片': '#9b8ac9', '花絮': '#d9a76a', '活動': '#5fa08a' };
       const TABS = [['msgs', 'Q&A 留言'], ['annc', '公告列'], ['news', 'NEWS'], ['gal', 'GALLERY'], ['chars', '角色'], ['stories', '故事']];
       gb.tabs = TABS.map((t) => ({ label: t[1], sel: S.tab === t[0] ? 'true' : 'false', pick: () => { if (t[0] === 'chars' || t[0] === 'stories') { location.href = '/admin-' + t[0]; return; } this.setState({ tab: t[0], cmNote: '', admErr: '' }); } }));
       gb.tabAnnc = authed && S.tab === 'annc'; gb.tabNews = authed && S.tab === 'news'; gb.tabGal = authed && S.tab === 'gal';
