@@ -128,7 +128,7 @@ a{color:var(--pink)}
   </aside>
   <main id="main"><div class="empty">從左邊選一個角色開始編輯</div></main>
 </div>
-<div class="bar" id="bar" hidden><span id="msg" class="msg" role="status"></span><span class="sp"></span><a class="ghost" id="view" target="_blank" rel="noopener">預覽已儲存的角色頁 ↗</a><button class="btn" type="button" id="save">儲存這個角色</button></div>
+<div class="bar" id="bar" hidden><span id="msg" class="msg" role="status"></span><span class="sp"></span><button class="ghost danger" type="button" id="del">刪除這個角色</button><a class="ghost" id="view" target="_blank" rel="noopener">預覽已儲存的角色頁 ↗</a><button class="btn" type="button" id="save">儲存這個角色</button></div>
 <div class="fb" id="fb" role="toolbar" aria-label="圖片排版">
   <button type="button" data-l="b-full">滿版</button><button type="button" data-l="b-center">置中</button><button type="button" data-l="b-left">靠左・文繞</button><button type="button" data-l="b-right">靠右・文繞</button>
   <button type="button" data-a="up">↑</button><button type="button" data-a="down">↓</button><button type="button" data-a="del">刪除</button>
@@ -344,6 +344,22 @@ $('save').onclick = async function () {
     renderList(); msg('已儲存，網站已更新 ✓', 'ok');
   } catch (e) { if (e.status === 401) { msg('登入過期了，請重新整理後再登入', 'err'); try { sessionStorage.removeItem('gbk'); } catch (_) {} } else msg(e.message, 'err'); }
   $('save').disabled = false;
+};
+
+$('del').onclick = async function () {
+  if (cur == null) return; var c = CH[cur];
+  if (!(await ask('刪除「' + c.name + '」？', c.isNew ? '這個角色還沒儲存過，會直接移除。' : '角色頁、角色列表、世界觀頁頭像和它的秘密設定文章都會從網站上移除，刪除後無法復原。如果只是想暫時不顯示，可以改勾「隱藏」。', '刪除'))) return;
+  if (c.isNew) { CH.splice(cur, 1); cur = null; dirty = blogDirty = galDirty = false; $('bar').hidden = true; $('main').innerHTML = '<div class="empty">從左邊選一個角色開始編輯</div>'; renderList(); return; }
+  $('del').disabled = true; msg('刪除中…');
+  try {
+    var list = CH.filter(function (x, i) { return i !== cur && !x.isNew; }).map(function (x) { var y = Object.assign({}, x); delete y.isNew; return y; });
+    var d = await call({ action: 'save', k: 'chars', data: list });
+    try { await call({ action: 'save', k: 'blog_' + c.id, data: '' }); } catch (e) {}
+    var keepNew = CH.filter(function (x, i) { return i !== cur && x.isNew; });
+    CH = keepNew.concat(d.data); cur = null; dirty = blogDirty = galDirty = orderDirty = false;
+    $('bar').hidden = true; $('main').innerHTML = '<div class="empty">已刪除「' + esc(c.name) + '」</div>'; renderList();
+  } catch (e) { if (e.status === 401) { msg('登入過期了，請重新整理後再登入', 'err'); try { sessionStorage.removeItem('gbk'); } catch (_) {} } else msg(e.message, 'err'); }
+  $('del').disabled = false;
 };
 
 async function start() {
