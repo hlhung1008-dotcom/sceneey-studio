@@ -308,7 +308,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 <div class="rule"><b>禁術<small>Rumor</small></b><p>傳聞教會掌握血肉魔法的禁術分支，甚至暗中研究以魔法打造的「人造神器」……</p></div>
 </div></div></div></section>
       <section class="sec"><div class="sec-h"><h2>瓦勒利亞皇室</h2><em>The Valerian Crown</em></div><p class="lead" style="margin:0">統治法奧斯大陸的人類帝國。瓦勒利亞皇室與雙生神教會共同掌控著這片大陸，SS 與 S 級的頂尖神器，多半收歸於王室與貴族之手。</p></section>
-      <section class="sec"><div class="sec-h"><h2>登場角色</h2><em>Characters</em></div><div class="cg cg-round"><a class="cc" href="#"><div class="cc-img"><img src="/img/c/7b8d518e20b8b7d4764847ba415398e5.webp" alt="澤德"><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">澤德</p><p class="cc-one cc-weapon" style="color: #a8823f !important">神器・長棍</p></a><a class="cc" href="#"><div class="cc-img"><img src="/img/c/1e9a3f7348ce75d7fbd69f79b4cfc3da.webp" alt="克萊莫"><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">克萊莫</p><p class="cc-one cc-weapon" style="color: #a8823f !important">神器・巨劍</p></a><div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-sil"></div><div class="cc-ph"><span>？</span><small>COMING SOON</small></div><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">？？？</p><p class="cc-one cc-weapon">？？？</p></div></div></section>
+      <section class="sec"><div class="sec-h"><h2>登場角色</h2><em>Characters</em></div><div class="cg cg-round" data-world="armentary"><a class="cc" href="/m/c/zed"><div class="cc-img"><img src="/img/c/7b8d518e20b8b7d4764847ba415398e5.webp" alt="澤德"><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">澤德</p><p class="cc-one cc-weapon" style="color: #a8823f !important">神器・長棍</p></a><a class="cc" href="/m/c/claymore"><div class="cc-img"><img src="/img/c/1e9a3f7348ce75d7fbd69f79b4cfc3da.webp" alt="克萊莫"><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">克萊莫</p><p class="cc-one cc-weapon" style="color: #a8823f !important">神器・巨劍</p></a><div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-sil"></div><div class="cc-ph"><span>？</span><small>COMING SOON</small></div><span class="cc-badge" style="background:#a8823f">ARMENTARY</span></div><p class="cc-name">？？？</p><p class="cc-one cc-weapon">？？？</p></div></div></section>
       <section class="sec"><div class="sec-h"><h2>其他世界</h2><em>Explore</em></div><div style="display: flex; gap: 10px; flex-wrap: wrap"><a class="chip" href="/m/maroplis" style="color: #3f8f9c">MAROPLIS・烏托邦 →</a><a class="chip" href="/m/wujie" style="color: #7d64a6">WUJIE・五界 →</a><a class="chip" href="/m/characters" style="color: #c27ba0">全部角色 →</a></div></section>
       </div>
     </main>
@@ -362,5 +362,24 @@ document.addEventListener('alpine:init', function () {
 
 </script>
 <script src="/js/alpine.min.js"></script>
+<script>
+(function () {
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function paint(list) {
+    document.querySelectorAll('.cg-round[data-world]').forEach(function (g) {
+      var k = g.getAttribute('data-world'), w = g.querySelector('.cc-weapon[style]'), tone = w ? w.style.color : '';
+      var keep = Array.prototype.filter.call(g.children, function (el) { return el.classList.contains('cc-void'); });
+      var html = list.filter(function (x) { return x.world === k && !x.hidden; }).map(function (x) {
+        if (x.soon) return '<div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-ph"><span>？</span></div></div><p class="cc-name">？？？</p><p class="cc-one cc-weapon" style="color: ' + tone + ' !important">？？？</p></div>';
+        var im = x.av || x.img, pos = x.av ? '50% 50%' : (x.pos || '50% 20%');
+        return '<a class="cc" href="/m/c/' + esc(x.id) + '"><div class="cc-img">' + (im ? '<img src="' + esc(im) + '" alt="' + esc(x.name) + '" style="object-position: ' + esc(pos) + '">' : '<div class="cc-ph"><span>' + esc(x.name.charAt(0)) + '</span></div>') + '</div><p class="cc-name">' + esc(x.name) + '</p>' + (x.role ? '<p class="cc-one cc-weapon" style="color: ' + tone + ' !important">' + esc(x.role) + '</p>' : '') + '</a>';
+      }).join('');
+      g.innerHTML = html; keep.forEach(function (el) { g.appendChild(el); });
+    });
+  }
+  try { var c = localStorage.getItem('site_chars'); if (c) paint(JSON.parse(c)); } catch (e) {}
+  fetch('/api/site?k=chars', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { if (d && d.data) { paint(d.data); try { localStorage.setItem('site_chars', JSON.stringify(d.data)); } catch (e) {} } }).catch(function () {});
+})();
+</script>
 </body>
 </html>

@@ -14,6 +14,9 @@ export default {
       if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
       return media({ ...base, params: { id: m[1] } });
     }
+    if (url.pathname === "/zl7893" || url.pathname === "/zl7893.html") return Response.redirect(url.origin + "/c/zl", 301);
+    const cm = url.pathname.match(/^(\/m)?\/c\/[a-z0-9-]{1,40}\/?$/);
+    if (cm) return env.ASSETS.fetch(new Request(url.origin + (cm[1] || "") + "/c", request));
     return env.ASSETS.fetch(request);
   },
 };

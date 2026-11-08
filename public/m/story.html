@@ -54,6 +54,201 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .logo-link:hover{color:inherit !important}
 .logo-link:hover .lg-h{animation:logobeat .7s ease-in-out}
 @media (prefers-reduced-motion:reduce){.logo-link:hover .lg-h{animation:none}}
+
+.cw{max-width:1180px;margin:0 auto;padding:0 56px}
+.cw-lead{max-width:640px;margin:-6px auto 44px;text-align:center;font-family:"Noto Serif TC",serif;font-size:15px;line-height:2;letter-spacing:.08em;color:#6b5e63}
+.wl{display:flex;flex-direction:column;gap:28px}
+.wc{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid #ecdfe3;background:#fff;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.wc:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(61,54,57,.35)}
+.wc-art{position:relative;min-height:300px;overflow:hidden}
+.wc-art .wc-num{position:absolute;left:28px;top:22px;font:italic 500 15px "Cormorant Garamond",serif;letter-spacing:.1em;opacity:.8}
+.wc-art .wc-big{position:absolute;left:24px;bottom:12px;font:600 76px/1 "Cormorant Garamond",serif;letter-spacing:.12em;opacity:.95}
+.wc-body{padding:34px 36px 30px;display:flex;flex-direction:column;gap:14px;font-family:"Noto Serif TC",serif}
+.wc-zh{font-size:24px;font-weight:600;letter-spacing:.2em;color:#3d3639;display:flex;align-items:baseline;gap:12px}
+.wc-zh small{font:italic 500 14px "Cormorant Garamond",serif;letter-spacing:.08em;color:#8a7d82}
+.wc-tag{font-size:14px;line-height:1.95;letter-spacing:.06em;color:#5c5054}
+.wc-row{display:flex;align-items:center;gap:8px;margin-top:auto}
+.av{width:46px;height:46px;border-radius:50%;overflow:hidden;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px #ecdfe3;margin-left:-10px;display:flex;align-items:center;justify-content:center;font:600 16px "Noto Serif TC",serif;color:#fff}
+.av:first-child{margin-left:0}
+.av img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.wc-cnt{margin-left:12px;font-size:13px;letter-spacing:.12em;color:#8a7d82}
+.wc-go{margin-left:auto;font:500 13px "Noto Serif TC",serif;letter-spacing:.2em;padding-bottom:3px;border-bottom:1px solid currentColor}
+.indie-note{margin:46px auto 10px;max-width:760px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 28px;border:1px dashed #e4cdd6;border-radius:10px;font-family:"Noto Serif TC",serif;color:#5c5054;font-size:14px;letter-spacing:.06em}
+.indie-note a{color:#3d3639;text-decoration:none;border-bottom:1px solid #c27ba0;padding-bottom:3px;white-space:nowrap}
+/* world page */
+.wh{position:relative;height:360px;overflow:hidden;display:flex;align-items:flex-end}
+.wh.fade{height:500px}
+.wh.fade .wh-in{padding-bottom:165px;z-index:2;text-shadow:0 2px 14px rgba(30,20,12,.45)}
+.wh.fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;z-index:1;pointer-events:none;background:linear-gradient(rgba(255,253,251,0),rgba(255,253,251,.35) 30%,rgba(255,253,251,.85) 70%,#fffdfb)}
+.wh-in{position:relative;max-width:1180px;width:100%;margin:0 auto;padding:0 56px 40px;display:flex;flex-direction:column;gap:10px}
+.wh-crumb{font:500 12px "Noto Serif TC",serif;letter-spacing:.25em;opacity:.8}
+.wh-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+.wh-en{font:600 96px/1 "Cormorant Garamond",serif;letter-spacing:.14em}
+.wh-zh{font:600 22px "Noto Serif TC",serif;letter-spacing:.35em}
+.wh-tag{max-width:620px;font:400 15px/2 "Noto Serif TC",serif;letter-spacing:.06em;opacity:.92}
+.sec{padding:54px 0 0}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin:0 0 22px}
+.sec-h h2{margin:0;font:600 20px "Noto Serif TC",serif;letter-spacing:.3em;color:#3d3639}
+.sec-h em{font:italic 500 16px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.08em}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.fact{border:1px solid #ecdfe3;border-radius:8px;background:#fff;padding:18px 18px 16px;font-family:"Noto Serif TC",serif}
+.fact b{display:block;font:italic 500 13px "Cormorant Garamond",serif;letter-spacing:.12em;margin-bottom:8px}
+.fact p{margin:0;font-size:14px;line-height:1.8;color:#3d3639;letter-spacing:.04em}
+.places{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.place{padding:16px 16px 14px;border-radius:8px;font-family:"Noto Serif TC",serif}
+.place b{display:block;font-size:15px;letter-spacing:.12em;color:#3d3639}
+.place small{display:block;font:italic 500 13px "Cormorant Garamond",serif;color:#8a7d82;margin:2px 0 8px}
+.place p{margin:0;font-size:13px;line-height:1.75;color:#5c5054}
+.factions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.fac{border:1px solid #ecdfe3;border-radius:10px;background:#fff;padding:22px 24px;font-family:"Noto Serif TC",serif}
+.fac-layer{display:table;margin:2px 0 8px;padding:2px 10px;border:1px solid;border-radius:999px;font:500 11px "Noto Serif TC",serif;letter-spacing:.16em}
+.fac h3{margin:0 0 4px;font:600 26px "Cormorant Garamond",serif;letter-spacing:.14em}
+.fac p{margin:6px 0 14px;font-size:14px;line-height:1.85;color:#5c5054}
+.fac .fac-who{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 12px "Noto Serif TC",serif;letter-spacing:.12em;padding:6px 12px;border-radius:999px;border:1px solid currentColor;text-decoration:none}
+/* character cards */
+.cg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.cc{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;font-family:"Noto Serif TC",serif}
+.cc-img{position:relative;aspect-ratio:3/4;border-radius:8px;overflow:hidden;background:#f6eef1}
+.cc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.cc:hover .cc-img img{transform:scale(1.04)}
+.cc-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.cc-ph span{font:600 64px/1 "Noto Serif TC",serif;opacity:.9}
+.cc-ph small{font:500 11px "Noto Serif TC",serif;letter-spacing:.3em;opacity:.75}
+.cc-badge{position:absolute;left:10px;top:10px;font:600 10px/1 "Cormorant Garamond",serif;letter-spacing:.2em;color:#fff;padding:5px 9px;border-radius:999px}
+.cc-award{position:absolute;right:10px;bottom:10px;font:500 10px/1.2 "Noto Serif TC",serif;letter-spacing:.08em;color:#3d3639;background:rgba(255,253,251,.92);padding:5px 8px;border-radius:4px}
+.cc-name{margin:12px 0 0;font-size:16px;font-weight:600;letter-spacing:.12em;color:#3d3639}
+.cc-one{margin:5px 0 0;font-size:13px;line-height:1.7;color:#6b5e63}
+.cc-era{margin-top:6px;font:italic 500 13px "Cormorant Garamond",serif;letter-spacing:.06em;color:#8a7d82}
+.cc-soon .cc-img{background:#2b2620 url(/img/c/02de65fb8257451bdd7f58966fb5dac5.webp) center/cover no-repeat}
+.cc-soon .cc-sil{display:none !important}
+.cc-void .cc-img{background:#141114 !important}
+.cc-soon .cc-ph span{text-shadow:0 2px 12px rgba(20,14,8,.6)}
+.cc-soon .cc-ph span{color:#e7d8b6;font-size:72px}
+.cc-soon .cc-ph small{color:#e7d8b6}
+.cc-soon .cc-sil{position:absolute;left:50%;bottom:0;width:62%;height:78%;transform:translateX(-50%);background:radial-gradient(circle at 50% 22%,#1a1612 0 17%,transparent 17.5%),radial-gradient(ellipse at 50% 100%,#1a1612 0 60%,transparent 60.5%);opacity:.95}
+.cg-round{display:flex;flex-wrap:wrap;gap:30px 44px}
+.cg-round .cc{width:156px;align-items:center;text-align:center}
+.cg-round .cc-img{width:156px;height:156px;aspect-ratio:auto;border-radius:50%;box-shadow:0 0 0 4px #fff,0 0 0 5px #ecdfe3}
+.cg-round .cc-badge,.cg-round .cc-award{display:none}
+.cg-round .cc-ph span{font-size:46px}
+.cg-round .cc-ph small{font-size:9px;letter-spacing:.2em}
+.cg-round .cc-soon .cc-ph span{font-size:50px}
+.cg-round .cc-soon .cc-ph small{display:none}
+.cg-round .cc-soon .cc-sil{width:74%;height:80%}
+.cg-round .cc-one{font-size:12px}
+.cc-weapon{font:italic 500 13px "Cormorant Garamond","Noto Serif TC",serif !important;letter-spacing:.2em;color:#a8854c !important}
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 34px}
+.filters button{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 "Noto Serif TC",serif;letter-spacing:.14em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:10px 16px;cursor:pointer;transition:all .2s}
+.filters button i{width:8px;height:8px;border-radius:50%}
+.filters button:hover{border-color:#c27ba0}
+.filters button[aria-pressed="true"]{background:#3d3639;border-color:#3d3639;color:#fff}
+.cnt-line{text-align:center;margin:-18px 0 26px;font:italic 500 15px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.08em}
+/* character page */
+.cp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start;padding-top:44px}
+.cp-art{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:3/4;background:#f6eef1}
+.cp-art img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.cp-info{font-family:"Noto Serif TC",serif;display:flex;flex-direction:column;gap:16px;padding-top:8px}
+.cp-crumb{font:500 12px "Noto Serif TC",serif;letter-spacing:.25em;color:#8a7d82}
+.cp-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+.cp-name{margin:0;font-size:40px;font-weight:600;letter-spacing:.12em;color:#3d3639;line-height:1.25}
+.cp-one{font-size:17px;line-height:1.9;color:#5c5054;letter-spacing:.06em;margin:0}
+.cp-meta{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px 18px;margin:8px 0 0;padding:20px 0;border-top:1px solid #ecdfe3;border-bottom:1px solid #ecdfe3;font-size:14px}
+.cp-meta dt{font:italic 500 15px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.08em}
+.cp-meta dd{margin:0;color:#3d3639;letter-spacing:.06em}
+.cp-meta a{color:inherit}
+.cp-cta{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;margin-top:6px;font:500 14px "Noto Serif TC",serif;letter-spacing:.2em;color:#fff;background:#3d3639;border-radius:999px;padding:14px 26px;text-decoration:none;transition:background .2s}
+.cp-cta:hover{background:#c27ba0}
+.cp-note{font-size:12px;color:#8a7d82;letter-spacing:.06em}
+
+.tg-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tg{display:inline-flex;align-items:center;font:600 10px/1 "Noto Serif TC",serif;letter-spacing:.12em;padding:4px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.cc .tg-row{margin-top:10px}
+.cc .cc-name{margin-top:8px}
+.cp-tags{display:flex;flex-wrap:wrap;gap:6px}
+.cp-tags .tg{font-size:11px;padding:5px 10px}
+.cp-acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cp-sub{display:inline-flex;align-items:center;gap:8px;font:500 13px "Noto Serif TC",serif;letter-spacing:.14em;color:#3d3639;background:#fff;border:1px solid #e3d3d9;border-radius:999px;padding:11px 18px;text-decoration:none}
+.cp-sub:hover{border-color:#c27ba0;color:#c27ba0}
+.cp-sub small{font:italic 500 13px "Cormorant Garamond",serif;color:#8a7d82}
+.cp-cta.is-off{background:#cfc3c8;pointer-events:none}
+.st-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.st-item a,.st-item div.st-card{display:block;height:100%;box-sizing:border-box;border:1px solid #ecdfe3;border-radius:10px;background:#fff;padding:18px 20px;text-decoration:none;color:#3d3639;font-family:"Noto Serif TC",serif;transition:border-color .3s,transform .3s}
+.st-item a:hover{border-color:#c27ba0;transform:translateY(-2px)}
+.st-item b{display:block;font-size:15px;letter-spacing:.1em}
+.st-item p{margin:8px 0 0;font-size:13px;line-height:1.8;color:#6b5e63}
+.st-item small{display:block;margin-top:10px;font:italic 500 13px "Cormorant Garamond",serif;color:#c27ba0;letter-spacing:.08em}
+.st-grp{scroll-margin-top:96px}
+.st-empty{margin:0;padding:26px;border:1px dashed #e3d3d9;border-radius:10px;text-align:center;font:400 13px "Noto Serif TC",serif;letter-spacing:.14em;color:#8a7d82}
+.gal-mini{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.gal-mini img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;background:#f6eef1}
+.cp-blog{max-width:760px;font:400 15px/2 "Noto Serif TC",serif;letter-spacing:.04em;color:#3d3639}
+.cp-blog::after{content:"";display:block;clear:both}
+.cp-blog h2{font-size:22px;letter-spacing:.14em;margin:34px 0 12px;line-height:1.5}
+.cp-blog h3{font-size:17px;letter-spacing:.12em;margin:26px 0 8px;line-height:1.5;color:#c27ba0}
+.cp-blog p{margin:0 0 14px}
+.cp-blog blockquote{margin:18px 0;padding:6px 0 6px 18px;border-left:3px solid #f0c7d4;color:#6b5e63;font-style:italic}
+.cp-blog hr{border:0;height:1px;background:linear-gradient(90deg,transparent,#e3c9d2,transparent);margin:30px 0}
+.cp-blog a{color:#c27ba0}
+.cp-blog ul,.cp-blog ol{padding-left:22px;margin:0 0 14px}
+.cp-blog figure{margin:18px 0}
+.cp-blog figure img{display:block;width:100%;height:auto;border-radius:8px}
+.cp-blog figcaption{margin-top:6px;font-size:12px;color:#8a7d82;text-align:center;letter-spacing:.08em}
+.cp-blog figure.b-center{width:62%;margin-left:auto;margin-right:auto}
+.cp-blog figure.b-left{float:left;width:44%;margin:6px 24px 12px 0}
+.cp-blog figure.b-right{float:right;width:44%;margin:6px 0 12px 24px}
+.cp-blog .b-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.cp-blog .b-row figure{margin:0}
+.cp-blog .b-row::after{display:none}
+.cp-art .cp-soon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 64px "Noto Serif TC",serif;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+
+.cw{padding:0 18px !important}
+.wh,.wh.fade{height:auto !important;min-height:400px}
+.wh.fade{min-height:440px}
+.wh-in{padding:0 18px 30px !important;gap:8px !important}
+.wh.fade .wh-in{padding-bottom:120px !important}
+.wh-en{font-size:64px !important;letter-spacing:.02em !important}
+.wh-zh{font-size:17px !important;letter-spacing:.3em !important}
+.wh-tag{font-size:13px !important;line-height:1.9 !important}
+.wh-crumb{font-size:11px !important}
+.sec{padding-top:40px !important}
+.sec-h{flex-wrap:wrap;gap:8px !important;margin-bottom:16px !important}
+.sec-h h2{font-size:18px !important}
+.sec-h em{font-size:14px !important}
+.lead{font-size:14px !important;line-height:1.95 !important}
+.facts,.places,.lands,.forms,.rules,.spots,.factions,.menu{grid-template-columns:1fr !important;gap:12px !important}
+.rules{gap:0 !important}
+.rule{grid-template-columns:72px 1fr !important;gap:10px !important}
+.spot.wide{grid-column:auto !important}
+.spot.img{padding:26px 20px !important;background-position:center !important}
+.feat,.feat.rev{grid-template-columns:1fr !important}
+.feat-img{min-height:0 !important;aspect-ratio:4/3;margin:0 -18px;background-position:center 35% !important;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent) !important;mask-image:linear-gradient(180deg,#000 70%,transparent) !important}
+.feat-body{margin:6px 0 0 !important}
+.feat-body .lead{margin-bottom:10px !important}
+.cg-round{gap:22px 10px !important;justify-content:flex-start}
+.cg-round .cc{width:100px !important}
+.cg-round .cc-img{width:96px !important;height:96px !important}
+.cg-round .cc-ph span{font-size:32px !important}
+.cg-round .cc-name{font-size:13px}
+.cc-weapon{font-size:11px !important;letter-spacing:.08em !important}
+.places,.lands,.forms,.spots,.factions{display:flex !important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -18px !important;padding:4px 18px 10px !important;scroll-padding:0 18px;gap:12px !important}
+.places::-webkit-scrollbar,.lands::-webkit-scrollbar,.forms::-webkit-scrollbar,.spots::-webkit-scrollbar,.factions::-webkit-scrollbar{display:none}
+.places>*,.lands>*,.forms>*,.spots>*,.factions>*{flex:0 0 80%;scroll-snap-align:start;box-sizing:border-box}
+.spots>.spot.img{flex-basis:86%}
+.sec:has(.places,.lands,.forms,.spots,.factions) .sec-h::after{content:"swipe →";margin-left:auto;font:italic 500 13px "Cormorant Garamond",serif;letter-spacing:.12em;color:#b3a3aa;animation:swhint 2.4s ease-in-out infinite}
+@keyframes swhint{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+.cp{grid-template-columns:1fr !important;gap:22px !important;padding-top:20px !important}
+.cp-name{font-size:30px !important}
+.cp-one{font-size:15px !important}
+.cp-meta{grid-template-columns:82px minmax(0,1fr) !important;font-size:13px !important}
+.st-list{grid-template-columns:1fr !important}
+.gal-mini{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+.cp-blog{font-size:14px !important}
+.cp-blog figure.b-left,.cp-blog figure.b-right,.cp-blog figure.b-center{float:none !important;width:100% !important;margin:16px 0 !important}
+.cp-blog .b-row{grid-template-columns:1fr 1fr;gap:8px}
+.cg{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:18px 12px !important}
+.cp-acts .cp-sub{padding:9px 14px;font-size:12px}
 </style>
 <style>html,body{margin:0;background:#fffdfb;overflow:hidden}#dcroot{margin:0 auto}template{display:none}
 #pl{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--pl-bg,#fffdfb);transition:opacity .5s ease,visibility .5s}
@@ -82,10 +277,15 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
       <div aria-hidden="true" style="position: absolute; right: 64px; top: 100%; width: 72px; pointer-events: none"><div class="mini-kick" style="transform-origin: 50% 0; transition: transform .6s cubic-bezier(.34,1.6,.5,1)"><div class="mini-swing" style="transform-origin: 50% 0"><svg width="72" height="40" viewBox="0 0 72 40" style="display: block; overflow: visible"><g fill="none" stroke="#4a4547" stroke-width="1.6" stroke-linecap="round"><path d="M25,0 C26,12 24,26 25.5,40"></path><path d="M48,0 C47,14 49,27 47.5,40"></path></g></svg><img src="/img/c/a7709ceaf351e2589ecf63f52b0e8df1.webp" alt="" style="display: block; width: 72px; margin-top: -4px"></div></div></div>
       <template x-if="v.menuOpen"><div style="display: contents"><nav aria-label="網站導覽" style="position: absolute; right: 16px; top: 52px; z-index: 2; display: flex; flex-direction: column; gap: 4px; background: #fff; border: 2px solid #4a4547; border-radius: 16px; padding: 10px; box-shadow: 4px 4px 0 #f6c9d4"><a href="/m/" aria-label="首頁" class="mpill" style="display: flex; align-items: center; padding: 6px 14px; border-radius: 999px; color: #4a4547; background: transparent"><svg viewBox="0 0 40 40" width="24" height="24" aria-hidden="true" style="display: block; overflow: visible"><defs><filter id="houseCrayonMStory" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="7" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"></feDisplacementMap></filter></defs><g filter="url(#houseCrayonMStory)" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M7 19.5 L20 7.5 L33.2 19.8" fill="none"></path><path d="M10.5 17.2 L10.8 32.6 L29.6 32.8 L29.4 17.4" fill="#f6c9d4" fill-opacity=".55"></path><path d="M17.4 32.6 L17.6 24.4 C19.4 23.6 21 23.6 22.6 24.4 L22.8 32.6" fill="#fff"></path><path d="M25.6 12 L25.8 7.6 L29.2 7.8 L29.2 15" fill="none"></path><path d="M20 17.6c-1.4-1.6-3.8-.4-2.6 1.4L20 21.4l2.6-2.4c1.2-1.8-1.2-3-2.6-1.4z" fill="#c27ba0" stroke-width="1.2"></path></g></svg></a><a href="/m/news" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">NEWS</a><a href="/m/world" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">WORLD</a><a href="/m/characters" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">CHARACTERS</a><a href="/m/story" aria-current="page" class="mpill" style="text-decoration: none; color: #fff; background: #4a4547; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">STORY</a><a href="/m/gallery" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">GALLERY</a><a href="/m/qa" class="mpill" style="text-decoration: none; color: #4a4547; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px">Q&amp;A</a><a href="/story" onclick="SVSET('desk');location.href='/story'+location.hash;return false;" class="mpill vw-sw" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: #6d5f66; background: transparent; font-weight: 800; font-size: 13px; padding: 8px 16px; border-radius: 999px; border: 1.5px dashed #b9a9b0"><svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M8 20.5h8M12 16.5v4"/></svg>切換為電腦版</a></nav></div></template>
     </header>
-    <main style="padding-bottom: 30px">
+    <main style="background: #fffdfb; padding-bottom: 40px">
       <div class="pg-head"><p class="pg-eyebrow">Sceneey's Studio</p><h1 class="pg-title">Story</h1></div>
-      <div class="pg-banner"><img src="/img/c/fad93d7e8babb20f5f92ebc37697c765.webp" alt="故事開場 主視覺" style="object-position: 50% 34%"><span class="pg-cap">故事開場</span></div>
-      <div class="pg-soon"><em>coming soon</em><p>故事開場整理中，敬請期待。</p></div>
+      <div class="cw">
+        <p class="cnt-line"><span x-text="v.storyLine"></span></p>
+        <template x-if="v.noStories"><div style="display: contents"><p class="st-empty">故事整理中，敬請期待。</p></div></template>
+        <template x-for="(g, $index) in v.groups"><div style="display: contents"><section class="sec st-grp" :id="g.anchor"><div class="sec-h"><h2><a :href="g.href" style="color: inherit; text-decoration: none"><span x-text="g.name"></span></a></h2><em><span x-text="g.count"></span></em></div>
+          <ul class="st-list"><template x-for="(s, $index) in g.stories"><div style="display: contents"><li class="st-item"><template x-if="s.hasUrl"><div style="display: contents"><a :href="s.url" :target="s.target" rel="noopener"><b><span x-text="s.title"></span></b><p><span x-text="s.desc"></span></p><small>閱讀故事 →</small></a></div></template><template x-if="s.noUrl"><div style="display: contents"><div class="st-card"><b><span x-text="s.title"></span></b><p><span x-text="s.desc"></span></p></div></div></template></li></div></template></ul>
+        </section></div></template>
+      </div>
     </main>
     <footer style="position: relative; z-index: 5; background: #fff; padding: 34px 16px 30px; display: flex; flex-direction: column; align-items: center; gap: 18px">
       <svg aria-hidden="true" width="390" height="36" viewBox="0 0 390 36" style="position: absolute; left: 0; top: -18px; overflow: visible; pointer-events: none"><path d="M0,11.6 L10,12.5 L20,13.8 L30,12.6 L40,11.0 L50,10.7 L60,12.3 L70,14.2 L80,17.7 L90,20.0 L100,23.1 L110,22.7 L120,20.8 L130,18.1 L140,16.3 L150,17.2 L160,17.3 L170,17.9 L180,17.7 L190,14.7 L200,12.2 L210,10.1 L220,8.8 L230,9.5 L240,12.1 L250,13.7 L260,18.1 L270,19.9 L280,19.6 L290,17.8 L300,17.8 L310,17.1 L320,20.5 L330,22.0 L340,22.0 L350,20.5 L360,19.1 L370,14.5 L380,11.9 L390,10.0 L390,36 L0,36 Z" fill="#ffffff"></path><path d="M0,11.6 L10,12.5 L20,13.8 L30,12.6 L40,11.0 L50,10.7 L60,12.3 L70,14.2 L80,17.7 L90,20.0 L100,23.1 L110,22.7 L120,20.8 L130,18.1 L140,16.3 L150,17.2 L160,17.3 L170,17.9 L180,17.7 L190,14.7 L200,12.2 L210,10.1 L220,8.8 L230,9.5 L240,12.1 L250,13.7 L260,18.1 L270,19.9 L280,19.6 L290,17.8 L300,17.8 L310,17.1 L320,20.5 L330,22.0 L340,22.0 L350,20.5 L360,19.1 L370,14.5 L380,11.9 L390,10.0" fill="none" stroke="#4a4547" stroke-width="4" stroke-linecap="round" filter="url(#mEdge)"></path></svg>
@@ -119,12 +319,32 @@ function siteVals(r) { var a = SITE.annc || SITE_DEF.annc, l = a.link || 'news';
   if (!a.on) { r.anncOpen = false; r.scTop = '0px'; } return r; }
 
 
+
+const CDEF = [{"id": "zed", "name": "澤德", "one": "師傅……想把這些都塞進去。", "era": "西方奇幻", "world": "armentary", "collab": false, "partner": "", "award": "", "role": "神器・長棍", "img": "/img/c/ccd4066a59da247b9f485f8ca83d8330.webp", "av": "/img/c/7b8d518e20b8b7d4764847ba415398e5.webp", "pos": "58% 38%", "play": "https://caveduck.io/zh-hant/characters/321699bd-bf55-4b6b-8160-823d1149fdf4", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "claymore", "name": "克萊莫", "one": "爸爸，需要女兒幫忙磨刃嗎？", "era": "西方奇幻", "world": "armentary", "collab": false, "partner": "", "award": "", "role": "神器・巨劍", "img": "/img/c/54aa8310213c6c48247bd7da163663a4.webp", "av": "/img/c/1e9a3f7348ce75d7fbd69f79b4cfc3da.webp", "pos": "40% 16%", "play": "https://caveduck.io/zh-hant/characters/ddfe2a6d-b6db-4332-9293-cc04dd50e00b", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "severus", "name": "？？？", "one": "", "era": "", "world": "armentary", "collab": false, "partner": "", "award": "", "role": "", "img": "/img/c/02de65fb8257451bdd7f58966fb5dac5.webp", "av": "", "pos": "50% 20%", "play": "", "opening": "", "released": "", "stories": [], "soon": true, "hidden": false}, {"id": "lyn", "name": "林恩", "one": "成為了黑市首腦的人質。", "era": "Echo", "world": "maroplis", "collab": false, "partner": "", "award": "", "role": "Echo 黑市首領", "img": "/img/c/4c2c3f6e2b225f9fefbd48c418e90f3e.webp", "av": "/img/c/7790d3173dccf7c654dbf7c936440cb8.webp", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/186d91f2-c8a0-4765-bd0f-37de11b3611f", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "jing", "name": "井", "one": "操，閉嘴。", "era": "Echo", "world": "maroplis", "collab": false, "partner": "", "award": "", "role": "Echo 高級幹部", "img": "/img/c/6dd4c0a7c6eb28a028e64b6a168d83bf.webp", "av": "/img/c/c85ce08e8fb33f6bef2817fe35541488.webp", "pos": "40% 25%", "play": "https://caveduck.io/zh-hant/characters/ff506020-4442-4517-bbc2-b3e7447e67a8", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "zl", "name": "偽善者-ZL7893", "one": "永遠保有母愛的男性仿生人。", "era": "Nīlus", "world": "maroplis", "collab": false, "partner": "", "award": "官方邀請・母親節企劃", "role": "Nīlus 客製款仿生人", "img": "/img/c/4f3daa01c9a4d6e214da3d45ffefee0c.webp", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/91691c97-e050-4b59-8a4e-629cb8d6a8f8", "opening": "客製化母親已送達", "released": "2026.05.13", "stories": [], "soon": false, "hidden": false}, {"id": "taolie", "name": "濤列", "one": "把主人視為美食的上古兇獸。", "era": "上古 × 現代", "world": "wujie", "collab": true, "partner": "hoshi_furu", "award": "", "role": "饕餮", "img": "/img/c/649b49e507428f2f446aae9147b11421.webp", "av": "/img/c/8be5f7f3f5746efa5613679d4ff9ffe3.webp", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/e10a1854-6e81-4b8b-9a45-cb699cc5164d", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "xuhuan", "name": "許歡", "one": "性格惡劣的青梅竹馬演員。", "era": "現代・鄉下新年", "world": "", "collab": false, "partner": "", "award": "繁中區新春競賽 首獎", "role": "", "img": "/img/c/818deb743f48c20b9a1d0520bb7a2b68.webp", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/05b79405-3821-4006-af7d-630c72b672b0", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "mnzj", "name": "明年再見", "one": "歡迎來到赫哲重考班。", "era": "現代・重考班", "world": "", "collab": false, "partner": "", "award": "第 16 屆徵稿 首獎", "role": "", "img": "/img/c/9d259311ffb8b0d15c5aa5b7035dbdd0.webp", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/c283c7da-92f3-4974-97c4-bdc4fe61ae8d", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "seventh", "name": "第七小隊訓練計畫", "one": "你擔任問題魔法少男戰隊的臥底教官。", "era": "都會奇幻", "world": "", "collab": true, "partner": "gogogoyin", "award": "第 15 屆徵稿 首獎", "role": "", "img": "/img/c/871bd3ca59a83e5b5c6404da8b96e307.webp", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/3a76b9af-2fad-4425-8322-d0deb124aaea", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "suxue", "name": "蘇城的雪", "one": "娘親，讓孩兒們來孝順您。", "era": "架空古代", "world": "", "collab": false, "partner": "", "award": "第 13 屆徵稿 首獎", "role": "", "img": "/img/c/ffb8a5fd24bd62d06fe3e2f279ebc0ca.webp", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/8a259bdd-75b5-4746-b5be-9f02dd63b6f6", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "soulswap", "name": "靈魂交換!!", "one": "靈魂交換的，我的死黨們。", "era": "現代・台北", "world": "", "collab": false, "partner": "", "award": "第 12 屆徵稿 首獎", "role": "", "img": "", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/1fc269a3-58c1-4722-9f6a-6c3dc7815ec3", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "cangling", "name": "蒼嶺", "one": "下山的時候抱著走比較快。", "era": "山岳靈異", "world": "", "collab": false, "partner": "", "award": "第 11 屆徵稿 首獎", "role": "", "img": "/img/c/c6c857560f64b3b112fdc05cee02437c.webp", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/d6339d81-9195-4109-b938-e356a6f7c418", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "jiyun", "name": "季昀", "one": "被我發現祕密的九尾狐師兄。", "era": "修仙", "world": "", "collab": false, "partner": "", "award": "", "role": "", "img": "", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/40634f70-72b9-444c-aa5a-d1d5f9f00dcb", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "emmett", "name": "埃米特", "one": "你是埃米特最寵愛的小貓咪♡", "era": "近未來獸人", "world": "", "collab": false, "partner": "", "award": "", "role": "", "img": "", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/0454d2a1-f5b9-49ae-b1cf-a7e9991fd49c", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "grey", "name": "葛雷", "one": "擁有兩條尾巴的外星人觀測官。", "era": "2050・外星", "world": "", "collab": true, "partner": "gogogoyin", "award": "", "role": "", "img": "", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/611e04e2-8288-469c-b25e-342297045b89", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}, {"id": "mute", "name": "Mute", "one": "汪汪，先叫個兩聲來聽如何？", "era": "現代・電競", "world": "", "collab": false, "partner": "", "award": "", "role": "", "img": "/img/c/08d211c60a1d6d67f5b81ef3b0bf5c44.webp", "av": "", "pos": "50% 20%", "play": "https://caveduck.io/zh-hant/characters/fbe4c16c-a18a-4b48-aec1-1039e5ab275c", "opening": "", "released": "", "stories": [], "soon": false, "hidden": false}], WL = {"armentary": {"en": "ARMENTARY", "zh": "神器與契約", "tone": "#a8823f", "soft": "#f4ecdc"}, "maroplis": {"en": "MAROPLIS", "zh": "烏托邦", "tone": "#3f8f9c", "soft": "#e3f1f2"}, "wujie": {"en": "WUJIE", "zh": "五界", "tone": "#7d64a6", "soft": "#efeaf6"}, "": {"en": "INDEPENDENT", "zh": "獨立角色", "tone": "#c27ba0", "soft": "#fbeef3"}}, IS_M = true;
+const siteGet = (k) => (typeof SITE !== 'undefined' && SITE[k] != null) ? SITE[k] : null;
+const allChars = () => (siteGet('chars') || CDEF).filter((c) => !c.hidden);
+const ON_SITE = typeof SITE !== 'undefined';
+const charHref = (c) => ON_SITE ? ((IS_M ? '/m/c/' : '/c/') + c.id) : (IS_M ? '/m/c' : '/c');
+const worldHref = (k) => k ? ((IS_M ? '/m/' : '/') + k) : '';
+const tagsOf = (c) => { const w = WL[c.world || ''] || WL['']; const t = [{ label: c.world ? w.en : '獨立角色', col: w.tone, soft: w.soft }];
+  if (c.collab) t.push({ label: '合作角色', col: '#6f9bb5', soft: '#eef5f9' }); if (c.award) t.push({ label: '得獎作品', col: '#c9963c', soft: '#fbf3e3' }); return t; };
+
+if (typeof NEED !== 'undefined') { NEED.push('chars'); SITE.chars = siteCached('chars'); }
+if (typeof location !== 'undefined' && location.hash) setTimeout(() => { const e = document.getElementById(location.hash.slice(1)); if (e) e.scrollIntoView({ behavior: 'smooth' }); }, 900);
+
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { annc: true, menu: false }; }
   renderVals() {
-    return { onScroll: (e) => { const el = e.currentTarget; const k = el.querySelector('.mini-kick'); if (!k) return; const d = el.scrollTop - (this._lastY || 0); this._lastY = el.scrollTop; const a = Math.max(-14, Math.min(14, -d * 0.6)); k.style.transform = 'rotate(' + a + 'deg)'; clearTimeout(this._kt); this._kt = setTimeout(() => { k.style.transform = 'rotate(0deg)'; }, 120); }, anncOpen: this.state.annc, closeAnnc: () => this.setState({ annc: false }), scTop: this.state.annc ? '36px' : '0px', menuOpen: this.state.menu, toggleMenu: () => this.setState({ menu: !this.state.menu }) };
+
+    const gs = allChars().filter((c) => !c.soon && (c.stories || []).length).map((c) => ({ anchor: 'c-' + c.id, name: c.name, href: charHref(c), count: c.stories.length + ' stories',
+      stories: c.stories.map((s) => ({ title: s.title, desc: s.desc || '', url: s.url || '', hasUrl: !!s.url, noUrl: !s.url, target: /^https?:/.test(s.url || '') ? '_blank' : '_self' })) }));
+    const n = gs.reduce((a, g) => a + g.stories.length, 0);
+    const R = { groups: gs, noStories: !gs.length, storyLine: n ? n + ' stories' : '',
+    };
+    return { ...R, onScroll: (e) => { const el = e.currentTarget; const k = el.querySelector('.mini-kick'); if (!k) return; const d = el.scrollTop - (this._lastY || 0); this._lastY = el.scrollTop; const a = Math.max(-14, Math.min(14, -d * 0.6)); k.style.transform = 'rotate(' + a + 'deg)'; clearTimeout(this._kt); this._kt = setTimeout(() => { k.style.transform = 'rotate(0deg)'; }, 120); }, anncOpen: this.state.annc, closeAnnc: () => this.setState({ annc: false }), scTop: this.state.annc ? '36px' : '0px', menuOpen: this.state.menu, toggleMenu: () => this.setState({ menu: !this.state.menu }) };
   }
 }
+
 
 
 document.addEventListener('alpine:init', function () {

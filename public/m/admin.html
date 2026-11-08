@@ -423,8 +423,8 @@ class Component extends DCLogic {
 
     if (ADMIN) {
       const authed = !!S.key, COL = { '公告': '#c27ba0', '維修': '#8a9bb0', '圖片': '#9b8ac9', '花絮': '#d9a76a' };
-      const TABS = [['msgs', '留言'], ['annc', '公告列'], ['news', 'NEWS'], ['gal', 'GALLERY']];
-      gb.tabs = TABS.map((t) => ({ label: t[1], sel: S.tab === t[0] ? 'true' : 'false', pick: () => this.setState({ tab: t[0], cmNote: '', admErr: '' }) }));
+      const TABS = [['msgs', '留言'], ['annc', '公告列'], ['news', 'NEWS'], ['gal', 'GALLERY'], ['chars', '角色 ↗']];
+      gb.tabs = TABS.map((t) => ({ label: t[1], sel: S.tab === t[0] ? 'true' : 'false', pick: () => { if (t[0] === 'chars') { location.href = '/admin-chars'; return; } this.setState({ tab: t[0], cmNote: '', admErr: '' }); } }));
       gb.tabAnnc = authed && S.tab === 'annc'; gb.tabNews = authed && S.tab === 'news'; gb.tabGal = authed && S.tab === 'gal';
       gb.cmNote = S.cmNote; gb.cmNoteOn = !!S.cmNote;
       const a = S.dA || {}; const mode = a.link === 'none' ? 'none' : (!a.link || a.link === 'news' ? 'news' : 'custom');

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>角色管理｜Sceneey's Studio</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Noto+Serif+TC:wght@400;600&display=swap">
+<style>
+:root{--ink:#3d3639;--sub:#8a7d82;--line:#ecdfe3;--pink:#c27ba0;--soft:#fdf2f5;--bg:#fffdfb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.7 "Noto Serif TC",serif}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--pink)}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:14px 22px;background:rgba(255,253,251,.96);border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:18px;letter-spacing:.2em}
+.top .sp{flex:1}
+.lnk{font-size:13px;letter-spacing:.1em;text-decoration:none;color:var(--sub)}
+.lnk:hover{color:var(--pink)}
+.wrap{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;max-width:1240px;margin:0 auto;padding:22px}
+.side{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+.side-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.2em;color:var(--sub)}
+.cl{list-style:none;margin:0;padding:0}
+.cl li{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #f4ebee;cursor:pointer}
+.cl li:hover{background:#fffafb}
+.cl li[aria-current="true"]{background:var(--soft)}
+.cl img,.cl .ph{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;background:#f3e8ec;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--pink)}
+.cl .nm{flex:1;min-width:0}
+.cl .nm b{display:block;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl .nm small{font-size:11px;color:var(--sub)}
+.cl .mv{display:flex;flex-direction:column}
+.cl .mv button{border:0;background:none;cursor:pointer;color:var(--sub);font-size:11px;line-height:1;padding:3px 4px}
+.cl .mv button:hover{color:var(--pink)}
+.card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:20px 22px;margin-bottom:16px}
+.card h2{margin:0 0 14px;font-size:15px;letter-spacing:.2em;display:flex;align-items:baseline;gap:10px}
+.card h2 em{font:italic 500 14px "Cormorant Garamond",serif;color:var(--sub);letter-spacing:.06em}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f>span{font-size:12px;letter-spacing:.16em;color:var(--sub)}
+.in{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:9px 11px;outline:none}
+.in:focus{border-color:var(--pink)}
+.in[readonly]{color:var(--sub);background:#f8f3f4}
+.chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.chk input{width:16px;height:16px;accent-color:var(--pink)}
+.hint{font-size:12px;color:var(--sub)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:var(--ink);color:#fff;padding:10px 18px;font-size:13px;letter-spacing:.14em;cursor:pointer}
+.btn:hover{background:var(--pink)}
+.btn:disabled{opacity:.5;cursor:default}
+.ghost{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 13px;font-size:12px;letter-spacing:.1em;cursor:pointer}
+.ghost:hover{border-color:var(--pink);color:var(--pink)}
+.danger:hover{border-color:#c0504d;color:#c0504d}
+.up{position:relative;overflow:hidden}
+.up input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.imgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.prev{position:relative;width:100%;aspect-ratio:3/4;border-radius:8px;overflow:hidden;background:#f6eef1;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:12px}
+.prev img{width:100%;height:100%;object-fit:cover}
+.prev.av{width:160px;aspect-ratio:1;border-radius:50%}
+.tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.rng{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub)}
+.rng input{flex:1;accent-color:var(--pink)}
+.st{border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:10px;background:#fffafb}
+.gp{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.gp button{position:relative;border:2px solid transparent;border-radius:8px;padding:0;background:#f6eef1;cursor:pointer;aspect-ratio:1;overflow:hidden}
+.gp img{width:100%;height:100%;object-fit:cover;display:block;opacity:.55;transition:opacity .2s}
+.gp button[aria-pressed="true"]{border-color:var(--pink)}
+.gp button[aria-pressed="true"] img{opacity:1}
+.gp button[aria-pressed="true"]::after{content:"✓";position:absolute;right:5px;top:5px;width:20px;height:20px;border-radius:50%;background:var(--pink);color:#fff;font-size:12px;line-height:20px;text-align:center}
+.tb{position:sticky;top:62px;z-index:5;display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid var(--line);border-bottom:0;border-radius:8px 8px 0 0;background:#fff}
+.tb button,.tb label{border:1px solid transparent;background:none;border-radius:6px;padding:6px 9px;font-size:12px;cursor:pointer;letter-spacing:.06em}
+.tb button:hover,.tb label:hover{border-color:var(--line);color:var(--pink)}
+.tb .sep{width:1px;background:var(--line);margin:2px 4px}
+.ed{min-height:360px;border:1px solid var(--line);border-radius:0 0 8px 8px;padding:20px 24px;outline:none;background:#fff;font:400 15px/2 "Noto Serif TC",serif;letter-spacing:.04em}
+.ed:focus{border-color:#e3c9d2}
+.ed:empty::before{content:"在這裡開始寫秘密設定與幕後花絮……";color:#c9bcc1}
+.ed::after{content:"";display:block;clear:both}
+.ed h2{font-size:22px;letter-spacing:.14em;margin:28px 0 10px;line-height:1.5}
+.ed h3{font-size:17px;letter-spacing:.12em;margin:22px 0 8px;line-height:1.5;color:var(--pink)}
+.ed p{margin:0 0 12px}
+.ed blockquote{margin:16px 0;padding:6px 0 6px 18px;border-left:3px solid #f0c7d4;color:#6b5e63;font-style:italic}
+.ed hr{border:0;height:1px;background:linear-gradient(90deg,transparent,#e3c9d2,transparent);margin:26px 0}
+.ed figure{margin:16px 0;position:relative;cursor:pointer}
+.ed figure img{display:block;width:100%;height:auto;border-radius:8px}
+.ed figcaption{margin-top:6px;font-size:12px;color:var(--sub);text-align:center;cursor:text;outline:none;min-height:1.5em}
+.ed figcaption:empty::before{content:"圖片說明（可留空）";color:#d3c7cc}
+.ed figure.b-center{width:62%;margin-left:auto;margin-right:auto}
+.ed figure.b-left{float:left;width:44%;margin:6px 22px 10px 0}
+.ed figure.b-right{float:right;width:44%;margin:6px 0 10px 22px}
+.ed .b-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;cursor:pointer}
+.ed .b-row figure{margin:0}
+.ed .sel{outline:3px solid #f0c7d4;outline-offset:3px;border-radius:8px}
+.fb{position:absolute;z-index:30;display:none;gap:4px;padding:6px;border:1px solid var(--line);border-radius:999px;background:#fff;box-shadow:0 8px 24px -10px rgba(74,54,66,.35)}
+.fb button{border:0;background:none;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
+.fb button:hover,.fb button[aria-pressed="true"]{background:var(--soft);color:var(--pink)}
+.bar{position:sticky;bottom:0;z-index:15;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 22px;background:rgba(255,253,251,.97);border-top:1px solid var(--line)}
+.bar .sp{flex:1}
+.msg{font-size:13px}
+.msg.err{color:#c0504d}
+.msg.ok{color:#5a9a6e}
+.login{max-width:360px;margin:80px auto;display:flex;flex-direction:column;gap:12px;padding:26px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(61,54,57,.35)}
+.modal.on{display:flex}
+.modal>div{width:min(420px,92vw);background:#fff;border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.modal b{font-size:16px;letter-spacing:.1em}
+.modal .row{display:flex;justify-content:flex-end;gap:8px}
+.empty{padding:60px 20px;text-align:center;color:var(--sub)}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;padding:14px}.side{position:static;max-height:260px}.g2,.imgs{grid-template-columns:1fr}.tb{top:56px}.top{padding:12px 14px}}
+</style>
+</head>
+<body>
+<header class="top"><h1>角色管理</h1><span class="sp"></span><a class="lnk" href="/admin">← 回到管理頁</a><a class="lnk" href="/characters" target="_blank" rel="noopener">看網站 ↗</a></header>
+<div id="login" class="login" hidden>
+  <b style="letter-spacing:.2em">管理密碼</b>
+  <input id="pw" class="in" type="password" autocomplete="current-password" aria-label="管理密碼">
+  <button id="pwgo" class="btn" type="button">登入</button>
+  <span id="pwerr" class="msg err"></span>
+</div>
+<div id="app" class="wrap" hidden>
+  <aside class="side" aria-label="角色列表">
+    <div class="side-h"><span>角色 <span id="cnt"></span></span><button class="ghost" type="button" id="add">＋ 新增</button></div>
+    <ul class="cl" id="list"></ul>
+  </aside>
+  <main id="main"><div class="empty">從左邊選一個角色開始編輯</div></main>
+</div>
+<div class="bar" id="bar" hidden><span id="msg" class="msg" role="status"></span><span class="sp"></span><a class="ghost" id="view" target="_blank" rel="noopener">預覽已儲存的角色頁 ↗</a><button class="btn" type="button" id="save">儲存這個角色</button></div>
+<div class="fb" id="fb" role="toolbar" aria-label="圖片排版">
+  <button type="button" data-l="b-full">滿版</button><button type="button" data-l="b-center">置中</button><button type="button" data-l="b-left">靠左・文繞</button><button type="button" data-l="b-right">靠右・文繞</button>
+  <button type="button" data-a="up">↑</button><button type="button" data-a="down">↓</button><button type="button" data-a="del">刪除</button>
+</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div><b id="mt"></b><span id="mb" class="hint" style="font-size:13px"></span><div class="row"><button class="ghost" type="button" id="mno">取消</button><button class="btn" type="button" id="mok">確定</button></div></div></div>
+<script>
+(function(){
+var WL = {"": ["獨立角色", "#c27ba0"], "armentary": ["ARMENTARY", "#a8823f"], "maroplis": ["MAROPLIS", "#3f8f9c"], "wujie": ["五界 WUJIE", "#8a74b8"]};
+var KEY = ''; try { KEY = sessionStorage.getItem('gbk') || ''; } catch (e) {}
+var CH = [], GAL = [], cur = null, F = null, blog = '', dirty = false, galDirty = false, blogDirty = false, orderDirty = false;
+var $ = function (id) { return document.getElementById(id); };
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function msg(t, k) { var m = $('msg'); m.textContent = t || ''; m.className = 'msg' + (k ? ' ' + k : ''); }
+function ask(title, body, ok) { return new Promise(function (res) { $('mt').textContent = title; $('mb').textContent = body || ''; $('mok').textContent = ok || '確定'; $('modal').classList.add('on');
+  var done = function (v) { $('modal').classList.remove('on'); $('mok').onclick = $('mno').onclick = null; res(v); }; $('mok').onclick = function () { done(true); }; $('mno').onclick = function () { done(false); }; }); }
+async function call(body) {
+  var h = { 'content-type': 'application/json' }; if (KEY) h['x-admin-key'] = KEY;
+  var r = await fetch('/api/site', { method: 'POST', headers: h, body: JSON.stringify(body) }); var d = {}; try { d = await r.json(); } catch (e) {}
+  if (!r.ok) { var er = new Error(d.error || '網路好像怪怪的，請稍後再試'); er.status = r.status; throw er; } return d;
+}
+async function get(k) { var r = await fetch('/api/site?k=' + k, { cache: 'no-store' }); var d = await r.json(); if (!r.ok) throw new Error(d.error || '載入失敗'); return d.data; }
+function setDirty(v) { dirty = v; if (v) msg('有未儲存的變更'); }
+window.addEventListener('beforeunload', function (e) { if (dirty || galDirty || blogDirty || orderDirty) { e.preventDefault(); e.returnValue = ''; } });
+
+// ---------- login ----------
+async function tryLogin(k) { KEY = k; try { await call({ action: 'check' }); try { sessionStorage.setItem('gbk', k); } catch (e) {} return true; } catch (e) { KEY = ''; $('pwerr').textContent = e.status === 401 ? '密碼不對喔' : e.message; return false; } }
+$('pwgo').onclick = async function () { if (await tryLogin($('pw').value)) start(); };
+$('pw').onkeydown = function (e) { if (e.key === 'Enter') $('pwgo').click(); };
+
+// ---------- list ----------
+function tagsTxt(c) { var t = [(WL[c.world || ''] || WL[''])[0]]; if (c.collab) t.push('合作'); if (c.award) t.push('得獎'); if (c.soon) t.push('即將登場'); if (c.hidden) t.push('隱藏'); return t.join('・'); }
+function renderList() {
+  $('cnt').textContent = '（' + CH.length + '）';
+  $('list').innerHTML = CH.map(function (c, i) { var im = c.av || c.img; return '<li data-i="' + i + '" aria-current="' + (cur === i) + '">' + (im ? '<img src="' + esc(im) + '" alt="" style="object-position:' + esc(c.av ? '50% 50%' : c.pos) + '">' : '<span class="ph">' + esc(c.name.charAt(0)) + '</span>') +
+    '<span class="nm"><b>' + esc(c.name) + '</b><small>' + esc(tagsTxt(c)) + '</small></span><span class="mv"><button type="button" data-mv="-1" aria-label="往上移">▲</button><button type="button" data-mv="1" aria-label="往下移">▼</button></span></li>'; }).join('');
+}
+$('list').onclick = async function (e) {
+  var li = e.target.closest('li'); if (!li) return; var i = +li.dataset.i;
+  var mv = e.target.closest('[data-mv]');
+  if (mv) { e.stopPropagation(); var j = i + (+mv.dataset.mv); if (j < 0 || j >= CH.length) return; var t = CH[i]; CH[i] = CH[j]; CH[j] = t; if (cur === i) cur = j; else if (cur === j) cur = i; orderDirty = true; renderList(); msg('順序改了，按「儲存這個角色」或儲存任一角色就會一起存', ''); return; }
+  if (i === cur) return;
+  if ((dirty || blogDirty || galDirty) && !(await ask('放棄未儲存的變更？', '目前這個角色有還沒儲存的修改。', '放棄並切換'))) return;
+  open(i);
+};
+$('add').onclick = async function () {
+  if ((dirty || blogDirty || galDirty) && !(await ask('放棄未儲存的變更？', '目前這個角色有還沒儲存的修改。', '放棄並新增'))) return;
+  var id = (prompt('新角色的網址代號（小寫英文、數字或 -，例如 lyn、my-char）：', '') || '').trim().toLowerCase();
+  if (!id) return; if (!/^[a-z0-9-]{1,40}$/.test(id)) { alert('只能用小寫英文、數字和 -'); return; }
+  if (CH.some(function (c) { return c.id === id; })) { alert('這個代號已經有角色在用了'); return; }
+  CH.unshift({ id: id, name: '新角色', one: '', era: '', world: '', collab: false, partner: '', award: '', role: '', img: '', av: '', pos: '50% 20%', play: '', opening: '', released: '', stories: [], soon: false, hidden: true, isNew: true });
+  cur = null; renderList(); open(0); setDirty(true); msg('新角色預設是「隱藏」，填好後取消勾選隱藏再儲存，就會出現在網站上。');
+};
+
+// ---------- editor ----------
+function field(label, key, attrs) { return '<label class="f"><span>' + label + '</span><input class="in" data-k="' + key + '" value="' + esc(F[key]) + '" ' + (attrs || '') + '></label>'; }
+function imgsHtml() {
+  var px = parseInt(F.pos) || 50, py = parseInt(String(F.pos).split(' ')[1]) || 20;
+  return '<h2>圖片<em>Images</em></h2><div class="imgs"><div><span class="hint">立繪（直式，角色頁和角色列表用）</span><div class="prev" id="pImg" style="margin-top:8px">' + (F.img ? '<img src="' + esc(F.img) + '" alt="" style="object-position:' + esc(F.pos) + '">' : '尚未上傳') + '</div>' +
+   '<div class="tools"><label class="ghost up">上傳立繪<input type="file" accept="image/*" data-up="img"></label>' + (F.img ? '<button class="ghost danger" type="button" data-clr="img">移除</button>' : '') + '</div>' +
+   '<div class="rng"><span>左右</span><input type="range" min="0" max="100" value="' + px + '" data-pos="x"></div><div class="rng"><span>上下</span><input type="range" min="0" max="100" value="' + py + '" data-pos="y"></div><span class="hint">拖曳調整圖片在框裡露出的位置</span></div>' +
+   '<div><span class="hint">圓形頭像（可留空，留空會用立繪裁切）</span><div class="prev av" id="pAv" style="margin-top:8px">' + (F.av ? '<img src="' + esc(F.av) + '" alt="">' : (F.img ? '<img src="' + esc(F.img) + '" alt="" style="object-position:' + esc(F.pos) + '">' : '尚未上傳')) + '</div>' +
+   '<div class="tools"><label class="ghost up">上傳頭像<input type="file" accept="image/*" data-up="av"></label>' + (F.av ? '<button class="ghost danger" type="button" data-clr="av">移除</button>' : '') + '</div><span class="hint">建議上傳正方形、臉在正中間的圖</span></div></div>';
+}
+async function open(i) {
+  cur = i; F = JSON.parse(JSON.stringify(CH[i])); dirty = false; blogDirty = false; galDirty = false; renderList();
+  $('bar').hidden = false; $('view').href = '/c/' + F.id; msg('');
+  $('main').innerHTML =
+  '<section class="card"><h2>基本資料<em>Profile</em></h2><div class="g2">' + field('角色名稱', 'name', 'maxlength="40"') + '<label class="f"><span>網址代號（/c/…）</span><input class="in" value="' + esc(F.id) + '" readonly></label>' +
+   '<label class="f" style="grid-column:1/-1"><span>一句話介紹</span><input class="in" data-k="one" maxlength="120" value="' + esc(F.one) + '"></label>' +
+   field('類型・風格（例：現代・電競）', 'era', 'maxlength="30"') + field('身分・武器（顯示在世界觀頁頭像下）', 'role', 'maxlength="40"') + field('開場名稱', 'opening', 'maxlength="60"') + field('發布日期（例：2026.05.13）', 'released', 'maxlength="20"') + '</div></section>' +
+  '<section class="card"><h2>分類<em>Tags</em></h2><div class="g2"><label class="f"><span>世界觀</span><select class="in" data-k="world">' + Object.keys(WL).map(function (k) { return '<option value="' + k + '"' + (F.world === k ? ' selected' : '') + '>' + WL[k][0] + '</option>'; }).join('') + '</select></label>' +
+   field('得獎紀錄（留空＝沒有得獎標籤）', 'award', 'maxlength="40"') +
+   '<div class="f"><label class="chk"><input type="checkbox" data-k="collab"' + (F.collab ? ' checked' : '') + '>合作角色</label><input class="in" data-k="partner" maxlength="40" placeholder="合作對象（例：gogogoyin）" value="' + esc(F.partner) + '"></div>' +
+   '<div class="f" style="gap:10px"><label class="chk"><input type="checkbox" data-k="soon"' + (F.soon ? ' checked' : '') + '>即將登場（列表顯示問號卡，不開放角色頁）</label><label class="chk"><input type="checkbox" data-k="hidden"' + (F.hidden ? ' checked' : '') + '>隱藏（網站上完全不顯示）</label></div></div></section>' +
+  '<section class="card" id="imgs">' + imgsHtml() + '</section>' +
+  '<section class="card"><h2>遊玩連結<em>Play</em></h2>' + '<input class="in" data-k="play" placeholder="https://caveduck.io/…" value="' + esc(F.play) + '"><span class="hint">角色頁的「在 Caveduck 遊玩」按鈕會連到這裡，留空會顯示「遊玩連結準備中」</span></section>' +
+  '<section class="card"><h2>故事連結<em>Stories</em></h2><div id="sts"></div><button class="ghost" type="button" id="stAdd">＋ 新增故事</button><span class="hint" style="display:block;margin-top:8px">會出現在角色頁和 STORY 頁的故事列表</span></section>' +
+  '<section class="card"><h2>賀圖・活動圖<em>Gallery</em></h2><span class="hint">點選屬於這個角色的圖片（可多選）。新圖片請先到管理頁的 GALLERY 分頁上傳。</span><div class="gp" id="gp" style="margin-top:12px"></div></section>' +
+  '<section class="card"><h2>秘密設定與幕後花絮<em>Behind the Scenes</em></h2>' +
+   '<div class="tb" id="tb"><button type="button" data-c="formatBlock" data-v="p">內文</button><button type="button" data-c="formatBlock" data-v="h2">大標</button><button type="button" data-c="formatBlock" data-v="h3">小標</button><span class="sep"></span>' +
+   '<button type="button" data-c="bold"><b>B</b></button><button type="button" data-c="italic"><i>I</i></button><button type="button" data-c="underline"><u>U</u></button><button type="button" data-c="formatBlock" data-v="blockquote">引言</button><button type="button" data-c="insertUnorderedList">清單</button><button type="button" data-c="insertHorizontalRule">分隔線</button><button type="button" data-c="link">連結</button><span class="sep"></span>' +
+   '<label class="up">＋ 圖片<input type="file" accept="image/*" data-ins="1"></label><label class="up">＋ 雙圖並排<input type="file" accept="image/*" multiple data-ins="2"></label><span class="sep"></span><button type="button" data-c="removeFormat">清除格式</button></div>' +
+   '<div class="ed" id="ed" contenteditable="true" spellcheck="false"></div><span class="hint" style="display:block;margin-top:8px">點圖片可以切換排版（滿版、置中、靠左文繞、靠右文繞）。手機上靠左／靠右會自動變成滿版。</span></section>';
+  renderStories(); renderGal();
+  var ed = $('ed'); ed.innerHTML = '<p class="hint">載入中…</p>'; ed.contentEditable = 'false';
+  try { blog = await get('blog_' + F.id); } catch (e) { blog = ''; }
+  if (cur !== i) return;
+  ed.innerHTML = blog || ''; ed.contentEditable = 'true'; prepEd();
+}
+function bindMain() {
+  var m = $('main');
+  m.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.id === 'ed' || t.closest && t.closest('#ed')) { blogDirty = true; msg('有未儲存的變更'); return; }
+    if (t.dataset.k) { F[t.dataset.k] = t.type === 'checkbox' ? t.checked : t.value; setDirty(true); if (t.dataset.k === 'name') { CH[cur].name = F.name; } }
+    if (t.dataset.pos) { var r = m.querySelectorAll('[data-pos]'); F.pos = r[0].value + '% ' + r[1].value + '%'; m.querySelectorAll('#pImg img, #pAv img').forEach(function (im) { if (!F.av || im.closest('#pImg')) im.style.objectPosition = F.pos; }); setDirty(true); }
+    if (t.dataset.st) { var p = t.dataset.st.split('.'); F.stories[+p[0]][p[1]] = t.value; setDirty(true); }
+  });
+  m.addEventListener('change', async function (e) {
+    var t = e.target;
+    if (t.dataset.k && t.tagName === 'SELECT') { F[t.dataset.k] = t.value; setDirty(true); }
+    if (t.dataset.up && t.files[0]) { msg('上傳中…'); try { var src = await upload(t.files[0], t.dataset.up === 'av' ? 900 : 1600); F[t.dataset.up] = src; setDirty(true); rerenderKeepBlog(); msg('圖片已上傳，記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } t.value = ''; }
+    if (t.dataset.ins) { var fs = Array.from(t.files || []); t.value = ''; if (t.dataset.ins === '2' && fs.length !== 2) { msg('雙圖並排請一次選兩張圖', 'err'); return; } await insertImgs(fs); }
+  });
+  m.addEventListener('click', async function (e) {
+    var t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.clr) { F[t.dataset.clr] = ''; setDirty(true); rerenderKeepBlog(); }
+    if (t.id === 'stAdd') { F.stories.push({ title: '', url: '', desc: '' }); setDirty(true); renderStories(); }
+    if (t.dataset.std != null) { F.stories.splice(+t.dataset.std, 1); setDirty(true); renderStories(); }
+    if (t.dataset.stm) { var p = t.dataset.stm.split(','), a = +p[0], b = a + (+p[1]); if (b < 0 || b >= F.stories.length) return; var x = F.stories[a]; F.stories[a] = F.stories[b]; F.stories[b] = x; setDirty(true); renderStories(); }
+    if (t.dataset.g != null) { var g = GAL[+t.dataset.g]; g.chars = g.chars || []; var k = g.chars.indexOf(F.id); if (k >= 0) g.chars.splice(k, 1); else g.chars.push(F.id); galDirty = true; msg('有未儲存的變更'); renderGal(); }
+  });
+  m.addEventListener('mousedown', function (e) { if (e.target.closest('#tb button')) e.preventDefault(); });
+  m.addEventListener('click', function (e) { var b = e.target.closest('#tb button'); if (!b) return; cmd(b.dataset.c, b.dataset.v); });
+}
+function rerenderKeepBlog() { $('imgs').innerHTML = imgsHtml(); }
+function renderStories() {
+  $('sts').innerHTML = F.stories.length ? F.stories.map(function (s, i) { return '<div class="st"><div class="g2"><label class="f"><span>故事標題</span><input class="in" maxlength="60" data-st="' + i + '.title" value="' + esc(s.title) + '"></label><label class="f"><span>連結（可留空）</span><input class="in" data-st="' + i + '.url" placeholder="https://…" value="' + esc(s.url) + '"></label>' +
+    '<label class="f" style="grid-column:1/-1"><span>簡介</span><input class="in" maxlength="200" data-st="' + i + '.desc" value="' + esc(s.desc) + '"></label></div><div class="tools"><button class="ghost" type="button" data-stm="' + i + ',-1">↑</button><button class="ghost" type="button" data-stm="' + i + ',1">↓</button><button class="ghost danger" type="button" data-std="' + i + '">刪除</button></div></div>'; }).join('') : '<p class="hint" style="margin:0 0 10px">還沒有故事</p>';
+}
+function renderGal() { $('gp').innerHTML = GAL.length ? GAL.map(function (g, i) { return '<button type="button" data-g="' + i + '" aria-pressed="' + ((g.chars || []).indexOf(F.id) >= 0) + '" title="' + esc(g.alt) + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy"></button>'; }).join('') : '<span class="hint">藝廊還沒有圖片</span>'; }
+
+// ---------- images ----------
+async function shrink(file, max) {
+  var bmp = await createImageBitmap(file); var s = Math.min(1, max / Math.max(bmp.width, bmp.height));
+  var c = document.createElement('canvas'); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+  var blob = null; for (var q of [0.86, 0.75, 0.62, 0.5]) { blob = await new Promise(function (r) { c.toBlob(r, 'image/webp', q); }); if (!blob || blob.type !== 'image/webp') blob = await new Promise(function (r) { c.toBlob(r, 'image/jpeg', q + 0.02); }); if (blob.size < 1700000) break; }
+  var data = await new Promise(function (r) { var fr = new FileReader(); fr.onload = function () { r(String(fr.result).split(',')[1]); }; fr.readAsDataURL(blob); });
+  return { type: blob.type, data: data };
+}
+async function upload(file, max) { var im = await shrink(file, max); var d = await call({ action: 'upload', type: im.type, data: im.data }); return d.src; }
+
+// ---------- rich text ----------
+var savedRange = null, selFig = null;
+document.addEventListener('selectionchange', function () { var ed = $('ed'); var s = window.getSelection(); if (ed && s.rangeCount && ed.contains(s.anchorNode)) savedRange = s.getRangeAt(0).cloneRange(); });
+function restore() { var ed = $('ed'); ed.focus(); if (savedRange) { var s = window.getSelection(); s.removeAllRanges(); s.addRange(savedRange); } }
+function cmd(c, v) {
+  restore();
+  if (c === 'link') { var u = prompt('連結網址（https:// 開頭，或站內 / 開頭）：', 'https://'); if (!u) return; if (!/^(https?:\/\/|\/)/.test(u)) { alert('網址要以 https:// 或 / 開頭'); return; } document.execCommand('createLink', false, u); }
+  else if (c === 'formatBlock') document.execCommand('formatBlock', false, '<' + v + '>');
+  else document.execCommand(c, false, v || null);
+  blogDirty = true; msg('有未儲存的變更');
+}
+function fig(src, cls) { return '<figure class="' + cls + '" contenteditable="false"><img src="' + src + '" alt=""><figcaption contenteditable="true"></figcaption></figure>'; }
+async function insertImgs(files) {
+  msg('上傳圖片中…');
+  try { var srcs = []; for (var f of files) srcs.push(await upload(f, 1600));
+    var html = files.length === 2 ? '<div class="b-row" contenteditable="false">' + fig(srcs[0], '') + fig(srcs[1], '') + '</div><p><br></p>' : fig(srcs[0], 'b-full') + '<p><br></p>';
+    restore(); document.execCommand('insertHTML', false, html); prepEd(); blogDirty = true; msg('圖片已插入，記得按儲存', '');
+  } catch (e) { msg('上傳失敗：' + e.message, 'err'); }
+}
+function prepEd() {
+  var ed = $('ed'); if (!ed) return;
+  ed.querySelectorAll('figure, .b-row').forEach(function (f) { f.contentEditable = 'false'; });
+  ed.querySelectorAll('figcaption').forEach(function (c) { c.contentEditable = 'true'; });
+  ed.querySelectorAll('figure img, .b-row img').forEach(function (im) { im.draggable = false; });
+}
+function serialize() {
+  var ed = $('ed'); if (!ed) return blog; var c = ed.cloneNode(true);
+  c.querySelectorAll('[contenteditable]').forEach(function (x) { x.removeAttribute('contenteditable'); });
+  c.querySelectorAll('.sel').forEach(function (x) { x.classList.remove('sel'); });
+  c.querySelectorAll('[style]').forEach(function (x) { x.removeAttribute('style'); });
+  var h = c.innerHTML.replace(/<p><br><\/p>\s*$/, '').trim(); return h === '<br>' ? '' : h;
+}
+var fb = $('fb');
+document.addEventListener('click', function (e) {
+  var ed = $('ed'); if (!ed) return;
+  if (e.target.closest('#fb')) return;
+  var f = ed.contains(e.target) && !e.target.closest('figcaption') ? (e.target.closest('.b-row') || e.target.closest('figure')) : null;
+  if (selFig) selFig.classList.remove('sel'); selFig = f;
+  if (!f) { fb.style.display = 'none'; return; }
+  f.classList.add('sel'); var r = f.getBoundingClientRect(); fb.style.display = 'flex';
+  fb.style.left = Math.max(8, r.left + window.scrollX) + 'px'; fb.style.top = (r.top + window.scrollY - 46) + 'px';
+  var row = f.classList.contains('b-row'); fb.querySelectorAll('[data-l]').forEach(function (b) { b.style.display = row ? 'none' : ''; b.setAttribute('aria-pressed', f.classList.contains(b.dataset.l)); });
+});
+fb.addEventListener('mousedown', function (e) { e.preventDefault(); });
+fb.addEventListener('click', function (e) {
+  var b = e.target.closest('button'); if (!b || !selFig) return; var f = selFig;
+  if (b.dataset.l) { f.classList.remove('b-full', 'b-center', 'b-left', 'b-right'); f.classList.add(b.dataset.l); }
+  if (b.dataset.a === 'del') { f.remove(); selFig = null; fb.style.display = 'none'; }
+  if (b.dataset.a === 'up' && f.previousElementSibling) f.parentNode.insertBefore(f, f.previousElementSibling);
+  if (b.dataset.a === 'down' && f.nextElementSibling) f.parentNode.insertBefore(f.nextElementSibling, f);
+  blogDirty = true; msg('有未儲存的變更');
+  if (selFig) { var r = selFig.getBoundingClientRect(); fb.style.top = (r.top + window.scrollY - 46) + 'px'; fb.style.left = Math.max(8, r.left + window.scrollX) + 'px'; fb.querySelectorAll('[data-l]').forEach(function (x) { x.setAttribute('aria-pressed', selFig.classList.contains(x.dataset.l)); }); }
+});
+
+// ---------- save ----------
+$('save').onclick = async function () {
+  if (cur == null) return;
+  if (!String(F.name || '').trim()) { msg('角色名稱要填喔', 'err'); return; }
+  if (F.stories.some(function (s) { return !String(s.title || '').trim(); })) { msg('每個故事都要有標題', 'err'); return; }
+  if (!(await ask('儲存「' + F.name + '」？', '儲存後網站上的角色頁、角色列表' + (galDirty ? '、藝廊' : '') + '會馬上更新。', '儲存'))) return;
+  $('save').disabled = true; msg('儲存中…');
+  try {
+    var list = CH.slice(); var it = Object.assign({}, F); delete it.isNew; list[cur] = it;
+    var d = await call({ action: 'save', k: 'chars', data: list.map(function (c) { var x = Object.assign({}, c); delete x.isNew; return x; }) });
+    CH = d.data; F = JSON.parse(JSON.stringify(CH[cur])); orderDirty = false; dirty = false;
+    if (blogDirty) { var b = await call({ action: 'save', k: 'blog_' + F.id, data: serialize() }); blog = b.data; blogDirty = false; }
+    if (galDirty) { var g = await call({ action: 'save', k: 'gallery', data: GAL }); GAL = g.data; galDirty = false; }
+    renderList(); msg('已儲存，網站已更新 ✓', 'ok');
+  } catch (e) { if (e.status === 401) { msg('登入過期了，請重新整理後再登入', 'err'); try { sessionStorage.removeItem('gbk'); } catch (_) {} } else msg(e.message, 'err'); }
+  $('save').disabled = false;
+};
+
+async function start() {
+  $('login').hidden = true; $('app').hidden = false; bindMain();
+  try { var r = await Promise.all([get('chars'), get('gallery')]); CH = r[0] || []; GAL = r[1] || []; renderList(); }
+  catch (e) { $('main').innerHTML = '<div class="empty">載入失敗：' + esc(e.message) + '</div>'; }
+}
+(async function () { if (KEY && await tryLogin(KEY)) start(); else { $('login').hidden = false; $('pw').focus(); } })();
+})();
+</script>
+</body>
+</html>
