@@ -123,7 +123,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "claymore",
@@ -144,7 +145,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "severus",
@@ -165,7 +167,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": true,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "lyn",
@@ -186,7 +189,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "jing",
@@ -207,7 +211,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "zl",
@@ -228,7 +233,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "taolie",
@@ -249,7 +255,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "xuhuan",
@@ -270,7 +277,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "mnzj",
@@ -291,7 +299,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "seventh",
@@ -312,7 +321,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "suxue",
@@ -333,7 +343,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "soulswap",
@@ -354,7 +365,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "cangling",
@@ -375,7 +387,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "jiyun",
@@ -396,7 +409,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "emmett",
@@ -417,7 +431,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "grey",
@@ -438,7 +453,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     },
     {
       "id": "mute",
@@ -459,7 +475,8 @@ export const DEFAULTS = {
       "stories": [],
       "soon": false,
       "hidden": false,
-      "tags": []
+      "tags": [],
+      "gender": "m"
     }
   ],
   "stories": [],

@@ -407,7 +407,7 @@ document.addEventListener('alpine:init', function () {
       var k = g.getAttribute('data-world'), w = g.querySelector('.cc-weapon[style]'), tone = w ? w.style.color : '';
       var keep = Array.prototype.filter.call(g.children, function (el) { return el.classList.contains('cc-void'); });
       var html = list.filter(function (x) { return x.world === k && !x.hidden; }).map(function (x) {
-        if (x.soon) return '<div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-ph"><span>？</span></div></div><p class="cc-name">？？？</p><p class="cc-one cc-weapon" style="color: ' + tone + ' !important">？？？</p></div>';
+        if (x.soon) return '<div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"' + (x.img ? ' style="background-image: url(' + esc(x.img) + '); background-position: ' + esc(x.pos || '50% 20%') + '"' : '') + '><div class="cc-ph"><span>？</span></div></div><p class="cc-name">？？？</p><p class="cc-one cc-weapon" style="color: ' + tone + ' !important">？？？</p></div>';
         var im = x.av || x.img, pos = x.av ? '50% 50%' : (x.pos || '50% 20%');
         return '<a class="cc" href="/c/' + esc(x.id) + '"><div class="cc-img">' + (im ? '<img src="' + esc(im) + '" alt="' + esc(x.name) + '" style="object-position: ' + esc(pos) + '">' : '<div class="cc-ph"><span>' + esc(x.name.charAt(0)) + '</span></div>') + '</div><p class="cc-name">' + esc(x.name) + '</p>' + (x.role ? '<p class="cc-one cc-weapon" style="color: ' + tone + ' !important">' + esc(x.role) + '</p>' : '') + '</a>';
       }).join('');
