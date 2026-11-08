@@ -179,6 +179,8 @@ body{margin:0}
 .cc-one{margin:5px 0 0;font-size:13px;line-height:1.7;color:#6b5e63}
 .cc-era{margin-top:6px;font:italic 500 13px "Cormorant Garamond",serif;letter-spacing:.06em;color:#8a7d82}
 .cc-soon .cc-img{background:#2b2620 url(/img/c/02de65fb8257451bdd7f58966fb5dac5.webp) center/cover no-repeat}
+.cc-sbg{position:absolute;inset:-18px;background-size:cover;background-repeat:no-repeat;filter:blur(12px) brightness(.82) saturate(.9)}
+.cc-soon .cc-ph{z-index:1}
 .cc-soon .cc-sil{display:none !important}
 .cc-void .cc-img{background:#141114 !important}
 .cc-soon .cc-ph span{text-shadow:0 2px 12px rgba(20,14,8,.6)}
@@ -218,7 +220,7 @@ body{margin:0}
 .cp-cta{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;margin-top:6px;font:500 14px "Noto Serif TC",serif;letter-spacing:.2em;color:#fff;background:#3d3639;border-radius:999px;padding:14px 26px;text-decoration:none;transition:background .2s}
 .cp-cta:hover{background:#c27ba0}
 .cp-note{font-size:12px;color:#8a7d82;letter-spacing:.06em}
-
+.sbar{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin:0 0 16px}.sbar .cnt-line{margin:0 auto 0 0 !important}.sdd{position:relative;z-index:20}.sdd>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:500 12.5px/1 "Noto Serif TC",serif;letter-spacing:.12em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:9px 14px}.sdd>summary::-webkit-details-marker{display:none}.sdd>summary:hover,.sdd[open]>summary{border-color:#c27ba0;color:#c27ba0}.sdd>summary i{font-style:normal;font-size:10px;transition:transform .2s}.sdd[open]>summary i{transform:rotate(180deg)}.sdd-m{position:absolute;right:0;top:calc(100% + 6px);min-width:132px;background:#fff;border:1px solid #ecdfe3;border-radius:12px;padding:6px;box-shadow:0 14px 30px -14px rgba(74,54,66,.35);display:flex;flex-direction:column}.sdd-m button{border:0;background:none;text-align:left;font:400 13px "Noto Serif TC",serif;letter-spacing:.1em;color:#3d3639;padding:9px 12px;border-radius:8px;cursor:pointer}.sdd-m button:hover{background:#fdf2f5}.sdd-m button[aria-checked="true"]{color:#c27ba0;font-weight:600}.sdd-m button[aria-checked="true"]::after{content:" ✓"}
 .fgs{display:flex;flex-direction:column;gap:10px;max-width:900px;margin:0 auto 34px}
 .fg{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
 .fg-n{font:italic 500 14px "Cormorant Garamond","Noto Serif TC",serif;letter-spacing:.12em;color:#8a7d82;text-align:right}
@@ -369,9 +371,9 @@ body{margin:0}
       <div class="pg-head"><p class="pg-eyebrow">Sceneey's Studio</p><h1 class="pg-title">Characters</h1></div>
       <div class="cw">
         <div class="fgs"><template x-for="(g, $index) in v.fgroups"><div style="display: contents"><div class="fg"><span class="fg-n"><span x-text="g.name"></span></span><div class="filters" role="group" :aria-label="g.name"><template x-for="(f, $index) in g.items"><div style="display: contents"><button type="button" :aria-pressed="f.pressed" @click="f.pick($event)"><i :style="'background: ' + (f.col)"></i><span x-text="f.label"></span></button></div></template></div></div></div></template><template x-if="v.hasMore"><div style="display: contents"><details class="fmore"><summary><span><span x-text="v.moreLabel"></span></span><template x-if="v.hasMoreCur"><div style="display: contents"><b><span x-text="v.moreCur"></span></b></div></template><i aria-hidden="true">▾</i></summary><template x-for="(g, $index) in v.fmore"><div style="display: contents"><div class="fg"><span class="fg-n"><span x-text="g.name"></span></span><div class="filters" role="group" :aria-label="g.name"><template x-for="(f, $index) in g.items"><div style="display: contents"><button type="button" :aria-pressed="f.pressed" @click="f.pick($event)"><i :style="'background: ' + (f.col)"></i><span x-text="f.label"></span></button></div></template></div></div></div></template></details></div></template></div>
-        <p class="cnt-line"><span x-text="v.countLine"></span></p>
+        <div class="sbar"><p class="cnt-line"><span x-text="v.countLine"></span></p><details class="sdd"><summary aria-label="排序方式"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h13M3 12h9M3 18h5M18 9V20M15 17l3 3 3-3"/></svg><span><span x-text="v.sortLabel"></span></span><i aria-hidden="true">▾</i></summary><div class="sdd-m" role="menu"><template x-for="(t, $index) in v.sorts"><div style="display: contents"><button type="button" role="menuitemradio" :aria-checked="t.on" @click="t.pick($event)"><span x-text="t.label"></span></button></div></template></div></details></div>
         <div class="cg"><template x-for="(c, $index) in v.cards"><div style="display: contents">
-          <template x-if="c.soon"><div style="display: contents"><div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img" :style="'background-image: ' + (c.soonBg) + '; background-position: ' + (c.pos)"><div class="cc-ph"><span>？</span><small>COMING SOON</small></div></div><div class="tg-row"><template x-for="(t, $index) in c.tags"><div style="display: contents"><span class="tg" :style="'color: ' + (t.col) + '; background: ' + (t.soft)"><span x-text="t.label"></span></span></div></template></div><p class="cc-name">？？？</p><p class="cc-one">神秘的新角色，即將登場。</p></div></div></template>
+          <template x-if="c.soon"><div style="display: contents"><div class="cc cc-soon" aria-label="尚未公開的角色"><div class="cc-img"><div class="cc-sbg" :style="'background-image: ' + (c.soonBg) + '; background-position: ' + (c.pos)"></div><div class="cc-ph"><span>？</span><small>COMING SOON</small></div></div><div class="tg-row"><template x-for="(t, $index) in c.tags"><div style="display: contents"><span class="tg" :style="'color: ' + (t.col) + '; background: ' + (t.soft)"><span x-text="t.label"></span></span></div></template></div><p class="cc-name">？？？</p><p class="cc-one">神秘的新角色，即將登場。</p></div></div></template>
           <template x-if="c.shown"><div style="display: contents"><a class="cc" :href="c.href"><div class="cc-img">
             <template x-if="c.hasImg"><div style="display: contents"><img :src="c.img" :alt="c.name" :style="'object-position: ' + (c.pos)"></div></template>
             <template x-if="c.noImg"><div style="display: contents"><div class="cc-ph" :style="'background: ' + (c.soft) + '; color: ' + (c.tone)"><span><span x-text="c.initial"></span></span><small>立繪待補</small></div></div></template>
@@ -443,10 +445,18 @@ class Component extends DCLogic {
 
     const FL = filterList('獨立角色', 'chars');
     const f = FL.some((x) => x[0] === this.state.f) ? this.state.f : 'all';
-    const list = allChars().filter((c) => charHas(c, f));
+    const base = allChars().filter((c) => charHas(c, f)), cs = this.state.cs || 'def';
+    const rd = (c) => { const m = String(c.released || '').match(/(\d{4})\D?(\d{1,2})?\D?(\d{1,2})?/); return m ? (+m[1]) * 10000 + (+(m[2] || 0)) * 100 + (+(m[3] || 0)) : 0; };
+    const wo = allTags().filter((t) => t.kind === 'world').map((t) => t.id);
+    let list = base.slice();
+    if (cs === 'new' || cs === 'old') { const withD = list.filter((c) => rd(c)), noD = list.filter((c) => !rd(c)); withD.sort((a, b) => cs === 'new' ? rd(b) - rd(a) : rd(a) - rd(b)); list = withD.concat(noD); }
+    else if (cs === 'tag') list = list.map((c, i) => [c.world ? wo.indexOf(c.world) : wo.length, i, c]).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map((x) => x[2]);
+    else if (cs === 'rand') { let x = this.state.seed || 1; const rnd = () => { x = (x * 16807) % 2147483647; return x / 2147483647; }; list = list.map((c) => [rnd(), c]).sort((a, b) => a[0] - b[0]).map((p) => p[1]); }
     const R = {
       ...foldVals(FL, f, (v) => this.setState({ f: v })),
       countLine: list.length + ' characters',
+      sortLabel: ({ def: '預設排序', new: '最新', old: '最舊', tag: '依世界觀', rand: '隨機' })[cs],
+      sorts: [['def', '預設排序'], ['new', '最新'], ['old', '最舊'], ['tag', '依世界觀'], ['rand', '隨機']].map((s) => ({ label: s[1], on: cs === s[0] ? 'true' : 'false', pick: (e) => { try { e.currentTarget.closest('details').removeAttribute('open'); } catch (_) {} this.setState({ cs: s[0], seed: s[0] === 'rand' ? Math.floor(Math.random() * 2147483646) + 1 : this.state.seed }); } })),
       cards: list.map((c) => { const w = worldOf(c.world); return { name: c.name, one: c.one, era: c.era, award: c.award, hasAward: !!c.award, img: c.img, pos: c.pos || '50% 20%', hasImg: !!c.img, noImg: !c.img,
         initial: c.name.charAt(0), tone: w.tone, soft: w.soft, soon: !!c.soon, soonBg: c.img ? 'url(' + c.img + ')' : 'none', shown: !c.soon, href: charHref(c), tags: tagsOf(c) }; }),
     };

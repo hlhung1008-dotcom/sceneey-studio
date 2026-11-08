@@ -271,7 +271,7 @@ function addSel(i) { return '<select class="in" data-gadd="' + i + '" style="pad
   '<optgroup label="世界觀">' + TAGS.filter(function (t) { return t.kind === 'world'; }).map(function (t) { return '<option value="t:' + esc(t.id) + '">' + esc(t.label) + '</option>'; }).join('') + '</optgroup>' + tagGroups(TAGS.filter(function (t) { return t.kind !== 'world' && (!Array.isArray(t.on) || t.on.indexOf('gallery') >= 0); })).map(function (g) { return '<optgroup label="' + esc(g.n) + '">' + g.l.map(function (t) { return '<option value="t:' + esc(t.id) + '">' + esc(t.label) + '</option>'; }).join('') + '</optgroup>'; }).join('') + '</select>'; }
 function rGal() {
   $('main').innerHTML = '<section class="card"><h2>GALLERY<em>Gallery</em></h2><div class="row2"><span class="hint">共 ' + GAL.length + ' 張。標上角色的圖會出現在角色頁輪播；標上世界觀或其他標籤，藝廊頁就能用標籤篩選；「搜尋關鍵字」不會顯示出來，只用來讓訪客搜尋。</span><span style="flex:1"></span><label class="btn up" style="padding:8px 16px">＋ 上傳圖片<input type="file" accept="image/*" multiple id="gup" hidden></label></div></section>' +
-    '<div class="gg">' + GAL.map(function (g, i) { return '<div class="gc"><img src="' + esc(g.src) + '" alt="" loading="lazy"><div class="bd"><input class="in" data-ga="' + i + '" maxlength="60" placeholder="圖片說明" value="' + esc(g.alt) + '"><input class="in" data-gk="' + i + '" maxlength="200" placeholder="搜尋關鍵字（用空格或逗號分隔）" value="' + esc(g.kw) + '" style="font-size:12.5px">' +
+    '<div class="gg">' + GAL.map(function (g, i) { return '<div class="gc"><img src="' + esc(g.src) + '" alt="" loading="lazy"><div class="bd"><input class="in" data-ga="' + i + '" maxlength="60" placeholder="圖片說明" value="' + esc(g.alt) + '"><input class="in" data-gk="' + i + '" maxlength="200" placeholder="搜尋關鍵字（用空格或逗號分隔）" value="' + esc(g.kw) + '" style="font-size:12.5px"><select class="in" data-gg="' + i + '" style="padding:6px 8px;font-size:12.5px"><option value="">性別：不設定</option><option value="m"' + (g.gender === 'm' ? ' selected' : '') + '>性別：男性</option><option value="f"' + (g.gender === 'f' ? ' selected' : '') + '>性別：女性</option></select>' +
       '<div class="row2">' + gTags(g).map(function (t) { return '<button type="button" class="tagc" data-grm="' + i + ':' + t.k + ':' + esc(t.id) + '" title="移除這個標籤"><i style="background:' + esc(t.col) + '"></i>' + esc(t.label) + ' ×</button>'; }).join('') + '</div>' + addSel(i) +
       '<div class="tools"><button class="ghost" type="button" data-gm="' + i + ',-1">←</button><button class="ghost" type="button" data-gm="' + i + ',1">→</button><span style="flex:1"></span><button class="ghost danger" type="button" data-gd="' + i + '">刪除</button></div></div></div>'; }).join('') + '</div>';
 }
@@ -307,9 +307,11 @@ M.addEventListener('input', function (e) {
 M.addEventListener('change', async function (e) {
   var t = e.target, d = t.dataset;
   if (d.a === 'mode') { ANNC.link = t.value === 'custom' ? '' : t.value; mark(); rAnnc(); }
-  if (d.gadd != null && t.value) { var g = GAL[+d.gadd], p = t.value.split(':'), arr = p[0] === 'c' ? (g.chars = g.chars || []) : (g.tags = g.tags || []); if (arr.indexOf(p[1]) < 0) arr.push(p[1]); mark(); rGal(); }
+  if (d.gg != null) { GAL[+d.gg].gender = t.value; mark(); }
+  if (d.gadd != null && t.value) { var g = GAL[+d.gadd], p = t.value.split(':'), arr = p[0] === 'c' ? (g.chars = g.chars || []) : (g.tags = g.tags || []); if (arr.indexOf(p[1]) < 0) arr.push(p[1]);
+    if (p[0] === 'c' && !g.gender) { var ch = CH.find(function (x) { return x.id === p[1]; }); if (ch && ch.gender) g.gender = ch.gender; } mark(); rGal(); }
   if (t.id === 'gup' && t.files.length) { var fs = Array.from(t.files); t.value = ''; msg('上傳中…（' + fs.length + ' 張）');
-    try { for (var f of fs) { var src = await upload(f, 2000); GAL.unshift({ src: src, alt: f.name.replace(/\.[^.]+$/, '').slice(0, 60), chars: [], tags: [] }); rGal(); } mark(); msg('已上傳，寫好說明、貼好標籤後記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } }
+    try { for (var f of fs) { var src = await upload(f, 2000); GAL.unshift({ src: src, alt: f.name.replace(/\.[^.]+$/, '').slice(0, 60), kw: '', chars: [], tags: [], gender: '' }); rGal(); } mark(); msg('已上傳，寫好說明、貼好標籤後記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } }
 });
 M.addEventListener('click', async function (e) {
   var b = e.target.closest('button'); if (!b) return; var d = b.dataset;

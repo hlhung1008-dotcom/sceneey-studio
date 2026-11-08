@@ -63,7 +63,7 @@ function validate(k, d) {
     if (!Array.isArray(d) || d.length > 300) throw new Error("資料格式錯誤");
     return d.map((g) => { const src = String(g.src || ""); if (!SRC_RE.test(src)) throw new Error("圖片網址不對");
       const chars = Array.isArray(g.chars) ? [...new Set(g.chars.map(String).filter((x) => ID_RE.test(x)))].slice(0, 20) : [];
-      return { src, alt: str(g.alt, 60), kw: str(g.kw, 200), chars, tags: TAGIDS(g.tags) }; });
+      return { src, alt: str(g.alt, 60), kw: str(g.kw, 200), chars, tags: TAGIDS(g.tags), gender: ["m", "f"].includes(g.gender) ? g.gender : "" }; });
   }
   if (k === "tags") {
     if (!Array.isArray(d) || d.length > 100) throw new Error("資料格式錯誤");
