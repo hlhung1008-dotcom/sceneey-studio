@@ -17,6 +17,8 @@ export default {
     if (url.pathname === "/zl7893" || url.pathname === "/zl7893.html") return Response.redirect(url.origin + "/c/zl", 301);
     const cm = url.pathname.match(/^(\/m)?\/c\/[a-z0-9-]{1,40}\/?$/);
     if (cm) return env.ASSETS.fetch(new Request(url.origin + (cm[1] || "") + "/c", request));
+    const sm = url.pathname.match(/^(\/m)?\/story\/[a-z0-9-]{1,40}\/?$/);
+    if (sm) return env.ASSETS.fetch(new Request(url.origin + (sm[1] || "") + "/story-page", request));
     return env.ASSETS.fetch(request);
   },
 };

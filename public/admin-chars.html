@@ -108,7 +108,7 @@ a{color:var(--pink)}
 </style>
 </head>
 <body>
-<header class="top"><h1>角色管理</h1><span class="sp"></span><a class="lnk" href="/admin">← 回到管理頁</a><a class="lnk" href="/characters" target="_blank" rel="noopener">看網站 ↗</a></header>
+<header class="top"><h1>角色管理</h1><span class="sp"></span><a class="lnk" href="/admin">← 回到管理頁</a><a class="lnk" href="/admin-stories">故事管理</a><a class="lnk" href="/characters" target="_blank" rel="noopener">看網站 ↗</a></header>
 <div id="login" class="login" hidden>
   <b style="letter-spacing:.2em">管理密碼</b>
   <input id="pw" class="in" type="password" autocomplete="current-password" aria-label="管理密碼">
@@ -184,7 +184,7 @@ function imgsHtml() {
    '<div class="tools"><label class="ghost up">上傳立繪<input type="file" accept="image/*" data-up="img"></label>' + (F.img ? '<button class="ghost danger" type="button" data-clr="img">移除</button>' : '') + '</div>' +
    '<div class="rng"><span>左右</span><input type="range" min="0" max="100" value="' + px + '" data-pos="x"></div><div class="rng"><span>上下</span><input type="range" min="0" max="100" value="' + py + '" data-pos="y"></div><span class="hint">拖曳調整圖片在框裡露出的位置</span></div>' +
    '<div><span class="hint">圓形頭像（可留空，留空會用立繪裁切）</span><div class="prev av" id="pAv" style="margin-top:8px">' + (F.av ? '<img src="' + esc(F.av) + '" alt="">' : (F.img ? '<img src="' + esc(F.img) + '" alt="" style="object-position:' + esc(F.pos) + '">' : '尚未上傳')) + '</div>' +
-   '<div class="tools"><label class="ghost up">上傳頭像<input type="file" accept="image/*" data-up="av"></label>' + (F.av ? '<button class="ghost danger" type="button" data-clr="av">移除</button>' : '') + '</div><span class="hint">建議上傳正方形、臉在正中間的圖</span></div></div>';
+   '<div class="tools"><label class="ghost up">上傳頭像<input type="file" accept="image/*" data-up="av"></label>' + (F.av ? '<button class="ghost danger" type="button" data-clr="av">移除</button>' : '') + '</div><span class="hint">建議上傳正方形、臉在正中間的圖</span></div></div><div style="margin-top:18px"><span class="hint">角色頁頂端橫幅（橫式，可留空；留空會用世界觀主視覺或立繪）</span><div class="prev" style="aspect-ratio:16/5;margin-top:8px">' + (F.banner ? '<img src="' + esc(F.banner) + '" alt="">' : '尚未上傳') + '</div><div class="tools"><label class="ghost up">上傳橫幅<input type="file" accept="image/*" data-up="banner"></label>' + (F.banner ? '<button class="ghost danger" type="button" data-clr="banner">移除</button>' : '') + '</div></div>';
 }
 async function open(i) {
   cur = i; F = JSON.parse(JSON.stringify(CH[i])); dirty = false; blogDirty = false; galDirty = false; renderList();
@@ -199,14 +199,14 @@ async function open(i) {
    '<div class="f" style="gap:10px"><label class="chk"><input type="checkbox" data-k="soon"' + (F.soon ? ' checked' : '') + '>即將登場（列表顯示問號卡，不開放角色頁）</label><label class="chk"><input type="checkbox" data-k="hidden"' + (F.hidden ? ' checked' : '') + '>隱藏（網站上完全不顯示）</label></div></div></section>' +
   '<section class="card" id="imgs">' + imgsHtml() + '</section>' +
   '<section class="card"><h2>遊玩連結<em>Play</em></h2>' + '<input class="in" data-k="play" placeholder="https://caveduck.io/…" value="' + esc(F.play) + '"><span class="hint">角色頁的「在 Caveduck 遊玩」按鈕會連到這裡，留空會顯示「遊玩連結準備中」</span></section>' +
-  '<section class="card"><h2>故事連結<em>Stories</em></h2><div id="sts"></div><button class="ghost" type="button" id="stAdd">＋ 新增故事</button><span class="hint" style="display:block;margin-top:8px">會出現在角色頁和 STORY 頁的故事列表</span></section>' +
+  '<section class="card"><h2>故事<em>Stories</em></h2><span class="hint">故事請到 <a href="/admin-stories">故事管理</a> 撰寫，並在故事裡勾選這個角色。角色頁的「故事」按鈕只有在這個角色有故事時才會出現。</span></section>' +
   '<section class="card"><h2>賀圖・活動圖<em>Gallery</em></h2><span class="hint">點選屬於這個角色的圖片（可多選）。新圖片請先到管理頁的 GALLERY 分頁上傳。</span><div class="gp" id="gp" style="margin-top:12px"></div></section>' +
   '<section class="card"><h2>秘密設定與幕後花絮<em>Behind the Scenes</em></h2>' +
    '<div class="tb" id="tb"><button type="button" data-c="formatBlock" data-v="p">內文</button><button type="button" data-c="formatBlock" data-v="h2">大標</button><button type="button" data-c="formatBlock" data-v="h3">小標</button><span class="sep"></span>' +
    '<button type="button" data-c="bold"><b>B</b></button><button type="button" data-c="italic"><i>I</i></button><button type="button" data-c="underline"><u>U</u></button><button type="button" data-c="formatBlock" data-v="blockquote">引言</button><button type="button" data-c="insertUnorderedList">清單</button><button type="button" data-c="insertHorizontalRule">分隔線</button><button type="button" data-c="link">連結</button><span class="sep"></span>' +
    '<label class="up">＋ 圖片<input type="file" accept="image/*" data-ins="1"></label><label class="up">＋ 雙圖並排<input type="file" accept="image/*" multiple data-ins="2"></label><span class="sep"></span><button type="button" data-c="removeFormat">清除格式</button></div>' +
    '<div class="ed" id="ed" contenteditable="true" spellcheck="false"></div><span class="hint" style="display:block;margin-top:8px">點圖片可以切換排版（滿版、置中、靠左文繞、靠右文繞）。手機上靠左／靠右會自動變成滿版。</span></section>';
-  renderStories(); renderGal();
+  renderGal();
   var ed = $('ed'); ed.innerHTML = '<p class="hint">載入中…</p>'; ed.contentEditable = 'false';
   try { blog = await get('blog_' + F.id); } catch (e) { blog = ''; }
   if (cur !== i) return;
@@ -224,7 +224,7 @@ function bindMain() {
   m.addEventListener('change', async function (e) {
     var t = e.target;
     if (t.dataset.k && t.tagName === 'SELECT') { F[t.dataset.k] = t.value; setDirty(true); }
-    if (t.dataset.up && t.files[0]) { msg('上傳中…'); try { var src = await upload(t.files[0], t.dataset.up === 'av' ? 900 : 1600); F[t.dataset.up] = src; setDirty(true); rerenderKeepBlog(); msg('圖片已上傳，記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } t.value = ''; }
+    if (t.dataset.up && t.files[0]) { msg('上傳中…'); try { var src = await upload(t.files[0], t.dataset.up === 'av' ? 900 : (t.dataset.up === 'banner' ? 2000 : 1600)); F[t.dataset.up] = src; setDirty(true); rerenderKeepBlog(); msg('圖片已上傳，記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } t.value = ''; }
     if (t.dataset.ins) { var fs = Array.from(t.files || []); t.value = ''; if (t.dataset.ins === '2' && fs.length !== 2) { msg('雙圖並排請一次選兩張圖', 'err'); return; } await insertImgs(fs); }
   });
   m.addEventListener('click', async function (e) {
@@ -313,7 +313,6 @@ fb.addEventListener('click', function (e) {
 $('save').onclick = async function () {
   if (cur == null) return;
   if (!String(F.name || '').trim()) { msg('角色名稱要填喔', 'err'); return; }
-  if (F.stories.some(function (s) { return !String(s.title || '').trim(); })) { msg('每個故事都要有標題', 'err'); return; }
   if (!(await ask('儲存「' + F.name + '」？', '儲存後網站上的角色頁、角色列表' + (galDirty ? '、藝廊' : '') + '會馬上更新。', '儲存'))) return;
   $('save').disabled = true; msg('儲存中…');
   try {
