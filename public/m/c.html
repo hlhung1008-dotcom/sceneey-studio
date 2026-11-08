@@ -337,6 +337,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
     </header>
     <main style="background: #fffdfb; padding-bottom: 40px">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&amp;family=Noto+Sans+TC:wght@300;500;700&amp;display=swap">
+      <template x-if="v.isPv"><div style="display: contents"><div style="position: sticky; top: 0; z-index: 30; background: #3d3639; color: #fff; text-align: center; font: 500 13px/1.6 'Noto Serif TC', serif; letter-spacing: .12em; padding: 9px 16px"><span x-text="v.pvNote"></span></div></div></template>
       <section class="cb" :style="'background-image: url(' + (v.ch.banner) + '); background-position: ' + (v.ch.bpos)"><div class="cb-shade"></div><div class="cb-in">
         <span class="cb-crumb"><a href="/m/characters">CHARACTERS</a>　/　<span x-text="v.ch.worldLabel"></span></span>
         <h1 class="cb-name"><span>|</span><span x-text="v.ch.name"></span><em>| 秘密 &amp; 幕後花絮</em></h1>
@@ -407,6 +408,7 @@ const filterList = (indieLabel, where) => [['all', '全部', '#3d3639']].concat(
 const charHas = (c, f) => f === 'all' || (f === 'indie' ? !c.world : (c.world === f || ctagIds(c).indexOf(f) >= 0));
 
 const CID = ((location.pathname.match(/\/c\/([a-z0-9-]{1,40})/) || [])[1]) || 'zl';
+const PV = (() => { try { if (!/[?&]preview=1/.test(location.search)) return null; const d = JSON.parse(localStorage.getItem('sv_pv_' + CID) || 'null'); return d && d.c ? d : { c: null, blog: null }; } catch (e) { return null; } })();
 if (typeof NEED !== 'undefined') { NEED.push('chars', 'gallery', 'stories', 'tags', 'blog_' + CID); SITE.chars = siteCached('chars'); SITE.tags = siteCached('tags'); SITE.stories = siteCached('stories'); SITE.gallery = siteCached('gallery'); SITE['blog_' + CID] = siteCached('blog_' + CID); }
 
 class Component extends DCLogic {
@@ -414,7 +416,7 @@ class Component extends DCLogic {
   renderVals() {
 
     const all = allChars();
-    const c = all.find((x) => x.id === CID && !x.soon) || all.find((x) => x.id === 'zl') || all[0];
+    const c = (PV && PV.c) || (PV ? (siteGet('chars') || CDEF).find((x) => x.id === CID) : null) || all.find((x) => x.id === CID && !x.soon) || all.find((x) => x.id === 'zl') || all[0];
     const w = worldOf(c.world);
     const metas = [];
     if (c.world) metas.push({ k: 'World', v: w.en + '・' + w.zh, link: true, plain: false, href: worldHref(c.world), col: w.tone });
@@ -424,7 +426,7 @@ class Component extends DCLogic {
     if (c.released) metas.push({ k: 'Released', v: c.released, link: false, plain: true });
     if (c.era) metas.push({ k: 'Genre', v: c.era, link: false, plain: true });
     const gal = (siteGet('gallery') || []).filter((g) => (g.chars || []).indexOf(c.id) >= 0);
-    const blog = siteGet('blog_' + c.id) || '';
+    const blog = (PV && PV.blog != null) ? PV.blog : (siteGet('blog_' + c.id) || '');
     const st = (siteGet('stories') || []).filter((t) => !t.hidden && (t.chars || []).indexOf(c.id) >= 0);
     const same = c.world ? all.filter((x) => x.id !== c.id && !x.soon && x.world === c.world) : [];
     if (typeof document !== 'undefined' && document.title.indexOf(c.name) < 0) { try { document.title = c.name + '｜Sceneey Characters'; } catch (e) {} }
@@ -438,7 +440,7 @@ class Component extends DCLogic {
       galDots: gal.slice(0, 12).map((g, k) => ({ label: '第 ' + (k + 1) + ' 張', on: (this.state.gi || 0) === k ? 'true' : 'false', pick: () => { this._gt0 = Date.now(); this.setState({ gi: k }); } })),
       galCap: (gal[this.state.gi || 0] || {}).alt || '',
       galHref: (IS_M ? '/m/gallery' : '/gallery') + '?c=' + c.id, galCount: gal.length ? gal.length + ' 張' : '', galThumbs: gal.slice(0, IS_M ? 6 : 8), hasGal: gal.length > 0, noGal: !gal.length,
-      blogHtml: blog, hasBlog: !!blog, noBlog: !blog,
+      blogHtml: blog, hasBlog: !!blog, noBlog: !blog, isPv: !!PV, pvNote: PV && PV.c ? '預覽模式：顯示的是後台還沒儲存的內容' + (c.hidden ? '（這個角色目前是隱藏的）' : '') : '預覽模式' + (c.hidden ? '：這個角色目前是隱藏的，只有你看得到' : ''),
       same: same.map((x) => ({ href: charHref(x), name: x.name, role: x.role || '', img: x.av || x.img, pos: x.av ? '50% 50%' : (x.pos || '50% 20%'), hasImg: !!(x.av || x.img), noImg: !(x.av || x.img), initial: x.name.charAt(0), tone: w.tone, soft: w.soft })),
     };
     this._gn = Math.min(gal.length, 12);

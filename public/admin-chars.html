@@ -128,7 +128,7 @@ a{color:var(--pink)}
   </aside>
   <main id="main"><div class="empty">從左邊選一個角色開始編輯</div></main>
 </div>
-<div class="bar" id="bar" hidden><span id="msg" class="msg" role="status"></span><span class="sp"></span><button class="ghost danger" type="button" id="del">刪除這個角色</button><a class="ghost" id="view" target="_blank" rel="noopener">預覽已儲存的角色頁 ↗</a><button class="btn" type="button" id="save">儲存這個角色</button></div>
+<div class="bar" id="bar" hidden><span id="msg" class="msg" role="status"></span><span class="sp"></span><button class="ghost danger" type="button" id="del">刪除這個角色</button><button class="ghost" type="button" id="view">預覽角色頁 ↗</button><button class="btn" type="button" id="save">儲存這個角色</button></div>
 <div class="fb" id="fb" role="toolbar" aria-label="圖片排版">
   <button type="button" data-l="b-full">滿版</button><button type="button" data-l="b-center">置中</button><button type="button" data-l="b-left">靠左・文繞</button><button type="button" data-l="b-right">靠右・文繞</button>
   <button type="button" data-a="up">↑</button><button type="button" data-a="down">↓</button><button type="button" data-a="del">刪除</button>
@@ -206,7 +206,7 @@ function imgsHtml() {
 }
 async function open(i) {
   cur = i; F = JSON.parse(JSON.stringify(CH[i])); F.tags = ctagIds(F); dirty = !!F.isNew; blogDirty = false; galDirty = false; renderList();
-  $('bar').hidden = false; $('view').href = '/c/' + F.id; msg('');
+  $('bar').hidden = false; msg('');
   $('main').innerHTML =
   '<section class="card"><h2>基本資料<em>Profile</em></h2><div class="g2">' + field('角色名稱', 'name', 'maxlength="40"') + '<label class="f"><span>網址代號（/c/…）</span><input class="in" value="' + esc(F.id) + '" readonly></label>' +
    '<label class="f" style="grid-column:1/-1"><span>一句話介紹</span><input class="in" data-k="one" maxlength="120" value="' + esc(F.one) + '"></label>' +
@@ -346,6 +346,11 @@ $('save').onclick = async function () {
   $('save').disabled = false;
 };
 
+$('view').onclick = function () {
+  if (cur == null) return; var c = Object.assign({}, F); delete c.isNew;
+  try { localStorage.setItem('sv_pv_' + F.id, JSON.stringify({ c: c, blog: $('ed') && $('ed').contentEditable === 'true' ? serialize() : null, t: Date.now() })); } catch (e) {}
+  window.open('/c/' + F.id + '?preview=1', '_blank');
+};
 $('del').onclick = async function () {
   if (cur == null) return; var c = CH[cur];
   if (!(await ask('刪除「' + c.name + '」？', c.isNew ? '這個角色還沒儲存過，會直接移除。' : '角色頁、角色列表、世界觀頁頭像和它的秘密設定文章都會從網站上移除，刪除後無法復原。如果只是想暫時不顯示，可以改勾「隱藏」。', '刪除'))) return;
