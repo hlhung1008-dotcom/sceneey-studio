@@ -170,15 +170,13 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 @keyframes ssfade4{0%{opacity:0;transform:scale(1.02)}5%{opacity:1}25%{opacity:1}30%{opacity:0;transform:scale(1.12)}100%{opacity:0;transform:scale(1.12)}}
 @media (prefers-reduced-motion:reduce){.ss img{animation:none}.ss img:first-child{opacity:1}}
 
-.wv-stack{timeline-scope:--wv2,--wv3}
 .wv{position:relative;background:#fffdfb}
 .wv-stack{position:relative;width:100%;transition:width .7s cubic-bezier(.2,.8,.2,1)}
 .wv.is-open .wv-stack{width:58%}
-div:has(> main > section.wv){container-type:size}
-.wv-band{position:sticky;top:57px;display:block;width:100%;height:751px;height:calc(100cqh - 57px);border:0;padding:0;margin:0;cursor:pointer;background:none;overflow:hidden;transition:filter .5s}
-.wv-stack::after{content:"";display:block;height:150px}
-.wv-in{position:absolute;inset:0 0 -80px 0;will-change:transform}
-@keyframes wvlift{to{transform:translateY(-80px);filter:brightness(.78)}}
+div:has(> main > section.wv){container-type:size;scroll-snap-type:y mandatory;scroll-padding-top:57px}
+div:has(> main > section.wv) > footer{scroll-snap-align:end}
+.wv-band{position:relative;scroll-snap-align:start;scroll-snap-stop:always;display:block;width:100%;height:751px;height:calc(100cqh - 57px);border:0;padding:0;margin:0;cursor:pointer;background:none;overflow:hidden;transition:filter .5s}
+.wv-in{position:absolute;inset:0}
 .wv-band .wv-bg{position:absolute;inset:0;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
 .wv-axis{position:absolute;left:0;right:0;bottom:30px;z-index:55;display:flex;justify-content:center;pointer-events:none;transition:right .7s cubic-bezier(.2,.8,.2,1)}
 .wv-axis.is-open{right:42%}
@@ -209,7 +207,7 @@ div:has(> main > section.wv){container-type:size}
 .wa-q .wa-lb{font:italic 500 14px/26px "Cormorant Garamond",serif;letter-spacing:.3em;color:rgba(255,255,255,.6)}
 .wa-q::before{content:"?"}
 @media (prefers-reduced-motion:reduce){.wa-line i,.wa-node .wa-dot::before,.wa-node .wa-dot::after{animation:none !important}}
-.wv-desc{position:absolute;left:8%;top:calc((100% - 80px) * .52 + 70px);font:400 15px/2.1 "Noto Serif TC",serif;letter-spacing:.32em;color:rgba(255,255,255,.88);text-shadow:0 1px 8px rgba(30,20,28,.55);white-space:nowrap;text-align:left;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s;opacity:.85}
+.wv-desc{position:absolute;left:8%;top:calc(52% + 70px);font:400 15px/2.1 "Noto Serif TC",serif;letter-spacing:.32em;color:rgba(255,255,255,.88);text-shadow:0 1px 8px rgba(30,20,28,.55);white-space:nowrap;text-align:left;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s;opacity:.85}
 .wv-band:hover .wv-desc{opacity:1;transform:translateX(14px)}
 .wv-band.r .wv-desc{left:auto;right:9%;text-align:right}
 .wv-band.r:hover .wv-desc{transform:translateX(-14px)}
@@ -225,7 +223,7 @@ div:has(> main > section.wv){container-type:size}
 .wv-band .wv-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(74,54,66,.42) 0%,rgba(74,54,66,.12) 45%,rgba(255,246,249,.12) 100%)}
 .wv.is-open .wv-band{filter:saturate(.55) brightness(.92)}
 .wv.is-open .wv-band.is-sel{filter:none}
-.wv-name{position:absolute;left:8%;top:calc((100% - 80px) * .52);transform:translateY(-38%) rotate(-4deg);font-family:"Corinthia","Allison",cursive;font-weight:700;font-size:96px;line-height:1;color:#fff;white-space:nowrap;text-shadow:0 0 14px rgba(246,201,212,.6),0 2px 10px rgba(74,54,66,.45);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.wv-name{position:absolute;left:8%;top:52%;transform:translateY(-38%) rotate(-4deg);font-family:"Corinthia","Allison",cursive;font-weight:700;font-size:96px;line-height:1;color:#fff;white-space:nowrap;text-shadow:0 0 14px rgba(246,201,212,.6),0 2px 10px rgba(74,54,66,.45);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .wv-band:hover .wv-name{transform:translateY(-38%) rotate(-4deg) translateX(14px)}
 .wv-band.r .wv-name{left:auto;right:9%}
 .wv-band.r:hover .wv-name{transform:translateY(-38%) rotate(-4deg) translateX(-14px)}
@@ -289,14 +287,13 @@ div:has(> main > section.wv){container-type:size}
 .mini-kick{transition:opacity .4s}
 *:has(.wv.is-open) .mini-kick{opacity:0}
 .wv-band:nth-of-type(1){z-index:1}
-.wv-band:nth-of-type(2){margin-top:244px;-webkit-mask-image:linear-gradient(171.83deg, transparent -40px, #000 170px);mask-image:linear-gradient(171.83deg, transparent -40px, #000 170px);z-index:2;view-timeline:--wv2 block}
-.wv-band:nth-of-type(1) .wv-in{animation:wvlift linear both;animation-timeline:--wv2;animation-range:entry 0% entry 100%}
-.wv-band:nth-of-type(3){margin-top:244px;-webkit-mask-image:linear-gradient(171.83deg, transparent -40px, #000 170px);mask-image:linear-gradient(171.83deg, transparent -40px, #000 170px);z-index:3;view-timeline:--wv3 block}
-.wv-band:nth-of-type(2) .wv-in{animation:wvlift linear both;animation-timeline:--wv3;animation-range:entry 0% entry 100%}
+.wv-band:nth-of-type(2){margin-top:-180px;height:calc(100cqh - 57px + 180px);scroll-margin-top:-180px;-webkit-mask-image:linear-gradient(180deg, transparent 0, rgba(0,0,0,.55) 90px, #000 180px);mask-image:linear-gradient(180deg, transparent 0, rgba(0,0,0,.55) 90px, #000 180px);z-index:2}
+.wv-band:nth-of-type(3){margin-top:-180px;height:calc(100cqh - 57px + 180px);scroll-margin-top:-180px;-webkit-mask-image:linear-gradient(180deg, transparent 0, rgba(0,0,0,.55) 90px, #000 180px);mask-image:linear-gradient(180deg, transparent 0, rgba(0,0,0,.55) 90px, #000 180px);z-index:3}
+
 .wv.is-open .wv-stack{width:100%}
-.wv-name{left:7%;font-size:60px;top:calc((100% - 80px) * .5)}
+.wv-name{left:7%;font-size:60px;top:50%}
 .wv-band.r .wv-name,.wv.is-open .wv-band.r .wv-name{right:7%}
-.wv-desc{left:7%;top:calc((100% - 80px) * .5 + 46px);font-size:12px;letter-spacing:.2em}
+.wv-desc{left:7%;top:calc(50% + 46px);font-size:12px;letter-spacing:.2em}
 .wv-band.r .wv-desc,.wv.is-open .wv-band.r .wv-desc{right:7%}
 .wv-band.is-cur .wv-veil::after{opacity:0}
 .wv-scroll{bottom:100px;font-size:12px}
@@ -402,10 +399,10 @@ class Component extends DCLogic {
   renderVals() {
     const WD = {"armentary": {"name": "Armentary", "zh": "神器與契約", "tone": "#a8823f", "tagline": "人類與擁有三種型態的「神器」締結契約，與精靈、獸人、龍族、魔族並存的大陸。", "page": "/m/armentary", "facts": [{"k": "曆法", "v": "奧瑪曆"}, {"k": "神器", "v": "人類、武器、手持武器的人形三種型態"}, {"k": "舞台", "v": "七大陸與深海"}], "chars": [{"name": "澤德", "one": "師傅……想把這些都塞進去。", "img": "/img/c/7b8d518e20b8b7d4764847ba415398e5.webp", "initial": "澤", "tone": "#a8823f", "soft": "#f4ecdc", "href": "#", "soon": false, "shown": true, "hasImg": true, "pos": "50% 50%", "tag": "神器・長棍", "scls": "wv-ch wv-ch-soon"}, {"name": "克萊莫", "one": "爸爸，需要女兒幫忙磨刃嗎？", "img": "/img/c/1e9a3f7348ce75d7fbd69f79b4cfc3da.webp", "initial": "克", "tone": "#a8823f", "soft": "#f4ecdc", "href": "#", "soon": false, "shown": true, "hasImg": true, "pos": "50% 50%", "tag": "神器・巨劍", "scls": "wv-ch wv-ch-soon"}, {"name": "？？？", "one": "", "img": "", "initial": "？", "tone": "#a8823f", "soft": "#f4ecdc", "href": "#", "soon": true, "shown": false, "hasImg": false, "pos": "50% 15%", "tag": "？？？", "scls": "wv-ch wv-ch-soon"}]}, "maroplis": {"name": "Maroplis", "zh": "烏托邦", "tone": "#3f8f9c", "tagline": "科技登峰造極，環境卻已崩壞的星球。城市由雲層區一路沉到基核層，階級絕對、沒有神明。", "page": "/m/maroplis", "facts": [{"k": "階層", "v": "雲層區・灰脈層・邊緣層・基核層"}, {"k": "勢力", "v": "地下黑市 Echo（邊緣層）、雲層研究機構 Nīlus（雲層區）"}, {"k": "貨幣", "v": "LN（羅恩）"}], "chars": [{"name": "林恩", "one": "成為了黑市首腦的人質。", "img": "/img/c/7790d3173dccf7c654dbf7c936440cb8.webp", "initial": "林", "tone": "#3f8f9c", "soft": "#e3f1f2", "href": "#", "soon": false, "shown": true, "hasImg": true, "pos": "50% 50%", "tag": "Echo 黑市首領", "scls": "wv-ch wv-ch-soon"}, {"name": "井", "one": "操，閉嘴。", "img": "/img/c/c85ce08e8fb33f6bef2817fe35541488.webp", "initial": "井", "tone": "#3f8f9c", "soft": "#e3f1f2", "href": "#", "soon": false, "shown": true, "hasImg": true, "pos": "50% 50%", "tag": "Echo 高級幹部", "scls": "wv-ch wv-ch-soon"}, {"name": "偽善者-ZL7893", "one": "永遠保有母愛的男性仿生人。", "img": "/img/c/4f3daa01c9a4d6e214da3d45ffefee0c.webp", "initial": "偽", "tone": "#3f8f9c", "soft": "#e3f1f2", "href": "/zl7893", "soon": false, "shown": true, "hasImg": true, "pos": "50% 15%", "tag": "Nīlus 客製款仿生人", "scls": "wv-ch wv-ch-soon"}]}, "wujie": {"name": "Wujie", "zh": "五界", "tone": "#7d64a6", "tagline": "天地初開，清者上浮，濁者下沉。太古時分為——五界，九天、仙界、大荒、人間、九幽。上古神話與現代台灣交會。", "page": "/m/wujie", "facts": [{"k": "五界", "v": "九天・仙界・大荒・人間・九幽"}], "chars": [{"name": "濤列", "one": "把主人視為美食的上古兇獸。", "img": "/img/c/8be5f7f3f5746efa5613679d4ff9ffe3.webp", "initial": "濤", "tone": "#7d64a6", "soft": "#efeaf6", "href": "#", "soon": false, "shown": true, "hasImg": true, "pos": "50% 50%", "tag": "饕餮", "scls": "wv-ch wv-ch-soon"}, {"name": "？？？", "one": "", "img": "", "initial": "？", "tone": "#7d64a6", "soft": "#efeaf6", "href": "#", "soon": true, "shown": false, "hasImg": false, "pos": "", "tag": "混沌", "scls": "wv-ch wv-ch-soon wv-ch-void"}, {"name": "？？？", "one": "", "img": "", "initial": "？", "tone": "#7d64a6", "soft": "#efeaf6", "href": "#", "soon": true, "shown": false, "hasImg": false, "pos": "", "tag": "檮杌", "scls": "wv-ch wv-ch-soon wv-ch-void"}]}};
     const sel = this.state.wsel;
-    const HDR = 57, GAP = 244, ORDER = ["armentary", "maroplis", "wujie"];
+    const HDR = 57, GAP = 0, ORDER = ["armentary", "maroplis", "wujie"];
     const ix = sel ? ORDER.indexOf(sel) : (this.state.wcur || 0);
     const wv = { axCls: 'wv-axis' + (sel ? ' is-open' : '') + (this.state.wend ? ' is-gone' : ''), axFill: (ix < 0 ? 0 : ix * 256 / 3).toFixed(1) + 'px', track: (el) => { try { const st = el.querySelector('.wv-stack'); if (!st) return; const STEP = st.querySelector('.wv-band').offsetHeight + GAP; const scale = el.getBoundingClientRect().height / el.clientHeight || 1; const v = (st.getBoundingClientRect().top - el.getBoundingClientRect().top) / scale; const i = Math.max(0, Math.min(ORDER.length - 1, Math.floor((HDR - v) / STEP + 0.35))); const end = (st.getBoundingClientRect().bottom - el.getBoundingClientRect().top) / scale < el.clientHeight - 40; if (i !== (this.state.wcur || 0) || end !== !!this.state.wend) this.setState({ wcur: i, wend: end }); } catch (e) {} }, drTop: ((this.state.annc ? 40 : 0) + HDR) + 'px', wvCls: sel ? 'wv is-open' : 'wv', drCls: sel ? 'wv-drawer is-open' : 'wv-drawer', drHidden: sel ? 'false' : 'true', d: WD[sel || 'maroplis'], close: () => this.setState({ wsel: '' }), goBack: () => { try { if (window.history.length > 1) window.history.back(); } catch (e) {} } };
-    Object.keys(WD).forEach((k) => { wv['cls_' + k] = 'wv-band fx-' + k + (k === 'maroplis' ? '' : ' r') + (sel === k ? ' is-sel' : '') + (ORDER.indexOf(k) === (this.state.wcur || 0) ? ' is-cur' : ''); wv['open_' + k] = () => this.setState({ wsel: sel === k ? '' : k }); const i = ORDER.indexOf(k); wv['ax_' + k] = 'wa-node' + (i === ix ? ' is-lit' : (i < ix ? ' is-on' : '')); wv['go_' + k] = () => { try { const st = document.querySelector('.wv-stack'); const STEP = st.querySelector('.wv-band').offsetHeight + GAP; let sc = st && st.parentElement; while (sc && !/(auto|scroll)/.test(getComputedStyle(sc).overflowY)) sc = sc.parentElement; if (sc) { const scale = sc.getBoundingClientRect().height / sc.clientHeight || 1; const top = sc.scrollTop + (st.getBoundingClientRect().top - sc.getBoundingClientRect().top) / scale; sc.scrollTo({ top: Math.max(0, top + i * STEP - HDR + 2), behavior: 'smooth' }); } } catch (e) {} this.setState({ wsel: k }); }; });
+    Object.keys(WD).forEach((k) => { wv['cls_' + k] = 'wv-band fx-' + k + (k === 'maroplis' ? '' : ' r') + (sel === k ? ' is-sel' : '') + (ORDER.indexOf(k) === (this.state.wcur || 0) ? ' is-cur' : ''); wv['open_' + k] = () => this.setState({ wsel: sel === k ? '' : k }); const i = ORDER.indexOf(k); wv['ax_' + k] = 'wa-node' + (i === ix ? ' is-lit' : (i < ix ? ' is-on' : '')); wv['go_' + k] = () => { try { const b = document.querySelectorAll('.wv-stack .wv-band')[i]; if (b) b.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} this.setState({ wsel: k }); }; });
     return { ...wv, onScroll: (e) => { const el = e.currentTarget; wv.track(el); const k = el.querySelector('.mini-kick'); if (!k) return; const d = el.scrollTop - (this._lastY || 0); this._lastY = el.scrollTop; const a = Math.max(-14, Math.min(14, -d * 0.6)); k.style.transform = 'rotate(' + a + 'deg)'; clearTimeout(this._kt); this._kt = setTimeout(() => { k.style.transform = 'rotate(0deg)'; }, 120); }, anncOpen: this.state.annc, closeAnnc: () => this.setState({ annc: false }), scTop: this.state.annc ? '36px' : '0px', menuOpen: this.state.menu, toggleMenu: () => this.setState({ menu: !this.state.menu }) };
   }
 }
