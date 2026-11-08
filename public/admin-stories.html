@@ -155,10 +155,10 @@ function setDirty(v) { dirty = v; if (v) msg('有未儲存的變更'); }
 window.addEventListener('beforeunload', function (e) { if (dirty || galDirty || blogDirty || orderDirty) { e.preventDefault(); e.returnValue = ''; } });
 
 function worlds() { return TAGS.filter(function (t) { return t.kind === 'world'; }); }
-function plainTags() { return TAGS.filter(function (t) { return t.kind !== 'world'; }); }
+function plainTags(where) { return TAGS.filter(function (t) { return t.kind !== 'world' && (!where || !Array.isArray(t.on) || t.on.indexOf(where) >= 0); }); }
 function tagLabel(id) { var t = TAGS.find(function (x) { return x.id === id; }); return t ? t.label : (id ? id : '獨立角色'); }
 function ctagIds(c) { var a = (c.tags || []).slice(); if (c.collab && a.indexOf('collab') < 0) a.push('collab'); if (c.award && a.indexOf('award') < 0) a.push('award'); return a; }
-function chips(name, sel) { return '<div class="chars">' + plainTags().map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div>'; }
+function chips(name, sel, where) { return '<div class="chars">' + plainTags(where).map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div>'; }
 function worldSelect(v, attr) { return '<select class="in" ' + attr + '><option value="">獨立角色（不屬於任何世界觀）</option>' + worlds().map(function (t) { return '<option value="' + esc(t.id) + '"' + (v === t.id ? ' selected' : '') + '>' + esc(t.label) + '</option>'; }).join('') + '</select>'; }
 function form(title, html) { return new Promise(function (res) { var md = $('fmodal'); $('fmt').textContent = title; $('fmb').innerHTML = html; md.classList.add('on'); var f1 = md.querySelector('input'); if (f1) f1.focus();
   var done = function (v) { md.classList.remove('on'); $('fmok').onclick = $('fmno').onclick = null; res(v); }; $('fmok').onclick = function () { var o = {}; md.querySelectorAll('[name]').forEach(function (x) { o[x.name] = x.value.trim(); }); done(o); }; $('fmno').onclick = function () { done(null); }; }); }
@@ -203,7 +203,7 @@ async function open(i) {
    '<label class="chk"><input type="checkbox" data-k="hidden"' + (F.hidden ? ' checked' : '') + '>隱藏（網站上不顯示）</label></div></section>' +
   '<section class="card"><h2>出場角色<em>Characters</em></h2><span class="hint">可以複選；都不勾就是「獨立短篇」。勾選的角色，角色頁會出現「故事」按鈕。</span><div class="chars" id="chs" style="margin-top:12px">' +
    CH.filter(function (c) { return !c.soon; }).map(function (c) { return '<label><input type="checkbox" data-ch="' + esc(c.id) + '"' + ((F.chars || []).indexOf(c.id) >= 0 ? ' checked' : '') + '>' + esc(c.name) + '</label>'; }).join('') + '</div></section>' +
-  '<section class="card"><h2>其他標籤<em>Tags</em></h2><span class="hint">可複選。世界觀會依照出場角色自動判斷，這裡只需要勾額外的標籤。</span><div style="margin-top:12px">' + chips('tg', F.tags || []) + '</div></section>' +
+  '<section class="card"><h2>其他標籤<em>Tags</em></h2><span class="hint">可複選。世界觀會依照出場角色自動判斷，這裡只需要勾額外的標籤。</span><div style="margin-top:12px">' + chips('tg', F.tags || [], 'stories') + '</div></section>' +
   '<section class="card"><h2>封面<em>Cover</em></h2><div id="cov">' + coverHtml() + '</div></section>' +
   '<section class="card"><h2>內文<em>Text</em></h2>' +
    '<div class="tb" id="tb"><button type="button" data-c="formatBlock" data-v="p">內文</button><button type="button" data-c="formatBlock" data-v="h2">大標</button><button type="button" data-c="formatBlock" data-v="h3">小標</button><span class="sep"></span>' +

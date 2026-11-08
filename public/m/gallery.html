@@ -129,12 +129,12 @@ if (typeof NEED !== 'undefined') { SITE.chars = siteCached('chars'); SITE.tags =
 
 const GALQ = new URLSearchParams(location.search);
 const GALC = (GALQ.get('c') || '').replace(/[^a-z0-9-]/g, ''), GALT = (GALQ.get('t') || '').replace(/[^a-z0-9-]/g, '');
-const GTDEF = [{"id": "armentary", "label": "ARMENTARY", "color": "#a8823f", "kind": "world"}, {"id": "maroplis", "label": "MAROPLIS", "color": "#3f8f9c", "kind": "world"}, {"id": "wujie", "label": "五界", "color": "#7d64a6", "kind": "world"}, {"id": "collab", "label": "合作角色", "color": "#6f9bb5", "kind": "tag"}, {"id": "award", "label": "得獎作品", "color": "#c9963c", "kind": "tag"}];
+const GTDEF = [{"id": "armentary", "label": "ARMENTARY", "color": "#a8823f", "kind": "world", "on": ["chars", "stories", "gallery"]}, {"id": "maroplis", "label": "MAROPLIS", "color": "#3f8f9c", "kind": "world", "on": ["chars", "stories", "gallery"]}, {"id": "wujie", "label": "五界", "color": "#7d64a6", "kind": "world", "on": ["chars", "stories", "gallery"]}, {"id": "collab", "label": "合作角色", "color": "#6f9bb5", "kind": "tag", "on": ["chars", "stories", "gallery"]}, {"id": "award", "label": "得獎作品", "color": "#c9963c", "kind": "tag", "on": ["chars", "stories", "gallery"]}];
 const galTagList = () => SITE.tags || GTDEF;
 const galCharName = () => { const l = SITE.chars || []; const c = l.find((x) => x.id === GALC); if (c) return c.name; const t = galTagList().find((x) => x.id === GALT); return t ? t.label : (GALC || GALT); };
 const galHas = (g) => { if (GALC) return (g.chars || []).indexOf(GALC) >= 0; if (!GALT) return true; if ((g.tags || []).indexOf(GALT) >= 0) return true;
   const cs = (SITE.chars || []).filter((c) => (g.chars || []).indexOf(c.id) >= 0); return cs.some((c) => c.world === GALT || (c.tags || []).indexOf(GALT) >= 0 || (GALT === 'collab' && c.collab) || (GALT === 'award' && !!c.award)); };
-const galChips = () => [{ label: '全部', href: location.pathname, on: !GALC && !GALT ? 'true' : 'false', col: '#3d3639' }].concat(galTagList().map((t) => ({ label: t.label, href: location.pathname + '?t=' + t.id, on: GALT === t.id ? 'true' : 'false', col: t.color })));
+const galChips = () => [{ label: '全部', href: location.pathname, on: !GALC && !GALT ? 'true' : 'false', col: '#3d3639' }].concat(galTagList().filter((t) => t.kind === 'world' || !Array.isArray(t.on) || t.on.indexOf('gallery') >= 0).map((t) => ({ label: t.label, href: location.pathname + '?t=' + t.id, on: GALT === t.id ? 'true' : 'false', col: t.color })));
 
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { annc: true, menu: false, lb: null }; }

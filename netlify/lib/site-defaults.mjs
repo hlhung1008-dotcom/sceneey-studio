@@ -479,31 +479,56 @@ export const DEFAULTS = {
       "id": "armentary",
       "label": "ARMENTARY",
       "color": "#a8823f",
-      "kind": "world"
+      "kind": "world",
+      "on": [
+        "chars",
+        "stories",
+        "gallery"
+      ]
     },
     {
       "id": "maroplis",
       "label": "MAROPLIS",
       "color": "#3f8f9c",
-      "kind": "world"
+      "kind": "world",
+      "on": [
+        "chars",
+        "stories",
+        "gallery"
+      ]
     },
     {
       "id": "wujie",
       "label": "五界",
       "color": "#7d64a6",
-      "kind": "world"
+      "kind": "world",
+      "on": [
+        "chars",
+        "stories",
+        "gallery"
+      ]
     },
     {
       "id": "collab",
       "label": "合作角色",
       "color": "#6f9bb5",
-      "kind": "tag"
+      "kind": "tag",
+      "on": [
+        "chars",
+        "stories",
+        "gallery"
+      ]
     },
     {
       "id": "award",
       "label": "得獎作品",
       "color": "#c9963c",
-      "kind": "tag"
+      "kind": "tag",
+      "on": [
+        "chars",
+        "stories",
+        "gallery"
+      ]
     }
   ]
 };

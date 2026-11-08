@@ -131,6 +131,7 @@ a{color:var(--pink)}
 .tagc{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;letter-spacing:.06em;border-radius:999px;padding:3px 8px;background:#f6eef1;color:var(--ink);border:0;cursor:pointer;font-family:inherit}
 .tagc i{width:7px;height:7px;border-radius:50%}
 .tagc:hover{background:#fbe3ec}
+.scope{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--sub)}.scope label{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;background:#fff}.scope label:has(input:checked){border-color:var(--pink);background:var(--soft);color:var(--pink)}.scope input{accent-color:var(--pink)}
 .tgrow{display:grid;grid-template-columns:44px minmax(0,1fr) 150px auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
 .tgrow input[type=color]{width:40px;height:34px;border:1px solid var(--line);border-radius:8px;padding:2px;background:#fff;cursor:pointer}
 .tgrow code{font-size:12px;color:var(--sub)}
@@ -172,10 +173,10 @@ function setDirty(v) { dirty = v; if (v) msg('有未儲存的變更'); }
 window.addEventListener('beforeunload', function (e) { if (dirty || galDirty || blogDirty || orderDirty) { e.preventDefault(); e.returnValue = ''; } });
 
 function worlds() { return TAGS.filter(function (t) { return t.kind === 'world'; }); }
-function plainTags() { return TAGS.filter(function (t) { return t.kind !== 'world'; }); }
+function plainTags(where) { return TAGS.filter(function (t) { return t.kind !== 'world' && (!where || !Array.isArray(t.on) || t.on.indexOf(where) >= 0); }); }
 function tagLabel(id) { var t = TAGS.find(function (x) { return x.id === id; }); return t ? t.label : (id ? id : '獨立角色'); }
 function ctagIds(c) { var a = (c.tags || []).slice(); if (c.collab && a.indexOf('collab') < 0) a.push('collab'); if (c.award && a.indexOf('award') < 0) a.push('award'); return a; }
-function chips(name, sel) { return '<div class="chars">' + plainTags().map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div>'; }
+function chips(name, sel, where) { return '<div class="chars">' + plainTags(where).map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div>'; }
 function worldSelect(v, attr) { return '<select class="in" ' + attr + '><option value="">獨立角色（不屬於任何世界觀）</option>' + worlds().map(function (t) { return '<option value="' + esc(t.id) + '"' + (v === t.id ? ' selected' : '') + '>' + esc(t.label) + '</option>'; }).join('') + '</select>'; }
 function form(title, html) { return new Promise(function (res) { var md = $('fmodal'); $('fmt').textContent = title; $('fmb').innerHTML = html; md.classList.add('on'); var f1 = md.querySelector('input'); if (f1) f1.focus();
   var done = function (v) { md.classList.remove('on'); $('fmok').onclick = $('fmno').onclick = null; res(v); }; $('fmok').onclick = function () { var o = {}; md.querySelectorAll('[name]').forEach(function (x) { o[x.name] = x.value.trim(); }); done(o); }; $('fmno').onclick = function () { done(null); }; }); }
@@ -254,7 +255,7 @@ function chName(id) { var c = CH.find(function (x) { return x.id === id; }); ret
 function tagInfo(id) { var t = TAGS.find(function (x) { return x.id === id; }); return t; }
 function gTags(g) { return (g.chars || []).map(function (id) { var n = chName(id); return n ? { k: 'c', id: id, label: n, col: '#c27ba0' } : null; }).filter(Boolean).concat((g.tags || []).map(function (id) { var t = tagInfo(id); return t ? { k: 't', id: id, label: t.label, col: t.color } : null; }).filter(Boolean)); }
 function addSel(i) { return '<select class="in" data-gadd="' + i + '" style="padding:6px 8px;font-size:12.5px"><option value="">＋ 加標籤…</option><optgroup label="角色">' + CH.filter(function (c) { return !c.soon; }).map(function (c) { return '<option value="c:' + esc(c.id) + '">' + esc(c.name) + '</option>'; }).join('') + '</optgroup>' +
-  '<optgroup label="世界觀">' + TAGS.filter(function (t) { return t.kind === 'world'; }).map(function (t) { return '<option value="t:' + esc(t.id) + '">' + esc(t.label) + '</option>'; }).join('') + '</optgroup><optgroup label="其他標籤">' + TAGS.filter(function (t) { return t.kind !== 'world'; }).map(function (t) { return '<option value="t:' + esc(t.id) + '">' + esc(t.label) + '</option>'; }).join('') + '</optgroup></select>'; }
+  '<optgroup label="世界觀">' + TAGS.filter(function (t) { return t.kind === 'world'; }).map(function (t) { return '<option value="t:' + esc(t.id) + '">' + esc(t.label) + '</option>'; }).join('') + '</optgroup><optgroup label="其他標籤">' + TAGS.filter(function (t) { return t.kind !== 'world' && (!Array.isArray(t.on) || t.on.indexOf('gallery') >= 0); }).map(function (t) { return '<option value="t:' + esc(t.id) + '">' + esc(t.label) + '</option>'; }).join('') + '</optgroup></select>'; }
 function rGal() {
   $('main').innerHTML = '<section class="card"><h2>GALLERY<em>Gallery</em></h2><div class="row2"><span class="hint">共 ' + GAL.length + ' 張。標上角色的圖會出現在角色頁輪播；標上世界觀或其他標籤，藝廊頁就能用標籤篩選。</span><span style="flex:1"></span><label class="btn up" style="padding:8px 16px">＋ 上傳圖片<input type="file" accept="image/*" multiple id="gup" hidden></label></div></section>' +
     '<div class="gg">' + GAL.map(function (g, i) { return '<div class="gc"><img src="' + esc(g.src) + '" alt="" loading="lazy"><div class="bd"><input class="in" data-ga="' + i + '" maxlength="60" placeholder="圖片說明" value="' + esc(g.alt) + '">' +
@@ -264,12 +265,14 @@ function rGal() {
 
 // ---------- tags ----------
 function used(id) { var n = 0; CH.forEach(function (c) { if (c.world === id || (c.tags || []).indexOf(id) >= 0) n++; }); GAL.forEach(function (g) { if ((g.tags || []).indexOf(id) >= 0) n++; }); return n; }
-function tagRows(kind) { return TAGS.map(function (t, i) { if ((t.kind === 'world') !== (kind === 'world')) return ''; return '<div class="tgrow"><input type="color" data-tc="' + i + '" value="' + esc(t.color) + '" aria-label="顏色"><input class="in" data-tl="' + i + '" maxlength="20" value="' + esc(t.label) + '"><code>代號：' + esc(t.id) + (t.isNew ? '（新）' : '') + '</code><button class="ghost danger" type="button" data-td="' + i + '">移除</button></div>'; }).join(''); }
-function tagAdd(kind) { return '<div class="tgadd" data-kind="' + kind + '"><input type="color" value="' + (kind === 'world' ? '#7d64a6' : '#8a7d82') + '" class="nc" aria-label="顏色"><input class="in nl" maxlength="20" placeholder="' + (kind === 'world' ? '新世界觀名稱' : '新標籤名稱（例：短篇、節日限定）') + '"><input class="in cid" maxlength="40" placeholder="代號（英文，例：holiday）"><button class="ghost" type="button" data-tadd="' + kind + '">＋ 新增</button></div>'; }
+function tagRows(kind) { return TAGS.map(function (t, i) { if ((t.kind === 'world') !== (kind === 'world')) return ''; return '<div class="tgrow"><input type="color" data-tc="' + i + '" value="' + esc(t.color) + '" aria-label="顏色"><input class="in" data-tl="' + i + '" maxlength="20" value="' + esc(t.label) + '"><code>代號：' + esc(t.id) + (t.isNew ? '（新）' : '') + '</code><button class="ghost danger" type="button" data-td="' + i + '">移除</button>' + (t.kind === 'world' ? '' : scopeHtml('data-ts="' + i + '"', t.on)) + '</div>'; }).join(''); }
+var WHERE = [['chars', '角色'], ['stories', '故事'], ['gallery', '藝廊']];
+function scopeHtml(attr, on) { on = Array.isArray(on) ? on : ['chars', 'stories', 'gallery']; return '<div class="scope">套用在：' + WHERE.map(function (w) { return '<label><input type="checkbox" ' + attr + ' value="' + w[0] + '"' + (on.indexOf(w[0]) >= 0 ? ' checked' : '') + '>' + w[1] + '</label>'; }).join('') + '</div>'; }
+function tagAdd(kind) { return '<div class="tgadd" data-kind="' + kind + '"><input type="color" value="' + (kind === 'world' ? '#7d64a6' : '#8a7d82') + '" class="nc" aria-label="顏色"><input class="in nl" maxlength="20" placeholder="' + (kind === 'world' ? '新世界觀名稱' : '新標籤名稱（例：短篇、節日限定）') + '"><input class="in cid" maxlength="40" placeholder="代號（英文，例：holiday）"><button class="ghost" type="button" data-tadd="' + kind + '">＋ 新增</button>' + (kind === 'world' ? '' : scopeHtml('data-tsn', null)) + '</div>'; }
 function rTags() {
   var chs = CH.filter(function (c) { return !c.soon; });
   $('main').innerHTML = '<section class="card"><h2>世界觀標籤<em>Worlds</em></h2><span class="hint">角色只能選一個世界觀；沒選的就是「獨立角色」。ARMENTARY、MAROPLIS、五界 有自己的世界觀頁面。</span>' + tagRows('world') + tagAdd('world') + '</section>' +
-    '<section class="card"><h2>其他標籤<em>Tags</em></h2><span class="hint">角色、故事、藝廊圖片都可以貼，可以複選。角色列表、STORY、GALLERY 的篩選按鈕會跟著這裡更新。</span>' + tagRows('tag') + tagAdd('tag') + '</section>' +
+    '<section class="card"><h2>其他標籤<em>Tags</em></h2><span class="hint">每個標籤可以勾選要「套用在」角色、故事或藝廊；只勾藝廊的標籤，就只會出現在藝廊的標籤選單和 GALLERY 頁的篩選按鈕。</span>' + tagRows('tag') + tagAdd('tag') + '</section>' +
     '<section class="card"><h2>角色標籤<em>Characters</em></h2><span class="hint">每個角色都會自動成為一個標籤，用來標記故事和藝廊圖片。在 <a href="/admin-chars">角色</a> 分頁新增角色時就會自動建立。</span><div class="row2" style="margin-top:12px">' +
     chs.map(function (c) { return '<a class="tagc" href="/admin-chars" style="text-decoration:none"><i style="background:' + esc((tagInfo(c.world) || {}).color || '#c27ba0') + '"></i>' + esc(c.name) + '</a>'; }).join('') + '</div></section>';
 }
@@ -283,6 +286,7 @@ M.addEventListener('input', function (e) {
   if (d.ga != null) { GAL[+d.ga].alt = t.value; mark(); }
   if (d.tl != null) { TAGS[+d.tl].label = t.value; mark(); }
   if (d.tc != null) { TAGS[+d.tc].color = t.value; mark(); }
+  if (d.ts != null) { var i0 = +d.ts; TAGS[i0].on = Array.from(M.querySelectorAll('[data-ts="' + i0 + '"]:checked')).map(function (x) { return x.value; }); mark(); }
 });
 M.addEventListener('change', async function (e) {
   var t = e.target, d = t.dataset;
@@ -310,7 +314,8 @@ M.addEventListener('click', async function (e) {
   if (d.tadd) { var row = b.closest('.tgadd'), label = row.querySelector('.nl').value.trim(), id = row.querySelector('.cid').value.trim().toLowerCase(), col = row.querySelector('.nc').value;
     if (!label) { msg('標籤名稱要填喔', 'err'); return; } if (!/^[a-z0-9-]{1,40}$/.test(id)) { msg('代號只能用小寫英文、數字和 -', 'err'); return; }
     if (TAGS.some(function (t) { return t.id === id; }) || CH.some(function (c) { return c.id === id; })) { msg('這個代號已經被角色或標籤用掉了', 'err'); return; }
-    TAGS.push({ id: id, label: label, color: col, kind: d.tadd, isNew: true }); mark(); rTags(); return; }
+    var on = Array.from(row.querySelectorAll('[data-tsn]:checked')).map(function (x) { return x.value; }); if (d.tadd !== 'world' && !on.length) { msg('至少要選一個套用位置', 'err'); return; }
+    TAGS.push({ id: id, label: label, color: col, kind: d.tadd, on: on, isNew: true }); mark(); rTags(); return; }
 });
 
 // ---------- save ----------
@@ -320,7 +325,7 @@ $('save').onclick = async function () {
   if (!(await ask('儲存變更？', '儲存後網站會馬上更新。', '儲存'))) return;
   $('save').disabled = true; msg('儲存中…');
   try {
-    var data = k === 'annc' ? ANNC : k === 'news' ? NEWS : k === 'gallery' ? GAL : TAGS.map(function (t) { return { id: t.id, label: t.label, color: t.color, kind: t.kind }; });
+    var data = k === 'annc' ? ANNC : k === 'news' ? NEWS : k === 'gallery' ? GAL : TAGS.map(function (t) { return { id: t.id, label: t.label, color: t.color, kind: t.kind, on: t.on }; });
     var d = await call({ action: 'save', k: k, data: data });
     if (k === 'annc') ANNC = d.data; else if (k === 'news') NEWS = d.data; else if (k === 'gallery') GAL = d.data; else TAGS = d.data;
     dirty = false; render(); msg('已儲存，網站已更新 ✓', 'ok');

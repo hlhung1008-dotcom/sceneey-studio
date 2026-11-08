@@ -72,7 +72,9 @@ function validate(k, d) {
       const id = String(t.id || ""); if (!ID_RE.test(id)) throw new Error("標籤代號只能用小寫英文、數字和 -"); if (seen.has(id)) throw new Error("標籤代號重複了：" + id); seen.add(id);
       const label = str(t.label, 20); if (!label) throw new Error("標籤名稱要填喔");
       const color = /^#[0-9a-f]{6}$/i.test(String(t.color || "")) ? String(t.color).toLowerCase() : "#8a7d82";
-      return { id, label, color, kind: t.kind === "world" ? "world" : "tag" };
+      const kind = t.kind === "world" ? "world" : "tag";
+      const on = kind === "world" ? ["chars", "stories", "gallery"] : (Array.isArray(t.on) ? ["chars", "stories", "gallery"].filter((x) => t.on.includes(x)) : ["chars", "stories", "gallery"]);
+      return { id, label, color, kind, on };
     });
   }
   if (k === "chars") {

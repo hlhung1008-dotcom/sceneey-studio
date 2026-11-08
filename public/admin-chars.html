@@ -155,10 +155,10 @@ function setDirty(v) { dirty = v; if (v) msg('有未儲存的變更'); }
 window.addEventListener('beforeunload', function (e) { if (dirty || galDirty || blogDirty || orderDirty) { e.preventDefault(); e.returnValue = ''; } });
 
 function worlds() { return TAGS.filter(function (t) { return t.kind === 'world'; }); }
-function plainTags() { return TAGS.filter(function (t) { return t.kind !== 'world'; }); }
+function plainTags(where) { return TAGS.filter(function (t) { return t.kind !== 'world' && (!where || !Array.isArray(t.on) || t.on.indexOf(where) >= 0); }); }
 function tagLabel(id) { var t = TAGS.find(function (x) { return x.id === id; }); return t ? t.label : (id ? id : '獨立角色'); }
 function ctagIds(c) { var a = (c.tags || []).slice(); if (c.collab && a.indexOf('collab') < 0) a.push('collab'); if (c.award && a.indexOf('award') < 0) a.push('award'); return a; }
-function chips(name, sel) { return '<div class="chars">' + plainTags().map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div>'; }
+function chips(name, sel, where) { return '<div class="chars">' + plainTags(where).map(function (t) { return '<label><input type="checkbox" data-' + name + '="' + esc(t.id) + '"' + (sel.indexOf(t.id) >= 0 ? ' checked' : '') + '><i style="width:8px;height:8px;border-radius:50%;background:' + esc(t.color) + '"></i>' + esc(t.label) + '</label>'; }).join('') + '</div>'; }
 function worldSelect(v, attr) { return '<select class="in" ' + attr + '><option value="">獨立角色（不屬於任何世界觀）</option>' + worlds().map(function (t) { return '<option value="' + esc(t.id) + '"' + (v === t.id ? ' selected' : '') + '>' + esc(t.label) + '</option>'; }).join('') + '</select>'; }
 function form(title, html) { return new Promise(function (res) { var md = $('fmodal'); $('fmt').textContent = title; $('fmb').innerHTML = html; md.classList.add('on'); var f1 = md.querySelector('input'); if (f1) f1.focus();
   var done = function (v) { md.classList.remove('on'); $('fmok').onclick = $('fmno').onclick = null; res(v); }; $('fmok').onclick = function () { var o = {}; md.querySelectorAll('[name]').forEach(function (x) { o[x.name] = x.value.trim(); }); done(o); }; $('fmno').onclick = function () { done(null); }; }); }
@@ -213,7 +213,7 @@ async function open(i) {
    field('類型・風格（例：現代・電競）', 'era', 'maxlength="30"') + field('身分・武器（顯示在世界觀頁頭像下）', 'role', 'maxlength="40"') + field('開場名稱', 'opening', 'maxlength="60"') + field('發布日期（例：2026.05.13）', 'released', 'maxlength="20"') + '</div></section>' +
   '<section class="card"><h2>標籤<em>Tags</em></h2><div class="g2"><label class="f"><span>世界觀標籤</span>' + worldSelect(F.world || '', 'data-k="world"') + '</label>' +
    field('得獎紀錄文字（有填就會自動加上「得獎作品」標籤）', 'award', 'maxlength="40"') +
-   '<div class="f" style="grid-column:1/-1"><span>其他標籤（可複選，到「標籤」分頁可以新增或移除）</span>' + chips('tg', ctagIds(F)) + '</div>' +
+   '<div class="f" style="grid-column:1/-1"><span>其他標籤（可複選，到「標籤」分頁可以新增或移除）</span>' + chips('tg', ctagIds(F), 'chars') + '</div>' +
    field('合作對象（例：gogogoyin，選了「合作角色」時顯示）', 'partner', 'maxlength="40"') +
    '<div class="f" style="gap:10px"><label class="chk"><input type="checkbox" data-k="soon"' + (F.soon ? ' checked' : '') + '>即將登場（列表顯示問號卡，不開放角色頁）</label><label class="chk"><input type="checkbox" data-k="hidden"' + (F.hidden ? ' checked' : '') + '>隱藏（網站上完全不顯示）</label></div></div></section>' +
   '<section class="card" id="imgs">' + imgsHtml() + '</section>' +
