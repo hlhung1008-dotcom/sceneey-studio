@@ -261,7 +261,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 </style>
 <style>html,body{margin:0;background:#fffdfb;overflow:hidden}#dcroot{margin:0 auto}template{display:none}
 #pl{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--pl-bg,#fffdfb);transition:opacity .5s ease,visibility .5s}
-#pl.done{opacity:0;visibility:hidden}
+#pl.done,.pl-quick #pl.pl-wait,.pl-quick #pl:not(.pl-show){opacity:0;visibility:hidden}.pl-quick #pl:not(.pl-show){transition:none}
 .pl-in{display:flex;flex-direction:column;align-items:center;gap:10px}
 .pl-track{position:relative;width:300px;padding-top:52px}
 .pl-bun{position:absolute;top:0;left:0;width:66px;margin-left:-33px;transform-origin:50% 100%;transition:left .2s ease-out;animation:plhop .34s ease-in-out infinite alternate;pointer-events:none}
