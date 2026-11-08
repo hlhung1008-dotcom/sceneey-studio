@@ -16,6 +16,10 @@ a{color:var(--pink)}
 .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:14px 22px;background:rgba(255,253,251,.96);border-bottom:1px solid var(--line)}
 .top h1{margin:0;font-size:18px;letter-spacing:.2em}
 .top .sp{flex:1}
+.anav{display:flex;flex-wrap:wrap;gap:6px}
+.anav a{font-size:13px;letter-spacing:.1em;text-decoration:none;color:var(--sub);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.anav a:hover{color:var(--pink);border-color:var(--pink)}
+.anav a[aria-current="page"]{background:#3d3639;border-color:#3d3639;color:#fff}
 .lnk{font-size:13px;letter-spacing:.1em;text-decoration:none;color:var(--sub)}
 .lnk:hover{color:var(--pink)}
 .wrap{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;max-width:1240px;margin:0 auto;padding:22px}
@@ -97,6 +101,7 @@ a{color:var(--pink)}
 .msg{font-size:13px}
 .msg.err{color:#c0504d}
 .msg.ok{color:#5a9a6e}
+[hidden]{display:none !important}
 .login{max-width:360px;margin:80px auto;display:flex;flex-direction:column;gap:12px;padding:26px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(61,54,57,.35)}
 .modal.on{display:flex}
@@ -104,11 +109,11 @@ a{color:var(--pink)}
 .modal b{font-size:16px;letter-spacing:.1em}
 .modal .row{display:flex;justify-content:flex-end;gap:8px}
 .empty{padding:60px 20px;text-align:center;color:var(--sub)}
-@media (max-width:860px){.wrap{grid-template-columns:1fr;padding:14px}.side{position:static;max-height:260px}.g2,.imgs{grid-template-columns:1fr}.tb{top:56px}.top{padding:12px 14px}}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;padding:14px}.side{position:static;max-height:260px}.g2,.imgs{grid-template-columns:1fr}.tb{top:56px}.top{padding:12px 14px;flex-wrap:wrap}.anav{order:3;width:100%}}
 </style>
 </head>
 <body>
-<header class="top"><h1>角色管理</h1><span class="sp"></span><a class="lnk" href="/admin">← 回到管理頁</a><a class="lnk" href="/admin-stories">故事管理</a><a class="lnk" href="/characters" target="_blank" rel="noopener">看網站 ↗</a></header>
+<header class="top"><h1>後台管理</h1><nav class="anav" aria-label="管理頁面"><a href="/admin?tab=msgs">Q&amp;A 留言</a><a href="/admin?tab=annc">公告列</a><a href="/admin?tab=news">NEWS</a><a href="/admin?tab=gal">GALLERY</a><a href="/admin-chars" aria-current="page">角色</a><a href="/admin-stories">故事</a></nav><span class="sp"></span><a class="lnk" href="/" target="_blank" rel="noopener">看網站 ↗</a></header>
 <div id="login" class="login" hidden>
   <b style="letter-spacing:.2em">管理密碼</b>
   <input id="pw" class="in" type="password" autocomplete="current-password" aria-label="管理密碼">
