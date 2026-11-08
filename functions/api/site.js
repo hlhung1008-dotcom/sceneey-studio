@@ -2,11 +2,11 @@
 import { J, isAdmin, adminSecret, len, clean, sleep, rid, wrap } from "../../lib/cf/common.js";
 import { DEFAULTS } from "../../lib/cf/defaults.js";
 
-const KEYS = ["annc", "news", "gallery", "chars", "stories"];
+const KEYS = ["annc", "news", "gallery", "chars", "stories", "tags"];
 const BLOG_RE = /^(blog|story)_[a-z0-9-]{1,40}$/;
 const okKey = (k) => KEYS.includes(k) || BLOG_RE.test(String(k || ""));
 const ID_RE = /^[a-z0-9-]{1,40}$/;
-const WORLDS = ["armentary", "maroplis", "wujie", ""];
+const TAGIDS = (v) => Array.isArray(v) ? [...new Set(v.map(String).filter((x) => ID_RE.test(x)))].slice(0, 30) : [];
 const URL_RE = /^(https?:\/\/[^\s"'<>]{1,400}|\/[^\s"'<>]{0,300})$/;
 const img = (v) => { const s = String(v || ""); if (s && !SRC_RE.test(s)) throw new Error("圖片網址不對"); return s; };
 const url = (v, what) => { const s = String(v || "").trim(); if (s && !URL_RE.test(s)) throw new Error(what + "的網址格式不對（要以 https:// 或 / 開頭）"); return s; };
@@ -63,7 +63,17 @@ function validate(k, d) {
     if (!Array.isArray(d) || d.length > 300) throw new Error("資料格式錯誤");
     return d.map((g) => { const src = String(g.src || ""); if (!SRC_RE.test(src)) throw new Error("圖片網址不對");
       const chars = Array.isArray(g.chars) ? [...new Set(g.chars.map(String).filter((x) => ID_RE.test(x)))].slice(0, 20) : [];
-      return { src, alt: str(g.alt, 60), chars }; });
+      return { src, alt: str(g.alt, 60), chars, tags: TAGIDS(g.tags) }; });
+  }
+  if (k === "tags") {
+    if (!Array.isArray(d) || d.length > 100) throw new Error("資料格式錯誤");
+    const seen = new Set();
+    return d.map((t) => {
+      const id = String(t.id || ""); if (!ID_RE.test(id)) throw new Error("標籤代號只能用小寫英文、數字和 -"); if (seen.has(id)) throw new Error("標籤代號重複了：" + id); seen.add(id);
+      const label = str(t.label, 20); if (!label) throw new Error("標籤名稱要填喔");
+      const color = /^#[0-9a-f]{6}$/i.test(String(t.color || "")) ? String(t.color).toLowerCase() : "#8a7d82";
+      return { id, label, color, kind: t.kind === "world" ? "world" : "tag" };
+    });
   }
   if (k === "chars") {
     if (!Array.isArray(d) || d.length > 100) throw new Error("資料格式錯誤");
@@ -71,11 +81,11 @@ function validate(k, d) {
     return d.map((c) => {
       const id = String(c.id || ""); if (!ID_RE.test(id)) throw new Error("角色代號只能用小寫英文、數字和 -"); if (seen.has(id)) throw new Error("角色代號重複了：" + id); seen.add(id);
       const name = str(c.name, 40); if (!name) throw new Error("角色名稱要填喔");
-      const world = WORLDS.includes(c.world) ? c.world : "";
+      const world = ID_RE.test(String(c.world || "")) ? String(c.world) : "";
       const pos = /^\d{1,3}% \d{1,3}%$/.test(String(c.pos || "")) ? c.pos : "50% 20%";
       const stories = (Array.isArray(c.stories) ? c.stories : []).slice(0, 30).map((t) => { const title = str(t.title, 60); if (!title) throw new Error(name + "：故事標題要填喔"); return { title, url: url(t.url, "故事"), desc: str(t.desc, 200) }; });
       return { id, name, one: str(c.one, 120), era: str(c.era, 30), world, collab: !!c.collab, partner: str(c.partner, 40), award: str(c.award, 40), role: str(c.role, 40),
-        img: img(c.img), av: img(c.av), banner: img(c.banner), pos, play: url(c.play, "遊玩連結"), opening: str(c.opening, 60), released: str(c.released, 20), stories, soon: !!c.soon, hidden: !!c.hidden };
+        img: img(c.img), av: img(c.av), banner: img(c.banner), pos, play: url(c.play, "遊玩連結"), opening: str(c.opening, 60), released: str(c.released, 20), stories, tags: TAGIDS(c.tags), soon: !!c.soon, hidden: !!c.hidden };
     });
   }
   if (k === "stories") {
@@ -85,7 +95,7 @@ function validate(k, d) {
       const id = String(t.id || ""); if (!ID_RE.test(id)) throw new Error("故事代號只能用小寫英文、數字和 -"); if (seen.has(id)) throw new Error("故事代號重複了：" + id); seen.add(id);
       const title = str(t.title, 80); if (!title) throw new Error("故事標題要填喔");
       const chars = Array.isArray(t.chars) ? [...new Set(t.chars.map(String).filter((x) => ID_RE.test(x)))].slice(0, 20) : [];
-      return { id, title, chars, cover: img(t.cover), summary: str(t.summary, 200), date: str(t.date, 20), hidden: !!t.hidden };
+      return { id, title, chars, tags: TAGIDS(t.tags), cover: img(t.cover), summary: str(t.summary, 200), date: str(t.date, 20), hidden: !!t.hidden };
     });
   }
   if (BLOG_RE.test(k)) {
