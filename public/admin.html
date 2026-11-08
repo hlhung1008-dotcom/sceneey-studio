@@ -186,6 +186,16 @@ async function tryLogin(k) { KEY = k; try { await call({ action: 'check' }); try
 $('pwgo').onclick = async function () { if (await tryLogin($('pw').value)) start(); };
 $('pw').onkeydown = function (e) { if (e.key === 'Enter') $('pwgo').click(); };
 
+// ---------- images ----------
+async function shrink(file, max) {
+  var bmp = await createImageBitmap(file); var s = Math.min(1, max / Math.max(bmp.width, bmp.height));
+  var c = document.createElement('canvas'); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+  var blob = null; for (var q of [0.86, 0.75, 0.62, 0.5]) { blob = await new Promise(function (r) { c.toBlob(r, 'image/webp', q); }); if (!blob || blob.type !== 'image/webp') blob = await new Promise(function (r) { c.toBlob(r, 'image/jpeg', q + 0.02); }); if (blob.size < 1700000) break; }
+  var data = await new Promise(function (r) { var fr = new FileReader(); fr.onload = function () { r(String(fr.result).split(',')[1]); }; fr.readAsDataURL(blob); });
+  return { type: blob.type, data: data };
+}
+async function upload(file, max) { var im = await shrink(file, max); var d = await call({ action: 'upload', type: im.type, data: im.data }); return d.src; }
+
 
 async function gb(body) {
   var h = { 'content-type': 'application/json' }; if (KEY) h['x-admin-key'] = KEY;
