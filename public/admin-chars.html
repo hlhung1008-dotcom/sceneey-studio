@@ -199,13 +199,16 @@ $('add').onclick = async function () {
 
 // ---------- editor ----------
 function field(label, key, attrs) { return '<label class="f"><span>' + label + '</span><input class="in" data-k="' + key + '" value="' + esc(F[key]) + '" ' + (attrs || '') + '></label>'; }
+function avc(x) { var m = String(x.avc || '').match(/^(\d{1,3}) (\d{1,3}) (\d{2,3})$/); if (m) return [+m[1], +m[2], +m[3]]; if (x.av) return [50, 50, 100]; var q = String(x.pos || '50% 20%').split(' '); return [parseInt(q[0]) || 50, parseInt(q[1]) || 20, 100]; }
+function avSt(x) { var a = avc(x); return 'object-position:' + a[0] + '% ' + a[1] + '%;transform:scale(' + (a[2] / 100) + ');transform-origin:' + a[0] + '% ' + a[1] + '%'; }
 function imgsHtml() {
   var px = parseInt(F.pos) || 50, py = parseInt(String(F.pos).split(' ')[1]) || 20;
   return '<h2>圖片<em>Images</em></h2><div class="imgs"><div><span class="hint">立繪（直式，角色頁和角色列表用）</span><div class="prev" id="pImg" style="margin-top:8px">' + (F.img ? '<img src="' + esc(F.img) + '" alt="" style="object-position:' + esc(F.pos) + '">' : '尚未上傳') + '</div>' +
    '<div class="tools"><label class="ghost up">上傳立繪<input type="file" accept="image/*" data-up="img"></label>' + (F.img ? '<button class="ghost danger" type="button" data-clr="img">移除</button>' : '') + '</div>' +
    '<div class="rng"><span>左右</span><input type="range" min="0" max="100" value="' + px + '" data-pos="x"></div><div class="rng"><span>上下</span><input type="range" min="0" max="100" value="' + py + '" data-pos="y"></div><span class="hint">拖曳調整圖片在框裡露出的位置</span></div>' +
-   '<div><span class="hint">圓形頭像（可留空，留空會用立繪裁切）</span><div class="prev av" id="pAv" style="margin-top:8px">' + (F.av ? '<img src="' + esc(F.av) + '" alt="">' : (F.img ? '<img src="' + esc(F.img) + '" alt="" style="object-position:' + esc(F.pos) + '">' : '尚未上傳')) + '</div>' +
-   '<div class="tools"><label class="ghost up">上傳頭像<input type="file" accept="image/*" data-up="av"></label>' + (F.av ? '<button class="ghost danger" type="button" data-clr="av">移除</button>' : '') + '</div><span class="hint">建議上傳正方形、臉在正中間的圖</span></div></div><div style="margin-top:18px"><span class="hint">角色頁頂端橫幅（橫式，可留空；留空會用世界觀主視覺或立繪）</span><div class="prev" style="aspect-ratio:16/5;margin-top:8px">' + (F.banner ? '<img src="' + esc(F.banner) + '" alt="">' : '尚未上傳') + '</div><div class="tools"><label class="ghost up">上傳橫幅<input type="file" accept="image/*" data-up="banner"></label>' + (F.banner ? '<button class="ghost danger" type="button" data-clr="banner">移除</button>' : '') + '</div></div>';
+   '<div><span class="hint">圓形頭像（可留空，留空會用立繪裁切）</span><div class="prev av" id="pAv" style="margin-top:8px">' + ((F.av || F.img) ? '<img src="' + esc(F.av || F.img) + '" alt="" style="' + avSt(F) + '">' : '尚未上傳') + '</div>' +
+   '<div class="rng"><span>左右</span><input type="range" min="0" max="100" value="' + avc(F)[0] + '" data-avc="0"></div><div class="rng"><span>上下</span><input type="range" min="0" max="100" value="' + avc(F)[1] + '" data-avc="1"></div><div class="rng"><span>放大</span><input type="range" min="100" max="300" value="' + avc(F)[2] + '" data-avc="2"></div>' +
+   '<div class="tools"><label class="ghost up">上傳頭像<input type="file" accept="image/*" data-up="av"></label>' + (F.av ? '<button class="ghost danger" type="button" data-clr="av">移除</button>' : '') + '</div><span class="hint">拖曳「左右／上下」選要對準的位置，「放大」可以裁得更近</span></div></div><div style="margin-top:18px"><span class="hint">角色頁頂端橫幅（橫式，可留空；留空會用世界觀主視覺或立繪）</span><div class="prev" style="aspect-ratio:16/5;margin-top:8px">' + (F.banner ? '<img src="' + esc(F.banner) + '" alt="">' : '尚未上傳') + '</div><div class="tools"><label class="ghost up">上傳橫幅<input type="file" accept="image/*" data-up="banner"></label>' + (F.banner ? '<button class="ghost danger" type="button" data-clr="banner">移除</button>' : '') + '</div></div>';
 }
 async function open(i) {
   cur = i; F = JSON.parse(JSON.stringify(CH[i])); F.tags = ctagIds(F); dirty = !!F.isNew; blogDirty = false; galDirty = false; renderList();
@@ -243,18 +246,19 @@ function bindMain() {
     if (t.id === 'ed' || t.closest && t.closest('#ed')) { blogDirty = true; msg('有未儲存的變更'); return; }
     if (t.dataset.tg) { F.tags = Array.from(m.querySelectorAll('[data-tg]:checked')).map(function (x) { return x.dataset.tg; }); F.collab = F.tags.indexOf('collab') >= 0; setDirty(true); return; }
     if (t.dataset.k) { F[t.dataset.k] = t.type === 'checkbox' ? t.checked : t.value; setDirty(true); if (t.dataset.k === 'name') { CH[cur].name = F.name; } }
-    if (t.dataset.pos) { var r = m.querySelectorAll('[data-pos]'); F.pos = r[0].value + '% ' + r[1].value + '%'; m.querySelectorAll('#pImg img, #pAv img').forEach(function (im) { if (!F.av || im.closest('#pImg')) im.style.objectPosition = F.pos; }); setDirty(true); }
+    if (t.dataset.pos) { var r = m.querySelectorAll('[data-pos]'); F.pos = r[0].value + '% ' + r[1].value + '%'; var pi = m.querySelector('#pImg img'); if (pi) pi.style.objectPosition = F.pos; var pa = m.querySelector('#pAv img'); if (pa) pa.setAttribute('style', avSt(F)); setDirty(true); }
+    if (t.dataset.avc) { var ra = m.querySelectorAll('[data-avc]'); F.avc = ra[0].value + ' ' + ra[1].value + ' ' + ra[2].value; var pa2 = m.querySelector('#pAv img'); if (pa2) pa2.setAttribute('style', avSt(F)); setDirty(true); }
     if (t.dataset.st) { var p = t.dataset.st.split('.'); F.stories[+p[0]][p[1]] = t.value; setDirty(true); }
   });
   m.addEventListener('change', async function (e) {
     var t = e.target;
     if (t.dataset.k && t.tagName === 'SELECT') { F[t.dataset.k] = t.value; setDirty(true); }
-    if (t.dataset.up && t.files[0]) { msg('上傳中…'); try { var src = await upload(t.files[0], t.dataset.up === 'av' ? 900 : (t.dataset.up === 'banner' ? 2000 : 1600)); F[t.dataset.up] = src; setDirty(true); rerenderKeepBlog(); msg('圖片已上傳，記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } t.value = ''; }
+    if (t.dataset.up && t.files[0]) { msg('上傳中…'); try { var src = await upload(t.files[0], t.dataset.up === 'av' ? 900 : (t.dataset.up === 'banner' ? 2000 : 1600)); F[t.dataset.up] = src; if (t.dataset.up === 'av') F.avc = ''; setDirty(true); rerenderKeepBlog(); msg('圖片已上傳，記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } t.value = ''; }
     if (t.dataset.ins) { var fs = Array.from(t.files || []); t.value = ''; if (t.dataset.ins === '2' && fs.length !== 2) { msg('雙圖並排請一次選兩張圖', 'err'); return; } await insertImgs(fs); }
   });
   m.addEventListener('click', async function (e) {
     var t = e.target.closest('button'); if (!t) return;
-    if (t.dataset.clr) { F[t.dataset.clr] = ''; setDirty(true); rerenderKeepBlog(); }
+    if (t.dataset.clr) { F[t.dataset.clr] = ''; if (t.dataset.clr === 'av') F.avc = ''; setDirty(true); rerenderKeepBlog(); }
     if (t.id === 'stAdd') { F.stories.push({ title: '', url: '', desc: '' }); setDirty(true); renderStories(); }
     if (t.dataset.std != null) { F.stories.splice(+t.dataset.std, 1); setDirty(true); renderStories(); }
     if (t.dataset.stm) { var p = t.dataset.stm.split(','), a = +p[0], b = a + (+p[1]); if (b < 0 || b >= F.stories.length) return; var x = F.stories[a]; F.stories[a] = F.stories[b]; F.stories[b] = x; setDirty(true); renderStories(); }

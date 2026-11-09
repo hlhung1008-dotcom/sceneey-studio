@@ -474,6 +474,7 @@ const tagOn = (t, where) => t.kind === 'world' || !Array.isArray(t.on) || t.on.i
 const worldOf = (k) => { const t = k ? tagById(k) : null; if (!k || (!t && !WL[k])) return WL['']; const b = WL[k] || { en: t.label, zh: t.label, tone: t.color, soft: t.color + '1f', hero: '' }; return t ? Object.assign({}, b, { en: t.label, tone: t.color }) : b; };
 const ctagIds = (c) => { const a = (c.tags || []).slice(); if (c.collab && a.indexOf('collab') < 0) a.push('collab'); if (c.award && a.indexOf('award') < 0) a.push('award'); return a; };
 const ctags = (c) => ctagIds(c).map(tagById).filter((t) => t && t.kind !== 'world' && tagOn(t, 'chars'));
+const avSt = (x) => { const m = String(x.avc || '').match(/^(\d{1,3}) (\d{1,3}) (\d{2,3})$/); let px, py, z; if (m) { px = m[1]; py = m[2]; z = m[3]; } else if (x.av) { px = 50; py = 50; z = 100; } else { const q = String(x.pos || '50% 20%').split(' '); px = parseInt(q[0]) || 50; py = parseInt(q[1]) || 20; z = 100; } return 'object-position: ' + px + '% ' + py + '%; transform: scale(' + (z / 100) + '); transform-origin: ' + px + '% ' + py + '%'; };
 const GENDER = { m: ['男性', '#6f8fb8'], f: ['女性', '#d68aa5'], n: ['無性別', '#9b9488'] };
 const CTYPE = { char: ['角色', '#8a6f9e'], sim: ['模擬器', '#5f9a8a'] };
 const tagsOf = (c) => { const w = worldOf(c.world); const t = [{ label: c.world ? w.en : '獨立角色', col: w.tone, soft: w.soft }];
