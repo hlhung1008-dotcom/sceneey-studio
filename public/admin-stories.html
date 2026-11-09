@@ -202,6 +202,7 @@ async function open(i) {
   $('main').innerHTML =
   '<section class="card"><h2>故事資料<em>Story</em></h2><div class="g2"><label class="f" style="grid-column:1/-1"><span>標題</span><input class="in" data-k="title" maxlength="80" value="' + esc(F.title) + '"></label>' +
    '<label class="f"><span>網址代號（/story/…）</span><input class="in" value="' + esc(F.id) + '" readonly></label><label class="f"><span>日期（例：2026.11.08）</span><input class="in" data-k="date" maxlength="20" value="' + esc(F.date) + '"></label>' +
+   '<label class="f"><span>編輯者（留空＝sceneey）</span><input class="in" data-k="editor" maxlength="30" placeholder="sceneey" value="' + esc(F.editor || '') + '"></label>' +
    '<label class="f" style="grid-column:1/-1"><span>簡介（顯示在故事列表）</span><input class="in" data-k="summary" maxlength="200" value="' + esc(F.summary) + '"></label>' +
    '<label class="chk"><input type="checkbox" data-k="hidden"' + (F.hidden ? ' checked' : '') + '>隱藏（網站上不顯示）</label></div></section>' +
   '<section class="card"><h2>出場角色<em>Characters</em></h2><span class="hint">可以複選；都不勾就是「獨立短篇」。勾選的角色，角色頁會出現「故事」按鈕。</span><div class="chars" id="chs" style="margin-top:12px">' +

@@ -87,7 +87,7 @@ function validate(k, d) {
       const pos = /^\d{1,3}% \d{1,3}%$/.test(String(c.pos || "")) ? c.pos : "50% 20%";
       const stories = (Array.isArray(c.stories) ? c.stories : []).slice(0, 30).map((t) => { const title = str(t.title, 60); if (!title) throw new Error(name + "：故事標題要填喔"); return { title, url: url(t.url, "故事"), desc: str(t.desc, 200) }; });
       return { id, name, one: str(c.one, 120), era: str(c.era, 30), world, collab: !!c.collab, partner: str(c.partner, 40), award: str(c.award, 40), role: str(c.role, 40),
-        img: img(c.img), av: img(c.av), banner: img(c.banner), pos, play: url(c.play, "遊玩連結"), opening: str(c.opening, 60), released: str(c.released, 20), stories, tags: TAGIDS(c.tags), gender: ["m", "f", "n"].includes(c.gender) ? c.gender : "", ctype: c.ctype === "sim" ? "sim" : "char", avc: /^\d{1,3} \d{1,3} \d{2,3}$/.test(String(c.avc || "")) ? String(c.avc) : "", soon: !!c.soon, hidden: !!c.hidden };
+        img: img(c.img), av: img(c.av), banner: img(c.banner), pos, play: url(c.play, "遊玩連結"), opening: str(c.opening, 60), released: str(c.released, 20), stories, tags: TAGIDS(c.tags), gender: ["m", "f", "n"].includes(c.gender) ? c.gender : "", ctype: c.ctype === "sim" ? "sim" : "char", editor: str(c.editor, 30), avc: /^\d{1,3} \d{1,3} \d{2,3}$/.test(String(c.avc || "")) ? String(c.avc) : "", soon: !!c.soon, hidden: !!c.hidden };
     });
   }
   if (k === "stories") {
@@ -97,7 +97,7 @@ function validate(k, d) {
       const id = String(t.id || ""); if (!ID_RE.test(id)) throw new Error("故事代號只能用小寫英文、數字和 -"); if (seen.has(id)) throw new Error("故事代號重複了：" + id); seen.add(id);
       const title = str(t.title, 80); if (!title) throw new Error("故事標題要填喔");
       const chars = Array.isArray(t.chars) ? [...new Set(t.chars.map(String).filter((x) => ID_RE.test(x)))].slice(0, 20) : [];
-      return { id, title, chars, tags: TAGIDS(t.tags), cover: img(t.cover), summary: str(t.summary, 200), date: str(t.date, 20), hidden: !!t.hidden };
+      return { id, title, chars, tags: TAGIDS(t.tags), cover: img(t.cover), summary: str(t.summary, 200), date: str(t.date, 20), editor: str(t.editor, 30), hidden: !!t.hidden };
     });
   }
   if (BLOG_RE.test(k)) {
