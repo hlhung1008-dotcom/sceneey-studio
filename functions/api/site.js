@@ -139,6 +139,7 @@ export const onRequest = wrap(async ({ request: req, env }) => {
     const sq = url.searchParams.get("search");
     if (sq != null) return J({ data: await search(db, sq) });
     const k = url.searchParams.get("k");
+    if (k === "upd") return J({ data: (await getK(db, "upd")) || { chars: {}, stories: {} } });
     if (!okKey(k)) return J({ error: "未知的項目" }, 400);
     const d = await getK(db, k);
     return J({ data: d ?? (BLOG_RE.test(k) ? (k.startsWith("blog_") ? ((DEFAULTS.blogs || {})[k.slice(5)] || "") : "") : DEFAULTS[k]) });
@@ -153,6 +154,17 @@ export const onRequest = wrap(async ({ request: req, env }) => {
     if (!okKey(k)) return J({ error: "未知的項目" }, 400);
     let data; try { data = validate(k, b.data); } catch (e) { return J({ error: e.message }, 400); }
     const stmts = [db.prepare("INSERT OR REPLACE INTO site (k, v) VALUES (?, ?)").bind(k, JSON.stringify(data))];
+    // record "last updated" dates (Asia/Taipei) for characters and stories
+    try {
+      const t = new Date(Date.now() + 8 * 3600e3), day = t.getUTCFullYear() + "." + String(t.getUTCMonth() + 1).padStart(2, "0") + "." + String(t.getUTCDate()).padStart(2, "0");
+      const upd = (await getK(db, "upd")) || { chars: {}, stories: {} }; upd.chars = upd.chars || {}; upd.stories = upd.stories || {}; let ch = false;
+      const diff = (oldList, group) => { const om = new Map((oldList || []).map((x) => [x.id, JSON.stringify(x)])); for (const x of data) if (om.get(x.id) !== JSON.stringify(x)) { upd[group][x.id] = day; ch = true; } };
+      if (k === "chars") diff((await getK(db, "chars")) || DEFAULTS.chars, "chars");
+      else if (k === "stories") diff((await getK(db, "stories")) || DEFAULTS.stories, "stories");
+      else if (k.startsWith("blog_")) { const prev = await getK(db, k); if (prev !== data) { upd.chars[k.slice(5)] = day; ch = true; } }
+      else if (k.startsWith("story_")) { const prev = await getK(db, k); if (prev !== data) { upd.stories[k.slice(6)] = day; ch = true; } }
+      if (ch) stmts.push(db.prepare("INSERT OR REPLACE INTO site (k, v) VALUES (?, ?)").bind("upd", JSON.stringify(upd)));
+    } catch (e) {}
     if (k === "gallery") {
       const old = (await getK(db, "gallery")) || [];
       const keep = new Set(data.map((g) => g.src));

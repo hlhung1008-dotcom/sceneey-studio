@@ -328,6 +328,12 @@ body{margin:0}
 .al-q:focus{border-color:#c27ba0}
 .al-n{font:italic 500 14px "Cormorant Garamond",serif;color:#8a7d82;white-space:nowrap}
 .al-row{position:relative}
+.al-row{padding-right:292px !important;min-height:96px}
+.al-th{display:block;position:absolute;right:0;top:0;bottom:0;width:270px;overflow:hidden;-webkit-mask-image:linear-gradient(to left,#000 45%,transparent);mask-image:linear-gradient(to left,#000 45%,transparent)}
+.al-th img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+
+.al-row:hover .al-th img{transform:scale(1.05)}
+.al-th i{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font:600 26px "Noto Serif TC",serif;font-style:normal;color:#d9bfc9}
 .al-pv{position:absolute;left:calc(100% + 26px);top:50%;width:220px;aspect-ratio:16/10;border-radius:10px;overflow:hidden;opacity:0;transform:translate(-8px,-50%);transition:opacity .35s,transform .35s;pointer-events:none;box-shadow:0 14px 30px -16px rgba(74,54,66,.45)}
 .al-pv img{width:100%;height:100%;object-fit:cover}
 .al-row:hover .al-pv{opacity:1;transform:translate(0,-50%)}
@@ -343,14 +349,15 @@ body{margin:0}
 .al-list:not(:has(li)){display:none}
 .al-list{list-style:none;margin:0;padding:0;border-top:1px solid #ecdfe3}
 .al-list li{border-bottom:1px solid #ecdfe3}
-.al-row{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:22px;align-items:baseline;padding:20px 6px;text-decoration:none;color:#3d3639;font-family:"Noto Serif TC",serif;transition:background .3s}
+.al-row{display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:22px;align-items:center;padding:20px 6px;text-decoration:none;color:#3d3639;font-family:"Noto Serif TC",serif;transition:background .3s}
 .al-row:hover{background:#fdf6f8}
 .al-row:hover b{color:#c27ba0}
 .al-row time{font:italic 500 15px "Cormorant Garamond",serif;color:#8a7d82;letter-spacing:.06em;font-variant-numeric:tabular-nums}
 .al-main{display:flex;flex-direction:column;gap:5px;min-width:0}
 .al-main b{font-size:16px;font-weight:600;letter-spacing:.1em;transition:color .3s}
 .al-sum{font-size:13px;line-height:1.8;color:#6b5e63}
-.al-who{font-size:12px;letter-spacing:.14em;color:#a99aa0;white-space:nowrap}
+.al-who{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;max-width:220px}
+.al-who .tg{font-size:11.5px;letter-spacing:.1em;padding:3px 9px;border-radius:999px;white-space:nowrap}
 .sl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .sl-card{display:flex;flex-direction:column;text-decoration:none;color:#3d3639;font-family:"Noto Serif TC",serif;border:1px solid #ecdfe3;border-radius:12px;overflow:hidden;background:#fff;transition:transform .3s,border-color .3s}
 .sl-card:hover{transform:translateY(-3px);border-color:#c27ba0}
@@ -366,6 +373,15 @@ body{margin:0}
 .sp-title{margin:18px 0 10px;font:600 34px/1.4 "Noto Serif TC",serif;letter-spacing:.12em;color:#3d3639}
 .sp-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:22px;font:italic 500 14px "Cormorant Garamond",serif;color:#8a7d82}
 .sp-meta a.tg{text-decoration:none}
+.c-upd{margin:0 0 14px;text-align:right;font:italic 500 13px "Cormorant Garamond","Noto Serif TC",serif;letter-spacing:.12em;color:#a99aa0}
+.sp-upd{font-size:12.5px;opacity:.85}
+.sp-hero{position:relative;height:440px;background:#3d3639 center/cover no-repeat;display:flex;align-items:flex-end}
+.sp-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,20,26,.18) 0%,rgba(28,20,26,.42) 52%,rgba(28,20,26,.5) 70%,rgba(255,253,251,.55) 88%,#fffdfb 100%)}
+.sp-hero-in{position:relative;width:100%;max-width:780px;margin:0 auto;padding:0 24px 84px;box-sizing:border-box}
+.sp-hero .sp-back{color:rgba(255,255,255,.88)}
+.sp-hero .sp-title{font-size:40px;color:#fff;text-shadow:0 2px 18px rgba(20,12,18,.45)}
+.sp-hero .sp-meta{color:rgba(255,255,255,.9);margin-bottom:0}
+.sp-hero + .cw .sp-wrap{padding-top:6px}
 .sp-cover{margin:0 0 26px;border-radius:12px;overflow:hidden}
 .sp-cover img{display:block;width:100%;height:auto}
 .sp-wrap .cp-blog{max-width:none}
@@ -420,11 +436,17 @@ body{margin:0}
       </div>
     </header>
     <main style="background: #fffdfb; padding-bottom: 40px">
-      <div class="cw"><article class="sp-wrap">
+      <template x-if="v.t.hasCover"><div style="display: contents"><header class="sp-hero" :style="'background-image: url(' + (v.t.cover) + ')'"><div class="sp-hero-in">
         <a class="sp-back" href="/story">← STORY</a>
         <h1 class="sp-title"><span x-text="v.t.title"></span></h1>
-        <div class="sp-meta"><template x-for="(g, $index) in v.t.tags"><div style="display: contents"><a class="tg" :href="g.href" :style="'color: ' + (g.col) + '; background: ' + (g.soft)"><span x-text="g.label"></span></a></div></template><span><span x-text="v.t.date"></span></span></div>
-        <template x-if="v.t.hasCover"><div style="display: contents"><figure class="sp-cover"><img :src="v.t.cover" alt=""></figure></div></template>
+        <div class="sp-meta"><template x-for="(g, $index) in v.t.tags"><div style="display: contents"><a class="tg" :href="g.href" style="color: #ffffff; background: rgba(255,255,255,.16); box-shadow: inset 0 0 0 1px rgba(255,255,255,.55)"><span x-text="g.label"></span></a></div></template><span><span x-text="v.t.date"></span></span><span class="sp-upd">・最後更新 <span x-text="v.t.upd"></span></span></div>
+      </div></header></div></template>
+      <div class="cw"><article class="sp-wrap">
+        <template x-if="v.t.noCover"><div style="display: contents"><div>
+        <a class="sp-back" href="/story">← STORY</a>
+        <h1 class="sp-title"><span x-text="v.t.title"></span></h1>
+        <div class="sp-meta"><template x-for="(g, $index) in v.t.tags"><div style="display: contents"><a class="tg" :href="g.href" :style="'color: ' + (g.col) + '; background: ' + (g.soft)"><span x-text="g.label"></span></a></div></template><span><span x-text="v.t.date"></span></span><span class="sp-upd">・最後更新 <span x-text="v.t.upd"></span></span></div>
+        </div></div></template>
         <template x-if="v.hasBody"><div style="display: contents"><div class="cp-blog" x-html="v.bodyHtml"></div></div></template>
         <template x-if="v.noBody"><div style="display: contents"><p class="st-empty"><span x-text="v.emptyMsg"></span></p></div></template>
         <template x-if="v.hasMore"><div style="display: contents"><div class="sp-more"><h2>更多故事</h2><ul><template x-for="(m, $index) in v.more"><div style="display: contents"><li><a :href="m.href"><span x-text="m.title"></span> →</a></li></div></template></ul></div></div></template>
@@ -475,6 +497,11 @@ const worldOf = (k) => { const t = k ? tagById(k) : null; if (!k || (!t && !WL[k
 const ctagIds = (c) => { const a = (c.tags || []).slice(); if (c.collab && a.indexOf('collab') < 0) a.push('collab'); if (c.award && a.indexOf('award') < 0) a.push('award'); return a; };
 const ctags = (c) => ctagIds(c).map(tagById).filter((t) => t && t.kind !== 'world' && tagOn(t, 'chars'));
 const avSt = (x) => { const m = String(x.avc || '').match(/^(\d{1,3}) (\d{1,3}) (\d{2,3})$/); let px, py, z; if (m) { px = m[1]; py = m[2]; z = m[3]; } else if (x.av) { px = 50; py = 50; z = 100; } else { const q = String(x.pos || '50% 20%').split(' '); px = parseInt(q[0]) || 50; py = parseInt(q[1]) || 20; z = 100; } return 'object-position: ' + px + '% ' + py + '%; transform: scale(' + (z / 100) + '); transform-origin: ' + px + '% ' + py + '%'; };
+const galSoft = (tone, seed) => { let h = 0; String(seed || '').split('').forEach((ch) => { h = (h * 31 + ch.charCodeAt(0)) % 360; }); const PAL = ['#f7dfe8', '#e6e0f5', '#dcecf2', '#f5ead8', '#e2f0e6', '#f3e1ef'];
+  const PAT = ["url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Ccircle cx='3' cy='3' r='1.4' fill='white' fill-opacity='.75'/%3E%3Ccircle cx='12' cy='12' r='1' fill='white' fill-opacity='.55'/%3E%3C/svg%3E\")", "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='16'%3E%3Cpath d='M0 8 Q10 0 20 8 T40 8' fill='none' stroke='white' stroke-opacity='.6' stroke-width='1.2'/%3E%3C/svg%3E\")", "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M9 4l1.2 3.3 3.3 1.2-3.3 1.2L9 13l-1.2-3.3-3.3-1.2 3.3-1.2z' fill='white' fill-opacity='.7'/%3E%3Ccircle cx='25' cy='24' r='1.2' fill='white' fill-opacity='.6'/%3E%3C/svg%3E\")", "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16L16 0M-4 4L4-4M12 20L20 12' stroke='white' stroke-opacity='.5' stroke-width='1'/%3E%3C/svg%3E\")", "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='14'%3E%3Cpath d='M0 14a6 6 0 0 1 12 0a6 6 0 0 1 12 0' fill='none' stroke='white' stroke-opacity='.6' stroke-width='1.1'/%3E%3C/svg%3E\")", "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cg transform='rotate%2845 22 22%29' fill='white' fill-opacity='.42'%3E%3Cellipse cx='22' cy='16' rx='3.6' ry='5.2'/%3E%3Cellipse cx='22' cy='28' rx='3.6' ry='5.2'/%3E%3Cellipse cx='16' cy='22' rx='5.2' ry='3.6'/%3E%3Cellipse cx='28' cy='22' rx='5.2' ry='3.6'/%3E%3C/g%3E%3Ccircle cx='22' cy='22' r='1.8' fill='white' fill-opacity='.8'/%3E%3Ccircle cx='4' cy='4' r='1' fill='white' fill-opacity='.6'/%3E%3C/svg%3E\")"];
+  const a = PAL[h % PAL.length], b = PAL[(h + 2) % PAL.length]; return 'background: ' + PAT[h % PAT.length] + ', radial-gradient(120% 140% at 85% 20%, ' + tone + '33 0%, transparent 55%), linear-gradient(135deg, ' + a + ', ' + b + ')'; };
+const UPDB = '2026.11.09';
+const updOf = (grp, id) => (((siteGet('upd') || {})[grp]) || {})[id] || UPDB;
 const GENDER = { m: ['男性', '#6f8fb8'], f: ['女性', '#d68aa5'], n: ['無性別', '#9b9488'] };
 const CTYPE = { char: ['角色', '#8a6f9e'], sim: ['模擬器', '#5f9a8a'] };
 const tagsOf = (c) => { const w = worldOf(c.world); const t = [{ label: c.world ? w.en : '獨立角色', col: w.tone, soft: w.soft }];
@@ -493,7 +520,7 @@ const storyHref = (t) => ON_SITE ? ((IS_M ? '/m/story/' : '/story/') + t.id) : (
 const charsOf = (t) => { const all = allChars(); return (t.chars || []).map((id) => all.find((c) => c.id === id)).filter((c) => c && !c.soon); };
 
 const SID = ((typeof location !== 'undefined' && location.pathname.match(/\/story\/([a-z0-9-]{1,40})/)) || [])[1] || '';
-if (typeof NEED !== 'undefined') { NEED.push('chars', 'stories'); SITE.chars = siteCached('chars'); SITE.stories = siteCached('stories'); if (SID) { NEED.push('story_' + SID); SITE['story_' + SID] = siteCached('story_' + SID); } }
+if (typeof NEED !== 'undefined') { NEED.push('chars', 'stories', 'upd'); SITE.chars = siteCached('chars'); SITE.stories = siteCached('stories'); if (SID) { NEED.push('story_' + SID); SITE['story_' + SID] = siteCached('story_' + SID); } }
 
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { annc: true, lb: null }; }
@@ -506,7 +533,7 @@ class Component extends DCLogic {
     if (t && typeof document !== 'undefined') { try { document.title = t.title + '｜Sceneey Story'; } catch (e) {} }
     const more = t ? all.filter((x) => x.id !== t.id && (!cs.length ? !(x.chars || []).length : (x.chars || []).some((id) => (t.chars || []).indexOf(id) >= 0))).slice(0, 6) : [];
     const R = {
-      t: t ? { title: t.title, date: t.date || '', cover: t.cover, hasCover: !!t.cover, tags: cs.map((c) => { const w = worldOf(c.world); return { label: c.name, href: charHref(c), col: w.tone, soft: w.soft }; }) }
+      t: t ? { title: t.title, date: t.date || '', cover: t.cover, hasCover: !!t.cover, noCover: !t.cover, upd: updOf('stories', t.id), tags: cs.map((c) => { const w = worldOf(c.world); return { label: c.name, href: charHref(c), col: w.tone, soft: w.soft }; }) }
            : { title: loaded ? '找不到這篇故事' : '', date: '', cover: '', hasCover: false, tags: [] },
       bodyHtml: body, hasBody: !!body, noBody: !body, emptyMsg: t ? '內文整理中，敬請期待。' : (loaded ? '這篇故事可能已經移除了。' : '載入中…'),
       more: more.map((x) => ({ href: storyHref(x), title: x.title })), hasMore: more.length > 0,
