@@ -535,11 +535,9 @@ function relatedFor(kind, item) {
   chars.forEach((c) => { if (c.soon || (kind === 'char' && c.id === item.id)) return; let sc = 0;
     if (kind === 'story' && myChars.some((m) => m.id === c.id)) sc += 6;
     if (c.world && myWorlds.indexOf(c.world) >= 0) sc += 3;
-    ctagIds(c).forEach((t) => { if (myTags.indexOf(t) >= 0) sc += 1; });
     if (sc > 0) add('c:' + c.id, sc, { type: '秘密設定', title: c.name + '｜秘密 & 幕後花絮', href: charHref(c), img: c.banner || c.img || '', pos: c.banner ? 'center' : (c.pos || '50% 20%'), sub: c.one || '', tags: [tagOf(c)] }); });
   stories.forEach((t) => { if (kind === 'story' && t.id === item.id) return; const cs = chars.filter((c) => (t.chars || []).indexOf(c.id) >= 0); let sc = 0;
     cs.forEach((c) => { if (myChars.some((m) => m.id === c.id)) sc += 4; else if (c.world && myWorlds.indexOf(c.world) >= 0) sc += 2; });
-    (t.tags || []).concat(...cs.map(ctagIds)).forEach((x) => { if (myTags.indexOf(x) >= 0) sc += 1; });
     if (sc > 0) add('s:' + t.id, sc, { type: '故事', title: t.title, href: relStoryHref(t), img: t.cover || '', pos: 'center', sub: t.summary || '', tags: cs.length ? cs.map(tagOf) : [{ label: '獨立短篇', col: WL[''].tone, soft: WL[''].soft }] }); });
   return out.sort((a, b) => b.score - a.score).slice(0, 6).map((o) => Object.assign(o, { hasImg: !!o.img, thBg: o.img ? '' : galSoft(o.tags[0] ? o.tags[0].col : '#c27ba0', o.key) })); }
 const GENDER = { m: ['男性', '#6f8fb8'], f: ['女性', '#d68aa5'], n: ['無性別', '#9b9488'] };
