@@ -163,6 +163,17 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .cp-cta:hover{background:#c27ba0}
 .cp-note{font-size:12px;color:#8a7d82;letter-spacing:.06em}
 .sbar{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin:0 0 16px}.sbar .cnt-line{margin:0 auto 0 0 !important}.sdd{position:relative;z-index:20}.sdd>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:500 12.5px/1 "Noto Serif TC",serif;letter-spacing:.12em;color:#3d3639;background:#fff;border:1px solid #ecdfe3;border-radius:999px;padding:9px 14px}.sdd>summary::-webkit-details-marker{display:none}.sdd>summary:hover,.sdd[open]>summary{border-color:#c27ba0;color:#c27ba0}.sdd>summary i{font-style:normal;font-size:10px;transition:transform .2s}.sdd[open]>summary i{transform:rotate(180deg)}.sdd-m{position:absolute;right:0;top:calc(100% + 6px);min-width:132px;background:#fff;border:1px solid #ecdfe3;border-radius:12px;padding:6px;box-shadow:0 14px 30px -14px rgba(74,54,66,.35);display:flex;flex-direction:column}.sdd-m button{border:0;background:none;text-align:left;font:400 13px "Noto Serif TC",serif;letter-spacing:.1em;color:#3d3639;padding:9px 12px;border-radius:8px;cursor:pointer}.sdd-m button:hover{background:#fdf2f5}.sdd-m button[aria-checked="true"]{color:#c27ba0;font-weight:600}.sdd-m button[aria-checked="true"]::after{content:" ✓"}
+.rel{max-width:1080px;margin:56px auto 0;padding:0 24px}
+.rel-h{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}.rel-h h2{margin:0;font:600 18px "Noto Serif TC",serif;letter-spacing:.28em;color:#3d3639}.rel-h em{font:italic 500 15px "Cormorant Garamond",serif;letter-spacing:.08em;color:#a99aa0}
+.rel-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.rel-c{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#3d3639;background:#fff;border:1px solid #f0e4e8;border-radius:14px;overflow:hidden;padding-bottom:14px;transition:transform .3s,box-shadow .3s}
+.rel-c:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(74,54,66,.4)}
+.rel-im{position:relative;display:block;aspect-ratio:16/9;overflow:hidden}.rel-im img{width:100%;height:100%;object-fit:cover;display:block}
+.rel-im i{position:absolute;left:10px;top:10px;font:500 11px "Noto Serif TC",serif;font-style:normal;letter-spacing:.16em;color:#fff;background:rgba(61,54,57,.62);padding:4px 9px;border-radius:999px}
+.rel-c b{padding:0 14px;font:600 15px/1.5 "Noto Serif TC",serif;letter-spacing:.06em}
+.rel-c small{padding:0 14px;font:400 12.5px/1.7 "Noto Serif TC",serif;color:#8a7d82;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rel-t{display:flex;flex-wrap:wrap;gap:5px;padding:0 14px}.rel-t .tg{font-size:11px;padding:3px 9px;border-radius:999px;letter-spacing:.08em}
+.sp-wrap .rel{padding:0;margin-top:48px}
 .cb-upd{margin:6px 0 0;font:400 19px/1.2 "Pinyon Script","Cormorant Garamond",serif;letter-spacing:.02em;color:rgba(255,255,255,.82);text-shadow:0 1px 10px rgba(0,0,0,.35)}
 .a-sign{margin:36px 0 0;text-align:right;font:400 21px/1.3 "Pinyon Script","Cormorant Garamond",serif;letter-spacing:.02em;color:#9a8d92}
 .fgs{display:flex;flex-direction:column;gap:10px;max-width:900px;margin:0 auto 34px}
@@ -303,6 +314,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .sec:has(.places,.lands,.forms,.spots,.factions) .sec-h::after{content:"swipe →";margin-left:auto;font:italic 500 13px "Cormorant Garamond",serif;letter-spacing:.12em;color:#b3a3aa;animation:swhint 2.4s ease-in-out infinite}
 @keyframes swhint{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 
+.rel{padding:0 16px !important;margin-top:40px !important}.rel-g{grid-template-columns:1fr !important;gap:14px !important}.sp-wrap .rel{padding:0 !important}
 .cp{grid-template-columns:1fr !important;gap:22px !important;padding-top:20px !important}
 .cp-name{font-size:30px !important}
 .cp-one{font-size:15px !important}
@@ -372,6 +384,7 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
           <template x-if="v.hasGal"><div style="display: contents"><figure class="cgal"><div class="cgal-track" :style="'transform: translateX(' + (v.galX) + ')'"><template x-for="(g, $index) in v.galSlides"><div style="display: contents"><a class="cgal-s" :href="v.galHref"><img :src="g.src" :alt="g.alt" loading="lazy"></a></div></template></div><template x-if="v.galMulti"><div style="display: contents"><button type="button" class="cgal-b cgal-prev" aria-label="上一張" @click="v.galPrev($event)">‹</button><button type="button" class="cgal-b cgal-next" aria-label="下一張" @click="v.galNext($event)">›</button><div class="cgal-dots"><template x-for="(d, $index) in v.galDots"><div style="display: contents"><button type="button" :aria-label="d.label" :aria-pressed="d.on" @click="d.pick($event)"></button></div></template></div></div></template><figcaption><span x-text="v.galCap"></span></figcaption></figure></div></template>
         </article>
       </div>
+      <template x-if="v.hasRel"><div style="display: contents"><section class="rel"><div class="rel-h"><h2>相關文章</h2><em>Related</em></div><div class="rel-g"><template x-for="(r, $index) in v.rel"><div style="display: contents"><a class="rel-c" :href="r.href"><span class="rel-im" :style="r.thBg"><template x-if="r.hasImg"><div style="display: contents"><img :src="r.img" alt="" loading="lazy" :style="'object-position: ' + (r.pos)"></div></template><i><span x-text="r.type"></span></i></span><b><span x-text="r.title"></span></b><template x-if="r.sub"><div style="display: contents"><small><span x-text="r.sub"></span></small></div></template><span class="rel-t"><template x-for="(g, $index) in r.tags"><div style="display: contents"><span class="tg" :style="'color: ' + (g.col) + '; background: ' + (g.soft)"><span x-text="g.label"></span></span></div></template></span></a></div></template></div></section></div></template>
 <template x-if="v.hasSame"><div style="display: contents">        <section class="sec"><div class="sec-h"><h2>同一個世界的角色</h2><em><span x-text="v.sameEn"></span></em></div><div class="cg cg-round"><template x-for="(c, $index) in v.same"><div style="display: contents"><a class="cc" :href="c.href"><div class="cc-img"><template x-if="c.hasImg"><div style="display: contents"><img :src="c.img" :alt="c.name" :style="c.ast"></div></template><template x-if="c.noImg"><div style="display: contents"><div class="cc-ph" :style="'background: ' + (c.soft) + '; color: ' + (c.tone)"><span><span x-text="c.initial"></span></span></div></div></template></div><p class="cc-name"><span x-text="c.name"></span></p><p class="cc-one cc-weapon" :style="'color: ' + (c.tone) + ' !important'"><span x-text="c.role"></span></p></a></div></template></div></section></div></template>
       </div>
     </main>
@@ -431,6 +444,29 @@ const enDate = (d) => { const m = String(d || '').match(/(\d{4})\D(\d{1,2})\D(\d
 const yr = (d) => (String(d || '').match(/\d{4}/) || [''])[0];
 const ymd = (d) => { const m = String(d || '').match(/(\d{4})\D(\d{1,2})\D(\d{1,2})/); return m ? m[1] + ' 年 ' + (+m[2]) + ' 月 ' + (+m[3]) + ' 日' : d; };
 const updOf = (grp, id) => (((siteGet('upd') || {})[grp]) || {})[id] || UPDB;
+
+const WPAGE = { armentary: 'Armentary', maroplis: 'Maroplis', wujie: 'Wujie' };
+const WCAN = { armentary: ['/armentary', '/m/armentary'], maroplis: ['/maroplis', '/m/maroplis'], wujie: ['/wujie', '/m/wujie'] };
+const relWorldHref = (k) => ON_SITE ? ((IS_M ? '/m/' : '/') + k) : WCAN[k][IS_M ? 1 : 0];
+const relStoryHref = (t) => ON_SITE ? ((IS_M ? '/m/story/' : '/story/') + t.id) : (IS_M ? '/m/story-page' : '/story-page');
+// related articles found through shared tags: world, characters, custom tags
+function relatedFor(kind, item) {
+  const out = [], seen = {}, chars = allChars(), stories = (siteGet('stories') || []).filter((x) => !x.hidden);
+  const myChars = kind === 'char' ? [item] : chars.filter((c) => (item.chars || []).indexOf(c.id) >= 0);
+  const myWorlds = myChars.map((c) => c.world).filter(Boolean), myTags = [].concat(...myChars.map(ctagIds)).concat(kind === 'story' ? (item.tags || []) : []);
+  const tagOf = (c) => { const w = worldOf(c.world); return { label: c.name, col: w.tone, soft: w.soft }; };
+  const add = (key, score, o) => { if (seen[key]) { seen[key].score += score; return; } o.score = score; o.key = key; seen[key] = o; out.push(o); };
+  [...new Set(myWorlds)].forEach((k) => { if (!WPAGE[k]) return; const w = worldOf(k); add('w:' + k, 5, { type: '世界觀', title: w.en + '｜' + w.zh, href: relWorldHref(k), img: w.hero || '', pos: 'center', sub: kind === 'char' ? '這個角色所在的世界' : '故事發生的世界', tags: [{ label: w.en, col: w.tone, soft: w.soft }] }); });
+  chars.forEach((c) => { if (c.soon || (kind === 'char' && c.id === item.id)) return; let sc = 0;
+    if (kind === 'story' && myChars.some((m) => m.id === c.id)) sc += 6;
+    if (c.world && myWorlds.indexOf(c.world) >= 0) sc += 3;
+    ctagIds(c).forEach((t) => { if (myTags.indexOf(t) >= 0) sc += 1; });
+    if (sc > 0) add('c:' + c.id, sc, { type: '秘密設定', title: c.name + '｜秘密 & 幕後花絮', href: charHref(c), img: c.banner || c.img || '', pos: c.banner ? 'center' : (c.pos || '50% 20%'), sub: c.one || '', tags: [tagOf(c)] }); });
+  stories.forEach((t) => { if (kind === 'story' && t.id === item.id) return; const cs = chars.filter((c) => (t.chars || []).indexOf(c.id) >= 0); let sc = 0;
+    cs.forEach((c) => { if (myChars.some((m) => m.id === c.id)) sc += 4; else if (c.world && myWorlds.indexOf(c.world) >= 0) sc += 2; });
+    (t.tags || []).concat(...cs.map(ctagIds)).forEach((x) => { if (myTags.indexOf(x) >= 0) sc += 1; });
+    if (sc > 0) add('s:' + t.id, sc, { type: '故事', title: t.title, href: relStoryHref(t), img: t.cover || '', pos: 'center', sub: t.summary || '', tags: cs.length ? cs.map(tagOf) : [{ label: '獨立短篇', col: WL[''].tone, soft: WL[''].soft }] }); });
+  return out.sort((a, b) => b.score - a.score).slice(0, 6).map((o) => Object.assign(o, { hasImg: !!o.img, thBg: o.img ? '' : galSoft(o.tags[0] ? o.tags[0].col : '#c27ba0', o.key) })); }
 const GENDER = { m: ['男性', '#6f8fb8'], f: ['女性', '#d68aa5'], n: ['無性別', '#9b9488'] };
 const CTYPE = { char: ['角色', '#8a6f9e'], sim: ['模擬器', '#5f9a8a'] };
 const tagsOf = (c) => { const w = worldOf(c.world); const t = [{ label: c.world ? w.en : '獨立角色', col: w.tone, soft: w.soft }];
@@ -477,7 +513,7 @@ class Component extends DCLogic {
       galDots: gal.slice(0, 12).map((g, k) => ({ label: '第 ' + (k + 1) + ' 張', on: (this.state.gi || 0) === k ? 'true' : 'false', pick: () => { this._gt0 = Date.now(); this.setState({ gi: k }); } })),
       galCap: (gal[this.state.gi || 0] || {}).alt || '',
       galHref: (IS_M ? '/m/gallery' : '/gallery') + '?c=' + c.id, galCount: gal.length ? gal.length + ' 張' : '', galThumbs: gal.slice(0, IS_M ? 6 : 8), hasGal: gal.length > 0, noGal: !gal.length,
-      updLabel: updOf('chars', c.id), signLine: 'edited by ' + (c.editor || 'sceneey') + ', ' + yr(updOf('chars', c.id)), updEn: 'last updated ' + enDate(updOf('chars', c.id)), blogHtml: blog, hasBlog: !!blog, noBlog: !blog, isPv: !!PV, pvNote: PV && PV.c ? '預覽模式：顯示的是後台還沒儲存的內容' + (c.hidden ? '（這個角色目前是隱藏的）' : '') : '預覽模式' + (c.hidden ? '：這個角色目前是隱藏的，只有你看得到' : ''),
+      rel: relatedFor('char', c), hasRel: relatedFor('char', c).length > 0, updLabel: updOf('chars', c.id), signLine: 'edited by ' + (c.editor || 'sceneey') + ', ' + yr(updOf('chars', c.id)), updEn: 'last updated ' + enDate(updOf('chars', c.id)), blogHtml: blog, hasBlog: !!blog, noBlog: !blog, isPv: !!PV, pvNote: PV && PV.c ? '預覽模式：顯示的是後台還沒儲存的內容' + (c.hidden ? '（這個角色目前是隱藏的）' : '') : '預覽模式' + (c.hidden ? '：這個角色目前是隱藏的，只有你看得到' : ''),
       same: same.map((x) => ({ href: charHref(x), name: x.name, role: x.role || '', img: x.av || x.img, pos: x.av ? '50% 50%' : (x.pos || '50% 20%'), ast: avSt(x), hasImg: !!(x.av || x.img), noImg: !(x.av || x.img), initial: x.name.charAt(0), tone: w.tone, soft: w.soft })),
     };
     this._gn = Math.min(gal.length, 12);
