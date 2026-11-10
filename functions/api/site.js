@@ -12,9 +12,9 @@ const img = (v) => { const s = String(v || ""); if (s && !SRC_RE.test(s)) throw 
 const url = (v, what) => { const s = String(v || "").trim(); if (s && !URL_RE.test(s)) throw new Error(what + "的網址格式不對（要以 https:// 或 / 開頭）"); return s; };
 
 // --- blog HTML sanitizer: only a small set of tags/attributes survives ---
-const ALLOW = { p: [], h2: [], h3: [], strong: [], b: [], em: [], i: [], u: [], s: [], blockquote: [], hr: [], br: [], ul: [], ol: [], li: [], a: ["href"], figure: ["class"], img: ["src", "alt"], figcaption: [], div: ["class"] };
+const ALLOW = { p: ["class"], h2: ["class"], h3: ["class"], span: ["class"], strong: [], b: [], em: [], i: [], u: [], s: [], blockquote: [], hr: [], br: [], ul: [], ol: [], li: [], a: ["href"], figure: ["class"], img: ["src", "alt"], figcaption: [], div: ["class"] };
 const VOID = new Set(["hr", "br", "img"]);
-const CLS_RE = /^b-(full|center|left|right|row)$/;
+const CLS_RE = /^(b-(full|center|left|right|row)|fs-(l|s)|lh-(1|3)|c-(rose|ink|mist|sage|gold|lav|wine))$/;
 const escT = (t) => t.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const escA = (t) => t.replace(/&(?!(#\d+|#x[0-9a-f]+|[a-z]+);)/gi, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 export function sanitize(html) {

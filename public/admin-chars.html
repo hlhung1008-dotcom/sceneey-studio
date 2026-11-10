@@ -78,6 +78,7 @@ a{color:var(--pink)}
 .ed:focus{border-color:#e3c9d2}
 .ed:empty::before{content:"在這裡開始寫秘密設定與幕後花絮……";color:#c9bcc1}
 .ed::after{content:"";display:block;clear:both}
+.tb .tg-l{font-size:11px;letter-spacing:.14em;color:var(--sub);margin:0 2px 0 4px}.tb .sw{width:22px;height:22px;min-width:0;padding:0;border-radius:50%;background:var(--sw);border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}.tb .sw:hover{box-shadow:0 0 0 2px var(--sw)}#tbPaint[aria-pressed="true"]{background:var(--pink);color:#fff;border-color:var(--pink)}.ed.painting{cursor:copy}.ed .c-rose{color:#c27ba0}.ed .c-ink{color:#3d3639}.ed .c-mist{color:#6f8fb8}.ed .c-sage{color:#6f9a7f}.ed .c-gold{color:#b8893f}.ed .c-lav{color:#8a6fae}.ed .c-wine{color:#a8485a}.ed .fs-l{font-size:1.2em}.ed .fs-s{font-size:.85em}.ed .lh-1{line-height:1.6}.ed .lh-3{line-height:2.5}.ed h2.lh-1,.ed h3.lh-1{line-height:1.3}
 .ed h2{font-size:22px;letter-spacing:.14em;margin:28px 0 10px;line-height:1.5}
 .ed h3{font-size:17px;letter-spacing:.12em;margin:22px 0 8px;line-height:1.5;color:var(--pink)}
 .ed p{margin:0 0 12px}
@@ -229,9 +230,7 @@ async function open(i) {
   '<section class="card"><h2>故事<em>Stories</em></h2><span class="hint">故事請到 <a href="/admin-stories">故事管理</a> 撰寫，並在故事裡勾選這個角色。角色頁的「故事」按鈕只有在這個角色有故事時才會出現。</span></section>' +
   '<section class="card"><h2>賀圖・活動圖<em>Gallery</em></h2><span class="hint">點選屬於這個角色的圖片（可多選）。新圖片請先到管理頁的 GALLERY 分頁上傳。</span><div class="gp" id="gp" style="margin-top:12px"></div></section>' +
   '<section class="card"><h2>秘密設定與幕後花絮<em>Behind the Scenes</em></h2>' +
-   '<div class="tb" id="tb"><button type="button" data-c="formatBlock" data-v="p">內文</button><button type="button" data-c="formatBlock" data-v="h2">大標</button><button type="button" data-c="formatBlock" data-v="h3">小標</button><span class="sep"></span>' +
-   '<button type="button" data-c="bold"><b>B</b></button><button type="button" data-c="italic"><i>I</i></button><button type="button" data-c="underline"><u>U</u></button><button type="button" data-c="formatBlock" data-v="blockquote">引言</button><button type="button" data-c="insertUnorderedList">清單</button><button type="button" data-c="insertHorizontalRule">分隔線</button><button type="button" data-c="link">連結</button><span class="sep"></span>' +
-   '<label class="up">＋ 圖片<input type="file" accept="image/*" data-ins="1"></label><label class="up">＋ 雙圖並排<input type="file" accept="image/*" multiple data-ins="2"></label><span class="sep"></span><button type="button" data-c="removeFormat">清除格式</button></div>' +
+   '<div class="tb" id="tb"><span class="tg-l">段落</span><button type="button" data-c="block" data-v="p">內文</button><button type="button" data-c="block" data-v="h2">大標</button><button type="button" data-c="block" data-v="h3">小標</button><span class="sep"></span><button type="button" data-c="bold" data-v="" title="粗體"><b>B</b></button><button type="button" data-c="italic" data-v="" title="斜體"><i>I</i></button><button type="button" data-c="underline" data-v="" title="底線"><u>U</u></button><span class="sep"></span><span class="tg-l">字體</span><button type="button" data-c="size" data-v="l">大</button><button type="button" data-c="size" data-v="m">中</button><button type="button" data-c="size" data-v="s">小</button><span class="sep"></span><span class="tg-l">行距</span><button type="button" data-c="lh" data-v="1">緊</button><button type="button" data-c="lh" data-v="2">標準</button><button type="button" data-c="lh" data-v="3">寬</button><span class="sep"></span><span class="tg-l">顏色</span><button type="button" class="sw" data-c="color" data-v="rose" title="乾燥玫瑰（預設）" style="--sw:#c27ba0"></button><button type="button" class="sw" data-c="color" data-v="ink" title="墨灰" style="--sw:#3d3639"></button><button type="button" class="sw" data-c="color" data-v="mist" title="霧藍" style="--sw:#6f8fb8"></button><button type="button" class="sw" data-c="color" data-v="sage" title="鼠尾草綠" style="--sw:#6f9a7f"></button><button type="button" class="sw" data-c="color" data-v="gold" title="琥珀金" style="--sw:#b8893f"></button><button type="button" class="sw" data-c="color" data-v="lav" title="薰衣草紫" style="--sw:#8a6fae"></button><button type="button" class="sw" data-c="color" data-v="wine" title="酒紅" style="--sw:#a8485a"></button><button type="button" data-c="color" data-v="none" title="取消顏色">無</button><span class="sep"></span><button type="button" data-c="painter" data-v="" id="tbPaint" title="先點有格式的文字，按這裡，再選取要套用的文字">複製格式</button><button type="button" data-c="clear" data-v="" title="清除選取段落的所有格式">清除格式</button><span class="sep"></span><button type="button" data-c="formatBlock" data-v="blockquote">引言</button><button type="button" data-c="insertUnorderedList" data-v="">清單</button><button type="button" data-c="insertHorizontalRule" data-v="">分隔線</button><button type="button" data-c="link" data-v="">連結</button><span class="sep"></span><label class="up">＋ 圖片<input type="file" accept="image/*" data-ins="1"></label><label class="up">＋ 雙圖並排<input type="file" accept="image/*" multiple data-ins="2"></label></div>' +
    '<div class="ed" id="ed" contenteditable="true" spellcheck="false"></div><span class="hint" style="display:block;margin-top:8px">點圖片可以切換排版（滿版、置中、靠左文繞、靠右文繞）。手機上靠左／靠右會自動變成滿版。</span></section>';
   renderGal();
   var ed = $('ed'); ed.innerHTML = '<p class="hint">載入中…</p>'; ed.contentEditable = 'false';
@@ -288,9 +287,80 @@ async function upload(file, max) { var im = await shrink(file, max); var d = awa
 var savedRange = null, selFig = null;
 document.addEventListener('selectionchange', function () { var ed = $('ed'); var s = window.getSelection(); if (ed && s.rangeCount && ed.contains(s.anchorNode)) savedRange = s.getRangeAt(0).cloneRange(); });
 function restore() { var ed = $('ed'); ed.focus(); if (savedRange) { var s = window.getSelection(); s.removeAllRanges(); s.addRange(savedRange); } }
+
+// ---------- formatting helpers ----------
+var BLOCKS = /^(P|H2|H3|BLOCKQUOTE|UL|OL|DIV|FIGURE)$/;
+var GROUPS = { size: ['fs-l', 'fs-s'], color: ["c-rose", "c-ink", "c-mist", "c-sage", "c-gold", "c-lav", "c-wine"] };
+function edEl() { return $('ed'); }
+function topBlock(n) { var ed = edEl(); while (n && n.parentNode !== ed) n = n.parentNode; return n && n.nodeType === 1 ? n : null; }
+function curRange() { var s = window.getSelection(); if (s.rangeCount && edEl().contains(s.anchorNode)) return s.getRangeAt(0); return savedRange; }
+function blocksOf(r) { var ed = edEl(), out = [];
+  // wrap stray text nodes directly under the editor into paragraphs
+  Array.prototype.slice.call(ed.childNodes).forEach(function (n) { if (n.nodeType === 3 && n.textContent.trim()) { var p = document.createElement('p'); ed.insertBefore(p, n); p.appendChild(n); } });
+  if (!r) return out; var at = function (c, o, end) { if (c === ed) { var k = end ? Math.max(0, o - 1) : Math.min(o, ed.childNodes.length - 1); return ed.childNodes[k] || null; } return topBlock(c); };
+  var a = at(r.startContainer, r.startOffset, false), b = at(r.endContainer, r.endOffset, true); if (!a) return out; var n = a;
+  while (n) { if (n.nodeType === 1 && !/^(FIGURE)$/.test(n.tagName) && !n.classList.contains('b-row')) out.push(n); if (n === b) break; n = n.nextSibling; }
+  return out; }
+function selectNodes(first, last) { var r = document.createRange(); r.setStartBefore(first); r.setEndAfter(last || first); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); savedRange = r.cloneRange(); }
+function setBlock(tag) { var bl = blocksOf(curRange()).filter(function (b) { return /^(P|H2|H3|BLOCKQUOTE|DIV)$/.test(b.tagName); }); if (!bl.length) return;
+  var made = bl.map(function (b) { var n = document.createElement(tag); n.innerHTML = b.innerHTML; ['lh-1', 'lh-3'].forEach(function (c) { if (b.classList.contains(c)) n.classList.add(c); }); b.parentNode.replaceChild(n, b); return n; });
+  selectNodes(made[0], made[made.length - 1]); }
+function setLH(v) { blocksOf(curRange()).forEach(function (b) { b.classList.remove('lh-1', 'lh-3'); if (v !== '2') b.classList.add('lh-' + v); if (!b.className) b.removeAttribute('class'); }); }
+function unwrap(el) { var p = el.parentNode; while (el.firstChild) p.insertBefore(el.firstChild, el); p.removeChild(el); }
+function stripIn(root, sel, test) { Array.prototype.slice.call(root.querySelectorAll(sel)).forEach(function (el) { test(el); }); }
+// wrap the current selection (split per block) with an inline element after stripping conflicting formatting
+function wrapSel(make, strip) { var r = curRange(); if (!r) return; var bl = blocksOf(r); if (!bl.length) return;
+  var first = null, last = null;
+  bl.forEach(function (b) { var sub = document.createRange(); sub.selectNodeContents(b);
+    if (b.contains(r.startContainer) || b === r.startContainer) sub.setStart(r.startContainer, r.startOffset);
+    if (b.contains(r.endContainer) || b === r.endContainer) sub.setEnd(r.endContainer, r.endOffset);
+    if (r.collapsed) sub.selectNodeContents(b);
+    if (sub.collapsed) return;
+    var frag = sub.extractContents(); var tmp = document.createElement('div'); tmp.appendChild(frag); strip(tmp);
+    var w = make(); if (w) { var tgt = w._inner || w; delete w._inner; while (tmp.firstChild) tgt.appendChild(tmp.firstChild); sub.insertNode(w); first = first || w; last = w; }
+    else { var nodes = Array.prototype.slice.call(tmp.childNodes); for (var i = nodes.length - 1; i >= 0; i--) sub.insertNode(nodes[i]); if (nodes.length) { first = first || nodes[0]; last = nodes[nodes.length - 1]; } }
+    b.normalize(); });
+  // drop empty spans left behind
+  stripIn(edEl(), 'span', function (s) { if (!s.textContent && !s.querySelector('img,br')) s.remove(); else if (!s.className) unwrap(s); });
+  if (first && first.isConnected && last && last.isConnected) selectNodes(first, last); }
+function stripGroup(group) { return function (root) { stripIn(root, 'span', function (s) { GROUPS[group].forEach(function (c) { s.classList.remove(c); }); if (!s.className) unwrap(s); }); }; }
+function setClass(group, cls) { wrapSel(function () { if (!cls) return null; var s = document.createElement('span'); s.className = cls; return s; }, stripGroup(group)); }
+function clearFmt() { var bl = blocksOf(curRange()); bl.forEach(function (b) {
+    var n = b; if (/^(H2|H3|BLOCKQUOTE|DIV)$/.test(b.tagName)) { n = document.createElement('p'); n.innerHTML = b.innerHTML; b.parentNode.replaceChild(n, b); }
+    if (/^(UL|OL)$/.test(n.tagName)) { var frag = document.createDocumentFragment(); Array.prototype.slice.call(n.children).forEach(function (li) { var p = document.createElement('p'); p.innerHTML = li.innerHTML; frag.appendChild(p); }); var f1 = frag.firstChild; n.parentNode.replaceChild(frag, n); n = f1; if (!n) return; }
+    n.removeAttribute('class'); n.removeAttribute('style');
+    var again = true; while (again) { again = false; Array.prototype.slice.call(n.querySelectorAll('span,b,strong,i,em,u,s,font,a,sub,sup')).forEach(function (x) { unwrap(x); again = true; }); }
+    n.normalize(); });
+  if (bl.length) msg('已清除選取段落的格式'); }
+// format painter
+var painter = null;
+function readFmt() { var r = curRange(); if (!r) return null; var n = r.startContainer; if (n.nodeType === 3) n = n.parentNode; var b = topBlock(n); if (!b) return null;
+  var f = { block: /^(P|H2|H3)$/.test(b.tagName) ? b.tagName.toLowerCase() : 'p', lh: b.classList.contains('lh-1') ? '1' : b.classList.contains('lh-3') ? '3' : '2', cls: [], b: false, i: false, u: false };
+  for (var x = n; x && x !== b; x = x.parentNode) { if (x.tagName === 'SPAN') x.classList.forEach(function (c) { if (f.cls.indexOf(c) < 0) f.cls.push(c); }); if (/^(B|STRONG)$/.test(x.tagName)) f.b = true; if (/^(I|EM)$/.test(x.tagName)) f.i = true; if (x.tagName === 'U') f.u = true; }
+  return f; }
+function applyFmt(f) {
+  wrapSel(function () { var outer = null, inner = null; var add = function (el) { if (!outer) outer = inner = el; else { inner.appendChild(el); inner = el; } };
+      if (f.cls.length) { var s = document.createElement('span'); s.className = f.cls.join(' '); add(s); } if (f.b) add(document.createElement('b')); if (f.i) add(document.createElement('i')); if (f.u) add(document.createElement('u'));
+      if (!outer) return null; outer._inner = inner; return outer; },
+    function (root) { stripIn(root, 'span', function (s) { unwrap(s); }); stripIn(root, 'b,strong,i,em,u', function (x) { unwrap(x); }); });
+  setBlock(f.block); setLH(f.lh);
+}
+function setPainter(on) { var b = $('tbPaint'); if (b) b.setAttribute('aria-pressed', on ? 'true' : 'false'); var ed = edEl(); if (ed) ed.classList.toggle('painting', !!on); if (!on) painter = null; }
+document.addEventListener('mouseup', function (e) { if (!painter) return; var ed = edEl(); if (!ed || !ed.contains(e.target)) return; var s = window.getSelection(); if (!s.rangeCount || s.isCollapsed) return;
+  savedRange = s.getRangeAt(0).cloneRange(); applyFmt(painter); setPainter(false); blogDirty = true; msg('已套用複製的格式'); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && painter) setPainter(false); });
+// paste as plain text so outside styles never sneak in
+document.addEventListener('paste', function (e) { var ed = edEl(); if (!ed || !ed.contains(e.target) || e.target.closest('figcaption')) return; e.preventDefault();
+  var t = (e.clipboardData || window.clipboardData).getData('text/plain') || ''; document.execCommand('insertText', false, t); });
 function cmd(c, v) {
   restore();
-  if (c === 'link') { var u = prompt('連結網址（https:// 開頭，或站內 / 開頭）：', 'https://'); if (!u) return; if (!/^(https?:\/\/|\/)/.test(u)) { alert('網址要以 https:// 或 / 開頭'); return; } document.execCommand('createLink', false, u); }
+  if (c === 'painter') { if (painter) { setPainter(false); return; } var f = readFmt(); if (!f) { msg('先把游標放在想複製格式的文字裡', 'err'); return; } painter = f; setPainter(true); msg('格式已複製：選取要套用的文字（按 Esc 取消）'); return; }
+  if (c === 'block') setBlock(v);
+  else if (c === 'size') setClass('size', v === 'm' ? '' : 'fs-' + v);
+  else if (c === 'lh') setLH(v);
+  else if (c === 'color') setClass('color', v === 'none' ? '' : 'c-' + v);
+  else if (c === 'clear') clearFmt();
+  else if (c === 'link') { var u = prompt('連結網址（https:// 開頭，或站內 / 開頭）：', 'https://'); if (!u) return; if (!/^(https?:\/\/|\/)/.test(u)) { alert('網址要以 https:// 或 / 開頭'); return; } document.execCommand('createLink', false, u); }
   else if (c === 'formatBlock') document.execCommand('formatBlock', false, '<' + v + '>');
   else document.execCommand(c, false, v || null);
   blogDirty = true; msg('有未儲存的變更');
