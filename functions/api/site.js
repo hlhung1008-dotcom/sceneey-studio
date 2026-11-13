@@ -174,6 +174,23 @@ export const onRequest = wrap(async ({ request: req, env }) => {
     return J({ ok: true, data });
   }
   if (b.action === "check") return J({ ok: true });
+  // fetch an image shared from Google Drive ("anyone with the link") so the admin page can upload it like a local file
+  if (b.action === "drive") {
+    const m = String(b.link || "").match(/(?:\/d\/|[?&]id=|\/file\/d\/)([A-Za-z0-9_-]{20,})/) || String(b.link || "").match(/^([A-Za-z0-9_-]{25,})$/);
+    if (!m) return J({ error: "看不懂這個連結，請貼 Google 雲端硬碟的檔案分享連結" }, 400);
+    const id = m[1];
+    for (const u of ["https://drive.google.com/thumbnail?id=" + id + "&sz=w2400", "https://drive.google.com/uc?export=download&id=" + id]) {
+      try {
+        const r = await fetch(u, { redirect: "follow", headers: { "user-agent": "Mozilla/5.0" } });
+        const ct = r.headers.get("content-type") || "";
+        if (!r.ok || !ct.startsWith("image/")) continue;
+        const buf = await r.arrayBuffer();
+        if (buf.byteLength > 15 * 1024 * 1024) return J({ error: "圖片太大了（超過 15MB）" }, 413);
+        return new Response(buf, { headers: { "content-type": ct, "cache-control": "no-store" } });
+      } catch (e) {}
+    }
+    return J({ error: "讀不到這張圖。請確認雲端硬碟的分享設定是「知道連結的任何人都能檢視」，而且檔案是圖片" }, 400);
+  }
   if (b.action === "upload") {
     const type = String(b.type || "");
     if (!/^image\/(webp|jpeg|png)$/.test(type)) return J({ error: "只能上傳圖片" }, 400);

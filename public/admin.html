@@ -109,6 +109,7 @@ a{color:var(--pink)}
 .modal>div{width:min(420px,92vw);background:#fff;border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px}
 .modal b{font-size:16px;letter-spacing:.1em}
 .modal .row{display:flex;justify-content:flex-end;gap:8px}
+.drv{font-size:12px !important;padding:6px 11px !important;margin-left:6px}
 .tgg{display:grid;grid-template-columns:70px minmax(0,1fr);gap:10px;align-items:start;margin-top:8px}.tgg-n{font-size:12px;letter-spacing:.12em;color:var(--sub);padding-top:7px}
 .chars{display:flex;flex-wrap:wrap;gap:8px}.chars label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer;background:#fff}.chars input{accent-color:var(--pink)}.chars label:has(input:checked){border-color:var(--pink);background:var(--soft);color:var(--pink)}
 .empty{padding:60px 20px;text-align:center;color:var(--sub)}
@@ -184,6 +185,30 @@ function chips(name, sel, where) { var gs = tagGroups(plainTags(where)); if (!gs
 function worldSelect(v, attr) { return '<select class="in" ' + attr + '><option value="">獨立角色（不屬於任何世界觀）</option>' + worlds().map(function (t) { return '<option value="' + esc(t.id) + '"' + (v === t.id ? ' selected' : '') + '>' + esc(t.label) + '</option>'; }).join('') + '</select>'; }
 function form(title, html) { return new Promise(function (res) { var md = $('fmodal'); $('fmt').textContent = title; $('fmb').innerHTML = html; md.classList.add('on'); var f1 = md.querySelector('input'); if (f1) f1.focus();
   var done = function (v) { md.classList.remove('on'); $('fmok').onclick = $('fmno').onclick = null; res(v); }; $('fmok').onclick = function () { var o = {}; md.querySelectorAll('[name]').forEach(function (x) { o[x.name] = x.value.trim(); }); done(o); }; $('fmno').onclick = function () { done(null); }; }); }
+
+// ---------- Google Drive import: every upload button gets a "雲端硬碟" companion ----------
+async function driveFile(link) {
+  var h = { 'content-type': 'application/json' }; if (KEY) h['x-admin-key'] = KEY;
+  var r = await fetch('/api/site', { method: 'POST', headers: h, body: JSON.stringify({ action: 'drive', link: link }) });
+  var ct = r.headers.get('content-type') || '';
+  if (!r.ok || ct.indexOf('image/') !== 0) { var d = {}; try { d = await r.json(); } catch (e) {} throw new Error(d.error || '讀不到這張圖'); }
+  var blob = await r.blob(); var ext = (ct.split('/')[1] || 'jpg').split(';')[0];
+  return new File([blob], 'drive.' + ext, { type: ct.split(';')[0] });
+}
+function addDriveBtns(root) {
+  (root || document).querySelectorAll('label.up').forEach(function (lb) {
+    var inp = lb.querySelector('input[type=file]'); if (!inp || lb.dataset.drv) return; lb.dataset.drv = '1';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost drv'; b.textContent = '☁ 雲端硬碟'; b.title = '貼上 Google 雲端硬碟的圖片分享連結';
+    b.onclick = async function () {
+      var link = prompt('貼上 Google 雲端硬碟的圖片分享連結\n（分享設定要是「知道連結的任何人都能檢視」）'); if (!link) return;
+      b.disabled = true; var t0 = b.textContent; b.textContent = '讀取中…';
+      try { var f = await driveFile(link.trim()); var dt = new DataTransfer(); dt.items.add(f); inp.files = dt.files; inp.dispatchEvent(new Event('change', { bubbles: true })); }
+      catch (e) { alert(e.message); }
+      b.disabled = false; b.textContent = t0; };
+    lb.insertAdjacentElement('afterend', b);
+  });
+}
+new MutationObserver(function () { addDriveBtns(); }).observe(document.documentElement, { childList: true, subtree: true });
 
 // ---------- login ----------
 async function tryLogin(k) { KEY = k; try { await call({ action: 'check' }); try { sessionStorage.setItem('gbk', k); } catch (e) {} return true; } catch (e) { KEY = ''; $('pwerr').textContent = e.status === 401 ? '密碼不對喔' : e.message; return false; } }
