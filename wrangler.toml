@@ -5,6 +5,8 @@ compatibility_date = "2026-06-01"
 [assets]
 directory = "./public"
 binding = "ASSETS"
+# HTML pages go through the worker so it can add link-preview (Open Graph) tags; images/js stay direct.
+run_worker_first = ["/", "/index.html", "/news*", "/world*", "/characters*", "/story*", "/gallery*", "/qa*", "/armentary*", "/maroplis*", "/wujie*", "/m", "/m/*"]
 
 [[d1_databases]]
 binding = "DB"

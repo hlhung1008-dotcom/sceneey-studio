@@ -2,7 +2,7 @@
 import { J, isAdmin, adminSecret, len, clean, sleep, rid, wrap } from "../../lib/cf/common.js";
 import { DEFAULTS } from "../../lib/cf/defaults.js";
 
-const KEYS = ["annc", "news", "gallery", "chars", "stories", "tags"];
+const KEYS = ["annc", "news", "gallery", "chars", "stories", "tags", "wall"];
 const BLOG_RE = /^(blog|story)_[a-z0-9-]{1,40}$/;
 const okKey = (k) => KEYS.includes(k) || BLOG_RE.test(String(k || ""));
 const ID_RE = /^[a-z0-9-]{1,40}$/;
@@ -43,6 +43,18 @@ const SRC_RE = /^\/(img\/c\/[0-9a-f]{32}\.webp|api\/media\/[a-z0-9]{6,40})$/;
 const str = (s, max) => { const v = clean(s); if (len(v) > max) throw new Error("內容太長了（最多 " + max + " 字）"); return v; };
 
 function validate(k, d) {
+  if (k === "wall") {
+    if (!d || typeof d !== "object" || !Array.isArray(d.items) || d.items.length > 300) throw new Error("資料格式錯誤");
+    const items = d.items.map((w) => {
+      if (w.kind === "link") {
+        const u = String(w.url || "").trim();
+        if (!/^https:\/\/[^\s"'<>]{1,500}$/.test(u)) throw new Error("連結網址格式不對（要以 https:// 開頭）");
+        return { kind: "link", url: u, site: str(w.site, 30), title: str(w.title, 120), text: str(w.text, 300), img: img(w.img), name: str(w.name, 30), date: str(w.date, 20) };
+      }
+      const text = str(w.text, 200); if (!text) throw new Error("留言內容要填喔"); return { name: str(w.name, 30), text, date: str(w.date, 20) };
+    });
+    return { on: !!d.on, title: str(d.title, 30), items };
+  }
   if (k === "annc") {
     if (!d || typeof d !== "object") throw new Error("資料格式錯誤");
     const link = String(d.link ?? "news").trim();
@@ -190,6 +202,46 @@ export const onRequest = wrap(async ({ request: req, env }) => {
       } catch (e) {}
     }
     return J({ error: "讀不到這張圖。請確認雲端硬碟的分享設定是「知道連結的任何人都能檢視」，而且檔案是圖片" }, 400);
+  }
+  if (b.action === "unfurl") {
+    // Link preview for the message wall: read the page's Open Graph tags and keep a copy of its picture
+    // (social-site image links expire, so the picture is stored here like an upload).
+    const u = String(b.url || "").trim();
+    if (!/^https:\/\/[^\s"'<>]{1,500}$/.test(u)) return J({ error: "請貼 https:// 開頭的網址" }, 400);
+    let html = "";
+    try {
+      const r = await fetch(u, { redirect: "follow", headers: { "user-agent": "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)", "accept-language": "zh-TW,zh;q=0.9" } });
+      if (!r.ok) return J({ error: "對方網站拒絕讀取（" + r.status + "），可以自己填標題和圖片" }, 400);
+      html = (await r.text()).slice(0, 400000);
+    } catch (e) { return J({ error: "讀不到這個網址，可以自己填標題和圖片" }, 400); }
+    const dec = (v) => String(v || "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#0?39;|&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).trim();
+    const meta = (...keys) => {
+      for (const k of keys) {
+        const re1 = new RegExp('<meta[^>]+(?:property|name)=["\']' + k + '["\'][^>]*content=["\']([^"\']*)', "i");
+        const re2 = new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + k + '["\']', "i");
+        const m = html.match(re1) || html.match(re2); if (m && m[1].trim()) return dec(m[1]);
+      }
+      return "";
+    };
+    const cut = (v, n) => { const a = Array.from(v); return a.length > n ? a.slice(0, n - 1).join("") + "…" : v; };
+    const host = new URL(u).hostname.replace(/^www\./, "");
+    const SITES = { "threads.net": "Threads", "threads.com": "Threads", "x.com": "X", "twitter.com": "X", "instagram.com": "Instagram", "facebook.com": "Facebook", "plurk.com": "Plurk", "youtube.com": "YouTube", "caveduck.io": "Caveduck", "dcard.tw": "Dcard" };
+    const title = cut(meta("og:title", "twitter:title") || dec((html.match(/<title[^>]*>([^<]*)/i) || [])[1]), 120);
+    const text = cut(meta("og:description", "twitter:description", "description"), 300);
+    const site = cut(SITES[host] || meta("og:site_name") || host, 30);
+    let pic = meta("og:image", "og:image:url", "twitter:image", "twitter:image:src"), src = "";
+    if (pic) {
+      try {
+        const ir = await fetch(new URL(pic, u).href, { headers: { "user-agent": "Mozilla/5.0" } });
+        const ct = (ir.headers.get("content-type") || "").split(";")[0];
+        if (ir.ok && /^image\/(webp|jpeg|png)$/.test(ct)) {
+          const bin = new Uint8Array(await ir.arrayBuffer());
+          if (bin.length && bin.length <= 1900000) { const id = rid(); await db.prepare("INSERT INTO media (id, type, data, ts) VALUES (?, ?, ?, ?)").bind(id, ct, bin, Date.now()).run(); src = "/api/media/" + id; }
+        }
+      } catch (e) {}
+    }
+    if (!title && !text && !src) return J({ error: "這個網站沒有提供預覽資料（可能要登入才看得到），可以自己填標題和圖片" }, 400);
+    return J({ ok: true, data: { kind: "link", url: u, site, title, text, img: src, name: "", date: "" } });
   }
   if (b.action === "upload") {
     const type = String(b.type || "");

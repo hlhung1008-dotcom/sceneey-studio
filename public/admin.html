@@ -145,7 +145,7 @@ a{color:var(--pink)}
 </style>
 </head>
 <body>
-<header class="top"><h1>後台管理</h1><nav class="anav" aria-label="管理頁面"><a href="/admin?tab=msgs">Q&amp;A 留言</a><a href="/admin?tab=annc">公告列</a><a href="/admin?tab=news">NEWS</a><a href="/admin?tab=gal">GALLERY</a><a href="/admin-chars">角色</a><a href="/admin-stories">故事</a><a href="/admin?tab=tags">標籤</a></nav><span class="sp"></span><a class="lnk" href="/" target="_blank" rel="noopener">看網站 ↗</a></header>
+<header class="top"><h1>後台管理</h1><nav class="anav" aria-label="管理頁面"><a href="/admin?tab=msgs">Q&amp;A 留言</a><a href="/admin?tab=annc">公告列</a><a href="/admin?tab=news">NEWS</a><a href="/admin?tab=wall">留言牆</a><a href="/admin?tab=gal">GALLERY</a><a href="/admin-chars">角色</a><a href="/admin-stories">故事</a><a href="/admin?tab=tags">標籤</a></nav><span class="sp"></span><a class="lnk" href="/" target="_blank" rel="noopener">看網站 ↗</a></header>
 <div id="login" class="login" hidden>
   <b style="letter-spacing:.2em">管理密碼</b>
   <input id="pw" class="in" type="password" autocomplete="current-password" aria-label="管理密碼">
@@ -159,7 +159,7 @@ a{color:var(--pink)}
 <script>
 (function(){
 var KEY = ''; try { KEY = sessionStorage.getItem('gbk') || ''; } catch (e) {}
-var TAGS = [], CH = [], GAL = [], NEWS = [], ANNC = null, MSGS = [], tab = 'msgs', dirty = false, mf = 'all', galDirty = false, blogDirty = false, orderDirty = false;
+var TAGS = [], CH = [], GAL = [], NEWS = [], ANNC = null, WALL = { on: true, title: '', items: [] }, MSGS = [], tab = 'msgs', dirty = false, mf = 'all', galDirty = false, blogDirty = false, orderDirty = false;
 var CATS = ['公告', '維修', '圖片', '花絮', '活動'];
 var $ = function (id) { return document.getElementById(id); };
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -233,7 +233,7 @@ async function gb(body) {
 }
 function mark() { dirty = true; msg('有未儲存的變更'); }
 function today() { var d = new Date(), p = function (x) { return String(x).padStart(2, '0'); }; return d.getFullYear() + '.' + p(d.getMonth() + 1) + '.' + p(d.getDate()); }
-var TABS = ['msgs', 'annc', 'news', 'gal', 'tags'];
+var TABS = ['msgs', 'annc', 'news', 'wall', 'gal', 'tags'];
 
 // ---------- tabs ----------
 function setNav() { document.querySelectorAll('.anav a').forEach(function (a) { var m = (a.getAttribute('href') || '').match(/tab=(\w+)/); if (m) a.setAttribute('aria-current', m[1] === tab ? 'page' : 'false'); }); }
@@ -246,7 +246,7 @@ document.querySelector('.anav').addEventListener('click', async function (e) {
 function go(t) { tab = TABS.indexOf(t) >= 0 ? t : 'msgs'; dirty = false; msg(''); setNav(); try { history.replaceState(null, '', '/admin?tab=' + tab); } catch (e) {} render(); }
 function render() {
   $('bar').hidden = tab === 'msgs';
-  ({ msgs: rMsgs, annc: rAnnc, news: rNews, gal: rGal, tags: rTags })[tab]();
+  ({ msgs: rMsgs, annc: rAnnc, news: rNews, wall: rWall, gal: rGal, tags: rTags })[tab]();
 }
 
 // ---------- Q&A messages ----------
@@ -289,6 +289,29 @@ function rNews() {
       '<div class="tools"><label class="chk"><input type="checkbox" data-n="' + i + '.pin"' + (n.pin ? ' checked' : '') + '>釘選</label><span style="flex:1"></span><button class="ghost" type="button" data-nm="' + i + ',-1">↑</button><button class="ghost" type="button" data-nm="' + i + ',1">↓</button><button class="ghost danger" type="button" data-nd="' + i + '">刪除</button></div></div>'; }).join('');
 }
 
+// ---------- message wall ----------
+function rWall() {
+  var W = WALL;
+  $('main').innerHTML = '<section class="card"><h2>留言牆<em>Message wall</em></h2><span class="hint">從鴨答留言活動複製過來的留言，會在首頁用跑馬燈的方式橫向滾動。一次可以貼很多則：一則一行，格式是「暱稱：留言」（沒有冒號就當作匿名）。也可以貼別人在 Threads、X、IG 等社群分享的網址，會自動抓標題和圖片做成預覽卡；抓不到的話（有些要登入才看得到）可以自己填。</span>' +
+    '<div class="row2" style="margin-top:12px"><label class="chk"><input type="checkbox" data-w="on"' + (W.on ? ' checked' : '') + '>在首頁顯示</label><label class="f" style="flex:1;margin:0"><span>標題（可留空）</span><input class="in" data-w="title" maxlength="30" value="' + esc(W.title) + '" placeholder="來自鴨答的留言"></label></div>' +
+    '<div class="row2" style="margin-top:12px;align-items:flex-end"><label class="f" style="flex:1;margin:0"><span>社群分享連結</span><input class="in" id="wurl" placeholder="https://www.threads.net/@…/post/…"></label><button class="btn" type="button" id="wunf" style="padding:8px 16px">抓取預覽</button></div>' +
+    '<label class="f" style="margin-top:12px"><span>批次貼上留言</span><textarea class="in" id="wbulk" style="min-height:110px" placeholder="小明：好喜歡這個角色！&#10;阿花：每天都來看～"></textarea></label>' +
+    '<div class="row2"><span class="hint">共 ' + W.items.length + ' 則。</span><span style="flex:1"></span><button class="ghost" type="button" id="wadd1">＋ 空白一則</button><button class="btn" type="button" id="wbulkb" style="padding:8px 16px">加入這些留言</button></div></section>' +
+    W.items.map(function (w, i) { if (w.kind === 'link') return wLink(w, i); return '<div class="nw"><div class="g3"><label class="f"><span>暱稱</span><input class="in" data-wi="' + i + '.name" maxlength="30" value="' + esc(w.name) + '" placeholder="匿名"></label>' +
+      '<label class="f"><span>日期（可留空）</span><input class="in" data-wi="' + i + '.date" maxlength="20" value="' + esc(w.date) + '"></label><span></span></div>' +
+      '<label class="f"><span>留言</span><textarea class="in" data-wi="' + i + '.text" maxlength="200" style="min-height:60px">' + esc(w.text) + '</textarea></label>' +
+      '<div class="tools"><span style="flex:1"></span><button class="ghost" type="button" data-wm="' + i + ',-1">↑</button><button class="ghost" type="button" data-wm="' + i + ',1">↓</button><button class="ghost danger" type="button" data-wd="' + i + '">刪除</button></div></div>'; }).join('');
+}
+
+function wLink(w, i) {
+  var tools = '<div class="tools"><span class="pill">連結卡</span><a class="hint" href="' + esc(w.url) + '" target="_blank" rel="noopener" style="margin-left:8px;max-width:420px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(w.url) + '</a><span style="flex:1"></span><button class="ghost" type="button" data-wm="' + i + ',-1">↑</button><button class="ghost" type="button" data-wm="' + i + ',1">↓</button><button class="ghost danger" type="button" data-wd="' + i + '">刪除</button></div>';
+  return '<div class="nw"><div style="display:flex;gap:16px;align-items:flex-start"><div style="flex:none;width:180px"><div style="width:180px;height:120px;border-radius:10px;background:#f6eef0 center/cover no-repeat' + (w.img ? ' url(' + esc(w.img) + ')' : '') + ';display:flex;align-items:center;justify-content:center;color:#b3a9ad;font-size:12px">' + (w.img ? '' : '沒有圖片') + '</div>' +
+    '<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><label class="ghost up">換圖<input type="file" accept="image/*" data-wimg="' + i + '"></label>' + (w.img ? '<button class="ghost" type="button" data-wnoimg="' + i + '">拿掉圖</button>' : '') + '</div></div>' +
+    '<div style="flex:1;min-width:0"><div class="g3"><label class="f"><span>平台</span><input class="in" data-wi="' + i + '.site" maxlength="30" value="' + esc(w.site) + '" placeholder="Threads"></label><label class="f"><span>分享者（可留空）</span><input class="in" data-wi="' + i + '.name" maxlength="30" value="' + esc(w.name) + '"></label><label class="f"><span>日期（可留空）</span><input class="in" data-wi="' + i + '.date" maxlength="20" value="' + esc(w.date) + '"></label></div>' +
+    '<label class="f"><span>標題</span><input class="in" data-wi="' + i + '.title" maxlength="120" value="' + esc(w.title) + '"></label>' +
+    '<label class="f"><span>內文摘要</span><textarea class="in" data-wi="' + i + '.text" maxlength="300" style="min-height:60px">' + esc(w.text) + '</textarea></label></div></div>' + tools + '</div>';
+}
+
 // ---------- gallery ----------
 function chName(id) { var c = CH.find(function (x) { return x.id === id; }); return c ? c.name : null; }
 function tagInfo(id) { var t = TAGS.find(function (x) { return x.id === id; }); return t; }
@@ -322,6 +345,8 @@ var M = $('main');
 M.addEventListener('input', function (e) {
   var t = e.target, d = t.dataset;
   if (d.a) { if (d.a === 'on') ANNC.on = t.checked; else if (d.a === 'url') ANNC.link = t.value.trim(); else if (d.a !== 'mode') ANNC[d.a] = t.value; mark(); aPrev(); }
+  if (d.w) { WALL[d.w] = t.type === 'checkbox' ? t.checked : t.value; mark(); }
+  if (d.wi) { var pw = d.wi.split('.'); WALL.items[+pw[0]][pw[1]] = t.value; mark(); }
   if (d.n) { var p = d.n.split('.'); NEWS[+p[0]][p[1]] = t.type === 'checkbox' ? t.checked : t.value; mark(); }
   if (d.ga != null) { GAL[+d.ga].alt = t.value; mark(); }
   if (d.gk != null) { GAL[+d.gk].kw = t.value; mark(); }
@@ -336,6 +361,7 @@ M.addEventListener('change', async function (e) {
   if (d.gg != null) { GAL[+d.gg].gender = t.value; mark(); }
   if (d.gadd != null && t.value) { var g = GAL[+d.gadd], p = t.value.split(':'), arr = p[0] === 'c' ? (g.chars = g.chars || []) : (g.tags = g.tags || []); if (arr.indexOf(p[1]) < 0) arr.push(p[1]);
     if (p[0] === 'c' && !g.gender) { var ch = CH.find(function (x) { return x.id === p[1]; }); if (ch && ch.gender) g.gender = ch.gender; } mark(); rGal(); }
+  if (d.wimg != null && t.files && t.files[0]) { msg('上傳中…'); try { WALL.items[+d.wimg].img = await upload(t.files[0], 1200); mark(); rWall(); msg('圖片已上傳，記得按儲存', ''); } catch (er) { msg(er.message, 'err'); } return; }
   if (t.id === 'gup' && t.files.length) { var fs = Array.from(t.files); t.value = ''; msg('上傳中…（' + fs.length + ' 張）');
     try { for (var f of fs) { var src = await upload(f, 2000); GAL.unshift({ src: src, alt: f.name.replace(/\.[^.]+$/, '').slice(0, 60), kw: '', chars: [], tags: [], gender: '' }); rGal(); } mark(); msg('已上傳，寫好說明、貼好標籤後記得按儲存', ''); } catch (er) { msg('上傳失敗：' + er.message, 'err'); } }
 });
@@ -348,6 +374,15 @@ M.addEventListener('click', async function (e) {
     b.disabled = true; try { await gb({ action: d.ma, id: id, reply: d.ma === 'reply' ? box.querySelector('[data-rp]').value : undefined });
       if (d.ma === 'delete') MSGS = MSGS.filter(function (x) { return x.id !== id; }); else { m.ok = true; if (d.ma === 'reply') m.reply = box.querySelector('[data-rp]').value.trim(); }
       rMsgs(); } catch (er) { b.disabled = false; alert(er.message); } return; }
+  if (b.id === 'wunf') { var u = $('wurl').value.trim(); if (!u) return; b.disabled = true; msg('讀取預覽中…');
+    try { var dd = await call({ action: 'unfurl', url: u }); WALL.items.unshift(dd.data); mark(); rWall(); msg(dd.data.img ? '預覽抓好了，確認一下再按儲存' : '抓到文字了，但沒有圖片，可以按「換圖」自己上傳', ''); }
+    catch (er) { WALL.items.unshift({ kind: 'link', url: u, site: '', title: '', text: '', img: '', name: '', date: '' }); mark(); rWall(); msg(er.message + '（已先建立一張空白連結卡）', 'err'); }
+    b.disabled = false; return; }
+  if (d.wnoimg != null) { WALL.items[+d.wnoimg].img = ''; mark(); rWall(); return; }
+  if (b.id === 'wadd1') { WALL.items.unshift({ name: '', text: '', date: '' }); mark(); rWall(); return; }
+  if (b.id === 'wbulkb') { var add = $('wbulk').value.split(/\n+/).map(function (l) { l = l.trim(); if (!l) return null; var m = l.match(/^([^：:]{1,30})[：:]\s*(.+)$/); return m ? { name: m[1].trim(), text: m[2].trim().slice(0, 200), date: '' } : { name: '', text: l.slice(0, 200), date: '' }; }).filter(Boolean); if (!add.length) return; WALL.items = WALL.items.concat(add); mark(); rWall(); msg('加入了 ' + add.length + ' 則，記得按儲存。'); return; }
+  if (d.wm) { var qw = d.wm.split(','), aw = +qw[0], cw = aw + (+qw[1]); if (cw < 0 || cw >= WALL.items.length) return; var xw = WALL.items[aw]; WALL.items[aw] = WALL.items[cw]; WALL.items[cw] = xw; mark(); rWall(); return; }
+  if (d.wd != null) { WALL.items.splice(+d.wd, 1); mark(); rWall(); return; }
   if (b.id === 'nadd') { NEWS.unshift({ id: 'n' + Date.now().toString(36), date: today(), cat: '公告', pin: false, title: '', body: '' }); mark(); rNews(); return; }
   if (d.nm) { var q = d.nm.split(','), a = +q[0], c = a + (+q[1]); if (c < 0 || c >= NEWS.length) return; var x = NEWS[a]; NEWS[a] = NEWS[c]; NEWS[c] = x; mark(); rNews(); return; }
   if (d.nd != null) { if (!(await ask('刪除這則 NEWS？', NEWS[+d.nd].title || '（未命名）', '刪除'))) return; NEWS.splice(+d.nd, 1); mark(); rNews(); return; }
@@ -364,14 +399,14 @@ M.addEventListener('click', async function (e) {
 
 // ---------- save ----------
 $('save').onclick = async function () {
-  var k = { annc: 'annc', news: 'news', gal: 'gallery', tags: 'tags' }[tab]; if (!k) return;
+  var k = { annc: 'annc', news: 'news', wall: 'wall', gal: 'gallery', tags: 'tags' }[tab]; if (!k) return;
   if (!dirty) { msg('沒有需要儲存的變更'); return; }
   if (!(await ask('儲存變更？', '儲存後網站會馬上更新。', '儲存'))) return;
   $('save').disabled = true; msg('儲存中…');
   try {
-    var data = k === 'annc' ? ANNC : k === 'news' ? NEWS : k === 'gallery' ? GAL : TAGS.map(function (t) { return { id: t.id, label: t.label, color: t.color, kind: t.kind, on: t.on, group: t.group || '' }; });
+    var data = k === 'wall' ? WALL : k === 'annc' ? ANNC : k === 'news' ? NEWS : k === 'gallery' ? GAL : TAGS.map(function (t) { return { id: t.id, label: t.label, color: t.color, kind: t.kind, on: t.on, group: t.group || '' }; });
     var d = await call({ action: 'save', k: k, data: data });
-    if (k === 'annc') ANNC = d.data; else if (k === 'news') NEWS = d.data; else if (k === 'gallery') GAL = d.data; else TAGS = d.data;
+    if (k === 'wall') WALL = d.data; else if (k === 'annc') ANNC = d.data; else if (k === 'news') NEWS = d.data; else if (k === 'gallery') GAL = d.data; else TAGS = d.data;
     dirty = false; render(); msg('已儲存，網站已更新 ✓', 'ok');
   } catch (e) { if (e.status === 401) { msg('登入過期了，請重新整理後再登入', 'err'); try { sessionStorage.removeItem('gbk'); } catch (_) {} } else msg(e.message, 'err'); }
   $('save').disabled = false;
@@ -382,7 +417,7 @@ async function start() {
   $('login').hidden = true; $('app').hidden = false;
   var q = (location.search.match(/tab=(\w+)/) || [])[1]; tab = TABS.indexOf(q) >= 0 ? q : 'msgs'; setNav();
   $('main').innerHTML = '<div class="empty">載入中…</div>';
-  try { var r = await Promise.all([get('annc'), get('news'), get('gallery'), get('tags'), get('chars')]); ANNC = r[0] || { on: false, tag: '公告', text: '', link: 'news', linkText: '看更多' }; NEWS = r[1] || []; GAL = r[2] || []; TAGS = r[3] || []; CH = r[4] || []; }
+  try { var r = await Promise.all([get('annc'), get('news'), get('gallery'), get('tags'), get('chars'), get('wall')]); ANNC = r[0] || { on: false, tag: '公告', text: '', link: 'news', linkText: '看更多' }; NEWS = r[1] || []; GAL = r[2] || []; TAGS = r[3] || []; CH = r[4] || []; WALL = (r[5] && r[5].items) ? r[5] : { on: true, title: '', items: [] }; }
   catch (e) { $('main').innerHTML = '<div class="empty">載入失敗：' + esc(e.message) + '</div>'; return; }
   render(); loadMsgs();
 }
