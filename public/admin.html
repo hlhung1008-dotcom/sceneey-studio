@@ -310,7 +310,10 @@ function wLink(w, i) {
     '<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><label class="ghost up">換圖<input type="file" accept="image/*" data-wimg="' + i + '"></label>' + (w.img ? '<button class="ghost" type="button" data-wnoimg="' + i + '">拿掉圖</button>' : '') + '</div></div>' +
     '<div style="flex:1;min-width:0"><div class="g3"><label class="f"><span>平台</span><input class="in" data-wi="' + i + '.site" maxlength="30" value="' + esc(w.site) + '" placeholder="Threads"></label><label class="f"><span>分享者（可留空）</span><input class="in" data-wi="' + i + '.name" maxlength="30" value="' + esc(w.name) + '"></label><label class="f"><span>日期（可留空）</span><input class="in" data-wi="' + i + '.date" maxlength="20" value="' + esc(w.date) + '"></label></div>' +
     '<label class="f"><span>標題</span><input class="in" data-wi="' + i + '.title" maxlength="120" value="' + esc(w.title) + '"></label>' +
-    '<label class="f"><span>內文摘要</span><textarea class="in" data-wi="' + i + '.text" maxlength="300" style="min-height:60px">' + esc(w.text) + '</textarea></label></div></div>' + tools + '</div>';
+    '<label class="f"><span>內文摘要</span><textarea class="in" data-wi="' + i + '.text" maxlength="300" style="min-height:60px">' + esc(w.text) + '</textarea></label>' +
+    '<div class="row2" style="align-items:flex-start;gap:12px"><label class="chk" style="margin-top:8px"><input type="checkbox" data-wemb="' + i + '"' + (w.embed ? ' checked' : '') + '>直接嵌入貼文</label>' +
+    '<label class="f" style="flex:1;margin:0"><span>內嵌程式碼（從 Threads／IG／X 的「嵌入」複製整段貼上，或留空直接用上面的網址）</span><textarea class="in" data-wcode="' + i + '" style="min-height:44px" placeholder="&lt;blockquote class=&quot;text-post-media&quot; …"></textarea></label></div>' +
+    '<span class="hint">支援 Threads、Instagram、X、YouTube。嵌入後首頁會顯示官方的貼文框（可以按讚、看圖）；如果對方刪文或設成私人，就會改顯示連結。</span></div></div>' + tools + '</div>';
 }
 
 // ---------- gallery ----------
@@ -346,6 +349,9 @@ var M = $('main');
 M.addEventListener('input', function (e) {
   var t = e.target, d = t.dataset;
   if (d.a) { if (d.a === 'on') ANNC.on = t.checked; else if (d.a === 'url') ANNC.link = t.value.trim(); else if (d.a !== 'mode') ANNC[d.a] = t.value; mark(); aPrev(); }
+  if (d.wcode != null) { var cv = t.value, um = cv.match(/data-(?:text-post|instgrm)-permalink="([^"]+)"/) || cv.match(/https:\/\/(?:www\.)?(?:threads\.(?:net|com)|instagram\.com|x\.com|twitter\.com|youtube\.com|youtu\.be)\/[^\s"'<>]+/);
+    if (um) { var url = (um[1] || um[0]).replace(/&amp;/g, '&').replace(/\?.*$/, function (q) { return /youtube|youtu\.be/.test(um[0]) ? q : ''; }); var it0 = WALL.items[+d.wcode]; it0.url = url; it0.embed = true; if (!it0.site) it0.site = /threads/.test(url) ? 'Threads' : /instagram/.test(url) ? 'Instagram' : /youtu/.test(url) ? 'YouTube' : 'X'; mark(); rWall(); msg('已從內嵌碼抓到貼文網址，記得按儲存', ''); } else if (cv.trim()) msg('這段程式碼裡找不到 Threads／IG／X／YouTube 的貼文網址', 'err'); return; }
+  if (d.wemb != null) { WALL.items[+d.wemb].embed = t.checked; mark(); return; }
   if (d.w) { WALL[d.w] = t.type === 'checkbox' ? t.checked : t.value; mark(); }
   if (d.wi) { var pw = d.wi.split('.'); WALL.items[+pw[0]][pw[1]] = t.value; mark(); }
   if (d.n) { var p = d.n.split('.'); NEWS[+p[0]][p[1]] = t.type === 'checkbox' ? t.checked : t.value; mark(); }

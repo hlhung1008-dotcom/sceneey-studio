@@ -167,11 +167,27 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .wall-hd .d1{left:-58px;top:6px;transform:rotate(-14deg)}
 .wall-hd .d2{right:-52px;top:-6px;width:30px;height:30px}
 .wall-hd .d3{right:-86px;top:58px;width:22px;height:22px}
-.wall-row{display:flex;align-items:center;width:max-content;gap:26px;padding:12px 0;animation:wall-l var(--d,60s) linear infinite}
-.wall-row.r{animation-name:wall-r}
-.wall-row.st{animation:none;width:auto;justify-content:center;flex-wrap:wrap;padding:12px 24px}
-.wall-mask:hover .wall-row{animation-play-state:paused}
-.wall-mask{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.wall-sec{position:relative;margin-top:26px}
+.wall-sec[hidden]{display:none}
+.wall-lab{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:0 0 4px}
+.wall-lab em{font-family:'Corinthia','Snell Roundhand',cursive;font-weight:700;font-style:normal;font-size:38px;line-height:1;color:#c27ba0}
+.wall-lab span{display:inline-block;padding:4px 16px;background:#cfe6f1;transform:rotate(-1.5deg);font-size:14px;font-weight:800;letter-spacing:.24em;color:#4a4547}
+.wall-sec[data-k=cd] .wall-lab span{background:#fbe1e6;transform:rotate(1.5deg)}
+.wall-trk{display:flex;align-items:center;gap:26px;overflow-x:auto;overflow-y:hidden;padding:16px 7vw 18px;scrollbar-width:none;cursor:grab;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);overscroll-behavior-x:contain}
+.wall-trk::-webkit-scrollbar{display:none}
+.wall-trk.drag{cursor:grabbing;user-select:none}
+.wall-trk.drag a,.wall-trk.drag iframe{pointer-events:none}
+.wall-trk.fit{justify-content:center;cursor:default}
+.wall-trk.top{align-items:flex-start}
+.wall-ar{position:absolute;top:50%;z-index:3;width:42px;height:42px;margin-top:4px;border-radius:50%;border:1.6px solid #4a4547;background:#fff;color:#4a4547;font-size:20px;line-height:1;cursor:pointer;box-shadow:3px 3px 0 #e7a8bf;transition:transform .2s}
+.wall-ar:hover{transform:translateY(-2px)}
+.wall-ar.p{left:18px}.wall-ar.n{right:18px}
+.wall-sec.fit .wall-ar{display:none}
+.wall-e{flex:none;width:340px;max-height:520px;overflow:auto;background:#fff;border:1.6px solid #4a4547;border-radius:16px;box-shadow:4px 4px 0 #cfe6f1;transform:rotate(var(--rt,0deg));scrollbar-width:thin}
+.wall-e blockquote{margin:0 !important;min-width:0 !important;width:100% !important;max-width:100% !important;border:0 !important;box-shadow:none !important}
+.wall-e iframe{display:block;border:0;max-width:100%}
+.wall-e .yt{width:100%;aspect-ratio:16/9}
+.wall-e .ph{display:block;padding:18px;color:#776d71;font-size:13px;text-decoration:none}
 .wall-c{position:relative;flex:none;width:max-content;max-width:300px;background:var(--bg,#fff);border:1.6px solid #4a4547;border-radius:16px;padding:20px 20px 13px;box-shadow:4px 4px 0 #e7a8bf;transform:rotate(var(--rt,0deg));transition:transform .25s}
 .wall-c:hover{transform:rotate(0) translateY(-3px)}
 .wall-c:before{content:'\201C';position:absolute;left:12px;top:-18px;font-family:'Corinthia',cursive;font-weight:700;font-size:64px;line-height:1;color:#c27ba0}
@@ -203,7 +219,6 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .wall-pop .x{position:sticky;float:right;top:0;margin:-28px -16px 0 0;width:34px;height:34px;border-radius:50%;border:1.6px solid #4a4547;background:#fff;color:#4a4547;font-size:18px;line-height:1;cursor:pointer}
 @keyframes wall-l{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes wall-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-@media (prefers-reduced-motion:reduce){.wall-row{animation:none}.wall-mask{overflow-x:auto}}
 .wall.mob{padding:52px 0 60px}
 .wall.mob .wall-hd h2{font-size:68px}
 .wall.mob .wall-hd .sub{font-size:32px}
@@ -213,16 +228,38 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
 .wall.mob .wall-c p{font-size:13.5px}
 .wall.mob .wall-l{width:230px}
 .wall.mob .wall-l .im{height:120px}
+.wall.mob .wall-e{width:280px;max-height:460px}
+.wall.mob .wall-ar{display:none}
+.wall.mob .wall-lab em{font-size:30px}
 .wall.mob .wall-l .im.no{height:62px}
-</style><section class="wall mob" id="wall" hidden aria-label="留言牆" data-heart="<svg viewBox=&quot;0 0 40 40&quot; aria-hidden=&quot;true&quot;><path d=&quot;M20 34C9 26 4 20 4 13.5 4 8.5 8 5 12.5 5c3.3 0 5.8 2 7.5 4.6C21.7 7 24.2 5 27.5 5 32 5 36 8.5 36 13.5 36 20 31 26 20 34z&quot; fill=&quot;#f6c9d4&quot; stroke=&quot;#4a4547&quot; stroke-width=&quot;2.4&quot;/></svg>"><div class="wall-hd"><span class="dk d1"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34C9 26 4 20 4 13.5 4 8.5 8 5 12.5 5c3.3 0 5.8 2 7.5 4.6C21.7 7 24.2 5 27.5 5 32 5 36 8.5 36 13.5 36 20 31 26 20 34z" fill="#f6c9d4" stroke="#4a4547" stroke-width="2.4"/></svg></span><span class="dk d2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 6.6L21 9.3l-5 4.3 1.6 6.9L12 16.8 6.4 20.5 8 13.6 3 9.3l6.4-.7z" fill="#a9d4e8" stroke="#4a4547" stroke-width="1.2" stroke-linejoin="round"/></svg></span><span class="dk d3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 6.6L21 9.3l-5 4.3 1.6 6.9L12 16.8 6.4 20.5 8 13.6 3 9.3l6.4-.7z" fill="#fde7a8" stroke="#4a4547" stroke-width="1.2" stroke-linejoin="round"/></svg></span><h2>Messages</h2><span class="sub">love notes from players</span><span class="zh" hidden></span></div><div class="wall-mask"></div></section><script>
+</style><section class="wall mob" id="wall" hidden aria-label="留言牆" data-heart="<svg viewBox=&quot;0 0 40 40&quot; aria-hidden=&quot;true&quot;><path d=&quot;M20 34C9 26 4 20 4 13.5 4 8.5 8 5 12.5 5c3.3 0 5.8 2 7.5 4.6C21.7 7 24.2 5 27.5 5 32 5 36 8.5 36 13.5 36 20 31 26 20 34z&quot; fill=&quot;#f6c9d4&quot; stroke=&quot;#4a4547&quot; stroke-width=&quot;2.4&quot;/></svg>"><div class="wall-hd"><span class="dk d1"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34C9 26 4 20 4 13.5 4 8.5 8 5 12.5 5c3.3 0 5.8 2 7.5 4.6C21.7 7 24.2 5 27.5 5 32 5 36 8.5 36 13.5 36 20 31 26 20 34z" fill="#f6c9d4" stroke="#4a4547" stroke-width="2.4"/></svg></span><span class="dk d2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 6.6L21 9.3l-5 4.3 1.6 6.9L12 16.8 6.4 20.5 8 13.6 3 9.3l6.4-.7z" fill="#a9d4e8" stroke="#4a4547" stroke-width="1.2" stroke-linejoin="round"/></svg></span><span class="dk d3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 6.6L21 9.3l-5 4.3 1.6 6.9L12 16.8 6.4 20.5 8 13.6 3 9.3l6.4-.7z" fill="#fde7a8" stroke="#4a4547" stroke-width="1.2" stroke-linejoin="round"/></svg></span><h2>Messages</h2><span class="sub">love notes from players</span><span class="zh" hidden></span></div><div class="wall-sec" data-k="soc" hidden><div class="wall-lab"><span>社群分享</span></div><button class="wall-ar p" type="button" aria-label="往左">‹</button><div class="wall-trk"></div><button class="wall-ar n" type="button" aria-label="往右">›</button></div><div class="wall-sec" data-k="cd" hidden><div class="wall-lab"><span>留言</span></div><button class="wall-ar p" type="button" aria-label="往左">‹</button><div class="wall-trk"></div><button class="wall-ar n" type="button" aria-label="往右">›</button></div></section><script>
 (function () {
   var box = document.getElementById('wall'); if (!box) return;
   var BG = ['#ffffff', '#fbe1e6', '#e9f3f8', '#fdf3d6', '#efe8f8'], RT = [-1.6, 1.2, -0.6, 1.8, -1.1, 0.7];
   var HEART = box.getAttribute('data-heart');
   function esc(s) { return String(s || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function by(w) { return (w.name || w.date) ? '<span class="wall-by">' + HEART + esc(w.name || '') + (w.date ? '<i>' + esc(w.date) + '</i>' : '') + '</span>' : ''; }
+  // official embeds, rebuilt from the post's own address (never raw pasted code)
+  var EMB = { threads: 'https://www.threads.net/embed.js', instagram: 'https://www.instagram.com/embed.js', x: 'https://platform.twitter.com/widgets.js' }, need = {};
+  function plat(u) { var h = ''; try { h = new URL(u).hostname.replace(/^www\./, ''); } catch (e) {} return /^threads\.(net|com)$/.test(h) ? 'threads' : h === 'instagram.com' ? 'instagram' : (h === 'x.com' || h === 'twitter.com') ? 'x' : (h === 'youtube.com' || h === 'youtu.be' || h === 'm.youtube.com') ? 'youtube' : ''; }
+  function embedHtml(w) {
+    var p = plat(w.url), u = esc(w.url), fb = '<a class="ph" href="' + u + '" target="_blank" rel="noopener nofollow">' + esc(w.title || '在 ' + (w.site || '社群') + ' 查看這篇貼文') + ' →</a>';
+    if (p === 'threads') { need.threads = 1; return '<blockquote class="text-post-media" data-text-post-permalink="' + u + '" data-text-post-version="0">' + fb + '</blockquote>'; }
+    if (p === 'instagram') { need.instagram = 1; return '<blockquote class="instagram-media" data-instgrm-permalink="' + u + '" data-instgrm-version="14">' + fb + '</blockquote>'; }
+    if (p === 'x') { need.x = 1; return '<blockquote class="twitter-tweet" data-dnt="true" data-conversation="none">' + fb.replace('class="ph"', 'class="ph" data-x="1"').replace('target="_blank" rel="noopener nofollow"', '') + '</blockquote>'; }
+    if (p === 'youtube') { var m = w.url.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/); if (m) return '<iframe class="yt" src="https://www.youtube-nocookie.com/embed/' + m[1] + '" title="YouTube" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>'; }
+    return '';
+  }
+  function loadEmbeds() {
+    Object.keys(need).forEach(function (k) {
+      var s = document.createElement('script'); s.async = true; s.src = EMB[k];
+      s.onload = function () { try { if (k === 'instagram' && window.instgrm) window.instgrm.Embeds.process(); if (k === 'x' && window.twttr && window.twttr.widgets) window.twttr.widgets.load(box); } catch (e) {} var f = function () { box.dispatchEvent(new Event('wallfit')); }; setTimeout(f, 1500); setTimeout(f, 4000); };
+      document.body.appendChild(s);
+    });
+  }
   function card(w, i) {
     var st = '--rt:' + RT[i % RT.length] + 'deg';
+    if (w.kind === 'link' && w.embed) { var em = embedHtml(w); if (em) return '<div class="wall-e" style="' + st + '">' + em + '</div>'; }
     if (w.kind === 'link') {
       return '<a class="wall-l" style="' + st + '" href="' + esc(w.url) + '" target="_blank" rel="noopener nofollow">' +
         '<div class="im' + (w.img ? '' : ' no') + '"' + (w.img ? ' style="background-image:url(' + esc(w.img) + ')"' : '') + '>' + (w.site ? '<span class="pf">' + esc(w.site) + '</span>' : '') + (w.img ? '' : '<em>shared post</em>') + '</div>' +
@@ -243,23 +280,55 @@ a:focus-visible,button:focus-visible{outline:2px dashed #4a4547;outline-offset:3
     box.addEventListener('click', function (e) { var c = e.target.closest('.wall-c.more'); if (c) open(+c.dataset.wi, c.style.getPropertyValue('--bg')); });
     box.addEventListener('keydown', function (e) { var c = e.target.closest && e.target.closest('.wall-c.more'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(+c.dataset.wi, c.style.getPropertyValue('--bg')); } });
     if (W.title) { var zh = box.querySelector('.zh'); zh.textContent = W.title; zh.hidden = false; }
-    var rows = it.length >= 8 ? [it.filter(function (_, i) { return i % 2 === 0; }), it.filter(function (_, i) { return i % 2 === 1; })] : [it];
-    var mask = box.querySelector('.wall-mask');
-    mask.innerHTML = rows.map(function (r, n) { return '<div class="wall-row' + (n ? ' r' : '') + '">' + r.map(function (w, k) { return card(w, n * 3 + k); }).join('') + '</div>'; }).join('');
+    var groups = { soc: it.filter(function (w) { return w.kind === 'link'; }), cd: it.filter(function (w) { return w.kind !== 'link'; }) };
+    var secs = [];
+    Array.prototype.forEach.call(box.querySelectorAll('.wall-sec'), function (sec, n) {
+      var list = groups[sec.dataset.k]; if (!list.length) return;
+      var trk = sec.querySelector('.wall-trk');
+      trk.innerHTML = list.map(function (w, k) { return card(w, n * 3 + k); }).join('');
+      if (trk.querySelector('.wall-e')) trk.classList.add('top');
+      sec.hidden = false; secs.push(setup(sec, trk, n ? -1 : 1));
+    });
     box.hidden = false;
-    // only scroll a row when it is wider than the screen; otherwise show each item once, centred (no repeats)
-    function fit() {
-      Array.prototype.forEach.call(mask.querySelectorAll('.wall-row'), function (row) {
-        if (!row.dataset.one) row.dataset.one = row.innerHTML;
-        row.classList.remove('st'); row.innerHTML = row.dataset.one; row.style.removeProperty('--d');
-        var w = row.scrollWidth;
-        if (w <= mask.clientWidth) { row.classList.add('st'); return; }
-        row.innerHTML = row.dataset.one + row.dataset.one;
-        row.style.setProperty('--d', Math.max(30, Math.round(w / 45)) + 's');
-      });
+    loadEmbeds();
+    function fitAll() { secs.forEach(function (f) { f(); }); }
+    box.addEventListener('wallfit', fitAll);
+    fitAll(); if (document.fonts) document.fonts.ready.then(fitAll);
+    var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(fitAll, 200); });
+    // each row drifts slowly back and forth; hover, touch, drag, wheel or the arrows take over, and it resumes after a moment
+    function setup(sec, trk, dir) {
+      var hold = 0, hover = false, x = 0, fits = false, last = 0;
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function pause(ms) { hold = Math.max(hold, Date.now() + (ms || 2500)); }
+      function fit() { fits = trk.scrollWidth <= trk.clientWidth + 2; trk.classList.toggle('fit', fits); sec.classList.toggle('fit', fits); x = trk.scrollLeft; }
+      function tick(t) {
+        var dt = last ? Math.min(64, t - last) : 16; last = t;
+        if (!fits && !reduce && !hover && Date.now() > hold && !document.hidden) {
+          var max = trk.scrollWidth - trk.clientWidth;
+          if (Math.abs(trk.scrollLeft - x) > 1.5) x = trk.scrollLeft;
+          x += dir * dt * 0.035;
+          if (x >= max) { x = max; dir = -1; pause(1600); } else if (x <= 0) { x = 0; dir = 1; pause(1600); }
+          trk.scrollLeft = x;
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      trk.addEventListener('mouseenter', function () { hover = true; });
+      trk.addEventListener('mouseleave', function () { hover = false; pause(800); });
+      trk.addEventListener('touchstart', function () { pause(4000); }, { passive: true });
+      trk.addEventListener('wheel', function () { pause(3000); }, { passive: true });
+      trk.addEventListener('scroll', function () { if (Math.abs(trk.scrollLeft - x) > 1.5) { x = trk.scrollLeft; pause(3000); } }, { passive: true });
+      // mouse drag (touch screens already swipe natively)
+      var down = false, sx = 0, sl = 0, moved = false;
+      trk.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button !== 0 || fits) return; down = true; moved = false; sx = e.clientX; sl = trk.scrollLeft; });
+      window.addEventListener('pointermove', function (e) { if (!down) return; var d = e.clientX - sx; if (!moved && Math.abs(d) > 5) { moved = true; trk.classList.add('drag'); } if (moved) { trk.scrollLeft = sl - d; x = trk.scrollLeft; pause(3000); } });
+      window.addEventListener('pointerup', function () { if (!down) return; down = false; setTimeout(function () { trk.classList.remove('drag'); }, 0); });
+      trk.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+      trk.addEventListener('dragstart', function (e) { e.preventDefault(); });
+      sec.querySelector('.p').addEventListener('click', function () { pause(5000); trk.scrollBy({ left: -trk.clientWidth * 0.7, behavior: 'smooth' }); });
+      sec.querySelector('.n').addEventListener('click', function () { pause(5000); trk.scrollBy({ left: trk.clientWidth * 0.7, behavior: 'smooth' }); });
+      return fit;
     }
-    fit(); if (document.fonts) document.fonts.ready.then(fit);
-    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 200); });
   }).catch(function () {});
 })();
 </script>
