@@ -293,7 +293,7 @@ function rNews() {
 function rWall() {
   var W = WALL;
   $('main').innerHTML = '<section class="card"><h2>留言牆<em>Message wall</em></h2><span class="hint">從鴨答留言活動複製過來的留言，會在首頁用跑馬燈的方式橫向滾動。一次可以貼很多則：一則一行，格式是「暱稱：留言」（沒有冒號就當作匿名）。也可以貼別人在 Threads、X、IG 等社群分享的網址，會自動抓標題和圖片做成預覽卡；抓不到的話（有些要登入才看得到）可以自己填。</span>' +
-    '<div class="row2" style="margin-top:12px"><label class="chk"><input type="checkbox" data-w="on"' + (W.on ? ' checked' : '') + '>在首頁顯示</label><label class="f" style="flex:1;margin:0"><span>標題（可留空）</span><input class="in" data-w="title" maxlength="30" value="' + esc(W.title) + '" placeholder="來自鴨答的留言"></label></div>' +
+    '<div class="row2" style="margin-top:12px"><label class="chk"><input type="checkbox" data-w="on"' + (W.on ? ' checked' : '') + '>在首頁顯示</label><label class="f" style="flex:1;margin:0"><span>標題（可留空）</span><input class="in" data-w="title" maxlength="30" value="' + esc(W.title) + '" placeholder="留空就不顯示"></label></div>' +
     '<div class="row2" style="margin-top:12px;align-items:flex-end"><label class="f" style="flex:1;margin:0"><span>社群分享連結</span><input class="in" id="wurl" placeholder="https://www.threads.net/@…/post/…"></label><button class="btn" type="button" id="wunf" style="padding:8px 16px">抓取預覽</button></div>' +
     '<label class="f" style="margin-top:12px"><span>批次貼上留言</span><textarea class="in" id="wbulk" style="min-height:110px" placeholder="小明：好喜歡這個角色！&#10;阿花：每天都來看～"></textarea></label>' +
     '<div class="row2"><span class="hint">共 ' + W.items.length + ' 則。</span><span style="flex:1"></span><button class="ghost" type="button" id="wadd1">＋ 空白一則</button><button class="btn" type="button" id="wbulkb" style="padding:8px 16px">加入這些留言</button></div></section>' +
