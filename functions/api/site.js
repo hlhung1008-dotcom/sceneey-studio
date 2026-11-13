@@ -51,7 +51,7 @@ function validate(k, d) {
         if (!/^https:\/\/[^\s"'<>]{1,500}$/.test(u)) throw new Error("連結網址格式不對（要以 https:// 開頭）");
         return { kind: "link", url: u, site: str(w.site, 30), title: str(w.title, 120), text: str(w.text, 300), img: img(w.img), name: str(w.name, 30), date: str(w.date, 20) };
       }
-      const text = str(w.text, 200); if (!text) throw new Error("留言內容要填喔"); return { name: str(w.name, 30), text, date: str(w.date, 20) };
+      const text = str(w.text, 3000); if (!text) throw new Error("留言內容要填喔"); return { name: str(w.name, 30), text, date: str(w.date, 20) };
     });
     return { on: !!d.on, title: str(d.title, 30), items };
   }

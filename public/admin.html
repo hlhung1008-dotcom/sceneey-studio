@@ -159,7 +159,7 @@ a{color:var(--pink)}
 <script>
 (function(){
 var KEY = ''; try { KEY = sessionStorage.getItem('gbk') || ''; } catch (e) {}
-var TAGS = [], CH = [], GAL = [], NEWS = [], ANNC = null, WALL = { on: true, title: '', items: [] }, MSGS = [], tab = 'msgs', dirty = false, mf = 'all', galDirty = false, blogDirty = false, orderDirty = false;
+var TAGS = [], CH = [], GAL = [], NEWS = [], ANNC = null, WIMP = null, WALL = { on: true, title: '', items: [] }, MSGS = [], tab = 'msgs', dirty = false, mf = 'all', galDirty = false, blogDirty = false, orderDirty = false;
 var CATS = ['公告', '維修', '圖片', '花絮', '活動'];
 var $ = function (id) { return document.getElementById(id); };
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -296,10 +296,11 @@ function rWall() {
     '<div class="row2" style="margin-top:12px"><label class="chk"><input type="checkbox" data-w="on"' + (W.on ? ' checked' : '') + '>在首頁顯示</label><label class="f" style="flex:1;margin:0"><span>標題（可留空）</span><input class="in" data-w="title" maxlength="30" value="' + esc(W.title) + '" placeholder="留空就不顯示"></label></div>' +
     '<div class="row2" style="margin-top:12px;align-items:flex-end"><label class="f" style="flex:1;margin:0"><span>社群分享連結</span><input class="in" id="wurl" placeholder="https://www.threads.net/@…/post/…"></label><button class="btn" type="button" id="wunf" style="padding:8px 16px">抓取預覽</button></div>' +
     '<label class="f" style="margin-top:12px"><span>批次貼上留言</span><textarea class="in" id="wbulk" style="min-height:110px" placeholder="小明：好喜歡這個角色！&#10;阿花：每天都來看～"></textarea></label>' +
+    (WIMP ? '<div class="row2" style="margin-top:12px;padding:12px 14px;border-radius:12px;background:#fbe1e6"><span class="hint" style="color:#4a4547">有 ' + WIMP.length + ' 則整理好的玩家心得可以匯入（完整原文、可換行）。</span><span style="flex:1"></span><button class="btn" type="button" id="wimp" style="padding:8px 16px">匯入這 ' + WIMP.length + ' 則</button></div>' : '') +
     '<div class="row2"><span class="hint">共 ' + W.items.length + ' 則。</span><span style="flex:1"></span><button class="ghost" type="button" id="wadd1">＋ 空白一則</button><button class="btn" type="button" id="wbulkb" style="padding:8px 16px">加入這些留言</button></div></section>' +
     W.items.map(function (w, i) { if (w.kind === 'link') return wLink(w, i); return '<div class="nw"><div class="g3"><label class="f"><span>暱稱</span><input class="in" data-wi="' + i + '.name" maxlength="30" value="' + esc(w.name) + '" placeholder="匿名"></label>' +
       '<label class="f"><span>日期（可留空）</span><input class="in" data-wi="' + i + '.date" maxlength="20" value="' + esc(w.date) + '"></label><span></span></div>' +
-      '<label class="f"><span>留言</span><textarea class="in" data-wi="' + i + '.text" maxlength="200" style="min-height:60px">' + esc(w.text) + '</textarea></label>' +
+      '<label class="f"><span>留言</span><textarea class="in" data-wi="' + i + '.text" maxlength="3000" style="min-height:' + (w.text && w.text.length > 120 ? 220 : 60) + 'px">' + esc(w.text) + '</textarea></label>' +
       '<div class="tools"><span style="flex:1"></span><button class="ghost" type="button" data-wm="' + i + ',-1">↑</button><button class="ghost" type="button" data-wm="' + i + ',1">↓</button><button class="ghost danger" type="button" data-wd="' + i + '">刪除</button></div></div>'; }).join('');
 }
 
@@ -379,8 +380,9 @@ M.addEventListener('click', async function (e) {
     catch (er) { WALL.items.unshift({ kind: 'link', url: u, site: '', title: '', text: '', img: '', name: '', date: '' }); mark(); rWall(); msg(er.message + '（已先建立一張空白連結卡）', 'err'); }
     b.disabled = false; return; }
   if (d.wnoimg != null) { WALL.items[+d.wnoimg].img = ''; mark(); rWall(); return; }
+  if (b.id === 'wimp') { var have = {}; WALL.items.forEach(function (x) { have[x.text] = 1; }); var nw = WIMP.filter(function (x) { return !have[x.text]; }); WALL.items = WALL.items.concat(nw); WIMP = null; mark(); rWall(); msg('匯入了 ' + nw.length + ' 則，記得按儲存。'); return; }
   if (b.id === 'wadd1') { WALL.items.unshift({ name: '', text: '', date: '' }); mark(); rWall(); return; }
-  if (b.id === 'wbulkb') { var add = $('wbulk').value.split(/\n+/).map(function (l) { l = l.trim(); if (!l) return null; var m = l.match(/^([^：:]{1,30})[：:]\s*(.+)$/); return m ? { name: m[1].trim(), text: m[2].trim().slice(0, 200), date: '' } : { name: '', text: l.slice(0, 200), date: '' }; }).filter(Boolean); if (!add.length) return; WALL.items = WALL.items.concat(add); mark(); rWall(); msg('加入了 ' + add.length + ' 則，記得按儲存。'); return; }
+  if (b.id === 'wbulkb') { var add = $('wbulk').value.split(/\n+/).map(function (l) { l = l.trim(); if (!l) return null; var m = l.match(/^([^：:]{1,30})[：:]\s*(.+)$/); return m ? { name: m[1].trim(), text: m[2].trim().slice(0, 3000), date: '' } : { name: '', text: l.slice(0, 3000), date: '' }; }).filter(Boolean); if (!add.length) return; WALL.items = WALL.items.concat(add); mark(); rWall(); msg('加入了 ' + add.length + ' 則，記得按儲存。'); return; }
   if (d.wm) { var qw = d.wm.split(','), aw = +qw[0], cw = aw + (+qw[1]); if (cw < 0 || cw >= WALL.items.length) return; var xw = WALL.items[aw]; WALL.items[aw] = WALL.items[cw]; WALL.items[cw] = xw; mark(); rWall(); return; }
   if (d.wd != null) { WALL.items.splice(+d.wd, 1); mark(); rWall(); return; }
   if (b.id === 'nadd') { NEWS.unshift({ id: 'n' + Date.now().toString(36), date: today(), cat: '公告', pin: false, title: '', body: '' }); mark(); rNews(); return; }
@@ -417,7 +419,8 @@ async function start() {
   $('login').hidden = true; $('app').hidden = false;
   var q = (location.search.match(/tab=(\w+)/) || [])[1]; tab = TABS.indexOf(q) >= 0 ? q : 'msgs'; setNav();
   $('main').innerHTML = '<div class="empty">載入中…</div>';
-  try { var r = await Promise.all([get('annc'), get('news'), get('gallery'), get('tags'), get('chars'), get('wall')]); ANNC = r[0] || { on: false, tag: '公告', text: '', link: 'news', linkText: '看更多' }; NEWS = r[1] || []; GAL = r[2] || []; TAGS = r[3] || []; CH = r[4] || []; WALL = (r[5] && r[5].items) ? r[5] : { on: true, title: '', items: [] }; }
+  try { var r = await Promise.all([get('annc'), get('news'), get('gallery'), get('tags'), get('chars'), get('wall')]); ANNC = r[0] || { on: false, tag: '公告', text: '', link: 'news', linkText: '看更多' }; NEWS = r[1] || []; GAL = r[2] || []; TAGS = r[3] || []; CH = r[4] || []; WALL = (r[5] && r[5].items) ? r[5] : { on: true, title: '', items: [] };
+  try { var ri = await fetch('/wall-import.json', { cache: 'no-store' }); if (ri.ok) { var ji = await ri.json(); var hv = {}; WALL.items.forEach(function (x) { hv[x.text] = 1; }); WIMP = (ji.items || []).filter(function (x) { return !hv[x.text]; }); if (!WIMP.length) WIMP = null; } } catch (e) {} }
   catch (e) { $('main').innerHTML = '<div class="empty">載入失敗：' + esc(e.message) + '</div>'; return; }
   render(); loadMsgs();
 }
